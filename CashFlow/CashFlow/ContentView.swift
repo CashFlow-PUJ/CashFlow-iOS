@@ -23,6 +23,7 @@ struct ContentView: View {
                 
                 Image(uiImage: image ?? UIImage())
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 350, height: 400)
                     .cornerRadius(15)
                 
