@@ -44,11 +44,11 @@ struct LoginView: View {
                 // Email Input
                 TextField("Correo electrónico", text: $email)
                     .keyboardType(.emailAddress)
-                    .padding(.top, 25)
+                    .padding(.top, 20)
 
                 // Password Input
                 SecureField("Contraseña", text: $password)
-                    .padding(.vertical, 10)
+                    .padding(.vertical, 15)
                 
                 // Log in Button
                 Button(action: {

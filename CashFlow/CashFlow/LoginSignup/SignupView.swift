@@ -29,20 +29,20 @@ struct SignupView: View {
                 // Email Input
                 TextField("Correo electrónico", text: $email)
                     .keyboardType(.emailAddress)
-                    .padding(.top, 10)
+                    .padding(.top, 5)
                 
                 // Email Input
                 TextField("Confirma tu correo electrónico", text: $emailConfirmation)
                     .keyboardType(.emailAddress)
-                    .padding(.top, 10)
+                    .padding(.top, 15)
 
                 // Password Input
                 SecureField("Contraseña", text: $password)
-                    .padding(.top, 10)
+                    .padding(.top, 15)
                 
                 // Password Input
                 SecureField("Confirma tu contraseña", text: $passwordConfirmation)
-                    .padding(.top, 10)
+                    .padding(.top, 15)
                 
                 // Log in Button
                 Button(action: {
