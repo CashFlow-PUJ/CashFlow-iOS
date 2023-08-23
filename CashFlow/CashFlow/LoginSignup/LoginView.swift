@@ -34,6 +34,7 @@ struct LoginView: View {
                 Text("Inicia sesión")
                     .font(.largeTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 20)
                 
                 Text("¡Accede a tu cuenta!")
                     .font(.title3)
@@ -43,13 +44,16 @@ struct LoginView: View {
                 // Email Input
                 TextField("Correo electrónico", text: $email)
                     .keyboardType(.emailAddress)
+                    .padding(.top, 25)
 
                 // Password Input
                 SecureField("Contraseña", text: $password)
+                    .padding(.vertical, 10)
                 
                 // Log in Button
                 Button(action: {
                     print("\(email) \(password)")
+                    // TODO: Authenticate
                 }) {
                     Text("Iniciar sesión")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -59,18 +63,18 @@ struct LoginView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
-                    // TODO: Authenticate
                 }
                 .background(Color(hex: 0xF75E68))
                 .cornerRadius(8)
                 
                 Text("Iniciar sesión con")
                     .foregroundColor(.gray)
+                    .padding(.top, 25)
                 
                 // Facebook, Google, etc. Buttons
                 HStack {
                     Button(action: {
-                        print("TODO: Google authentication integration.")
+                        // TODO: Google authentication integration.
                     }) {
                         Text("Google")
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -80,13 +84,12 @@ struct LoginView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.white, lineWidth: 2))
-                        // TODO: Authenticate
                     }
                     .background(Color(hex: 0x7980F2))
                     .cornerRadius(8)
                     
                     Button(action: {
-                        print("TODO: Facebook authentication integration.")
+                        // TODO: Facebook authentication integration-
                     }) {
                         Text("Facebook")
                             .frame(minWidth: 0, maxWidth: .infinity)
@@ -96,7 +99,6 @@ struct LoginView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.white, lineWidth: 2))
-                        // TODO: Authenticate
                     }
                     .background(Color(hex: 0x425893))
                     .cornerRadius(8)
@@ -108,6 +110,7 @@ struct LoginView: View {
                     Text("¿Olvidaste tu contraseña?")
                         .foregroundColor(Color(hex: 0xF75E68))
                 }
+                .padding(.top, 25)
                 
                 NavigationLink {
                     SignupView()
@@ -115,6 +118,7 @@ struct LoginView: View {
                     Text("¿No estás registrado?")
                         .foregroundColor(Color(hex: 0xF75E68))
                 }
+                .padding(.top, 10)
                 
             }.padding(37)
         }

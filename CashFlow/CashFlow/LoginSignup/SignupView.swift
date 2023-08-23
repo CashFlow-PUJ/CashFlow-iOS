@@ -12,7 +12,9 @@ struct SignupView: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var email: String = ""
+    @State private var emailConfirmation: String = ""
     @State private var password: String = ""
+    @State private var passwordConfirmation: String = ""
     
     var body: some View {
         NavigationStack {
@@ -27,13 +29,25 @@ struct SignupView: View {
                 // Email Input
                 TextField("Correo electrónico", text: $email)
                     .keyboardType(.emailAddress)
+                    .padding(.top, 10)
+                
+                // Email Input
+                TextField("Confirma tu correo electrónico", text: $emailConfirmation)
+                    .keyboardType(.emailAddress)
+                    .padding(.top, 10)
 
                 // Password Input
                 SecureField("Contraseña", text: $password)
+                    .padding(.top, 10)
+                
+                // Password Input
+                SecureField("Confirma tu contraseña", text: $passwordConfirmation)
+                    .padding(.top, 10)
                 
                 // Log in Button
                 Button(action: {
                     print("\(email) \(password)")
+                    // TODO: Authenticate
                 }) {
                     Text("Continuar")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -43,10 +57,10 @@ struct SignupView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
-                    // TODO: Authenticate
                 }
                 .background(Color(hex: 0xF75E68))
                 .cornerRadius(8)
+                .padding(.top, 20)
                 
                 // TODO: Policy Checkbox
                 
@@ -54,6 +68,7 @@ struct SignupView: View {
                     dismiss()
                 }
                 .foregroundColor(Color(hex: 0xF75E68))
+                .padding(.top, 20)
                 
                 Spacer()
                 Spacer()
