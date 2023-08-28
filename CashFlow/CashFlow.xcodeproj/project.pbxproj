@@ -14,6 +14,7 @@
 		9A1612482A6DF6C60032743E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612472A6DF6C60032743E /* ImagePicker.swift */; };
 		9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1942A957A9D0047CCD0 /* LoginView.swift */; };
 		9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1962A958F8E0047CCD0 /* SignupView.swift */; };
+		9A6AD1992A9CB9A20047CCD0 /* TransactionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		9A1612472A6DF6C60032743E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		9A6AD1942A957A9D0047CCD0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9A6AD1962A958F8E0047CCD0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
+				9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */,
 				9A6AD1932A957A890047CCD0 /* LoginSignup */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A16123B2A6DE6CB0032743E /* ContentView.swift */,
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1612482A6DF6C60032743E /* ImagePicker.swift in Sources */,
+				9A6AD1992A9CB9A20047CCD0 /* TransactionLog.swift in Sources */,
 				9A16123C2A6DE6CB0032743E /* ContentView.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
