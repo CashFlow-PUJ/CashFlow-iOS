@@ -12,6 +12,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .preferredColorScheme(.light)
         }
     }
 }

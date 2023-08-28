@@ -114,6 +114,7 @@ struct LoginView: View {
                 
                 NavigationLink {
                     SignupView()
+                        .preferredColorScheme(.light)
                 } label: {
                     Text("¿No estás registrado?")
                         .foregroundColor(Color(hex: 0xF75E68))
