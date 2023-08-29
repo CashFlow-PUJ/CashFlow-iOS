@@ -12,7 +12,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             
-            var userIsAuthenticated = true
+            var userIsAuthenticated = false
             
             // IF USER IS NOT AUTHENTICATED
             if(!userIsAuthenticated) {

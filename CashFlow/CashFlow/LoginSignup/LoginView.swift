@@ -21,6 +21,9 @@ extension Color {
 }
 
 struct LoginView: View {
+   
+    
+    // TODO: Both on this and SignUpView: dismiss keyboard controller when tapping out of TextField or SecureField.
     
     @State private var email: String = ""
     @State private var password: String = ""

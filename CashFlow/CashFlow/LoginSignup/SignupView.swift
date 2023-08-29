@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SignupView: View {
     
+    // TODO: Remove back button from this screen.
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var email: String = ""
