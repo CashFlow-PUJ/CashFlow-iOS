@@ -11,7 +11,18 @@ import SwiftUI
 struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
+            var userIsAuthenticated = false
+            
+            // IF USER IS NOT AUTHENTICATED
+            if(!userIsAuthenticated) {
+                LoginView()
+                    .preferredColorScheme(.light)
+            }
+            else {
+                TransactionLog()
+                    .preferredColorScheme(.light)
+            }
         }
     }
 }

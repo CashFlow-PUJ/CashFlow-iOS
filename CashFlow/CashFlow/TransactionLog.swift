@@ -1,13 +1,13 @@
 //
-//  ContentView.swift
+//  TransactionLog.swift
 //  CashFlow
 //
-//  Created by Cristóbal Castrillón Balcázar on 23/07/23.
+//  Created by Cristóbal Castrillón Balcázar on 28/08/23.
 //
 
 import SwiftUI
 
-struct ContentView: View {
+struct TransactionLog: View {
     
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
@@ -18,7 +18,21 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
+                HStack {
+                    
+                    // TODO: Hamburger menu button
+                    
+                    Text("Registro")
+                        .font(.title)
+                }
                 
+                // TODO: Horizontal Scroll View for Donuts
+                    // TODO: Donut component
+                
+                // TODO: Vertical Scroll View for Each Transaction
+                
+                
+                // TODO: Turn this Button into a Floating Button (Screen-fixed, Z-axis)
                 Image(uiImage: image ?? UIImage())
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -52,8 +66,6 @@ struct ContentView: View {
                         ]
                     )
                 }
-                
-                Spacer()
             }
             .padding()
         }
@@ -63,8 +75,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct TransactionLog_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        TransactionLog()
     }
 }
