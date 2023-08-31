@@ -59,7 +59,7 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
-				9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */,
+				9A7445092AA01427009BA3F9 /* TransactionLog */,
 				9A6AD1932A957A890047CCD0 /* LoginSignup */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A16123B2A6DE6CB0032743E /* ContentView.swift */,
@@ -85,6 +85,14 @@
 				9A6AD1962A958F8E0047CCD0 /* SignupView.swift */,
 			);
 			path = LoginSignup;
+			sourceTree = "<group>";
+		};
+		9A7445092AA01427009BA3F9 /* TransactionLog */ = {
+			isa = PBXGroup;
+			children = (
+				9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */,
+			);
+			path = TransactionLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
