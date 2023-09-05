@@ -12,7 +12,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             
-            var userIsAuthenticated = false
+            var userIsAuthenticated = true
             
             // IF USER IS NOT AUTHENTICATED
             if(!userIsAuthenticated) {
@@ -20,7 +20,7 @@ struct CashFlowApp: App {
                     .preferredColorScheme(.light)
             }
             else {
-                TransactionLog()
+                TransactionLogView()
                     .preferredColorScheme(.light)
             }
         }
