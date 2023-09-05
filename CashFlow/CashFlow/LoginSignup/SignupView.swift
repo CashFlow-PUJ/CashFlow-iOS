@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignupView: View {
     
@@ -21,9 +22,6 @@ struct SignupView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                
-                Spacer()
-                
                 Text("Crea tu cuenta")
                     .font(.largeTitle)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -38,7 +36,7 @@ struct SignupView: View {
                 TextField("Confirma tu correo electrónico", text: $emailConfirmation)
                     .keyboardType(.emailAddress)
                     .padding(.top, 15)
-
+                
                 // Password Input
                 SecureField("Contraseña", text: $password)
                     .padding(.top, 15)
@@ -50,8 +48,7 @@ struct SignupView: View {
                 
                 // Log in Button
                 Button(action: {
-                    print("\(email) \(password)")
-                    // TODO: Authenticate
+                    signUp()
                 }) {
                     Text("Continuar")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -60,11 +57,48 @@ struct SignupView: View {
                         .foregroundColor(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 2))
+                                .stroke(Color.white, lineWidth: 2))
                 }
                 .background(Color(hex: 0xF75E68))
                 .cornerRadius(8)
                 .padding(.top, 20)
+                
+                Text("O registrate con")
+                    .foregroundColor(.gray)
+                    .padding(.vertical, 10)
+                
+                // Facebook, Google, etc. Buttons
+                HStack {
+                    Button(action: {
+                        // TODO: Google authentication integration.
+                    }) {
+                        Text("Google")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .font(.system(size: 18))
+                            .padding()
+                            .foregroundColor(.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.white, lineWidth: 2))
+                    }
+                    .background(Color(hex: 0x7980F2))
+                    .cornerRadius(8)
+                    
+                    Button(action: {
+                        // TODO: Facebook authentication integration-
+                    }) {
+                        Text("Facebook")
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .font(.system(size: 18))
+                            .padding()
+                            .foregroundColor(.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.white, lineWidth: 2))
+                    }
+                    .background(Color(hex: 0x425893))
+                    .cornerRadius(8)
+                }
                 
                 // TODO: Policy Checkbox
                 
@@ -73,11 +107,17 @@ struct SignupView: View {
                 }
                 .foregroundColor(Color(hex: 0xF75E68))
                 .padding(.top, 20)
-                
-                Spacer()
-                Spacer()
-                                
             }.padding(37)
+        }
+    }
+    
+    func signUp() {
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+            } else {
+                print("success")
+            }
         }
     }
 }

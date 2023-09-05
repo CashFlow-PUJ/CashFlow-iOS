@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 // TODO: Check best practice to place extensions in Swift (independent file, etc.)
 extension Color {
@@ -55,8 +56,7 @@ struct LoginView: View {
                 
                 // Log in Button
                 Button(action: {
-                    print("\(email) \(password)")
-                    // TODO: Authenticate
+                    logIn()
                 }) {
                     Text("Iniciar sesión")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -125,6 +125,16 @@ struct LoginView: View {
                 .padding(.top, 10)
                 
             }.padding(37)
+        }
+    }
+    
+    func logIn() {
+        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+            } else {
+                print("success")
+            }
         }
     }
 }

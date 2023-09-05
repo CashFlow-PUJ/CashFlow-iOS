@@ -115,7 +115,6 @@
 			children = (
 				9A7445092AA01427009BA3F9 /* TransactionLog */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
-				9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */,
 				9A6AD1932A957A890047CCD0 /* LoginSignup */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A16123B2A6DE6CB0032743E /* ContentView.swift */,
@@ -389,6 +388,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
 				DEVELOPMENT_TEAM = 6HD9C3J3FV;
 				ENABLE_PREVIEWS = YES;
+				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -419,6 +419,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
 				DEVELOPMENT_TEAM = 6HD9C3J3FV;
 				ENABLE_PREVIEWS = YES;
+				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
