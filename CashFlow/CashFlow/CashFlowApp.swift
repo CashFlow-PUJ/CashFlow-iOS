@@ -7,34 +7,43 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAuth
+
+enum Route: Hashable {
+    case transactionLog
+}
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
+    func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
     return true
-  }
+    }
+}
+
+class Coordinator: ObservableObject {
+    @Published var path = [Route]()
 }
 
 @main
 struct CashFlowApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var coordinator = Coordinator()
     
     var body: some Scene {
         WindowGroup {
-            
-            var userIsAuthenticated = false
-            
-            // IF USER IS NOT AUTHENTICATED
-            if(!userIsAuthenticated) {
+            NavigationStack(path: $coordinator.path) {
                 LoginView()
                     .preferredColorScheme(.light)
-            }
-            else {
-                TransactionLog()
-                    .preferredColorScheme(.light)
-            }
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                            case .transactionLog:
+                                TransactionLogView()
+                                    .preferredColorScheme(.light)
+                        }
+                }
+            }.environmentObject(coordinator)
         }
     }
 }

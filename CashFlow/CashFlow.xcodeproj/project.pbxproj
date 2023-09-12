@@ -12,6 +12,7 @@
 		9A16123E2A6DE6CE0032743E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A16123D2A6DE6CE0032743E /* Assets.xcassets */; };
 		9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */; };
 		9A1612482A6DF6C60032743E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612472A6DF6C60032743E /* ImagePicker.swift */; };
+		9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B72C52AA748760091E313 /* TransactionLogView.swift */; };
 		9A4B72C82AA7494B0091E313 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */; };
 		9A4B72CB2AA749F40091E313 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 9A4B72CA2AA749F40091E313 /* FirebaseAnalyticsOnDeviceConversion */; };
 		9A4B72CD2AA749F40091E313 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9A4B72CC2AA749F40091E313 /* FirebaseAnalyticsSwift */; };
@@ -41,7 +42,7 @@
 		9A4B72FD2AA749F40091E313 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9A4B72FC2AA749F40091E313 /* FirebaseStorageCombine-Community */; };
 		9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1942A957A9D0047CCD0 /* LoginView.swift */; };
 		9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1962A958F8E0047CCD0 /* SignupView.swift */; };
-		9A6AD1992A9CB9A20047CCD0 /* TransactionLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */; };
+		9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,10 +52,11 @@
 		9A16123D2A6DE6CE0032743E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9A1612472A6DF6C60032743E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		9A4B72C52AA748760091E313 /* TransactionLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLogView.swift; sourceTree = "<group>"; };
 		9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9A6AD1942A957A9D0047CCD0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9A6AD1962A958F8E0047CCD0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
-		9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionLog.swift; sourceTree = "<group>"; };
+		9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +115,8 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
+				9A7445092AA01427009BA3F9 /* TransactionLog */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
-				9A6AD1982A9CB9A20047CCD0 /* TransactionLog.swift */,
 				9A6AD1932A957A890047CCD0 /* LoginSignup */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A16123B2A6DE6CB0032743E /* ContentView.swift */,
@@ -138,8 +140,17 @@
 			children = (
 				9A6AD1942A957A9D0047CCD0 /* LoginView.swift */,
 				9A6AD1962A958F8E0047CCD0 /* SignupView.swift */,
+				9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */,
 			);
 			path = LoginSignup;
+			sourceTree = "<group>";
+		};
+		9A7445092AA01427009BA3F9 /* TransactionLog */ = {
+			isa = PBXGroup;
+			children = (
+				9A4B72C52AA748760091E313 /* TransactionLogView.swift */,
+			);
+			path = TransactionLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,9 +256,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1612482A6DF6C60032743E /* ImagePicker.swift in Sources */,
-				9A6AD1992A9CB9A20047CCD0 /* TransactionLog.swift in Sources */,
 				9A16123C2A6DE6CB0032743E /* ContentView.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
+				9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */,
+				9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */,
 			);
@@ -380,6 +392,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
 				DEVELOPMENT_TEAM = 6HD9C3J3FV;
 				ENABLE_PREVIEWS = YES;
+				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -410,6 +423,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
 				DEVELOPMENT_TEAM = 6HD9C3J3FV;
 				ENABLE_PREVIEWS = YES;
+				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
