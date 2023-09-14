@@ -11,6 +11,7 @@ import FirebaseAuth
 
 enum Route: Hashable {
     case transactionLog
+    case imageInput
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -40,6 +41,9 @@ struct CashFlowApp: App {
                         switch route {
                             case .transactionLog:
                                 TransactionLogView()
+                                    .preferredColorScheme(.light)
+                            case .imageInput:
+                                ContentView()
                                     .preferredColorScheme(.light)
                         }
                 }
