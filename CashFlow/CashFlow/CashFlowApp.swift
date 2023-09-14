@@ -21,7 +21,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     return true
     }
 }
-
+ 
 class Coordinator: ObservableObject {
     @Published var path = [Route]()
 }

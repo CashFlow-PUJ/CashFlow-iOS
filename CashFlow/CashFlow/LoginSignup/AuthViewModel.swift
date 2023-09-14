@@ -28,7 +28,6 @@ class AuthViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     func signUp(email: String, password: String, completion: @escaping (Result<Bool, FBError>) -> Void) {
-        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             
             if let error {
@@ -45,7 +44,6 @@ class AuthViewModel: ObservableObject {
     }
     
     func logIn(email: String, password: String, completion: @escaping (Result<Bool, FBError>) -> Void) {
-        
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             
             if let error {
