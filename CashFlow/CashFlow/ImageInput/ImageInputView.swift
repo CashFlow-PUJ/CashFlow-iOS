@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ImageInputView: View {
     
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
@@ -65,6 +65,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ImageInputView()
     }
 }

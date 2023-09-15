@@ -43,7 +43,7 @@ struct CashFlowApp: App {
                                 TransactionLogView()
                                     .preferredColorScheme(.light)
                             case .imageInput:
-                                ContentView()
+                                ImageInputView()
                                     .preferredColorScheme(.light)
                         }
                 }
