@@ -20,6 +20,7 @@
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
 		9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */; };
+		9AB5235E2AB3FD46005EA49C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AB5235D2AB3FD46005EA49C /* Main.storyboard */; };
 		9ACDA9C32AB31FBD00002DE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9C22AB31FBD00002DE7 /* FirebaseAuth */; };
 		9ACDA9C52AB31FBD00002DE7 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9C42AB31FBD00002DE7 /* FirebaseAuthCombine-Community */; };
 		9ACDA9C72AB31FBD00002DE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9C62AB31FBD00002DE7 /* FirebaseDatabase */; };
@@ -49,6 +50,7 @@
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
 		9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitExtensions.swift; sourceTree = "<group>"; };
+		9AB5235D2AB3FD46005EA49C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BE38DCDF0F19421B33AA677B /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
 		D355B3A2F7BC7D22BBEC71E3 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
+				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9ACDA9C02AB31BA600002DE7 /* ImageInput */,
 				9A7445092AA01427009BA3F9 /* TransactionLog */,
@@ -149,6 +152,14 @@
 				9AB523562AB3DE95005EA49C /* image_has_text.jpg */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9AB5235A2AB3F9F6005EA49C /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				9AB5235D2AB3FD46005EA49C /* Main.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 		9ACDA9C02AB31BA600002DE7 /* ImageInput */ = {
@@ -247,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */,
+				9AB5235E2AB3FD46005EA49C /* Main.storyboard in Resources */,
 				9A16123E2A6DE6CE0032743E /* Assets.xcassets in Resources */,
 				9A4B72C82AA7494B0091E313 /* GoogleService-Info.plist in Resources */,
 				9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */,
