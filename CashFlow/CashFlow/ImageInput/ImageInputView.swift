@@ -13,21 +13,22 @@ struct ImageInputView: View {
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     
-    @State private var image: UIImage?
+    // @State private var image: UIImage?
     
     var body: some View {
         NavigationView {
             VStack {
-                
+                /*
                 Image(uiImage: image ?? UIImage())
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 350, height: 400)
                     .cornerRadius(15)
+                 */
                 
                 Button(
                     action: {
-                        self.showSheet = true
+                        self.showImagePicker = true
                     },
                     label: {
                         Image(systemName: "camera.fill")
@@ -35,31 +36,29 @@ struct ImageInputView: View {
                             .foregroundColor(.primary)
                             .font(.title)
                 })
-                .actionSheet(isPresented: $showSheet) {
-                    ActionSheet(
-                        title: Text("Escanear recibo"),
-                        message: Text("Seleccione una foto"),
-                        buttons: [
-                            .default(Text("Galería")) {
-                                self.showImagePicker = true
-                                self.sourceType = .photoLibrary
-                            },
-                            .default(Text("Cámara")) {
-                                self.showImagePicker = true
-                                self.sourceType = .camera
-                            },
-                            .cancel(Text("Cancelar"))
-                        ]
-                    )
-                }
                 
-                Spacer()
+                //Spacer()
             }
             .padding()
         }
         .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: self.$image, isShown: self.$showImagePicker, sourceType: self.sourceType)
+            // ImagePicker(image: self.$image, isShown: self.$showImagePicker, sourceType: self.sourceType)
+            ImageInputViewControllerRepresentable()
         }
+    }
+}
+
+struct ImageInputViewControllerRepresentable: UIViewControllerRepresentable {
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        let vc = ImageInputViewController()
+        return vc
+    }
+    
+    typealias UIViewControllerType = UIViewController
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
     }
 }
 
