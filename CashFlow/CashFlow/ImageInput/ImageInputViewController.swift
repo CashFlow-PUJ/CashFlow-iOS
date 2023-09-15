@@ -171,7 +171,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         guard let image = image else { return }
         
         // [START init_text]
-        var options: CommonTextRecognizerOptions = TextRecognizerOptions.init()
+        let options: CommonTextRecognizerOptions = TextRecognizerOptions.init()
         
         let onDeviceTextRecognizer = TextRecognizer.textRecognizer(options: options)
         // [END init_text]
