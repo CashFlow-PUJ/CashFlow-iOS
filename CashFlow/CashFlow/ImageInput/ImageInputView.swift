@@ -13,19 +13,9 @@ struct ImageInputView: View {
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     
-    // @State private var image: UIImage?
-    
     var body: some View {
         NavigationView {
             VStack {
-                /*
-                Image(uiImage: image ?? UIImage())
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 350, height: 400)
-                    .cornerRadius(15)
-                 */
-                
                 Button(
                     action: {
                         self.showImagePicker = true
@@ -36,13 +26,10 @@ struct ImageInputView: View {
                             .foregroundColor(.primary)
                             .font(.title)
                 })
-                
-                //Spacer()
             }
             .padding()
         }
         .sheet(isPresented: $showImagePicker) {
-            // ImagePicker(image: self.$image, isShown: self.$showImagePicker, sourceType: self.sourceType)
             ImageInputViewControllerRepresentable()
         }
     }
