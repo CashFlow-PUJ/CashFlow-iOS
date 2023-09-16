@@ -17,8 +17,8 @@ enum FBError: Error, Identifiable {
     
     var errorMessage: String {
         switch self {
-            case .error(let message):
-                return message
+        case .error(let message):
+            return message
         }
     }
 }
@@ -56,6 +56,16 @@ class AuthViewModel: ObservableObject {
                 }
             }
             
+        }
+    }
+    
+    func signOut(completion: @escaping (Result<Bool, FBError>) -> Void) {
+        do {
+            try Auth.auth().signOut()
+        } catch let error as NSError {
+            DispatchQueue.main.async {
+                completion(.failure(.error(error.localizedDescription)))
+            }
         }
     }
     

@@ -16,12 +16,12 @@ enum Route: Hashable {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        return true
     }
 }
- 
+
 class Coordinator: ObservableObject {
     @Published var path = [Route]()
 }
@@ -33,18 +33,28 @@ struct CashFlowApp: App {
     @ObservedObject var coordinator = Coordinator()
     
     var body: some Scene {
+        
+        
+        
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                LoginView()
-                    .preferredColorScheme(.light)
-                    .navigationDestination(for: Route.self) { route in
-                        switch route {
+                if Auth.auth().currentUser != nil {
+                    // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
+                    ImageInputView()
+                        .preferredColorScheme(.light)
+                }
+                else {
+                    LoginView()
+                        .preferredColorScheme(.light)
+                        .navigationDestination(for: Route.self) { route in
+                            switch route {
                             case .transactionLog:
                                 TransactionLogView()
                                     .preferredColorScheme(.light)
                             case .imageInput:
                                 ImageInputView()
                                     .preferredColorScheme(.light)
+                            }
                         }
                 }
             }.environmentObject(coordinator)
