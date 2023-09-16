@@ -106,14 +106,14 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
-				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9ACDA9C02AB31BA600002DE7 /* ImageInput */,
 				9A7445092AA01427009BA3F9 /* TransactionLog */,
 				9A6AD1932A957A890047CCD0 /* LoginSignup */,
+				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
+				9A16123F2A6DE6CE0032743E /* Preview Content */,
 				9A16123D2A6DE6CE0032743E /* Assets.xcassets */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
-				9A16123F2A6DE6CE0032743E /* Preview Content */,
 			);
 			path = CashFlow;
 			sourceTree = "<group>";

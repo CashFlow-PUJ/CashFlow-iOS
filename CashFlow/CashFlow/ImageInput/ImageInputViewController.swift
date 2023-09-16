@@ -12,7 +12,7 @@ import MLKit
 @objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
     
-    /// A string holding current results from detection.g
+    /// A string holding current results from detection.
     var resultsText = ""
     
     /// An overlay view that displays detection annotations.
