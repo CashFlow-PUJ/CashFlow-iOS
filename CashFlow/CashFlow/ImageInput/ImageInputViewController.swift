@@ -9,7 +9,7 @@ import UIKit
 import MLImage
 import MLKit
 
-@objc(ViewController)
+@objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
     
     /// A string holding current results from detection.g

@@ -38,8 +38,9 @@ struct ImageInputView: View {
 struct ImageInputViewControllerRepresentable: UIViewControllerRepresentable {
     
     func makeUIViewController(context: Context) -> UIViewController {
-        let vc = ImageInputViewController()
-        return vc
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = sb.instantiateViewController(identifier: "IIVC")
+                return viewController
     }
     
     typealias UIViewControllerType = UIViewController

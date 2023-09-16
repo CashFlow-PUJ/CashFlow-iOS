@@ -22,10 +22,10 @@
             </objects>
             <point key="canvasLocation" x="-607" y="134"/>
         </scene>
-        <!--View Controller-->
+        <!--Image Input View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="viewController" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IIVC" id="BYZ-38-t0r" customClass="ImageInputViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LHw-b6-B2a"/>
                         <viewControllerLayoutGuide type="bottom" id="Ydg-C1-MLG"/>
