@@ -55,11 +55,11 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="v2M-Hr-v21"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-tA-gDT">
-                                <rect key="frame" x="0.0" y="120" width="375" height="330"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-tA-gDT">
+                                <rect key="frame" x="0.0" y="120" width="375" height="503"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yof-fW-vlO" userLabel="Bottom Toolbar">
-                                <rect key="frame" x="0.0" y="450" width="375" height="44"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="yof-fW-vlO" userLabel="Bottom Toolbar">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="74h-Pf-w4T"/>
                                 </constraints>
@@ -85,6 +85,7 @@
                             <constraint firstItem="POq-8j-gOJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cho-7Z-rGg"/>
                             <constraint firstAttribute="trailing" secondItem="yof-fW-vlO" secondAttribute="trailing" id="etE-tG-0CW"/>
                             <constraint firstItem="yof-fW-vlO" firstAttribute="top" secondItem="cCp-tA-gDT" secondAttribute="bottom" id="oQg-Ks-4Jj"/>
+                            <constraint firstItem="Ydg-C1-MLG" firstAttribute="top" secondItem="yof-fW-vlO" secondAttribute="bottom" id="yqH-dO-z03"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xYg-VP-pps">

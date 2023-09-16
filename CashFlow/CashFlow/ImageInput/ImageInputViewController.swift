@@ -59,7 +59,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         UIImagePickerController.isCameraDeviceAvailable(.front)
         || UIImagePickerController.isCameraDeviceAvailable(.rear)
         
-        if isCameraAvailable {
+        if !isCameraAvailable {
             photoCameraButton.isEnabled = false
         }
     }
