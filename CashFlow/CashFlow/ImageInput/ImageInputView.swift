@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImageInputView: View {
     
+    // TODO: Find out how to remove 'Back' button in NavigationStack routed view.
     @Environment(\.dismiss) private var dismiss
     
     @State private var showSheet: Bool = false

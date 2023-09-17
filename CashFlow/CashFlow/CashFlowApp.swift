@@ -36,7 +36,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                initialView
+                LoginView()
                     .preferredColorScheme(.light)
                     .navigationDestination(for: Route.self) { route in
                         switch route {
@@ -51,27 +51,16 @@ struct CashFlowApp: App {
                         }
                     }
             }
+            .onAppear {
+                if Auth.auth().currentUser != nil {
+                    // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
+                    coordinator.path.append(.imageInput)
+                }
+            }
             .environmentObject(coordinator)
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }
-        }
-    }
-    
-    @ViewBuilder
-    private var initialView: some View {
-        if Auth.auth().currentUser != nil {
-            // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
-            ImageInputView()
-        }
-        else {
-            LoginView()
-        }
-    }
-    
-    private func checkIfActiveUserSession() {
-        if Auth.auth().currentUser != nil {
-            coordinator.path.append(.imageInput)
         }
     }
 }
