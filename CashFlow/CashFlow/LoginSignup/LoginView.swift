@@ -63,7 +63,7 @@ struct LoginView: View {
             Button(action: {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
-                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                     case .success(_):
                         coordinator.path.append(.imageInput)
                     case .failure(let error):

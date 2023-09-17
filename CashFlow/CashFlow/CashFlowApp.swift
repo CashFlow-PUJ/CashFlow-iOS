@@ -36,38 +36,42 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                if Auth.auth().currentUser != nil {
-                    // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
-                    ImageInputView()
-                        .preferredColorScheme(.light)
-                    // TODO: Link this View with modifier .navigationDestination
-                }
-                else {
-                    LoginView()
-                        .preferredColorScheme(.light)
-                        .navigationDestination(for: Route.self) { route in
-                            switch route {
-                            case .transactionLog:
-                                TransactionLogView()
-                                    .preferredColorScheme(.light)
-                                    .environmentObject(coordinator)
-                            case .imageInput:
-                                ImageInputView()
-                                    .preferredColorScheme(.light)
-                                    .environmentObject(coordinator)
-                            }
+                initialView
+                    .preferredColorScheme(.light)
+                    .navigationDestination(for: Route.self) { route in
+                        switch route {
+                        case .transactionLog:
+                            TransactionLogView()
+                                .preferredColorScheme(.light)
+                                .environmentObject(coordinator)
+                        case .imageInput:
+                            ImageInputView()
+                                .preferredColorScheme(.light)
+                                .environmentObject(coordinator)
                         }
-                }
+                    }
             }
             .environmentObject(coordinator)
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }
-            .onAppear {
-                GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-                    // Check if `user` exists; otherwise, do something with `error`
-                }
-            }
+        }
+    }
+    
+    @ViewBuilder
+    private var initialView: some View {
+        if Auth.auth().currentUser != nil {
+            // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
+            ImageInputView()
+        }
+        else {
+            LoginView()
+        }
+    }
+    
+    private func checkIfActiveUserSession() {
+        if Auth.auth().currentUser != nil {
+            coordinator.path.append(.imageInput)
         }
     }
 }
