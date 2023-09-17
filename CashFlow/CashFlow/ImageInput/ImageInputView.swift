@@ -45,7 +45,7 @@ struct ImageInputView: View {
             }
             .padding()
         }
-        .fullScreenCover(isPresented: $showImagePicker){
+        .sheet(isPresented: $showImagePicker){
             ImageInputViewControllerRepresentable()
         }
     }

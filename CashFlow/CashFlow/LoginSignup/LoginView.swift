@@ -7,7 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
-import GoogleSignInSwift
+import FirebaseCore
 import GoogleSignIn
 
 // TODO: Check best practice to place extensions and enums in Swift (independent file, etc.)
@@ -63,7 +63,7 @@ struct LoginView: View {
             Button(action: {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
-                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                     case .success(_):
                         coordinator.path.append(.imageInput)
                     case .failure(let error):
@@ -90,24 +90,20 @@ struct LoginView: View {
             // Facebook, Google, etc. Buttons
             HStack {
                 
-                GoogleSignInButton(action: handleSignInButton)
-                
-                /*
-                 Button(action: {
-                 // TODO: Google authentication integration.
-                 }) {
-                 Text("Google")
-                 .frame(minWidth: 0, maxWidth: .infinity)
-                 .font(.system(size: 18))
-                 .padding()
-                 .foregroundColor(.white)
-                 .overlay(
-                 RoundedRectangle(cornerRadius: 8)
-                 .stroke(Color.white, lineWidth: 2))
-                 }
-                 .background(Color(hex: 0x7980F2))
-                 .cornerRadius(8)
-                 */
+                Button(action: {
+                    handleGoogleSignInButton()
+                }) {
+                    Text("Google")
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .font(.system(size: 18))
+                        .padding()
+                        .foregroundColor(.white)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.white, lineWidth: 2))
+                }
+                .background(Color(hex: 0x7980F2))
+                .cornerRadius(8)
                 
                 Button(action: {
                     // TODO: Facebook authentication integration-
@@ -146,14 +142,18 @@ struct LoginView: View {
         .padding(37)
     }
     
-    private func handleSignInButton() {
-        guard let presentingViewController = (UIApplication.shared.connectedScenes.first
-                                              as? UIWindowScene)?.windows.first?.rootViewController
-        else {return}
+    private func handleGoogleSignInButton() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.configuration = config
         
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
-            guard let result = signInResult else {
-                // Inspect error
+            guard signInResult != nil else {
+                // TODO: Handle error
                 return
             }
             coordinator.path.append(.imageInput)
