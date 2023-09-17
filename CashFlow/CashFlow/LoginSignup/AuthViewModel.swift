@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
 
 enum FBError: Error, Identifiable {
     case error(String)
@@ -55,6 +56,28 @@ class AuthViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     completion(.success(true))
                 }
+            }
+            
+        }
+    }
+    
+    func logIn(credential: AuthCredential, completion: @escaping (Result<Bool, FBError>) -> Void) {
+        Auth.auth().signIn(with: credential) { result, error in
+            
+            if let error {
+                DispatchQueue.main.async {
+                    completion(.failure(.error(error.localizedDescription)))
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(.success(true))
+                }
+                
+                // TODO: SAVE USER OBJECT
+                /*
+                self.email = result?.user.email
+                self.photoURL = result?.user.photoURL!.absoluteString
+                */
             }
             
         }

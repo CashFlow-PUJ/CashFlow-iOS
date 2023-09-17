@@ -151,12 +151,24 @@ struct LoginView: View {
         
         GIDSignIn.sharedInstance.configuration = config
         
-        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
-            guard signInResult != nil else {
-                // TODO: Handle error
-                return
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
+            
+            if let error {
+              // TODO: Handle error
             }
-            coordinator.path.append(.imageInput)
+                    
+            guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            
+            vm.logIn(credential: credential) { result in
+                switch result {
+                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                case .success(_):
+                    coordinator.path.append(.imageInput)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            }
         }
     }
 }
