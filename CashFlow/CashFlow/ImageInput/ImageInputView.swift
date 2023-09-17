@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ImageInputView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera

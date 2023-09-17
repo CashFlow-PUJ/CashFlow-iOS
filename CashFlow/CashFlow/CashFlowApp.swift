@@ -40,6 +40,7 @@ struct CashFlowApp: App {
                     // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
                     ImageInputView()
                         .preferredColorScheme(.light)
+                    // TODO: Link this View with modifier .navigationDestination
                 }
                 else {
                     LoginView()
