@@ -32,8 +32,11 @@ struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
-    @StateObject private var vm = AuthViewModel()
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
     
+    @StateObject private var vm = AuthViewModel()
+
     var credentialFieldsAreEmpty: Bool {
         return (email.isEmpty || password.isEmpty)
     }
@@ -75,7 +78,8 @@ struct LoginView: View {
                     case .success(_):
                         coordinator.path.append(.imageInput)
                     case .failure(let error):
-                        print(error.errorMessage)
+                        showingErrorAlert = true
+                        errorMessage = error.errorMessage
                     }
                 }
             }) {
@@ -87,6 +91,9 @@ struct LoginView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
+            }
+            .alert(isPresented: $showingErrorAlert) {
+                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("Aceptar")))
             }
             .disabled(credentialFieldsAreEmpty)
             .background(loginButtonColor)
@@ -163,7 +170,7 @@ struct LoginView: View {
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
             if let error {
-              // TODO: Handle error
+                print(error.localizedDescription)
             }
                     
             guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }

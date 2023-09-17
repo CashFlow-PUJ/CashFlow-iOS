@@ -23,6 +23,9 @@ struct SignupView: View {
     @State private var password: String = ""
     @State private var passwordConfirmation: String = ""
     
+    @State private var showingErrorAlert = false
+    @State private var errorMessage = ""
+    
     @StateObject private var vm = AuthViewModel()
     
     var credentialFieldsAreEmpty: Bool {
@@ -34,7 +37,7 @@ struct SignupView: View {
     }
 
     var signupButtonColor: Color {
-        return !credentialFieldsAreEmpty ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
+        return !credentialFieldsAreEmpty || !credentialFieldsDontMatch ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
     }
     
     var body: some View {
@@ -81,7 +84,8 @@ struct SignupView: View {
                         // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                         coordinator.path.append(.imageInput)
                     case .failure(let error):
-                        print(error.errorMessage)
+                        showingErrorAlert = true
+                        errorMessage = error.errorMessage
                     }
                 }
             }) {
@@ -93,6 +97,9 @@ struct SignupView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
+            }
+            .alert(isPresented: $showingErrorAlert) {
+                Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("Aceptar")))
             }
             .disabled(credentialFieldsAreEmpty || credentialFieldsDontMatch)
             .background(signupButtonColor)
