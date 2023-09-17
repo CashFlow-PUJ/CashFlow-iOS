@@ -12,8 +12,6 @@ import GoogleSignIn
 
 struct SignupView: View {
     
-    // TODO: Remove back button from this screen.
-    
     @EnvironmentObject var coordinator: Coordinator
     
     @Environment(\.dismiss) private var dismiss
@@ -37,7 +35,7 @@ struct SignupView: View {
     }
 
     var signupButtonColor: Color {
-        return !credentialFieldsAreEmpty || !credentialFieldsDontMatch ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
+        return !credentialFieldsAreEmpty && !credentialFieldsDontMatch ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
     }
     
     var body: some View {
