@@ -23,6 +23,9 @@ struct ImageInputView: View {
     var body: some View {
         NavigationView {
             VStack {
+                
+                Spacer()
+                
                 Button(
                     action: {
                         self.showImagePicker = true
@@ -34,17 +37,21 @@ struct ImageInputView: View {
                             .font(.title)
                 })
                 
+                Spacer()
+                
                 // TODO: Remove this button once Sign Out dedicated trigger is implemented.
                 Button(
                     action: {
                         vm.signOut()
-                        coordinator.path = coordinator.path.dropLast()
+                        coordinator.path.append(.login)
                     },
                     label: {
                         Text("Sign Out")
                             .font(.title)
                     }
                 )
+                
+                Spacer()
             }
             .padding()
         }

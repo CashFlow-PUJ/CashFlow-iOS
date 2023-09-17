@@ -13,6 +13,7 @@ import GoogleSignIn
 enum Route: Hashable {
     case transactionLog
     case imageInput
+    case login
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -49,6 +50,10 @@ struct CashFlowApp: App {
                                 ImageInputView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
+                            case .login:
+                                LoginView()
+                                    .preferredColorScheme(.light)
+                                    .environmentObject(coordinator)
                             }
                         }
                         .navigationBarBackButtonHidden(true)
@@ -59,6 +64,10 @@ struct CashFlowApp: App {
                     // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
                     coordinator.path.append(.imageInput)
                 }
+                
+                // DEBUG
+                dump(coordinator.path)
+                
             }
             .environmentObject(coordinator)
             .onOpenURL { url in

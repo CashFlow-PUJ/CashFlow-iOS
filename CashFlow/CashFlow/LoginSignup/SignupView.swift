@@ -57,10 +57,11 @@ struct SignupView: View {
             Button(action: {
                 vm.signUp(email: email, password: password) { result in
                     switch result {
-                        case .success(_):
-                            coordinator.path.append(.transactionLog)
-                        case .failure(let error):
-                            print(error.errorMessage)
+                    case .success(_):
+                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                        coordinator.path.append(.imageInput)
+                    case .failure(let error):
+                        print(error.errorMessage)
                     }
                 }
             }) {
@@ -93,7 +94,7 @@ struct SignupView: View {
                         .foregroundColor(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 2))
+                                .stroke(Color.white, lineWidth: 2))
                 }
                 .background(Color(hex: 0x7980F2))
                 .cornerRadius(8)
@@ -108,7 +109,7 @@ struct SignupView: View {
                         .foregroundColor(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 2))
+                                .stroke(Color.white, lineWidth: 2))
                 }
                 .background(Color(hex: 0x425893))
                 .cornerRadius(8)
@@ -137,9 +138,9 @@ struct SignupView: View {
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
             if let error {
-              // TODO: Handle error
+                // TODO: Handle error
             }
-                    
+            
             guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
             
