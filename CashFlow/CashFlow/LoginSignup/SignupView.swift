@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseCore
+import GoogleSignIn
 
 struct SignupView: View {
     
@@ -82,7 +84,7 @@ struct SignupView: View {
             // Facebook, Google, etc. Buttons
             HStack {
                 Button(action: {
-                    // TODO: Google authentication integration.
+                    handleGoogleSignUpButton()
                 }) {
                     Text("Google")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -121,6 +123,36 @@ struct SignupView: View {
             .padding(.top, 20)
         }
         .padding(37)
+    }
+    
+    private func handleGoogleSignUpButton() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.configuration = config
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
+            
+            if let error {
+              // TODO: Handle error
+            }
+                    
+            guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            
+            vm.logIn(credential: credential) { result in
+                switch result {
+                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                case .success(_):
+                    coordinator.path.append(.imageInput)
+                case .failure(let error):
+                    print(error.errorMessage)
+                }
+            }
+        }
     }
 }
 

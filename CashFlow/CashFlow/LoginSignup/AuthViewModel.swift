@@ -73,7 +73,7 @@ class AuthViewModel: ObservableObject {
                     completion(.success(true))
                 }
                 
-                // TODO: SAVE USER OBJECT
+                // TODO: SAVE USER OBJECT IN MEMORY
                 /*
                 self.email = result?.user.email
                 self.photoURL = result?.user.photoURL!.absoluteString
