@@ -26,7 +26,11 @@ struct SignupView: View {
     @StateObject private var vm = AuthViewModel()
     
     var credentialFieldsAreEmpty: Bool {
-        return (email.isEmpty || password.isEmpty)
+        return (email.isEmpty || password.isEmpty) || (emailConfirmation.isEmpty || passwordConfirmation.isEmpty)
+    }
+    
+    var credentialFieldsDontMatch: Bool {
+        return (email != emailConfirmation || password != passwordConfirmation)
     }
 
     var signupButtonColor: Color {
@@ -40,26 +44,34 @@ struct SignupView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             // Email Input
-            TextField("Correo electrónico", text: $email)
-                .keyboardType(.emailAddress)
-                .padding(.top, 5)
-                .autocapitalization(.none)
-            
-            // Confirm Email Input
-            // TODO: Check for equality between emails and if not, display message on screen.
-            TextField("Confirma tu correo electrónico", text: $emailConfirmation)
-                .keyboardType(.emailAddress)
-                .padding(.top, 15)
-                .autocapitalization(.none)
+            Group {
+                TextField("Correo electrónico", text: $email)
+                    .keyboardType(.emailAddress)
+                    .padding(.top, 5)
+                    .autocapitalization(.none)
+                
+                // Confirm Email Input
+                // TODO: Check for equality between emails and if not, display message on screen.
+                TextField("Confirma tu correo electrónico", text: $emailConfirmation)
+                    .keyboardType(.emailAddress)
+                    .padding(.vertical, 15)
+                    .autocapitalization(.none)
+                
+                fieldsDoNotMatchText(errorMessage: "Los correos no coinciden. 🧐", textFieldString1: email, textFieldString2: emailConfirmation)
+            }
             
             // Password Input
-            SecureField("Contraseña", text: $password)
-                .padding(.top, 15)
-            
-            // Confirm Password Input
-            // TODO: Check for equality between passwords and if not, display message on screen.
-            SecureField("Confirma tu contraseña", text: $passwordConfirmation)
-                .padding(.top, 15)
+            Group {
+                SecureField("Contraseña", text: $password)
+                    .padding(.top, 5)
+                
+                // Confirm Password Input
+                // TODO: Check for equality between passwords and if not, display message on screen.
+                SecureField("Confirma tu contraseña", text: $passwordConfirmation)
+                    .padding(.vertical, 15)
+                
+                fieldsDoNotMatchText(errorMessage: "Las contraseñas no coinciden. 🫣", textFieldString1: password, textFieldString2: passwordConfirmation)
+            }
             
             // Log in Button
             Button(action: {
@@ -82,7 +94,7 @@ struct SignupView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
             }
-            .disabled(credentialFieldsAreEmpty)
+            .disabled(credentialFieldsAreEmpty || credentialFieldsDontMatch)
             .background(signupButtonColor)
             .cornerRadius(8)
             .padding(.top, 20)
@@ -133,6 +145,17 @@ struct SignupView: View {
             .padding(.top, 20)
         }
         .padding(37)
+    }
+    
+    @ViewBuilder
+    private func fieldsDoNotMatchText(errorMessage: String, textFieldString1: String, textFieldString2: String) -> some View {
+        if textFieldString1 != textFieldString2 && (!textFieldString1.isEmpty && !textFieldString2.isEmpty) {
+            Text(errorMessage)
+                .font(.callout)
+                .foregroundColor(.red)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        EmptyView()
     }
     
     private func handleGoogleSignUpButton() {
