@@ -34,6 +34,14 @@ struct LoginView: View {
     
     @StateObject private var vm = AuthViewModel()
     
+    var credentialFieldsAreEmpty: Bool {
+        return (email.isEmpty || password.isEmpty)
+    }
+
+    var loginButtonColor: Color {
+        return !credentialFieldsAreEmpty ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
+    }
+    
     var body: some View {
         VStack {
             
@@ -80,7 +88,8 @@ struct LoginView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
             }
-            .background(Color(hex: 0xF75E68))
+            .disabled(credentialFieldsAreEmpty)
+            .background(loginButtonColor)
             .cornerRadius(8)
             
             Text("Iniciar sesión con")

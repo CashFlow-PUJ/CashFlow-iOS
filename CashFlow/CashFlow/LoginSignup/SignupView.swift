@@ -25,6 +25,14 @@ struct SignupView: View {
     
     @StateObject private var vm = AuthViewModel()
     
+    var credentialFieldsAreEmpty: Bool {
+        return (email.isEmpty || password.isEmpty)
+    }
+
+    var signupButtonColor: Color {
+        return !credentialFieldsAreEmpty ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
+    }
+    
     var body: some View {
         VStack {
             Text("Crea tu cuenta")
@@ -74,7 +82,8 @@ struct SignupView: View {
                         RoundedRectangle(cornerRadius: 8)
                             .stroke(Color.white, lineWidth: 2))
             }
-            .background(Color(hex: 0xF75E68))
+            .disabled(credentialFieldsAreEmpty)
+            .background(signupButtonColor)
             .cornerRadius(8)
             .padding(.top, 20)
             

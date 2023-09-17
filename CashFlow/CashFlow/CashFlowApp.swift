@@ -64,10 +64,6 @@ struct CashFlowApp: App {
                     // TODO: Replace imageInput when transactionLog implementation starts and is linked to imageInput trigger button.
                     coordinator.path.append(.imageInput)
                 }
-                
-                // DEBUG
-                dump(coordinator.path)
-                
             }
             .environmentObject(coordinator)
             .onOpenURL { url in
