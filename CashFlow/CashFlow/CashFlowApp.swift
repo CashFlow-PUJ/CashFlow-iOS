@@ -8,6 +8,7 @@
 import SwiftUI
 import FirebaseCore
 import FirebaseAuth
+import GoogleSignIn
 
 enum Route: Hashable {
     case transactionLog
@@ -33,9 +34,6 @@ struct CashFlowApp: App {
     @ObservedObject var coordinator = Coordinator()
     
     var body: some Scene {
-        
-        
-        
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
                 if Auth.auth().currentUser != nil {
@@ -51,13 +49,24 @@ struct CashFlowApp: App {
                             case .transactionLog:
                                 TransactionLogView()
                                     .preferredColorScheme(.light)
+                                    .environmentObject(coordinator)
                             case .imageInput:
                                 ImageInputView()
                                     .preferredColorScheme(.light)
+                                    .environmentObject(coordinator)
                             }
                         }
                 }
-            }.environmentObject(coordinator)
+            }
+            .environmentObject(coordinator)
+            .onOpenURL { url in
+                GIDSignIn.sharedInstance.handle(url)
+            }
+            .onAppear {
+                GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+                    // Check if `user` exists; otherwise, do something with `error`
+                }
+            }
         }
     }
 }

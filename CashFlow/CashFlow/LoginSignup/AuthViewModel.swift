@@ -25,6 +25,7 @@ enum FBError: Error, Identifiable {
 
 class AuthViewModel: ObservableObject {
     
+    // TODO: Perhaps this could be deleted. Test .errorMessage call either in LoginView or SignupView.
     @Published var errorMessage: String?
     
     func signUp(email: String, password: String, completion: @escaping (Result<Bool, FBError>) -> Void) {
@@ -59,13 +60,11 @@ class AuthViewModel: ObservableObject {
         }
     }
     
-    func signOut(completion: @escaping (Result<Bool, FBError>) -> Void) {
+    func signOut() {
         do {
             try Auth.auth().signOut()
-        } catch let error as NSError {
-            DispatchQueue.main.async {
-                completion(.failure(.error(error.localizedDescription)))
-            }
+        } catch _ {
+            print("Error signing out.")
         }
     }
     

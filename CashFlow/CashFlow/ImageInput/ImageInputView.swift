@@ -13,6 +13,10 @@ struct ImageInputView: View {
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     
+    // TODO: Remove the following lines once Sign Out dedicated trigger is implemented.
+    @EnvironmentObject var coordinator: Coordinator
+    @StateObject private var vm = AuthViewModel()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -26,6 +30,18 @@ struct ImageInputView: View {
                             .foregroundColor(.primary)
                             .font(.title)
                 })
+                
+                // TODO: Remove this button once Sign Out dedicated trigger is implemented.
+                Button(
+                    action: {
+                        vm.signOut()
+                        coordinator.path = coordinator.path.dropLast()
+                    },
+                    label: {
+                        Text("Sign Out")
+                            .font(.title)
+                    }
+                )
             }
             .padding()
         }

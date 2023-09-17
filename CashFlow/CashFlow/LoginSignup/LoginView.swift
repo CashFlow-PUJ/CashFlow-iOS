@@ -7,6 +7,8 @@
 
 import SwiftUI
 import FirebaseAuth
+import GoogleSignInSwift
+import GoogleSignIn
 
 // TODO: Check best practice to place extensions and enums in Swift (independent file, etc.)
 extension Color {
@@ -22,7 +24,7 @@ extension Color {
 }
 
 struct LoginView: View {
-   
+    
     @EnvironmentObject var coordinator: Coordinator
     
     // TODO: Both on this and SignUpView: dismiss keyboard controller when tapping out of TextField or SecureField.
@@ -52,7 +54,7 @@ struct LoginView: View {
                 .keyboardType(.emailAddress)
                 .padding(.top, 20)
                 .autocapitalization(.none)
-
+            
             // Password Input
             SecureField("Contraseña", text: $password)
                 .padding(.vertical, 15)
@@ -61,11 +63,11 @@ struct LoginView: View {
             Button(action: {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
-                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
-                        case .success(_):
-                            coordinator.path.append(.imageInput)
-                        case .failure(let error):
-                            print(error.errorMessage)
+                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
+                    case .success(_):
+                        coordinator.path.append(.imageInput)
+                    case .failure(let error):
+                        print(error.errorMessage)
                     }
                 }
             }) {
@@ -76,7 +78,7 @@ struct LoginView: View {
                     .foregroundColor(.white)
                     .overlay(
                         RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.white, lineWidth: 2))
+                            .stroke(Color.white, lineWidth: 2))
             }
             .background(Color(hex: 0xF75E68))
             .cornerRadius(8)
@@ -87,20 +89,25 @@ struct LoginView: View {
             
             // Facebook, Google, etc. Buttons
             HStack {
-                Button(action: {
-                    // TODO: Google authentication integration.
-                }) {
-                    Text("Google")
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .font(.system(size: 18))
-                        .padding()
-                        .foregroundColor(.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 2))
-                }
-                .background(Color(hex: 0x7980F2))
-                .cornerRadius(8)
+                
+                GoogleSignInButton(action: handleSignInButton)
+                
+                /*
+                 Button(action: {
+                 // TODO: Google authentication integration.
+                 }) {
+                 Text("Google")
+                 .frame(minWidth: 0, maxWidth: .infinity)
+                 .font(.system(size: 18))
+                 .padding()
+                 .foregroundColor(.white)
+                 .overlay(
+                 RoundedRectangle(cornerRadius: 8)
+                 .stroke(Color.white, lineWidth: 2))
+                 }
+                 .background(Color(hex: 0x7980F2))
+                 .cornerRadius(8)
+                 */
                 
                 Button(action: {
                     // TODO: Facebook authentication integration-
@@ -112,7 +119,7 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.white, lineWidth: 2))
+                                .stroke(Color.white, lineWidth: 2))
                 }
                 .background(Color(hex: 0x425893))
                 .cornerRadius(8)
@@ -137,6 +144,20 @@ struct LoginView: View {
             
         }
         .padding(37)
+    }
+    
+    private func handleSignInButton() {
+        guard let presentingViewController = (UIApplication.shared.connectedScenes.first
+                                              as? UIWindowScene)?.windows.first?.rootViewController
+        else {return}
+        
+        GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { signInResult, error in
+            guard let result = signInResult else {
+                // Inspect error
+                return
+            }
+            coordinator.path.append(.imageInput)
+        }
     }
 }
 
