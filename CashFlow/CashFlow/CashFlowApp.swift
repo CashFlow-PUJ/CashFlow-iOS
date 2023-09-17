@@ -39,16 +39,19 @@ struct CashFlowApp: App {
                 LoginView()
                     .preferredColorScheme(.light)
                     .navigationDestination(for: Route.self) { route in
-                        switch route {
-                        case .transactionLog:
-                            TransactionLogView()
-                                .preferredColorScheme(.light)
-                                .environmentObject(coordinator)
-                        case .imageInput:
-                            ImageInputView()
-                                .preferredColorScheme(.light)
-                                .environmentObject(coordinator)
+                        Group {
+                            switch route {
+                            case .transactionLog:
+                                TransactionLogView()
+                                    .preferredColorScheme(.light)
+                                    .environmentObject(coordinator)
+                            case .imageInput:
+                                ImageInputView()
+                                    .preferredColorScheme(.light)
+                                    .environmentObject(coordinator)
+                            }
                         }
+                        .navigationBarBackButtonHidden(true)
                     }
             }
             .onAppear {
