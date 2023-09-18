@@ -52,7 +52,6 @@ struct SignupView: View {
                     .autocapitalization(.none)
                 
                 // Confirm Email Input
-                // TODO: Check for equality between emails and if not, display message on screen.
                 TextField("Confirma tu correo electrónico", text: $emailConfirmation)
                     .keyboardType(.emailAddress)
                     .padding(.vertical, 15)
@@ -67,7 +66,6 @@ struct SignupView: View {
                     .padding(.top, 5)
                 
                 // Confirm Password Input
-                // TODO: Check for equality between passwords and if not, display message on screen.
                 SecureField("Confirma tu contraseña", text: $passwordConfirmation)
                     .padding(.vertical, 15)
                 

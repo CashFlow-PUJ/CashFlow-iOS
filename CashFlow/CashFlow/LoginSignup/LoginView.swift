@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
 
-// TODO: Check best practice to place extensions and enums in Swift (independent file, etc.)
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(
