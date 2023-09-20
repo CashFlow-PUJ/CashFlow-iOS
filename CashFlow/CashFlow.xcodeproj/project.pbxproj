@@ -13,6 +13,8 @@
 		9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */; };
 		9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B72C52AA748760091E313 /* TransactionLogView.swift */; };
 		9A4B72C82AA7494B0091E313 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */; };
+		9A656CF82AB67708003B2F42 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 9A656CF72AB67708003B2F42 /* GoogleSignIn */; };
+		9A656CFA2AB67708003B2F42 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9A656CF92AB67708003B2F42 /* GoogleSignInSwift */; };
 		9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1942A957A9D0047CCD0 /* LoginView.swift */; };
 		9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1962A958F8E0047CCD0 /* SignupView.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
@@ -42,6 +44,7 @@
 		9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9A4B72C52AA748760091E313 /* TransactionLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLogView.swift; sourceTree = "<group>"; };
 		9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9A656CFB2AB678A6003B2F42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9A6AD1942A957A9D0047CCD0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9A6AD1962A958F8E0047CCD0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +64,8 @@
 			files = (
 				9ACDA9C92AB31FBD00002DE7 /* FirebaseDatabaseSwift in Frameworks */,
 				B11B63CD9C3CA5F04BADDBAE /* Pods_CashFlow.framework in Frameworks */,
+				9A656CF82AB67708003B2F42 /* GoogleSignIn in Frameworks */,
+				9A656CFA2AB67708003B2F42 /* GoogleSignInSwift in Frameworks */,
 				9ACDA9D32AB31FBD00002DE7 /* FirebaseStorageCombine-Community in Frameworks */,
 				9ACDA9D12AB31FBD00002DE7 /* FirebaseStorage in Frameworks */,
 				9ACDA9C52AB31FBD00002DE7 /* FirebaseAuthCombine-Community in Frameworks */,
@@ -114,6 +119,7 @@
 				9A16123F2A6DE6CE0032743E /* Preview Content */,
 				9A16123D2A6DE6CE0032743E /* Assets.xcassets */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
+				9A656CFB2AB678A6003B2F42 /* Info.plist */,
 			);
 			path = CashFlow;
 			sourceTree = "<group>";
@@ -208,6 +214,8 @@
 				9ACDA9CE2AB31FBD00002DE7 /* FirebaseFirestoreSwift */,
 				9ACDA9D02AB31FBD00002DE7 /* FirebaseStorage */,
 				9ACDA9D22AB31FBD00002DE7 /* FirebaseStorageCombine-Community */,
+				9A656CF72AB67708003B2F42 /* GoogleSignIn */,
+				9A656CF92AB67708003B2F42 /* GoogleSignInSwift */,
 			);
 			productName = CashFlow;
 			productReference = 9A1612362A6DE6CB0032743E /* CashFlow.app */;
@@ -239,6 +247,7 @@
 			mainGroup = 9A16122D2A6DE6CB0032743E;
 			packageReferences = (
 				9ACDA9C12AB31FBD00002DE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9A656CF62AB67708003B2F42 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 9A1612372A6DE6CB0032743E /* Products */;
 			projectDirPath = "";
@@ -463,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
@@ -470,6 +480,7 @@
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CashFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CashFlow;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -483,8 +494,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -497,6 +509,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
@@ -504,6 +517,7 @@
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CashFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CashFlow;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Esta aplicación utiliza los datos de su cámara para el escaneo automático de gastos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -517,8 +531,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -549,6 +564,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9A656CF62AB67708003B2F42 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		9ACDA9C12AB31FBD00002DE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -560,6 +583,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9A656CF72AB67708003B2F42 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A656CF62AB67708003B2F42 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		9A656CF92AB67708003B2F42 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9A656CF62AB67708003B2F42 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		9ACDA9C22AB31FBD00002DE7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9ACDA9C12AB31FBD00002DE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
