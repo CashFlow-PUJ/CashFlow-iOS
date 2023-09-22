@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
+import FacebookLogin
 
 struct SignupView: View {
     
