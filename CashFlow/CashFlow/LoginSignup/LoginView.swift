@@ -125,7 +125,6 @@ struct LoginView: View {
                 Button(action: {
                     loginWithFacebook() { result in
                         switch result {
-                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                         case .success(_):
                             coordinator.path.append(.imageInput)
                         case .failure(let error):
