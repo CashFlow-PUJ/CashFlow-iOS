@@ -83,6 +83,20 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    /*
+    func loginFacebook() {
+        authenticationRepository.loginFacebook() { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let newUser):
+                self.user = newUser
+            case .failure(let error):
+                self.messageError = error.localizedDescription
+            }
+        }
+    }
+    */
+    
     func signOut() {
         do {
             try Auth.auth().signOut()

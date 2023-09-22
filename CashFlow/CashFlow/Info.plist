@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -10,8 +15,15 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.460463522184-n90i4bovmlv30l999rk362fvrjd2u1oo</string>
+				<string>fb298673876123912</string>
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>298673876123912</string>
+	<key>FacebookClientToken</key>
+	<string>93e14f2eb700631208f115486314d2dc</string>
+	<key>FacebookDisplayName</key>
+	<string>CashFlow</string>
 </dict>
 </plist>

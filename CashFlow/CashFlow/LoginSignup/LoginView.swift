@@ -35,6 +35,8 @@ struct LoginView: View {
     @State private var errorMessage = ""
     
     @StateObject private var vm = AuthViewModel()
+    
+    private let facebookAuthentication = FacebookAuthentication()
 
     var credentialFieldsAreEmpty: Bool {
         return (email.isEmpty || password.isEmpty)
@@ -121,7 +123,15 @@ struct LoginView: View {
                 .cornerRadius(8)
                 
                 Button(action: {
-                    // TODO: Facebook authentication integration-
+                    loginWithFacebook() { result in
+                        switch result {
+                        case .success(_):
+                            coordinator.path.append(.imageInput)
+                        case .failure(let error):
+                            showingErrorAlert = true
+                            errorMessage = error.localizedDescription
+                        }
+                    }
                 }) {
                     Text("Facebook")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -184,6 +194,28 @@ struct LoginView: View {
                 case .failure(let error):
                     print(error.errorMessage)
                 }
+            }
+        }
+    }
+    
+    func loginWithFacebook(completionBlock: @escaping (Result<Bool, Error>) -> Void) {
+        facebookAuthentication.loginFacebook { result in
+            switch result {
+            case .success(let accessToken):
+                let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
+                Auth.auth().signIn(with: credential) { authDataResult, error in
+                    if let error = error {
+                        print("Error creating a new user \(error.localizedDescription)")
+                        completionBlock(.failure(error))
+                        return
+                    }
+                    let email = authDataResult?.user.email ?? "No email"
+                    print("New user created with info \(email)")
+                    completionBlock(.success(true))
+                }
+            case .failure(let error):
+                print("Error signIn with Facebook \(error.localizedDescription)")
+                completionBlock(.failure(error))
             }
         }
     }
