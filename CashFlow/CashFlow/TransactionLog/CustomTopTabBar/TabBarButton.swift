@@ -15,9 +15,9 @@ struct TabBarButton: View {
     var body: some View {
         Text(text)
             .fontWeight(isSelected ? .heavy : .regular)
-            .font(.custom("Avenir", size: 16))
+            .font(.custom("Avenir", size: 18))
             .padding(.bottom, 10)
-            .border(width: isSelected ? 3 : 1, edges: [.bottom], color: .black)
+            .border(width: isSelected ? 3 : 1, edges: [.bottom], color: Color(hex: 0x828992))
     }
     
 }
