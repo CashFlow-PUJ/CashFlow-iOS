@@ -54,12 +54,29 @@ struct TransactionLogView: View {
                     
                     CustomTopTabBar(tabIndex: $secondTabIndex, tabTitles: ["Historial", "Insights"])
                     if secondTabIndex == 0 {
+                        
                         // TODO: Vertical Scroll View for Each Transaction
-                        Spacer()
+                        
+                        if firstTabIndex == 0 {
+                            // Display income related history
+                            Spacer()
+                        }
+                        else {
+                            // Display expense related history
+                            Spacer()
+                        }
                     }
                     else {
                         // TODO: Insights View
-                        Spacer()
+                        
+                        if firstTabIndex == 0 {
+                            // Display income related insights
+                            Spacer()
+                        }
+                        else {
+                            // Display expense related insights
+                            Spacer()
+                        }
                     }
                     
                 }

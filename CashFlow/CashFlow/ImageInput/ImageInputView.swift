@@ -61,21 +61,6 @@ struct ImageInputView: View {
     }
 }
 
-struct ImageInputViewControllerRepresentable: UIViewControllerRepresentable {
-    
-    func makeUIViewController(context: Context) -> UIViewController {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = sb.instantiateViewController(identifier: "IIVC")
-                return viewController
-    }
-    
-    typealias UIViewControllerType = UIViewController
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
-    }
-}
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ImageInputView()
