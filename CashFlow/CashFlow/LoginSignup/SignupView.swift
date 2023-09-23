@@ -80,8 +80,7 @@ struct SignupView: View {
                 vm.signUp(email: email, password: password) { result in
                     switch result {
                     case .success(_):
-                        // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
-                        coordinator.path.append(.imageInput)
+                        coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
                         errorMessage = error.errorMessage
@@ -130,7 +129,7 @@ struct SignupView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            coordinator.path.append(.imageInput)
+                            coordinator.path.append(.transactionLog)
                         case .failure(let error):
                             showingErrorAlert = true
                             errorMessage = error.localizedDescription
