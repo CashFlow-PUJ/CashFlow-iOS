@@ -25,15 +25,16 @@ struct TransactionLogView: View {
                                 // TODO: Show Lateral Menu
                             },
                             label: {
-                                Image(systemName: "camera.fill")
+                                Image(systemName: "text.justify")
                                     .renderingMode(.original)
-                                    .foregroundColor(.primary)
+                                    .foregroundColor(Color(hex: 0xF75E68))
                                     .font(.title)
                             }
                         )
+                        .padding(.horizontal, 10)
                         
                         Text("Registro")
-                            .font(.title)
+                            .font(.largeTitle)
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
