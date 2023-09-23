@@ -9,11 +9,14 @@ import SwiftUI
 
 struct TransactionLogView: View {
     
+    // ImageInput
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
-    
     @State private var image: UIImage?
+    
+    // TabBarButton
+    @Binding var tabIndex: Int
     
     var body: some View {
         NavigationView {
@@ -38,6 +41,25 @@ struct TransactionLogView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
+                    HStack {
+                        
+                        Spacer()
+                        TabBarButton(text: "Ingresos", isSelected: .constant(tabIndex == 0))
+                            .onTapGesture { onButtonTapped(index: 0) }
+                        
+                        Spacer()
+                        
+                        TabBarButton(text: "Gastos", isSelected: .constant(tabIndex == 1))
+                            .onTapGesture { onButtonTapped(index: 1) }
+                        Spacer()
+                    }
+                    .border(width: 1, edges: [.bottom], color: .black)
+                    .padding(.top, 5)
+                    .padding(.horizontal, 10)
+                    
+                    Spacer()
+                    
+                    /*
                     // TODO: TabView for Expenses and Income
                     TabView {
                         // TODO: Horizontal Scroll View for Donuts
@@ -48,6 +70,7 @@ struct TransactionLogView: View {
                     TabView {
                         // TODO: Vertical Scroll View for Each Transaction
                     }
+                    */
                 }
                 .padding()
                 
@@ -72,10 +95,8 @@ struct TransactionLogView: View {
             ImageInputViewControllerRepresentable()
         }
     }
-}
-
-struct TransactionLog_Previews: PreviewProvider {
-    static var previews: some View {
-        TransactionLogView()
+    
+    private func onButtonTapped(index: Int) {
+        tabIndex = index
     }
 }

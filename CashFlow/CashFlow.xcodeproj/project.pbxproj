@@ -19,6 +19,8 @@
 		9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A656CFF2ABD0A30003B2F42 /* FacebookAuthentication.swift */; };
 		9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1942A957A9D0047CCD0 /* LoginView.swift */; };
 		9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A6AD1962A958F8E0047CCD0 /* SignupView.swift */; };
+		9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD012ABE764200155BA9 /* TabBarButton.swift */; };
+		9A70BD042ABE76CF00155BA9 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD032ABE76CF00155BA9 /* EdgeBorder.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
@@ -50,6 +52,8 @@
 		9A656CFF2ABD0A30003B2F42 /* FacebookAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookAuthentication.swift; sourceTree = "<group>"; };
 		9A6AD1942A957A9D0047CCD0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9A6AD1962A958F8E0047CCD0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		9A70BD012ABE764200155BA9 /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		9A70BD032ABE76CF00155BA9 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				9A4B72C52AA748760091E313 /* TransactionLogView.swift */,
+				9A70BD012ABE764200155BA9 /* TabBarButton.swift */,
+				9A70BD032ABE76CF00155BA9 /* EdgeBorder.swift */,
 			);
 			path = TransactionLog;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 			files = (
 				9A16123C2A6DE6CB0032743E /* ImageInputView.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
+				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
@@ -353,6 +360,7 @@
 				9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */,
+				9A70BD042ABE76CF00155BA9 /* EdgeBorder.swift in Sources */,
 				9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
