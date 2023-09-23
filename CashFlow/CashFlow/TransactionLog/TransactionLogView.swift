@@ -14,9 +14,9 @@ struct TransactionLogView: View {
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     @State private var image: UIImage?
-    
-    // TabBarButton
-    @Binding var tabIndex: Int
+
+    @State var firstTabIndex = 0
+    @State var secondTabIndex = 0
     
     var body: some View {
         NavigationView {
@@ -41,36 +41,27 @@ struct TransactionLogView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    HStack {
-                        
-                        Spacer()
-                        TabBarButton(text: "Ingresos", isSelected: .constant(tabIndex == 0))
-                            .onTapGesture { onButtonTapped(index: 0) }
-                        
-                        Spacer()
-                        
-                        TabBarButton(text: "Gastos", isSelected: .constant(tabIndex == 1))
-                            .onTapGesture { onButtonTapped(index: 1) }
-                        Spacer()
-                    }
-                    .border(width: 1, edges: [.bottom], color: .black)
-                    .padding(.top, 5)
-                    .padding(.horizontal, 10)
-                    
-                    Spacer()
-                    
-                    /*
-                    // TODO: TabView for Expenses and Income
-                    TabView {
-                        // TODO: Horizontal Scroll View for Donuts
+                    CustomTopTabBar(tabIndex: $firstTabIndex, tabTitles: ["Ingresos", "Gastos"])
+                    if firstTabIndex == 0 {
+                        // TODO: Horizontal Scroll View for Donuts (Expenses)
                         // TODO: Donut component
+                        Spacer()
+                    }
+                    else {
+                        // TODO: Horizontal Scroll View for Donuts (Income)
+                        Spacer()
                     }
                     
-                    // TODO: TabView for History and Insight
-                    TabView {
+                    CustomTopTabBar(tabIndex: $secondTabIndex, tabTitles: ["Historial", "Insights"])
+                    if secondTabIndex == 0 {
                         // TODO: Vertical Scroll View for Each Transaction
+                        Spacer()
                     }
-                    */
+                    else {
+                        // TODO: Insights View
+                        Spacer()
+                    }
+                    
                 }
                 .padding()
                 
@@ -94,9 +85,5 @@ struct TransactionLogView: View {
         .sheet(isPresented: $showImagePicker){
             ImageInputViewControllerRepresentable()
         }
-    }
-    
-    private func onButtonTapped(index: Int) {
-        tabIndex = index
-    }
+    }    
 }

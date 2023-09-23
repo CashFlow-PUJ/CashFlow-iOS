@@ -52,8 +52,6 @@ struct CashFlowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @ObservedObject var coordinator = Coordinator()
     
-    @State var tabIndex = 0
-    
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
@@ -63,7 +61,7 @@ struct CashFlowApp: App {
                         Group {
                             switch route {
                             case .transactionLog:
-                                TransactionLogView(tabIndex: $tabIndex)
+                                TransactionLogView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
                             case .imageInput:
