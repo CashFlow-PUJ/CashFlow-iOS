@@ -16,72 +16,60 @@ struct TransactionLogView: View {
     @State private var image: UIImage?
     
     var body: some View {
-        
-        VStack {
-            
-            HStack {
-                // TODO: Hamburger menu button
-                Text("Registro")
-                    .font(.title)
-            }
-            
-            // TODO: TabView for Expenses and Income
-            TabView {
-                // TODO: Horizontal Scroll View for Donuts
-                    // TODO: Donut component
-            }
-            
-            // TODO: TabView for History and Insight
-            TabView {
-                // TODO: Vertical Scroll View for Each Transaction
-            }
-        }
-        .padding()
-        
-        /*
         NavigationView {
-            
-            // TODO: View where to place, store and show the image to get user feedback: Was the image good quality? Want to take another one? etc.
-            Image(uiImage: image ?? UIImage())
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 350, height: 400)
-                .cornerRadius(15)
-            
-            // TODO: Turn this Button into a Floating Button (Screen-fixed, Z-axis)
-            Button(
-                action: {
-                    self.showSheet = true
-                },
-                label: {
-                    Image(systemName: "camera.fill")
-                        .renderingMode(.original)
-                        .foregroundColor(.primary)
-                        .font(.title)
-            })
-            .actionSheet(isPresented: $showSheet) {
-                ActionSheet(
-                    title: Text("Escanear recibo"),
-                    message: Text("Seleccione una foto"),
-                    buttons: [
-                        .default(Text("Galería")) {
-                            self.showImagePicker = true
-                            self.sourceType = .photoLibrary
-                        },
-                        .default(Text("Cámara")) {
-                            self.showImagePicker = true
-                            self.sourceType = .camera
-                        },
-                        .cancel(Text("Cancelar"))
-                    ]
+            ZStack(alignment: .bottomTrailing) {
+                VStack {
+                    HStack {
+                        Button(
+                            action: {
+                                // TODO: Show Lateral Menu
+                            },
+                            label: {
+                                Image(systemName: "camera.fill")
+                                    .renderingMode(.original)
+                                    .foregroundColor(.primary)
+                                    .font(.title)
+                            }
+                        )
+                        
+                        Text("Registro")
+                            .font(.title)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    
+                    // TODO: TabView for Expenses and Income
+                    TabView {
+                        // TODO: Horizontal Scroll View for Donuts
+                        // TODO: Donut component
+                    }
+                    
+                    // TODO: TabView for History and Insight
+                    TabView {
+                        // TODO: Vertical Scroll View for Each Transaction
+                    }
+                }
+                .padding()
+                
+                Button(
+                    action: {
+                        self.showImagePicker = true
+                    },
+                    label: {
+                        Image(systemName: "plus")
+                            .font(.title.weight(.semibold))
+                            .padding()
+                            .background(Color(hex: 0xF75E68))
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(radius: 4, x: 0, y: 4)
+                    }
                 )
+                .padding(.all, 25)
             }
-            
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(image: self.$image, isShown: self.$showImagePicker, sourceType: self.sourceType)
+        .sheet(isPresented: $showImagePicker){
+            ImageInputViewControllerRepresentable()
         }
-        */
     }
 }
 
