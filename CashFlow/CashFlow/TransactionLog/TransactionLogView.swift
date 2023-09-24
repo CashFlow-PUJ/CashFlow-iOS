@@ -94,11 +94,11 @@ struct TransactionLogView: View {
                         
                         if firstTabIndex == 0 {
                             // Display income related history
-                            Spacer()
+                            HistoryView(transactionHistory: TransactionHistory.sampleData)
                         }
                         else {
                             // Display expense related history
-                            Spacer()
+                            HistoryView(transactionHistory: TransactionHistory.sampleData)
                         }
                     }
                     else {
