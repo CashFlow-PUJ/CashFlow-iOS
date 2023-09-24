@@ -18,6 +18,9 @@ struct TransactionLogView: View {
     @State var firstTabIndex = 0
     @State var secondTabIndex = 0
     
+    // TODO: Crear lógica de manera que se seleccione un botón y solo para ese botón cambie el color de fondo.
+    @State private var categoryIsSelected : Bool = false
+    
     @State private var incomeDonutList = [
         [
             ChartData(color: Color(hex: 0xEFF0F2), value: 65),
@@ -62,14 +65,9 @@ struct TransactionLogView: View {
                                 // TODO: ForEach y agregar 'title' al donutList.
                                 
                                 // TODO: Wrap a cada miniDonut con un botón.
-                                Button(
-                                    action: {},
-                                    label: {
-                                        MiniDonut(title: "Salario", chartData: incomeDonutList[0])
-                                            .background(Color(hex: 0xF7F7F9))
-                                            .cornerRadius(25)
-                                    }
-                                )
+                                CategoryButton(isSelected: $categoryIsSelected, data: incomeDonutList[0]) {
+                                    categoryIsSelected = true
+                                }
                                 
                                 MiniDonut(title: "Regalos", chartData: incomeDonutList[0])
                             }

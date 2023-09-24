@@ -29,6 +29,7 @@
 		9A70BD162AC0D8AC00155BA9 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */; };
 		9A70BD192AC0DAFC00155BA9 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD182AC0DAFC00155BA9 /* Transaction.swift */; };
 		9A70BD1B2AC0DB1300155BA9 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */; };
+		9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
@@ -70,6 +71,7 @@
 		9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		9A70BD182AC0DAFC00155BA9 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
+		9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				9A70BD0B2AC091C400155BA9 /* ChartData.swift */,
 				9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */,
+				9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */,
 			);
 			path = Donut;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */,
+				9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */,
 				9A70BD042ABE76CF00155BA9 /* EdgeBorder.swift in Sources */,
 				9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */,
 			);
