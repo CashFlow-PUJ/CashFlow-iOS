@@ -23,6 +23,8 @@
 		9A70BD042ABE76CF00155BA9 /* EdgeBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD032ABE76CF00155BA9 /* EdgeBorder.swift */; };
 		9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD052ABE7BAF00155BA9 /* CustomTopTabBar.swift */; };
 		9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */; };
+		9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD0B2AC091C400155BA9 /* ChartData.swift */; };
+		9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
@@ -58,6 +60,8 @@
 		9A70BD032ABE76CF00155BA9 /* EdgeBorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeBorder.swift; sourceTree = "<group>"; };
 		9A70BD052ABE7BAF00155BA9 /* CustomTopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTopTabBar.swift; sourceTree = "<group>"; };
 		9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		9A70BD0B2AC091C400155BA9 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
+		9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniDonut.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
@@ -165,10 +169,20 @@
 			path = CustomTopTabBar;
 			sourceTree = "<group>";
 		};
+		9A70BD0A2AC091AC00155BA9 /* Donut */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD0B2AC091C400155BA9 /* ChartData.swift */,
+				9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */,
+			);
+			path = Donut;
+			sourceTree = "<group>";
+		};
 		9A7445092AA01427009BA3F9 /* TransactionLog */ = {
 			isa = PBXGroup;
 			children = (
 				9A4B72C52AA748760091E313 /* TransactionLogView.swift */,
+				9A70BD0A2AC091AC00155BA9 /* Donut */,
 				9A70BD072ABE7E7100155BA9 /* CustomTopTabBar */,
 			);
 			path = TransactionLog;
@@ -364,7 +378,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */,
 				9A16123C2A6DE6CB0032743E /* ImageInputView.swift in Sources */,
+				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
