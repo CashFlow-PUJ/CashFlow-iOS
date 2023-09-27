@@ -18,15 +18,20 @@ struct TransactionLogView: View {
     @State var firstTabIndex = 0
     @State var secondTabIndex = 0
     
-    // TODO: Crear lógica de manera que se seleccione un botón y solo para ese botón cambie el color de fondo.
-    @State private var categoryIsSelected : Bool = false
+    // TODO: Se mostrará un historial (History) diferente para cada una de las categorías. ¿Lo manejo con este índice, o con el enumerado que pienso crear?
+    @State private var selectedIncomeCategoryIndex: Int = 0
+    @State private var selectedExpenseCategoryIndex: Int = 0
     
+    // TODO: Ver cómo se van a manejar las categorías:
+    // * ¿Lista estática de categorías?
+    /*
     @State private var incomeDonutList = [
         [
             ChartData(color: Color(hex: 0xEFF0F2), value: 65),
             ChartData(color: .orange, value: 35)
         ],
     ]
+    */
     
     @State private var expenseDonutList = [
         [
@@ -34,6 +39,9 @@ struct TransactionLogView: View {
             ChartData(color: .orange, value: 35)
         ],
     ]
+    
+    
+    //@State private var expenseCategoryList = []
     
     var body: some View {
         NavigationView {
@@ -62,14 +70,24 @@ struct TransactionLogView: View {
                     if firstTabIndex == 0 {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                // TODO: ForEach y agregar 'title' al donutList.
+                                // TODO: ForEach.
                                 
-                                // TODO: Wrap a cada miniDonut con un botón.
-                                CategoryButton(isSelected: $categoryIsSelected, data: incomeDonutList[0]) {
-                                    categoryIsSelected = true
+                                CategoryButton(isSelected: selectedIncomeCategoryIndex == 0 ? true : false,
+                                               title: "Salario",
+                                               value: 35,
+                                               color: .orange
+                                ) {
+                                    selectedIncomeCategoryIndex = 0
                                 }
                                 
-                                MiniDonut(title: "Regalos", chartData: incomeDonutList[0])
+                                CategoryButton(isSelected: selectedIncomeCategoryIndex == 1 ? true : false,
+                                               title: "Regalos",
+                                               value: 65,
+                                               color: .green
+                                ) {
+                                    selectedIncomeCategoryIndex = 1
+                                }
+                                
                             }
                         }
                     }

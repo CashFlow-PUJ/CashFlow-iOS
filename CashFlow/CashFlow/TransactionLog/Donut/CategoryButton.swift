@@ -9,10 +9,17 @@ import SwiftUI
 
 struct CategoryButton: View {
     
-    @Binding var isSelected: Bool
+    var isSelected: Bool
+    var title: String
+    var value: Int
+    var color: Color
     
-    // TODO: ChartData debería ser capaz de tener los valores resaltado y sin resaltar en el mismo objeto. No hacer dos objetos ChartData para conseguir que el donut tenga los dos valores.
-    var data: [ChartData]
+    private var data: [ChartData] {
+        [
+            ChartData(color: Color(hex: 0xEFF0F2), value: 100 - CGFloat(self.value)),
+            ChartData(color: self.color, value: CGFloat(self.value))
+        ]
+    }
     
     var action: () -> Void
     
@@ -20,7 +27,7 @@ struct CategoryButton: View {
         Button(
             action: self.action,
             label: {
-                MiniDonut(title: "Salario", chartData: data)
+                MiniDonut(title: self.title, chartData: data)
                     .background(isSelected ? Color(hex: 0xF7F7F9) : .white)
                     .cornerRadius(25)
             }

@@ -9,10 +9,7 @@ import SwiftUI
 
 struct ChartData: Identifiable {
     var id = UUID()
-    // var title: String
     var color : Color
-    
     var slicePercent : CGFloat = 0.0
-    
     var value : CGFloat
 }

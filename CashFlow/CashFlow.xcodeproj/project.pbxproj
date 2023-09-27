@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612392A6DE6CB0032743E /* CashFlowApp.swift */; };
-		9A16123C2A6DE6CB0032743E /* ImageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A16123B2A6DE6CB0032743E /* ImageInputView.swift */; };
 		9A16123E2A6DE6CE0032743E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A16123D2A6DE6CE0032743E /* Assets.xcassets */; };
 		9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */; };
 		9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4B72C52AA748760091E313 /* TransactionLogView.swift */; };
@@ -52,7 +51,6 @@
 		6E1A9FD8F38EE961E777D265 /* Pods_CashFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1612362A6DE6CB0032743E /* CashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1612392A6DE6CB0032743E /* CashFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowApp.swift; sourceTree = "<group>"; };
-		9A16123B2A6DE6CB0032743E /* ImageInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputView.swift; sourceTree = "<group>"; };
 		9A16123D2A6DE6CE0032743E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9A4B72C52AA748760091E313 /* TransactionLogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLogView.swift; sourceTree = "<group>"; };
@@ -230,7 +228,6 @@
 		9ACDA9C02AB31BA600002DE7 /* ImageInput */ = {
 			isa = PBXGroup;
 			children = (
-				9A16123B2A6DE6CB0032743E /* ImageInputView.swift */,
 				9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */,
 				9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */,
 				9AB523532AB32803005EA49C /* UIUtilities.swift */,
@@ -402,7 +399,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */,
-				9A16123C2A6DE6CB0032743E /* ImageInputView.swift in Sources */,
 				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
