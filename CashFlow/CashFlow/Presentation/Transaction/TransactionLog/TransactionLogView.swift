@@ -16,30 +16,12 @@ struct TransactionLogView: View {
     @State private var image: UIImage?
 
     // MARK: - TransactionLog
-    @State var firstTabIndex = 0
-    @State var secondTabIndex = 0
+    @State var firstTabBarIndex = 0
+    @State var secondTabBarIndex = 0
     
     @State private var selectedIncomeCategory: String = IncomeCategory.allCases.first?.rawValue ?? ""
     @State private var selectedExpenseCategory: String = ExpenseCategory.allCases.first?.rawValue ?? ""
-    
-    // TODO: Ver cómo se van a manejar las categorías:
-    // * ¿Lista estática de categorías?
-    /*
-    @State private var incomeDonutList = [
-        [
-            ChartData(color: Color(hex: 0xEFF0F2), value: 65),
-            ChartData(color: .orange, value: 35)
-        ],
-    ]
-    */
-    
-    @State private var expenseDonutList = [
-        [
-            ChartData(color: Color(hex: 0xEFF0F2), value: 65),
-            ChartData(color: .orange, value: 35)
-        ],
-    ]
-    
+   
     var body: some View {
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
@@ -63,8 +45,8 @@ struct TransactionLogView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
-                    CustomTopTabBar(tabIndex: $firstTabIndex, tabTitles: ["Ingresos", "Gastos"])
-                    if firstTabIndex == 0 {
+                    CustomTopTabBar(tabIndex: $firstTabBarIndex, tabTitles: ["Ingresos", "Gastos"])
+                    if firstTabBarIndex == 0 {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(IncomeCategory.allCases) { category in
@@ -97,12 +79,12 @@ struct TransactionLogView: View {
                         }
                     }
                     
-                    CustomTopTabBar(tabIndex: $secondTabIndex, tabTitles: ["Historial", "Insights"])
-                    if secondTabIndex == 0 {
+                    CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"])
+                    if secondTabBarIndex == 0 {
                         
                         // TODO: Vertical Scroll View for Each Transaction
                         
-                        if firstTabIndex == 0 {
+                        if firstTabBarIndex == 0 {
                             // Display income related history
                             HistoryView(transactionHistory: TransactionHistory.sampleData)
                         }
@@ -114,7 +96,7 @@ struct TransactionLogView: View {
                     else {
                         // TODO: Insights View
                         
-                        if firstTabIndex == 0 {
+                        if firstTabBarIndex == 0 {
                             // Display income related insights
                             Spacer()
                         }
@@ -129,7 +111,14 @@ struct TransactionLogView: View {
                 
                 Button(
                     action: {
-                        self.showImagePicker = true
+                        if firstTabBarIndex == 0 {
+                            // Income entry
+                            // TODO: Income Entry Form/View
+                        }
+                        else {
+                            // Expense entry (OCR / Camera available)
+                            self.showImagePicker = true
+                        }
                     },
                     label: {
                         Image(systemName: "plus")
