@@ -135,11 +135,11 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
+				9A70BD212AC3B29A00155BA9 /* Presentation */,
+				9A70BD202AC3B29000155BA9 /* Domain */,
+				9A70BD1F2AC3B28B00155BA9 /* Data */,
+				9A70BD1E2AC3B28600155BA9 /* Core */,
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
-				9ACDA9C02AB31BA600002DE7 /* ImageInput */,
-				9A7445092AA01427009BA3F9 /* TransactionLog */,
-				9A6AD1932A957A890047CCD0 /* LoginSignup */,
-				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
 				9A16123F2A6DE6CE0032743E /* Preview Content */,
 				9A16123D2A6DE6CE0032743E /* Assets.xcassets */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
@@ -154,17 +154,6 @@
 				9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		9A6AD1932A957A890047CCD0 /* LoginSignup */ = {
-			isa = PBXGroup;
-			children = (
-				9A6AD1942A957A9D0047CCD0 /* LoginView.swift */,
-				9A6AD1962A958F8E0047CCD0 /* SignupView.swift */,
-				9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */,
-				9A656CFF2ABD0A30003B2F42 /* FacebookAuthentication.swift */,
-			);
-			path = LoginSignup;
 			sourceTree = "<group>";
 		};
 		9A70BD072ABE7E7100155BA9 /* CustomTopTabBar */ = {
@@ -187,26 +176,104 @@
 			path = Donut;
 			sourceTree = "<group>";
 		};
-		9A70BD172AC0DAD100155BA9 /* TransactionHistory */ = {
+		9A70BD1E2AC3B28600155BA9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */,
-				9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */,
-				9A70BD182AC0DAFC00155BA9 /* Transaction.swift */,
-				9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */,
+				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
 			);
-			path = TransactionHistory;
+			path = Core;
 			sourceTree = "<group>";
 		};
-		9A7445092AA01427009BA3F9 /* TransactionLog */ = {
+		9A70BD1F2AC3B28B00155BA9 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9A70BD202AC3B29000155BA9 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD282AC3B3F100155BA9 /* UseCase */,
+				9A70BD272AC3B3E100155BA9 /* Repository */,
+				9A70BD262AC3B3DB00155BA9 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9A70BD212AC3B29A00155BA9 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD252AC3B39600155BA9 /* Authentication */,
+				9A70BD242AC3B2FF00155BA9 /* Transaction */,
+				9A70BD222AC3B2C000155BA9 /* ImageInput */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		9A70BD222AC3B2C000155BA9 /* ImageInput */ = {
+			isa = PBXGroup;
+			children = (
+				9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */,
+				9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */,
+				9AB523532AB32803005EA49C /* UIUtilities.swift */,
+				9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */,
+			);
+			path = ImageInput;
+			sourceTree = "<group>";
+		};
+		9A70BD232AC3B2E300155BA9 /* TransactionLog */ = {
 			isa = PBXGroup;
 			children = (
 				9A4B72C52AA748760091E313 /* TransactionLogView.swift */,
-				9A70BD172AC0DAD100155BA9 /* TransactionHistory */,
-				9A70BD0A2AC091AC00155BA9 /* Donut */,
+				9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */,
+				9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */,
 				9A70BD072ABE7E7100155BA9 /* CustomTopTabBar */,
+				9A70BD0A2AC091AC00155BA9 /* Donut */,
 			);
 			path = TransactionLog;
+			sourceTree = "<group>";
+		};
+		9A70BD242AC3B2FF00155BA9 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD232AC3B2E300155BA9 /* TransactionLog */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		9A70BD252AC3B39600155BA9 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				9A6AD1942A957A9D0047CCD0 /* LoginView.swift */,
+				9A6AD1962A958F8E0047CCD0 /* SignupView.swift */,
+				9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */,
+				9A656CFF2ABD0A30003B2F42 /* FacebookAuthentication.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		9A70BD262AC3B3DB00155BA9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */,
+				9A70BD182AC0DAFC00155BA9 /* Transaction.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9A70BD272AC3B3E100155BA9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		9A70BD282AC3B3F100155BA9 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		9AB523552AB3DE84005EA49C /* Resources */ = {
@@ -223,17 +290,6 @@
 				9AB5235D2AB3FD46005EA49C /* Main.storyboard */,
 			);
 			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
-		9ACDA9C02AB31BA600002DE7 /* ImageInput */ = {
-			isa = PBXGroup;
-			children = (
-				9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */,
-				9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */,
-				9AB523532AB32803005EA49C /* UIUtilities.swift */,
-				9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */,
-			);
-			path = ImageInput;
 			sourceTree = "<group>";
 		};
 		F45028F4A9B48F76572C9771 /* Frameworks */ = {
