@@ -29,6 +29,11 @@
 		9A70BD192AC0DAFC00155BA9 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD182AC0DAFC00155BA9 /* Transaction.swift */; };
 		9A70BD1B2AC0DB1300155BA9 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */; };
 		9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */; };
+		9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD2B2AC3C5E000155BA9 /* Income.swift */; };
+		9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */; };
+		9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD302AC3C69D00155BA9 /* IncomeCategory.swift */; };
+		9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD322AC3C6E200155BA9 /* Expense.swift */; };
+		9A70BD372AC3C83400155BA9 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD362AC3C83400155BA9 /* Entry.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
@@ -70,6 +75,11 @@
 		9A70BD182AC0DAFC00155BA9 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
 		9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		9A70BD2B2AC3C5E000155BA9 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
+		9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
+		9A70BD302AC3C69D00155BA9 /* IncomeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCategory.swift; sourceTree = "<group>"; };
+		9A70BD322AC3C6E200155BA9 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		9A70BD362AC3C83400155BA9 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
@@ -179,6 +189,7 @@
 		9A70BD1E2AC3B28600155BA9 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				9A70BD342AC3C76000155BA9 /* Enumerations */,
 				9AB5235A2AB3F9F6005EA49C /* SupportingFiles */,
 			);
 			path = Core;
@@ -226,8 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				9A4B72C52AA748760091E313 /* TransactionLogView.swift */,
-				9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */,
-				9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */,
+				9A70BD352AC3C7FC00155BA9 /* TransactionHistory */,
 				9A70BD072ABE7E7100155BA9 /* CustomTopTabBar */,
 				9A70BD0A2AC091AC00155BA9 /* Donut */,
 			);
@@ -258,6 +268,9 @@
 			children = (
 				9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */,
 				9A70BD182AC0DAFC00155BA9 /* Transaction.swift */,
+				9A70BD2B2AC3C5E000155BA9 /* Income.swift */,
+				9A70BD322AC3C6E200155BA9 /* Expense.swift */,
+				9A70BD362AC3C83400155BA9 /* Entry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +287,24 @@
 			children = (
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		9A70BD342AC3C76000155BA9 /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */,
+				9A70BD302AC3C69D00155BA9 /* IncomeCategory.swift */,
+			);
+			path = Enumerations;
+			sourceTree = "<group>";
+		};
+		9A70BD352AC3C7FC00155BA9 /* TransactionHistory */ = {
+			isa = PBXGroup;
+			children = (
+				9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */,
+				9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */,
+			);
+			path = TransactionHistory;
 			sourceTree = "<group>";
 		};
 		9AB523552AB3DE84005EA49C /* Resources */ = {
@@ -456,10 +487,14 @@
 			files = (
 				9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */,
 				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
+				9A70BD372AC3C83400155BA9 /* Entry.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
+				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
+				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
+				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
 				9A70BD162AC0D8AC00155BA9 /* HistoryView.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
@@ -469,6 +504,7 @@
 				9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */,
 				9A70BD142AC0D6FC00155BA9 /* HistoryRow.swift in Sources */,
 				9A4B72C62AA748760091E313 /* TransactionLogView.swift in Sources */,
+				9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */,
 				9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */,

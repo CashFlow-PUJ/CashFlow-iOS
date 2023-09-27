@@ -9,18 +9,18 @@ import SwiftUI
 
 struct TransactionLogView: View {
     
-    // ImageInput
+    // MARK: - ImageInput
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     @State private var image: UIImage?
 
+    // MARK: - TransactionLog
     @State var firstTabIndex = 0
     @State var secondTabIndex = 0
     
-    // TODO: Se mostrará un historial (History) diferente para cada una de las categorías. ¿Lo manejo con este índice, o con el enumerado que pienso crear?
-    @State private var selectedIncomeCategoryIndex: Int = 0
-    @State private var selectedExpenseCategoryIndex: Int = 0
+    @State private var selectedIncomeCategory: String = IncomeCategory.allCases.first?.rawValue ?? ""
+    @State private var selectedExpenseCategory: String = ExpenseCategory.allCases.first?.rawValue ?? ""
     
     // TODO: Ver cómo se van a manejar las categorías:
     // * ¿Lista estática de categorías?
@@ -39,9 +39,6 @@ struct TransactionLogView: View {
             ChartData(color: .orange, value: 35)
         ],
     ]
-    
-    
-    //@State private var expenseCategoryList = []
     
     var body: some View {
         NavigationView {
@@ -70,35 +67,32 @@ struct TransactionLogView: View {
                     if firstTabIndex == 0 {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                // TODO: ForEach.
-                                
-                                CategoryButton(isSelected: selectedIncomeCategoryIndex == 0 ? true : false,
-                                               title: "Salario",
-                                               value: 35,
-                                               color: .orange
-                                ) {
-                                    selectedIncomeCategoryIndex = 0
+                                ForEach(IncomeCategory.allCases) { category in
+                                    CategoryButton(isSelected: selectedIncomeCategory == category.rawValue ? true : false,
+                                                   title: category.rawValue,
+                                                   // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
+                                                   value: 35,
+                                                   color: .orange
+                                    ) {
+                                        selectedIncomeCategory = category.rawValue
+                                    }
                                 }
-                                
-                                CategoryButton(isSelected: selectedIncomeCategoryIndex == 1 ? true : false,
-                                               title: "Regalos",
-                                               value: 65,
-                                               color: .green
-                                ) {
-                                    selectedIncomeCategoryIndex = 1
-                                }
-                                
                             }
                         }
                     }
                     else {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                MiniDonut(title: "Mercado", chartData: expenseDonutList[0])
-                                MiniDonut(title: "Mercado", chartData: expenseDonutList[0])
-                                MiniDonut(title: "Mercado", chartData: expenseDonutList[0])
-                                MiniDonut(title: "Mercado", chartData: expenseDonutList[0])
-                                MiniDonut(title: "Mercado", chartData: expenseDonutList[0])
+                                ForEach(ExpenseCategory.allCases) { category in
+                                    CategoryButton(isSelected: selectedExpenseCategory == category.rawValue ? true : false,
+                                                   title: category.rawValue,
+                                                   // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
+                                                   value: 35,
+                                                   color: .orange
+                                    ) {
+                                        selectedExpenseCategory = category.rawValue
+                                    }
+                                }
                             }
                         }
                     }
