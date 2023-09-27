@@ -193,7 +193,7 @@ struct SignupView: View {
                 switch result {
                     // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                 case .success(_):
-                    coordinator.path.append(.imageInput)
+                    coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)
                 }

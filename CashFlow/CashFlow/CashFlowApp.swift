@@ -13,7 +13,6 @@ import GoogleSignIn
 
 enum Route: Hashable {
     case transactionLog
-    case imageInput
     case login
 }
 
@@ -62,10 +61,6 @@ struct CashFlowApp: App {
                             switch route {
                             case .transactionLog:
                                 TransactionLogView()
-                                    .preferredColorScheme(.light)
-                                    .environmentObject(coordinator)
-                            case .imageInput:
-                                ImageInputView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
                             case .login:
