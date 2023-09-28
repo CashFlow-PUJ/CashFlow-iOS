@@ -60,7 +60,7 @@ struct CashFlowApp: App {
                         Group {
                             switch route {
                             case .transactionLog:
-                                TransactionLogView()
+                                EntryLogView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
                             case .login:

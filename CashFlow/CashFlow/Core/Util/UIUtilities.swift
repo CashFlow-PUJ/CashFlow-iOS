@@ -20,9 +20,7 @@ public class UIUtilities {
       rectangleView.accessibilityIdentifier = Constants.rectangleViewIdentifier
       view.addSubview(rectangleView)
     }
-    
-    
-    
+
 }
 
 // MARK: - Constants

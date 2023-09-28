@@ -1,5 +1,5 @@
 //
-//  TransactionLogView.swift
+//  EntryLogView.swift
 //  CashFlow
 //
 //  Created by Cristóbal Castrillón Balcázar on 28/08/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransactionLogView: View {
+struct EntryLogView: View {
     
     // MARK: - ImageInput
     @State private var showSheet: Bool = false
@@ -54,6 +54,7 @@ struct TransactionLogView: View {
                                                    title: category.rawValue,
                                                    // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
                                                    value: 35,
+                                                   // TODO: ¿Dónde se almacena el color de la categoría?
                                                    color: .orange
                                     ) {
                                         selectedIncomeCategory = category.rawValue
@@ -70,6 +71,7 @@ struct TransactionLogView: View {
                                                    title: category.rawValue,
                                                    // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
                                                    value: 35,
+                                                   // TODO: ¿Dónde se almacena el color de la categoría?
                                                    color: .orange
                                     ) {
                                         selectedExpenseCategory = category.rawValue
