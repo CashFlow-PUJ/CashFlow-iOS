@@ -9,7 +9,6 @@ import Foundation
 
 protocol Entry: Identifiable {
     var id: UUID { get set }
-    var total: Double { get set }
+    var total: Int { get set }
     var date: Date { get set }
-    var description: String { get set }
 }

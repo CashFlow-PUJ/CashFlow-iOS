@@ -24,10 +24,8 @@
 		9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */; };
 		9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD0B2AC091C400155BA9 /* ChartData.swift */; };
 		9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */; };
-		9A70BD142AC0D6FC00155BA9 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */; };
-		9A70BD162AC0D8AC00155BA9 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */; };
-		9A70BD192AC0DAFC00155BA9 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD182AC0DAFC00155BA9 /* Transaction.swift */; };
-		9A70BD1B2AC0DB1300155BA9 /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */; };
+		9A70BD142AC0D6FC00155BA9 /* ExpenseHistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD132AC0D6FC00155BA9 /* ExpenseHistoryRow.swift */; };
+		9A70BD162AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD152AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift */; };
 		9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */; };
 		9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD2B2AC3C5E000155BA9 /* Income.swift */; };
 		9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */; };
@@ -47,6 +45,8 @@
 		9A70BD5A2AC518BF00155BA9 /* VisualizeEntryHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD592AC518BF00155BA9 /* VisualizeEntryHistory.swift */; };
 		9A70BD5C2AC518E100155BA9 /* VisualizeInsights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD5B2AC518E100155BA9 /* VisualizeInsights.swift */; };
 		9A70BD602AC51AC600155BA9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD5F2AC51AC600155BA9 /* ColorExtension.swift */; };
+		9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */; };
+		9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
 		9AB523572AB3DE95005EA49C /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9AB523562AB3DE95005EA49C /* image_has_text.jpg */; };
@@ -83,10 +83,8 @@
 		9A70BD082ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		9A70BD0B2AC091C400155BA9 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		9A70BD0F2AC093C000155BA9 /* MiniDonut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniDonut.swift; sourceTree = "<group>"; };
-		9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
-		9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		9A70BD182AC0DAFC00155BA9 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
+		9A70BD132AC0D6FC00155BA9 /* ExpenseHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryRow.swift; sourceTree = "<group>"; };
+		9A70BD152AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseHistoryViewHistoryView.swift; sourceTree = "<group>"; };
 		9A70BD1C2AC0E84600155BA9 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		9A70BD2B2AC3C5E000155BA9 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCategory.swift; sourceTree = "<group>"; };
@@ -106,6 +104,8 @@
 		9A70BD592AC518BF00155BA9 /* VisualizeEntryHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeEntryHistory.swift; sourceTree = "<group>"; };
 		9A70BD5B2AC518E100155BA9 /* VisualizeInsights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeInsights.swift; sourceTree = "<group>"; };
 		9A70BD5F2AC51AC600155BA9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistoryRow.swift; sourceTree = "<group>"; };
+		9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistoryView.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
@@ -171,11 +171,11 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
+				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A70BD212AC3B29A00155BA9 /* Presentation */,
 				9A70BD202AC3B29000155BA9 /* Domain */,
 				9A70BD1F2AC3B28B00155BA9 /* Data */,
 				9A70BD1E2AC3B28600155BA9 /* Core */,
-				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9A16123F2A6DE6CE0032743E /* Preview Content */,
 				9A16123D2A6DE6CE0032743E /* Assets.xcassets */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
@@ -271,8 +271,6 @@
 		9A70BD262AC3B3DB00155BA9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9A70BD1A2AC0DB1300155BA9 /* TransactionHistory.swift */,
-				9A70BD182AC0DAFC00155BA9 /* Transaction.swift */,
 				9A70BD2B2AC3C5E000155BA9 /* Income.swift */,
 				9A70BD322AC3C6E200155BA9 /* Expense.swift */,
 				9A70BD362AC3C83400155BA9 /* Entry.swift */,
@@ -385,8 +383,10 @@
 		9A70BD572AC517FA00155BA9 /* EntryHistory */ = {
 			isa = PBXGroup;
 			children = (
-				9A70BD152AC0D8AC00155BA9 /* HistoryView.swift */,
-				9A70BD132AC0D6FC00155BA9 /* HistoryRow.swift */,
+				9A70BD152AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift */,
+				9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */,
+				9A70BD132AC0D6FC00155BA9 /* ExpenseHistoryRow.swift */,
+				9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */,
 			);
 			path = EntryHistory;
 			sourceTree = "<group>";
@@ -598,22 +598,22 @@
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
+				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
-				9A70BD162AC0D8AC00155BA9 /* HistoryView.swift in Sources */,
+				9A70BD162AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift in Sources */,
 				9A70BD432AC513D400155BA9 /* EditEntry.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
 				9A70BD4C2AC5157100155BA9 /* EditExpenseItem.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
 				9A70BD412AC513C300155BA9 /* ScanImage.swift in Sources */,
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
-				9A70BD1B2AC0DB1300155BA9 /* TransactionHistory.swift in Sources */,
-				9A70BD192AC0DAFC00155BA9 /* Transaction.swift in Sources */,
 				9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */,
 				9A70BD392AC5133800155BA9 /* SignUp.swift in Sources */,
 				9A70BD5C2AC518E100155BA9 /* VisualizeInsights.swift in Sources */,
-				9A70BD142AC0D6FC00155BA9 /* HistoryRow.swift in Sources */,
+				9A70BD142AC0D6FC00155BA9 /* ExpenseHistoryRow.swift in Sources */,
+				9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */,
 				9A4B72C62AA748760091E313 /* EntryLogView.swift in Sources */,
 				9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,

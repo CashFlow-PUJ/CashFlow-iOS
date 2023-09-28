@@ -15,12 +15,12 @@ struct EntryLogView: View {
     @State private var sourceType: UIImagePickerController.SourceType = .camera
     @State private var image: UIImage?
 
-    // MARK: - TransactionLog
+    // MARK: - EntryLog
     @State var firstTabBarIndex = 0
     @State var secondTabBarIndex = 0
-    
-    @State private var selectedIncomeCategory: String = IncomeCategory.allCases.first?.rawValue ?? ""
-    @State private var selectedExpenseCategory: String = ExpenseCategory.allCases.first?.rawValue ?? ""
+
+    @State private var selectedIncomeCategory: IncomeCategory = (IncomeCategory.allCases.first ?? .otros)
+    @State private var selectedExpenseCategory: ExpenseCategory = (ExpenseCategory.allCases.first ?? .otros)
    
     var body: some View {
         NavigationView {
@@ -50,14 +50,14 @@ struct EntryLogView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(IncomeCategory.allCases) { category in
-                                    CategoryButton(isSelected: selectedIncomeCategory == category.rawValue ? true : false,
+                                    CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
                                                    title: category.rawValue,
                                                    // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
                                                    value: 35,
                                                    // TODO: ¿Dónde se almacena el color de la categoría?
                                                    color: .orange
                                     ) {
-                                        selectedIncomeCategory = category.rawValue
+                                        selectedIncomeCategory = category
                                     }
                                 }
                             }
@@ -67,14 +67,14 @@ struct EntryLogView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(ExpenseCategory.allCases) { category in
-                                    CategoryButton(isSelected: selectedExpenseCategory == category.rawValue ? true : false,
+                                    CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
                                                    title: category.rawValue,
                                                    // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
                                                    value: 35,
                                                    // TODO: ¿Dónde se almacena el color de la categoría?
                                                    color: .orange
                                     ) {
-                                        selectedExpenseCategory = category.rawValue
+                                        selectedExpenseCategory = category
                                     }
                                 }
                             }
@@ -83,21 +83,17 @@ struct EntryLogView: View {
                     
                     CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"])
                     if secondTabBarIndex == 0 {
-                        
-                        // TODO: Vertical Scroll View for Each Transaction
-                        
                         if firstTabBarIndex == 0 {
                             // Display income related history
-                            HistoryView(transactionHistory: TransactionHistory.sampleData)
+                            IncomeHistoryView(categoryFilter: $selectedIncomeCategory)
                         }
                         else {
                             // Display expense related history
-                            HistoryView(transactionHistory: TransactionHistory.sampleData)
+                            ExpenseHistoryView(categoryFilter: $selectedExpenseCategory)
                         }
                     }
                     else {
                         // TODO: Insights View
-                        
                         if firstTabBarIndex == 0 {
                             // Display income related insights
                             Spacer()

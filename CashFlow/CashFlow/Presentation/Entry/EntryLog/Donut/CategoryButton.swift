@@ -11,11 +11,14 @@ struct CategoryButton: View {
     
     var isSelected: Bool
     var title: String
+    
+    // TODO: Compute or pass 'value' property value
     var value: Int
     var color: Color
     
     private var data: [ChartData] {
         [
+            // TODO: Associate a color to each Expense and Income Category.
             ChartData(color: Color(hex: 0xEFF0F2), value: 100 - CGFloat(self.value)),
             ChartData(color: self.color, value: CGFloat(self.value))
         ]
