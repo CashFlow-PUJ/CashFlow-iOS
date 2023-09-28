@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  SignupView.swift
 //  CashFlow
 //
 //  Created by Cristóbal Castrillón Balcázar on 22/08/23.
@@ -9,27 +9,18 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
+import FacebookLogin
 
-extension Color {
-    init(hex: UInt, alpha: Double = 1) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
-            opacity: alpha
-        )
-    }
-}
-
-struct LoginView: View {
+struct SignupView: View {
     
     @EnvironmentObject var coordinator: Coordinator
     
-    // TODO: Both on this and SignUpView: dismiss keyboard controller when tapping out of TextField or SecureField.
+    @Environment(\.dismiss) private var dismiss
     
     @State private var email: String = ""
+    @State private var emailConfirmation: String = ""
     @State private var password: String = ""
+    @State private var passwordConfirmation: String = ""
     
     @State private var showingErrorAlert = false
     @State private var errorMessage = ""
@@ -37,54 +28,66 @@ struct LoginView: View {
     @StateObject private var vm = AuthViewModel()
     
     private let facebookAuthentication = FacebookAuthentication()
-
+    
     var credentialFieldsAreEmpty: Bool {
-        return (email.isEmpty || password.isEmpty)
+        return (email.isEmpty || password.isEmpty) || (emailConfirmation.isEmpty || passwordConfirmation.isEmpty)
+    }
+    
+    var credentialFieldsDontMatch: Bool {
+        return (email != emailConfirmation || password != passwordConfirmation)
     }
 
-    var loginButtonColor: Color {
-        return !credentialFieldsAreEmpty ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
+    var signupButtonColor: Color {
+        return !credentialFieldsAreEmpty && !credentialFieldsDontMatch ? Color(hex: 0xF75E68) : Color(UIColor.lightGray)
     }
     
     var body: some View {
         VStack {
-            
-            Image("CashFlowLogo")
-            
-            Text("Inicia sesión")
+            Text("Crea tu cuenta")
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 20)
-            
-            Text("¡Accede a tu cuenta!")
-                .font(.title3)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(.gray)
             
             // Email Input
-            TextField("Correo electrónico", text: $email)
-                .keyboardType(.emailAddress)
-                .padding(.top, 20)
-                .autocapitalization(.none)
+            Group {
+                TextField("Correo electrónico", text: $email)
+                    .keyboardType(.emailAddress)
+                    .padding(.top, 5)
+                    .autocapitalization(.none)
+                
+                // Confirm Email Input
+                TextField("Confirma tu correo electrónico", text: $emailConfirmation)
+                    .keyboardType(.emailAddress)
+                    .padding(.vertical, 15)
+                    .autocapitalization(.none)
+                
+                fieldsDoNotMatchText(errorMessage: "Los correos no coinciden. 🧐", textFieldString1: email, textFieldString2: emailConfirmation)
+            }
             
             // Password Input
-            SecureField("Contraseña", text: $password)
-                .padding(.vertical, 15)
+            Group {
+                SecureField("Contraseña", text: $password)
+                    .padding(.top, 5)
+                
+                // Confirm Password Input
+                SecureField("Confirma tu contraseña", text: $passwordConfirmation)
+                    .padding(.vertical, 15)
+                
+                fieldsDoNotMatchText(errorMessage: "Las contraseñas no coinciden. 🫣", textFieldString1: password, textFieldString2: passwordConfirmation)
+            }
             
             // Log in Button
             Button(action: {
-                vm.logIn(email: email, password: password) { result in
+                vm.signUp(email: email, password: password) { result in
                     switch result {
-                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                     case .success(_):
-                        coordinator.path.append(.imageInput)
+                        coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
                         errorMessage = error.errorMessage
                     }
                 }
             }) {
-                Text("Iniciar sesión")
+                Text("Continuar")
                     .frame(minWidth: 0, maxWidth: .infinity)
                     .font(.system(size: 18))
                     .padding()
@@ -96,19 +99,19 @@ struct LoginView: View {
             .alert(isPresented: $showingErrorAlert) {
                 Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("Aceptar")))
             }
-            .disabled(credentialFieldsAreEmpty)
-            .background(loginButtonColor)
+            .disabled(credentialFieldsAreEmpty || credentialFieldsDontMatch)
+            .background(signupButtonColor)
             .cornerRadius(8)
+            .padding(.top, 20)
             
-            Text("Iniciar sesión con")
+            Text("O registrate con")
                 .foregroundColor(.gray)
-                .padding(.top, 25)
+                .padding(.vertical, 10)
             
             // Facebook, Google, etc. Buttons
             HStack {
-                
                 Button(action: {
-                    handleGoogleSignInButton()
+                    handleGoogleSignUpButton()
                 }) {
                     Text("Google")
                         .frame(minWidth: 0, maxWidth: .infinity)
@@ -126,7 +129,7 @@ struct LoginView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            coordinator.path.append(.imageInput)
+                            coordinator.path.append(.transactionLog)
                         case .failure(let error):
                             showingErrorAlert = true
                             errorMessage = error.localizedDescription
@@ -146,29 +149,29 @@ struct LoginView: View {
                 .cornerRadius(8)
             }
             
-            NavigationLink {
-                // TODO: Forgot password View
-            } label: {
-                Text("¿Olvidaste tu contraseña?")
-                    .foregroundColor(Color(hex: 0xF75E68))
-            }
-            .padding(.top, 25)
+            // TODO: Policy Checkbox
             
-            NavigationLink {
-                SignupView()
-                    .preferredColorScheme(.light)
-                    .navigationBarBackButtonHidden(true)
-            } label: {
-                Text("¿No estás registrado?")
-                    .foregroundColor(Color(hex: 0xF75E68))
+            Button("¿Ya tienes una cuenta?"){
+                dismiss()
             }
-            .padding(.top, 10)
-            
+            .foregroundColor(Color(hex: 0xF75E68))
+            .padding(.top, 20)
         }
         .padding(37)
     }
     
-    private func handleGoogleSignInButton() {
+    @ViewBuilder
+    private func fieldsDoNotMatchText(errorMessage: String, textFieldString1: String, textFieldString2: String) -> some View {
+        if textFieldString1 != textFieldString2 && (!textFieldString1.isEmpty && !textFieldString2.isEmpty) {
+            Text(errorMessage)
+                .font(.callout)
+                .foregroundColor(.red)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        EmptyView()
+    }
+    
+    private func handleGoogleSignUpButton() {
         guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
         
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
@@ -180,9 +183,9 @@ struct LoginView: View {
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
             if let error {
-                print(error.localizedDescription)
+                // TODO: Handle error
             }
-                    
+            
             guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
             
@@ -190,7 +193,7 @@ struct LoginView: View {
                 switch result {
                     // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                 case .success(_):
-                    coordinator.path.append(.imageInput)
+                    coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)
                 }
@@ -221,8 +224,8 @@ struct LoginView: View {
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
+struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        SignupView()
     }
 }

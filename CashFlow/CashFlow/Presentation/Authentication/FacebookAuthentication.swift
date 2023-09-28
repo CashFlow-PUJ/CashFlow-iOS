@@ -6,7 +6,6 @@
 //
 
 import Foundation
-// import FacebookLogin
 import FBSDKLoginKit
 
 final class FacebookAuthentication {
