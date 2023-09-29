@@ -13,12 +13,12 @@ struct ExpenseHistoryRow: View {
     
     var body: some View {
         HStack {
-            // TODO: Render different icon given the 'Category' enumerate value
-            Image(systemName: "cart.fill")
+            Image(systemName: entry.category.symbol)
                 .resizable()
                 .renderingMode(.original)
                 .foregroundColor(.secondary)
-                .frame(width: 32, height: 32)
+                .colorMultiply(.secondary)
+                .frame(width: 28, height: 28)
             VStack {
                 Text(entry.vendorName ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)

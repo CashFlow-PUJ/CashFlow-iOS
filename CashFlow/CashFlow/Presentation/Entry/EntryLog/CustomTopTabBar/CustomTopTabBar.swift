@@ -13,16 +13,18 @@ struct CustomTopTabBar: View {
     var tabTitles: [String]
     
     var body: some View {
-        HStack {
+        HStack (spacing: 45){
+            Spacer()
             TabBarButton(text: tabTitles[0], isSelected: .constant(tabIndex == 0))
                 .onTapGesture { onButtonTapped(index: 0) }
+            Spacer()
             TabBarButton(text: tabTitles[1], isSelected: .constant(tabIndex == 1))
                 .onTapGesture { onButtonTapped(index: 1) }
                 .frame(maxWidth: .infinity, alignment: .center)
+            Spacer()
         }
         .border(width: 1, edges: [.bottom], color: Color(hex: 0xCCCFD8))
         .padding(.top, 5)
-        .padding(.horizontal, 10)
         
     }
     
