@@ -14,9 +14,14 @@ struct ExpenseHistoryView: View {
     var entryHistory: [Expense] = Expense.sampleData
     
     var body: some View {
-        List(entryHistory.filter({$0.category == categoryFilter})) { entry in
-            ExpenseHistoryRow(entry: entry)
+        if categoryFilter == .total {
+            List(entryHistory) { entry in
+                ExpenseHistoryRow(entry: entry)
+            }.listStyle(.inset)
+        }else {
+            List(entryHistory.filter({$0.category == categoryFilter})) { entry in
+                ExpenseHistoryRow(entry: entry)
+            }.listStyle(.inset)
         }
-        .listStyle(.inset)
     }
 }

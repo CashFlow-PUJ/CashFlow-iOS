@@ -14,7 +14,7 @@ struct IncomeHistoryRow: View {
     var body: some View {
         HStack {
             // TODO: Render different icon given the 'Category' enumerate value
-            Image(systemName: "dollarsign.circle.fill")
+            Image(systemName: entry.category.symbol)
                 .resizable()
                 .renderingMode(.original)
                 .foregroundColor(.secondary)

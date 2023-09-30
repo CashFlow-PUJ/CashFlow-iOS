@@ -14,9 +14,14 @@ struct IncomeHistoryView: View {
     var entryHistory: [Income] = Income.sampleData
     
     var body: some View {
-        List(entryHistory.filter({$0.category == categoryFilter})) { entry in
-            IncomeHistoryRow(entry: entry)
+        if (categoryFilter == .total){
+            List(entryHistory) { entry in
+                IncomeHistoryRow(entry: entry)
+            }.listStyle(.inset)
+        }else{
+            List(entryHistory.filter({$0.category == categoryFilter})) { entry in
+                IncomeHistoryRow(entry: entry)
+            }.listStyle(.inset)
         }
-        .listStyle(.inset)
     }
 }

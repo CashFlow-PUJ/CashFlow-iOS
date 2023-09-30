@@ -54,7 +54,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                LoginView()
+                EntryLogView()
                     .preferredColorScheme(.light)
                     .navigationDestination(for: Route.self) { route in
                         Group {

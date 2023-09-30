@@ -46,18 +46,30 @@ struct EntryLogView: View {
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     
                     CustomTopTabBar(tabIndex: $firstTabBarIndex, tabTitles: ["Ingresos", "Gastos"])
-                    if firstTabBarIndex == 0 {
+                        .padding(20)
+                    if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
+                                
                                 ForEach(IncomeCategory.allCases) { category in
-                                    CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
-                                                   title: category.rawValue,
-                                                   // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
-                                                   value: 35,
-                                                   // TODO: ¿Dónde se almacena el color de la categoría?
-                                                   color: .orange
-                                    ) {
-                                        selectedIncomeCategory = category
+                                    if (category == .total) {
+                                        TotalButton(
+                                            isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                            title: "Total",
+                                            value: 100,
+                                            total: IncomeHistory.reduce(0) { $0 + $1.total},
+                                            color: category.color
+                                        ){
+                                            selectedIncomeCategory = category
+                                        }
+                                    } else {
+                                        CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                                       title: category.rawValue,
+                                                       value: Int(percentageOfIncomes(for: category)),
+                                                       color: category.color
+                                        ) {
+                                            selectedIncomeCategory = category
+                                        }
                                     }
                                 }
                             }
@@ -67,21 +79,31 @@ struct EntryLogView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(ExpenseCategory.allCases) { category in
-                                    CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
-                                                   title: category.rawValue,
-                                                   // TODO: ¿De dónde debe salir el valor (porcentaje) mostrado?
-                                                   value: 35,
-                                                   // TODO: ¿Dónde se almacena el color de la categoría?
-                                                   color: .orange
-                                    ) {
-                                        selectedExpenseCategory = category
+                                    if (category == .total) {
+                                        TotalButton(
+                                            isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                            title: "Total",
+                                            value: 100,
+                                            total: ExpenseHistory.reduce(0) {$0 + $1.total},
+                                            color: category.color
+                                        ){
+                                            selectedExpenseCategory = category
+                                        }
+                                    } else {
+                                        CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                                       title: category.rawValue,
+                                                       value: Int(percentageOfExpenses(for: category)),
+                                                       color: category.color
+                                        ) {
+                                            selectedExpenseCategory = category
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                     
-                    CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"])
+                    CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"]).padding(15)
                     if secondTabBarIndex == 0 {
                         if firstTabBarIndex == 0 {
                             // Display income related history
@@ -96,6 +118,7 @@ struct EntryLogView: View {
                         // TODO: Insights View
                         if firstTabBarIndex == 0 {
                             // Display income related insights
+                            MonthlyView()
                             Spacer()
                         }
                         else {
@@ -135,4 +158,35 @@ struct EntryLogView: View {
             ImageInputViewControllerRepresentable()
         }
     }    
+}
+
+func percentageOfExpenses(for category: ExpenseCategory) -> Double {
+    let totalExpenses = Double(ExpenseHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
+    let totalAllExpenses = Double(ExpenseHistory.reduce(0) { $0 + $1.total })
+    
+    if totalAllExpenses > 0 {
+        return customRounded((totalExpenses / totalAllExpenses) * 100.0)
+    } else {
+        return 0.0
+    }
+}
+
+func customRounded(_ value: Double) -> Double {
+    let fractionalPart = value - floor(value)
+    if fractionalPart >= 0.5 {
+        return ceil(value)
+    } else {
+        return floor(value)
+    }
+}
+
+func percentageOfIncomes(for category: IncomeCategory) -> Double {
+    let totalIncome = Double(IncomeHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
+    let totalAllIncomes = Double(IncomeHistory.reduce(0) { $0 + $1.total })
+    
+    if totalAllIncomes > 0 {
+        return customRounded((totalIncome / totalAllIncomes) * 100.0)
+    } else {
+        return 0.0
+    }
 }

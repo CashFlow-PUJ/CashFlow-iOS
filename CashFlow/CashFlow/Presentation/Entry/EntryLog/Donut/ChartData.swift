@@ -12,4 +12,5 @@ struct ChartData: Identifiable {
     var color : Color
     var slicePercent : CGFloat = 0.0
     var value : CGFloat
+    var total: Int
 }

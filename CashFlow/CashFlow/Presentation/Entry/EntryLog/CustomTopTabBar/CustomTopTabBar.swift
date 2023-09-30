@@ -22,7 +22,6 @@ struct CustomTopTabBar: View {
         }
         .border(width: 1, edges: [.bottom], color: Color(hex: 0xCCCFD8))
         .padding(.top, 5)
-        .padding(.horizontal, 10)
         
     }
     
