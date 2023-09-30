@@ -18,11 +18,21 @@ struct EntryLogView: View {
     // MARK: - EntryLog
     @State var firstTabBarIndex = 0
     @State var secondTabBarIndex = 0
+    
+    @State private var isShowingPopup = false
 
     @State private var selectedIncomeCategory: IncomeCategory = (IncomeCategory.allCases.first ?? .otros)
     @State private var selectedExpenseCategory: ExpenseCategory = (ExpenseCategory.allCases.first ?? .otros)
-   
+    @State private var selectedPopupCategory: IncomeCategory = (IncomeCategory.allCases.first ?? .otros)
+    
+    @State private var expenseHistory: [Expense] = Expense.sampleData
+    @State private var incomeHistory: [Income] = Income.sampleData
+    @State private var refreshID = UUID() // Variable de estado para el identificador
+
+    
     var body: some View {
+        @State var ExpenseHistory: [Expense] = Expense.sampleData
+        @State var IncomeHistory: [Income] = Income.sampleData
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 VStack {
@@ -65,7 +75,7 @@ struct EntryLogView: View {
                                     } else {
                                         CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
                                                        title: category.rawValue,
-                                                       value: Int(percentageOfIncomes(for: category)),
+                                                       value: Int(percentageOfIncomes(for: category, using: IncomeHistory)),
                                                        color: category.color
                                         ) {
                                             selectedIncomeCategory = category
@@ -134,6 +144,7 @@ struct EntryLogView: View {
                     action: {
                         if firstTabBarIndex == 0 {
                             // Income entry
+                            self.isShowingPopup.toggle()
                             // TODO: Income Entry Form/View
                         }
                         else {
@@ -152,15 +163,30 @@ struct EntryLogView: View {
                     }
                 )
                 .padding(.all, 25)
+                if isShowingPopup {
+                    Color.black.opacity(0.6) 
+                       .edgesIgnoringSafeArea(.all)
+                    Color.white
+                        .cornerRadius(50)
+                        .shadow(radius: 20)
+                        .frame(width: 360, height: 400)
+                        .overlay(
+                            PopUpIncomeView(isPresented: self.$isShowingPopup)
+                            .frame(width: 300, height: 380)
+                        )
+                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
+                }
             }
         }
         .sheet(isPresented: $showImagePicker){
             ImageInputViewControllerRepresentable()
         }
-    }    
+    }
 }
 
 func percentageOfExpenses(for category: ExpenseCategory) -> Double {
+    @State var ExpenseHistory: [Expense] = Expense.sampleData
+    
     let totalExpenses = Double(ExpenseHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
     let totalAllExpenses = Double(ExpenseHistory.reduce(0) { $0 + $1.total })
     
@@ -180,9 +206,9 @@ func customRounded(_ value: Double) -> Double {
     }
 }
 
-func percentageOfIncomes(for category: IncomeCategory) -> Double {
-    let totalIncome = Double(IncomeHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
-    let totalAllIncomes = Double(IncomeHistory.reduce(0) { $0 + $1.total })
+func percentageOfIncomes(for category: IncomeCategory, using incomeHistory: [Income]) -> Double {
+    let totalIncome = Double(incomeHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
+    let totalAllIncomes = Double(incomeHistory.reduce(0) { $0 + $1.total })
     
     if totalAllIncomes > 0 {
         return customRounded((totalIncome / totalAllIncomes) * 100.0)

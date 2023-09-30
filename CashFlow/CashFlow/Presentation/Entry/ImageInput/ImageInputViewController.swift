@@ -181,10 +181,10 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         visionImage.orientation = image.imageOrientation
         
         self.resultsText += "Running On-Device Text Recognition...\n"
-        process(visionImage, with: onDeviceTextRecognizer)
+        tgtgprocess(visionImage, with: onDeviceTextRecognizer)
     }
     
-    private func process(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
+    private func tgtgprocess(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
         weak var weakSelf = self
         textRecognizer?.process(visionImage) { text, error in
             guard let strongSelf = weakSelf else {

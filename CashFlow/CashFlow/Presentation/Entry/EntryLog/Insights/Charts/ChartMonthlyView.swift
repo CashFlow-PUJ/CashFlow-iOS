@@ -8,8 +8,6 @@
 import SwiftUI
 import Charts
 
-var ExpenseHistory: [Expense] = Expense.sampleData
-var IncomeHistory: [Income] = Income.sampleData
 
 let dateRangeArray = dateRange(startDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 1).date!, endDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 30).date!)
 
@@ -83,6 +81,8 @@ struct ChartViewMini: View {
 }
 
 func initData() -> [AnyEntry] {
+    @State var ExpenseHistory: [Expense] = Expense.sampleData
+    @State var IncomeHistory: [Income] = Income.sampleData
     var previousTotal: Int = 0
     var info: [AnyEntry] = []
     for date in dateRangeArray {
