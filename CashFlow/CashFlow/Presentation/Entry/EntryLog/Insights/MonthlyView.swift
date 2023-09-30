@@ -28,7 +28,3 @@ struct MonthlyView: View {
         }
     }
 }
-
-#Preview {
-    MonthlyView()
-}

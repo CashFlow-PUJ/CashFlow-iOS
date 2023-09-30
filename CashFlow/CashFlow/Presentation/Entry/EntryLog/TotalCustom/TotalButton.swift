@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct TotalButtton: View {
+struct TotalButton: View {
     
     var isSelected: Bool
     var title: String

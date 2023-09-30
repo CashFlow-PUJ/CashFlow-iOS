@@ -112,7 +112,3 @@ func dateRange(startDate: Date, endDate: Date) -> [Date] {
     
     return dateArray
 }
-
-#Preview {
-    GraphicView()
-}

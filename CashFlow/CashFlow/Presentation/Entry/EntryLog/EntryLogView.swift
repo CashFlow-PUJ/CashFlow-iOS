@@ -52,8 +52,8 @@ struct EntryLogView: View {
                             HStack {
                                 
                                 ForEach(IncomeCategory.allCases) { category in
-                                    if (category == .total){
-                                        TotalButtton(
+                                    if (category == .total) {
+                                        TotalButton(
                                             isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
                                             title: "Total",
                                             value: 100,
@@ -80,7 +80,7 @@ struct EntryLogView: View {
                             HStack {
                                 ForEach(ExpenseCategory.allCases) { category in
                                     if (category == .total) {
-                                        TotalButtton(
+                                        TotalButton(
                                             isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
                                             title: "Total",
                                             value: 100,
@@ -89,7 +89,7 @@ struct EntryLogView: View {
                                         ){
                                             selectedExpenseCategory = category
                                         }
-                                    }else{
+                                    } else {
                                         CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
                                                        title: category.rawValue,
                                                        value: Int(percentageOfExpenses(for: category)),
