@@ -12,6 +12,10 @@
 		7F1518C52AC721290004540A /* AnyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C42AC721290004540A /* AnyEntry.swift */; };
 		7F1518C82AC73F030004540A /* TotalCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C72AC73F030004540A /* TotalCustomView.swift */; };
 		7F1518CA2AC73F310004540A /* TotalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C92AC73F310004540A /* TotalButton.swift */; };
+		7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */; };
+		7F5793D92AC9737500C5877F /* ItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5793D82AC9737500C5877F /* ItemMenu.swift */; };
+		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
+		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
 		9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612392A6DE6CB0032743E /* CashFlowApp.swift */; };
 		9A16123E2A6DE6CE0032743E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A16123D2A6DE6CE0032743E /* Assets.xcassets */; };
 		9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */; };
@@ -77,6 +81,10 @@
 		7F1518C42AC721290004540A /* AnyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntry.swift; sourceTree = "<group>"; };
 		7F1518C72AC73F030004540A /* TotalCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCustomView.swift; sourceTree = "<group>"; };
 		7F1518C92AC73F310004540A /* TotalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalButton.swift; sourceTree = "<group>"; };
+		7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpIncomeView.swift; sourceTree = "<group>"; };
+		7F5793D82AC9737500C5877F /* ItemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenu.swift; sourceTree = "<group>"; };
+		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9A1612362A6DE6CB0032743E /* CashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1612392A6DE6CB0032743E /* CashFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowApp.swift; sourceTree = "<group>"; };
 		9A16123D2A6DE6CE0032743E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +184,22 @@
 			path = TotalCustom;
 			sourceTree = "<group>";
 		};
+		7F3B430B2AC7E93D00DA791C /* IncomeEntry */ = {
+			isa = PBXGroup;
+			children = (
+				7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */,
+			);
+			path = IncomeEntry;
+			sourceTree = "<group>";
+		};
+		7FCDB3752AC944E500C6FFC5 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		9A16122D2A6DE6CB0032743E = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +293,7 @@
 		9A70BD212AC3B29A00155BA9 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7FCDB3752AC944E500C6FFC5 /* Menu */,
 				9A70BD552AC5178800155BA9 /* Entry */,
 				9A70BD252AC3B39600155BA9 /* Authentication */,
 			);
@@ -302,6 +327,7 @@
 				9A70BD322AC3C6E200155BA9 /* Expense.swift */,
 				9A70BD362AC3C83400155BA9 /* Entry.swift */,
 				7F1518C42AC721290004540A /* AnyEntry.swift */,
+				7FCDB3782AC9533B00C6FFC5 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -328,6 +354,7 @@
 			children = (
 				9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */,
 				9A70BD302AC3C69D00155BA9 /* IncomeCategory.swift */,
+				7F5793D82AC9737500C5877F /* ItemMenu.swift */,
 			);
 			path = Enumerations;
 			sourceTree = "<group>";
@@ -400,6 +427,7 @@
 		9A70BD562AC5179B00155BA9 /* EntryLog */ = {
 			isa = PBXGroup;
 			children = (
+				7F3B430B2AC7E93D00DA791C /* IncomeEntry */,
 				9A4B72C52AA748760091E313 /* EntryLogView.swift */,
 				9A70BD652AC798E100155BA9 /* Insights */,
 				9A70BD572AC517FA00155BA9 /* EntryHistory */,
@@ -642,12 +670,14 @@
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
+				7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */,
 				9A70BD162AC0D8AC00155BA9 /* ExpenseHistoryViewHistoryView.swift in Sources */,
 				7F1518C82AC73F030004540A /* TotalCustomView.swift in Sources */,
 				9A70BD432AC513D400155BA9 /* EditEntry.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
 				9A70BD4C2AC5157100155BA9 /* EditExpenseItem.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
+				7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */,
 				9A70BD412AC513C300155BA9 /* ScanImage.swift in Sources */,
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
 				7F1518BD2AC680C70004540A /* MonthlyView.swift in Sources */,
@@ -666,8 +696,10 @@
 				9A70BD3B2AC5134800155BA9 /* LogIn.swift in Sources */,
 				9A70BD4A2AC5155800155BA9 /* AddExpenseItem.swift in Sources */,
 				7F1518C52AC721290004540A /* AnyEntry.swift in Sources */,
+				7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */,
 				9A70BD3F2AC513B300155BA9 /* EnterIncome.swift in Sources */,
 				9A70BD042ABE76CF00155BA9 /* EdgeBorder.swift in Sources */,
+				7F5793D92AC9737500C5877F /* ItemMenu.swift in Sources */,
 				9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */,
 				9A70BD602AC51AC600155BA9 /* ColorExtension.swift in Sources */,
 			);
@@ -800,7 +832,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = 6HD9C3J3FV;
+				DEVELOPMENT_TEAM = WXFW7D6G6Z;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -818,7 +850,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
