@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 struct Income: Entry {
     var id: UUID
