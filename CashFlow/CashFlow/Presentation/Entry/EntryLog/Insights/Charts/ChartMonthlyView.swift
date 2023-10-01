@@ -8,8 +8,10 @@
 import SwiftUI
 import Charts
 
+let month = Calendar.current.component(.month, from: Date())
+let day = Calendar.current.component(.day, from: Date())
 
-let dateRangeArray = dateRange(startDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 1).date!, endDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 30).date!)
+let dateRangeArray = dateRange(startDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 1).date!, endDate: DateComponents(calendar: Calendar.current, year: 2023, month: month, day: day).date!)
 
 struct GraphicView: View {
     var body: some View {
@@ -43,7 +45,6 @@ struct ChartView: View {
                         alignment: .bottom,
                         spacing: 10
                     ){
-                        //Text("\(String(format: "%.1fM", data.total/1000000))")
                         Text("\(String(Double(data.total/1000000)))M")
                             .font(.system(size: 8))
                     }
@@ -97,6 +98,12 @@ func initData() -> [AnyEntry] {
         info.append(AnyEntry(id: UUID(), total: total, date: date))
         previousTotal = total
     }
+    
+    info = info.filter { Calendar.current.component(.month, from: $0.date) == month}
+    if info.isEmpty {
+        info.append(AnyEntry(id: UUID(), total: previousTotal, date: Date()))
+    }
+        
     return info
 }
 
