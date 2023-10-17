@@ -8,6 +8,22 @@
 import UIKit
 import MLImage
 import MLKit
+import Foundation
+import SwiftUI
+
+
+// Representa la información individual de un artículo.
+struct Item: Decodable {
+    var id: String
+    var name: String
+    var category: String
+    var price: Int
+}
+
+// Representa la estructura completa de la respuesta con una lista de detalles.
+struct ApiResponse: Decodable {
+    var details: [Item]
+}
 
 @objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
@@ -186,7 +202,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
     
     private func tgtgprocess(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
         weak var weakSelf = self
-        textRecognizer?.process(visionImage) { text, error in
+        textRecognizer?.process(visionImage) { [self] text, error in
             guard let strongSelf = weakSelf else {
                 print("Self is nil!")
                 return
@@ -230,8 +246,26 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                     }
                 }
             }
-            strongSelf.resultsText += "\(text.text)\n"
-            strongSelf.showResults()
+            
+            let apiURL = "https://us-central1-white-library-365314.cloudfunctions.net/extractada"
+            let token = "0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTYyMjMwMDM0MTk0NTg2NDE1IiwiZW1haWwiOiJhdHBlbmFwZW5hQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiWWdxajRvVGJNLV9vNnR5WVRPZ0NUZyIsIm5iZiI6MTY5NzU1NzUxNCwiaWF0IjoxNjk3NTU3ODE0LCJleHAiOjE2OTc1NjE0MTQsImp0aSI6ImNjNzMxZWU5MGEzMjI2OWZhOWM2OTY2ZTcyYzZiMGQ5YTM5OTUyOGEifQ.f7Rr5bOU-fEv4QIcWH9U0rYEXf4rfwLe5ooXdoaFOX0RDG5oMLSXzBWcV7H-7OzsXUlUe-FoaGxGGsNn_-hng26ChmUFdE2mlmoOXM393UTl3XP-XkKo-AnFO9WWTnLRrvskC42BWg_oGclX5Wu8HM7GRGVFpHFmYe168a-lp2LOdYIDFixbr173o9ndF6ryXofbyDRkfkquD9i6eUBnDy79BDltHgZfeiN5Ve3iosAX9Z_T2qvjIPslkVpz03vficnp1R5VR87QMROF5XQTBEc-TXgoCe09wi25akfNTjcEayLXT19jS4hMcp0mY7tb45Nymf6lIH5DHL6UPdHR6A"
+            
+            sendRequest(urlString: apiURL, token: token, textData: text.text) { response, error in
+                if let error = error {
+                    // Manejar errores aquí.
+                    print("Error: \(error.localizedDescription)")
+                    return
+                }
+
+                if let response = response {
+                    // Procesar respuesta aquí.
+                    for item in response.details {
+                        strongSelf.resultsText +=  ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)")
+                        strongSelf.showResults()
+                    }
+                }
+            }
+            
         }
     }
     
@@ -312,4 +346,53 @@ private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerCon
   -> String
 {
   return input.rawValue
+}
+
+func sendRequest(urlString: String, token: String, textData: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
+    guard let url = URL(string: urlString) else {
+        print("Error: cannot create URL")
+        completion(nil, nil)
+        return
+    }
+
+    // Crear un diccionario para los datos de tu solicitud.
+    let requestBody: [String: Any] = ["data": textData]
+    
+    // Convertir el diccionario en datos JSON.
+    guard let httpBody = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {
+        print("Error: Something went wrong with JSON data")
+        completion(nil, nil)
+        return
+    }
+
+    // Crear una solicitud URL y configurarla con los datos JSON y el token de autorización.
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    request.httpBody = httpBody
+
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        // Manejar errores de la solicitud.
+        if let error = error {
+            completion(nil, error)
+            return
+        }
+
+        // Verificar y decodificar la respuesta.
+        guard let data = data else {
+            completion(nil, nil)
+            return
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            let response = try decoder.decode(ApiResponse.self, from: data)
+            completion(response, nil)
+        } catch let error {
+            completion(nil, error)
+        }
+    }
+    
+    task.resume()
 }
