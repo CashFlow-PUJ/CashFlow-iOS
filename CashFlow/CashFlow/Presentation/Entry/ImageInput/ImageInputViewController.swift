@@ -217,9 +217,8 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
             // ... [código para procesar el texto reconocido] ...
 
             // Envía la solicitud a tu servidor.
-            let apiURL = "https://us-central1-white-library-365314.cloudfunctions.net/extractada"
-            let token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdkMzM0NDk3NTA2YWNiNzRjZGVlZGFhNjYxODRkMTU1NDdmODM2OTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTYyMjMwMDM0MTk0NTg2NDE1IiwiZW1haWwiOiJhdHBlbmFwZW5hQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiMHRJRnRwOEVwSUV5TG5vX0dYZTFHQSIsIm5iZiI6MTY5NzY3OTk4MSwiaWF0IjoxNjk3NjgwMjgxLCJleHAiOjE2OTc2ODM4ODEsImp0aSI6ImZlYWMxMTRjOWQ1YzJiMDlkMGU5NGFiOTlkODliNDEwZjlmODE5MDYifQ.QiSivU6OUSpbp2uaslkMY4A3tzKY8DoUZUo_4yp6kLqTMJep6PS6BUywCzXWdkJ_hNDVSJt4P-maYtdcGYBcVxZwOF6qqDnBKLSw9Ec-q7fzbOGcYhh-iUWONm9hF4yf999XV1zDVuw122__hB0BuvJoKpm-Jr7UJvhy5vwa5ockaAMnNumUlrhfvE3KepUwouAS72gO7pRRAsfLMcpEBCujky4NcIYGk8EYYng1ldQlvY-3nqetQfEbiNDZDJs1dU7m1UjUdhvPxT0XY4oVuTEtqK1VdlDTSoKB8L3AmPMWu7_8aglNtBCY66hPb6hnApPI9BLozHwPAq5w179l_Q"
-            sendRequest(urlString: apiURL, token: token, textData: text.text) { response, error in
+            let apiURL = "https://us-central1-cashflow-37373.cloudfunctions.net/chatgpt"
+            sendRequest(urlString: apiURL, textData: text.text) { response, error in
                 // Vuelve al hilo principal si estás actualizando la UI.
                 DispatchQueue.main.async {
                     if let error = error {
@@ -324,7 +323,7 @@ private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerCon
   return input.rawValue
 }
 
-func sendRequest(urlString: String, token: String, textData: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
+func sendRequest(urlString: String, textData: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
     guard let url = URL(string: urlString) else {
         print("Error: cannot create URL")
         completion(nil, nil)
@@ -345,7 +344,6 @@ func sendRequest(urlString: String, token: String, textData: String, completion:
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
     request.httpBody = httpBody
 
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
