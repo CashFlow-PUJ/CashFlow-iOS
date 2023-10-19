@@ -202,70 +202,46 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
     
     private func tgtgprocess(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
         weak var weakSelf = self
-        textRecognizer?.process(visionImage) { [self] text, error in
+        textRecognizer?.process(visionImage) { text, error in
             guard let strongSelf = weakSelf else {
                 print("Self is nil!")
                 return
             }
             guard error == nil, let text = text else {
+                // Manejar errores aquí si el reconocimiento de texto falla.
                 let errorString = error?.localizedDescription ?? Constants.detectionNoResultsMessage
                 strongSelf.resultsText = "Text recognizer failed with error: \(errorString)"
-                strongSelf.showResults()
+                strongSelf.showResults()  // Muestra los resultados aquí si hay un error.
                 return
             }
-            // Blocks.
-            for block in text.blocks {
-                let transformedRect = block.frame.applying(strongSelf.transformMatrix())
-                UIUtilities.addRectangle(
-                    transformedRect,
-                    to: strongSelf.annotationOverlayView,
-                    color: UIColor.purple
-                )
-                
-                // Lines.
-                for line in block.lines {
-                    let transformedRect = line.frame.applying(strongSelf.transformMatrix())
-                    UIUtilities.addRectangle(
-                        transformedRect,
-                        to: strongSelf.annotationOverlayView,
-                        color: UIColor.orange
-                    )
-                    
-                    // Elements.
-                    for element in line.elements {
-                        let transformedRect = element.frame.applying(strongSelf.transformMatrix())
-                        UIUtilities.addRectangle(
-                            transformedRect,
-                            to: strongSelf.annotationOverlayView,
-                            color: UIColor.green
-                        )
-                        let label = UILabel(frame: transformedRect)
-                        label.text = element.text
-                        label.adjustsFontSizeToFitWidth = true
-                        strongSelf.annotationOverlayView.addSubview(label)
-                    }
-                }
-            }
-            
-            let apiURL = "https://us-central1-white-library-365314.cloudfunctions.net/extractada"
-            let token = "0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTYyMjMwMDM0MTk0NTg2NDE1IiwiZW1haWwiOiJhdHBlbmFwZW5hQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiWWdxajRvVGJNLV9vNnR5WVRPZ0NUZyIsIm5iZiI6MTY5NzU1NzUxNCwiaWF0IjoxNjk3NTU3ODE0LCJleHAiOjE2OTc1NjE0MTQsImp0aSI6ImNjNzMxZWU5MGEzMjI2OWZhOWM2OTY2ZTcyYzZiMGQ5YTM5OTUyOGEifQ.f7Rr5bOU-fEv4QIcWH9U0rYEXf4rfwLe5ooXdoaFOX0RDG5oMLSXzBWcV7H-7OzsXUlUe-FoaGxGGsNn_-hng26ChmUFdE2mlmoOXM393UTl3XP-XkKo-AnFO9WWTnLRrvskC42BWg_oGclX5Wu8HM7GRGVFpHFmYe168a-lp2LOdYIDFixbr173o9ndF6ryXofbyDRkfkquD9i6eUBnDy79BDltHgZfeiN5Ve3iosAX9Z_T2qvjIPslkVpz03vficnp1R5VR87QMROF5XQTBEc-TXgoCe09wi25akfNTjcEayLXT19jS4hMcp0mY7tb45Nymf6lIH5DHL6UPdHR6A"
-            
-            sendRequest(urlString: apiURL, token: token, textData: text.text) { response, error in
-                if let error = error {
-                    // Manejar errores aquí.
-                    print("Error: \(error.localizedDescription)")
-                    return
-                }
+            // ... [código para procesar el texto reconocido] ...
 
-                if let response = response {
-                    // Procesar respuesta aquí.
-                    for item in response.details {
-                        strongSelf.resultsText +=  ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)")
+            // Envía la solicitud a tu servidor.
+            let apiURL = "https://us-central1-white-library-365314.cloudfunctions.net/extractada"
+            let token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdkMzM0NDk3NTA2YWNiNzRjZGVlZGFhNjYxODRkMTU1NDdmODM2OTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNjE4MTA0NzA4MDU0LTlyOXMxYzRhbGczNmVybGl1Y2hvOXQ1Mm4zMm42ZGdxLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEyMTYyMjMwMDM0MTk0NTg2NDE1IiwiZW1haWwiOiJhdHBlbmFwZW5hQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiMHRJRnRwOEVwSUV5TG5vX0dYZTFHQSIsIm5iZiI6MTY5NzY3OTk4MSwiaWF0IjoxNjk3NjgwMjgxLCJleHAiOjE2OTc2ODM4ODEsImp0aSI6ImZlYWMxMTRjOWQ1YzJiMDlkMGU5NGFiOTlkODliNDEwZjlmODE5MDYifQ.QiSivU6OUSpbp2uaslkMY4A3tzKY8DoUZUo_4yp6kLqTMJep6PS6BUywCzXWdkJ_hNDVSJt4P-maYtdcGYBcVxZwOF6qqDnBKLSw9Ec-q7fzbOGcYhh-iUWONm9hF4yf999XV1zDVuw122__hB0BuvJoKpm-Jr7UJvhy5vwa5ockaAMnNumUlrhfvE3KepUwouAS72gO7pRRAsfLMcpEBCujky4NcIYGk8EYYng1ldQlvY-3nqetQfEbiNDZDJs1dU7m1UjUdhvPxT0XY4oVuTEtqK1VdlDTSoKB8L3AmPMWu7_8aglNtBCY66hPb6hnApPI9BLozHwPAq5w179l_Q"
+            sendRequest(urlString: apiURL, token: token, textData: text.text) { response, error in
+                // Vuelve al hilo principal si estás actualizando la UI.
+                DispatchQueue.main.async {
+                    if let error = error {
+                        // Manejar errores aquí, por ejemplo, mostrar una alerta al usuario.
+                        print("Error: \(error.localizedDescription)")
+                        // Considera llamar a `showResults` aquí para indicar que hubo un error.
+                        strongSelf.resultsText = "Request failed with error: \(error.localizedDescription)"
                         strongSelf.showResults()
+                        return
+                    }
+
+                    if let response = response {
+                        // Procesa la respuesta aquí.
+                        for item in response.details {
+                            strongSelf.resultsText += ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)\n")
+                        }
+                        // Muestra los resultados después de procesar la respuesta.
+                        strongSelf.showResults()
+                        print("Ya debieron mostrarse")
                     }
                 }
             }
-            
         }
     }
     
@@ -375,6 +351,7 @@ func sendRequest(urlString: String, token: String, textData: String, completion:
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         // Manejar errores de la solicitud.
         if let error = error {
+            print("Hay un error")
             completion(nil, error)
             return
         }
@@ -386,8 +363,28 @@ func sendRequest(urlString: String, token: String, textData: String, completion:
         }
         
         do {
+            print("decodificando los datos")
             let decoder = JSONDecoder()
             let response = try decoder.decode(ApiResponse.self, from: data)
+            var newExpenses: [Expense] = []
+            for item in response.details {
+                let expense = Expense.from(item: item)
+                newExpenses.append(expense)
+            }
+
+            // Agrupa los gastos por categoría y suma sus precios.
+            let groupedExpenses = Dictionary(grouping: newExpenses, by: { $0.category })
+            var summarizedExpenses: [Expense] = []
+            
+            for (category, expenses) in groupedExpenses {
+                let totalSum = expenses.reduce(0) { $0 + $1.total }
+                
+                // Crea un nuevo gasto que representa el total de la categoría.
+                let summaryExpense = Expense(id: UUID(), total: totalSum, date: Date(), description: "Total para \(category.rawValue)", vendorName: nil, category: category)
+                summarizedExpenses.append(summaryExpense)
+            }
+            
+            Expense.sampleData.append(contentsOf: summarizedExpenses)
             completion(response, nil)
         } catch let error {
             completion(nil, error)
