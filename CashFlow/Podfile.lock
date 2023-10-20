@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.8.0)
   - GoogleDataTransport (9.2.5):
     - GoogleUtilities/Environment (~> 7.7)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -60,12 +61,16 @@ PODS:
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.3.1)
   - Protobuf (3.24.3)
+  - SENetworking (1.0.8)
 
 DEPENDENCIES:
+  - Alamofire
   - GoogleMLKit/TextRecognition (= 3.2.0)
+  - SENetworking
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Alamofire
     - GoogleDataTransport
     - GoogleMLKit
     - GoogleToolboxForMac
@@ -80,8 +85,10 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - SENetworking
 
 SPEC CHECKSUMS:
+  Alamofire: 0e92e751b3e9e66d7982db43919d01f313b8eb91
   GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleMLKit: 0017a6a8372e1a182139b9def4d89be5d87ca5a7
   GoogleToolboxForMac: 8bef7c7c5cf7291c687cf5354f39f9db6399ad34
@@ -96,7 +103,8 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   Protobuf: 970f7ee93a3a08e3cf64859b8efd95ee32b4f87f
+  SENetworking: 4508f4538b947c50553873d3de853b374c6d45ba
 
-PODFILE CHECKSUM: 3b3857ed1362513db6ff5a8aa61cf753cc1ceb54
+PODFILE CHECKSUM: c4a6343420c833fc6737d785ff8b72a0863514d3
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.12.1

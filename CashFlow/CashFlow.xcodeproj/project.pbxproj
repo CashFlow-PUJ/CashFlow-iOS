@@ -70,6 +70,19 @@
 		9ACDA9CF2AB31FBD00002DE7 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9CE2AB31FBD00002DE7 /* FirebaseFirestoreSwift */; };
 		9ACDA9D12AB31FBD00002DE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9D02AB31FBD00002DE7 /* FirebaseStorage */; };
 		9ACDA9D32AB31FBD00002DE7 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9ACDA9D22AB31FBD00002DE7 /* FirebaseStorageCombine-Community */; };
+		9AD1A30B2AE1BA530034972E /* ExpenseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A30A2AE1BA530034972E /* ExpenseRepository.swift */; };
+		9AD1A30D2AE1BA5F0034972E /* IncomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A30C2AE1BA5F0034972E /* IncomeRepository.swift */; };
+		9AD1A30F2AE1D4E40034972E /* DefaultExpenseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A30E2AE1D4E40034972E /* DefaultExpenseRepository.swift */; };
+		9AD1A3122AE1D5770034972E /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3112AE1D5770034972E /* APIEndpoints.swift */; };
+		9AD1A3152AE1D5D90034972E /* ExpenseRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3142AE1D5D90034972E /* ExpenseRequestDTO.swift */; };
+		9AD1A3172AE1D5E20034972E /* ExpenseResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3162AE1D5E20034972E /* ExpenseResponseDTO.swift */; };
+		9AD1A31C2AE1E0720034972E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A31B2AE1E0720034972E /* Endpoint.swift */; };
+		9AD1A31E2AE1E0DA0034972E /* DataTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A31D2AE1E0DA0034972E /* DataTransferService.swift */; };
+		9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A31F2AE1E0FA0034972E /* NetworkConfig.swift */; };
+		9AD1A3222AE1E10F0034972E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3212AE1E10F0034972E /* NetworkService.swift */; };
+		9AD1A3242AE1E3250034972E /* RepositoryTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3232AE1E3250034972E /* RepositoryTask.swift */; };
+		9AD1A3262AE1E36E0034972E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3252AE1E36E0034972E /* Cancellable.swift */; };
+		9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */; };
 		9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */; };
 		B11B63CD9C3CA5F04BADDBAE /* Pods_CashFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1A9FD8F38EE961E777D265 /* Pods_CashFlow.framework */; };
 /* End PBXBuildFile section */
@@ -129,6 +142,19 @@
 		9AB523562AB3DE95005EA49C /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image_has_text.jpg; sourceTree = "<group>"; };
 		9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLKitExtensions.swift; sourceTree = "<group>"; };
 		9AB5235D2AB3FD46005EA49C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9AD1A30A2AE1BA530034972E /* ExpenseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRepository.swift; sourceTree = "<group>"; };
+		9AD1A30C2AE1BA5F0034972E /* IncomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeRepository.swift; sourceTree = "<group>"; };
+		9AD1A30E2AE1D4E40034972E /* DefaultExpenseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExpenseRepository.swift; sourceTree = "<group>"; };
+		9AD1A3112AE1D5770034972E /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		9AD1A3142AE1D5D90034972E /* ExpenseRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRequestDTO.swift; sourceTree = "<group>"; };
+		9AD1A3162AE1D5E20034972E /* ExpenseResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseResponseDTO.swift; sourceTree = "<group>"; };
+		9AD1A31B2AE1E0720034972E /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		9AD1A31D2AE1E0DA0034972E /* DataTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferService.swift; sourceTree = "<group>"; };
+		9AD1A31F2AE1E0FA0034972E /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
+		9AD1A3212AE1E10F0034972E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		9AD1A3232AE1E3250034972E /* RepositoryTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTask.swift; sourceTree = "<group>"; };
+		9AD1A3252AE1E36E0034972E /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BE38DCDF0F19421B33AA677B /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
 		D355B3A2F7BC7D22BBEC71E3 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
@@ -223,10 +249,12 @@
 			isa = PBXGroup;
 			children = (
 				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
+				9AD1A3272AE1FEF40034972E /* Application */,
 				9A70BD212AC3B29A00155BA9 /* Presentation */,
 				9A70BD202AC3B29000155BA9 /* Domain */,
 				9A70BD1F2AC3B28B00155BA9 /* Data */,
 				9A70BD1E2AC3B28600155BA9 /* Core */,
+				9AD1A3192AE1E05D0034972E /* Infrastructure */,
 				9A16123F2A6DE6CE0032743E /* Preview Content */,
 				9A16123D2A6DE6CE0032743E /* Assets.xcassets */,
 				9A4B72C72AA7494B0091E313 /* GoogleService-Info.plist */,
@@ -276,6 +304,8 @@
 		9A70BD1F2AC3B28B00155BA9 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9AD1A3102AE1D56B0034972E /* Network */,
+				9AD1A30E2AE1D4E40034972E /* DefaultExpenseRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -335,6 +365,8 @@
 		9A70BD272AC3B3E100155BA9 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				9AD1A30A2AE1BA530034972E /* ExpenseRepository.swift */,
+				9AD1A30C2AE1BA5F0034972E /* IncomeRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -427,8 +459,8 @@
 		9A70BD562AC5179B00155BA9 /* EntryLog */ = {
 			isa = PBXGroup;
 			children = (
-				7F3B430B2AC7E93D00DA791C /* IncomeEntry */,
 				9A4B72C52AA748760091E313 /* EntryLogView.swift */,
+				7F3B430B2AC7E93D00DA791C /* IncomeEntry */,
 				9A70BD652AC798E100155BA9 /* Insights */,
 				9A70BD572AC517FA00155BA9 /* EntryHistory */,
 				9A70BD072ABE7E7100155BA9 /* CustomTopTabBar */,
@@ -464,6 +496,8 @@
 				9AB523532AB32803005EA49C /* UIUtilities.swift */,
 				9AB523582AB3E2E9005EA49C /* MLKitExtensions.swift */,
 				9A70BD5F2AC51AC600155BA9 /* ColorExtension.swift */,
+				9AD1A3232AE1E3250034972E /* RepositoryTask.swift */,
+				9AD1A3252AE1E36E0034972E /* Cancellable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -491,6 +525,51 @@
 				9AB5235D2AB3FD46005EA49C /* Main.storyboard */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		9AD1A3102AE1D56B0034972E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1A3132AE1D5BF0034972E /* DataMapping */,
+				9AD1A3112AE1D5770034972E /* APIEndpoints.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9AD1A3132AE1D5BF0034972E /* DataMapping */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1A3142AE1D5D90034972E /* ExpenseRequestDTO.swift */,
+				9AD1A3162AE1D5E20034972E /* ExpenseResponseDTO.swift */,
+			);
+			path = DataMapping;
+			sourceTree = "<group>";
+		};
+		9AD1A3192AE1E05D0034972E /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1A31A2AE1E0650034972E /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		9AD1A31A2AE1E0650034972E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1A31B2AE1E0720034972E /* Endpoint.swift */,
+				9AD1A31D2AE1E0DA0034972E /* DataTransferService.swift */,
+				9AD1A31F2AE1E0FA0034972E /* NetworkConfig.swift */,
+				9AD1A3212AE1E10F0034972E /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9AD1A3272AE1FEF40034972E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		F45028F4A9B48F76572C9771 /* Frameworks */ = {
@@ -661,13 +740,16 @@
 				9A70BD5A2AC518BF00155BA9 /* VisualizeEntryHistory.swift in Sources */,
 				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
 				9A70BD372AC3C83400155BA9 /* Entry.swift in Sources */,
+				9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */,
 				9A70BD3D2AC5139C00155BA9 /* EnterExpense.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
+				9AD1A30B2AE1BA530034972E /* ExpenseRepository.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
 				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
+				9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
 				7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */,
@@ -678,11 +760,17 @@
 				9A70BD4C2AC5157100155BA9 /* EditExpenseItem.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
 				7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */,
+				9AD1A30F2AE1D4E40034972E /* DefaultExpenseRepository.swift in Sources */,
 				9A70BD412AC513C300155BA9 /* ScanImage.swift in Sources */,
+				9AD1A3172AE1D5E20034972E /* ExpenseResponseDTO.swift in Sources */,
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
+				9AD1A31C2AE1E0720034972E /* Endpoint.swift in Sources */,
+				9AD1A31E2AE1E0DA0034972E /* DataTransferService.swift in Sources */,
 				7F1518BD2AC680C70004540A /* MonthlyView.swift in Sources */,
 				9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */,
 				9A70BD392AC5133800155BA9 /* SignUp.swift in Sources */,
+				9AD1A3222AE1E10F0034972E /* NetworkService.swift in Sources */,
+				9AD1A3262AE1E36E0034972E /* Cancellable.swift in Sources */,
 				9A70BD5C2AC518E100155BA9 /* VisualizeInsights.swift in Sources */,
 				9A70BD142AC0D6FC00155BA9 /* ExpenseHistoryRow.swift in Sources */,
 				9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */,
@@ -690,9 +778,13 @@
 				9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9A70BD4E2AC515E200155BA9 /* DeleteExpenseItem.swift in Sources */,
+				9AD1A3242AE1E3250034972E /* RepositoryTask.swift in Sources */,
+				9AD1A30D2AE1BA5F0034972E /* IncomeRepository.swift in Sources */,
 				9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */,
+				9AD1A3122AE1D5770034972E /* APIEndpoints.swift in Sources */,
 				9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */,
 				7F1518CA2AC73F310004540A /* TotalButton.swift in Sources */,
+				9AD1A3152AE1D5D90034972E /* ExpenseRequestDTO.swift in Sources */,
 				9A70BD3B2AC5134800155BA9 /* LogIn.swift in Sources */,
 				9A70BD4A2AC5155800155BA9 /* AddExpenseItem.swift in Sources */,
 				7F1518C52AC721290004540A /* AnyEntry.swift in Sources */,
@@ -832,7 +924,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = WXFW7D6G6Z;
+				DEVELOPMENT_TEAM = 6HD9C3J3FV;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -850,7 +942,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -887,7 +979,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

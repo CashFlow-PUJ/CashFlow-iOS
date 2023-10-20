@@ -148,9 +148,13 @@ struct EntryLogView: View {
                     Color.black.opacity(0.6)
                         .edgesIgnoringSafeArea(.all)
                         .onTapGesture {
+                            isShowingMenu = false
+                            // TODO: Uncomment before commiting
+                            /*
                             withAnimation(.smooth(duration: 0.8)){
                                 isShowingMenu = false
                             }
+                            */
                         }
                     HStack {
                         Color.white
@@ -191,9 +195,13 @@ struct EntryLogView: View {
                     Color.black.opacity(0.6)
                        .edgesIgnoringSafeArea(.all)
                        .onTapGesture {
+                           isShowingPopup = false
+                           // TODO: Uncomment before commiting
+                           /*
                            withAnimation(.bouncy(duration: 0.3)){
                                isShowingPopup = false
                            }
+                            */
                        }
                     Color.white
                         .cornerRadius(50)

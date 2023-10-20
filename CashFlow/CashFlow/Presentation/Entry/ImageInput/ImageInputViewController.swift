@@ -216,6 +216,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
             }
             // ... [código para procesar el texto reconocido] ...
 
+            // TODO: Define request in the appropriate layer (i.e. Data).
             // Envía la solicitud a tu servidor.
             let apiURL = "https://us-central1-cashflow-37373.cloudfunctions.net/chatgpt"
             sendRequest(urlString: apiURL, textData: text.text) { response, error in
