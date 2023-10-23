@@ -90,14 +90,21 @@ extension DefaultDataTransferService: DataTransferService {
         on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<T>
     ) -> NetworkCancellable? where E.Response == T {
-
-        networkService.request(endpoint: endpoint) { result in
+        
+        // DEBUG PRINT
+        print("Request started...")
+        
+        return networkService.request(endpoint: endpoint) { result in
             switch result {
             case .success(let data):
                 let result: Result<T, DataTransferError> = self.decode(
                     data: data,
                     decoder: endpoint.responseDecoder
                 )
+                
+                // DEBUG PRINT
+                print("\nRESULT: ", result, "\n")
+                
                 queue.asyncExecute { completion(result) }
             case .failure(let error):
                 self.errorLogger.log(error: error)

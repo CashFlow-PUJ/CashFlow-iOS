@@ -11,6 +11,9 @@ final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
     
+    // TODO: Check if doing this is alright?
+    lazy var entryLogDIContainer: EntryLogDIContainer = makeEntryLogDIContainer()
+    
     // MARK: - Network
     lazy var apiDataTransferService: DataTransferService = {
         let config = ApiDataNetworkConfig(

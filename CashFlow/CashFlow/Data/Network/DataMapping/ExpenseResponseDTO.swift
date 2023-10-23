@@ -10,12 +10,14 @@ import Foundation
 // MARK: - Data Transfer Object
 
 struct ExpenseResponseDTO: Decodable {
+    /*
     private enum CodingKeys: String, CodingKey {
         // Si lo que se quiere viene con un key distinto, se hace lo siguiente
         // case movies = "results"
         // TODO: Ver qué se está devolviendo (JSON)
         case expenses
     }
+    */
     
     let expenses: [ExpenseDTO]
     
@@ -49,9 +51,11 @@ extension ExpenseResponseDTO {
         var expenseArray: [Expense] = []
         for expense in expenses {
             // TODO: Revisar con qué formato se devuelve el campo 'date'.
+            print(expense)
             let temp = Expense(id: expense.id, total: expense.total, date: expense.date , category: ExpenseCategory(rawValue: expense.category) ?? ExpenseCategory.otros)
             expenseArray.append(temp)
         }
+        print("Expense Array: ", expenseArray)
         return expenseArray
     }
 }

@@ -23,9 +23,39 @@ final class DefaultExpenseRepository: ExpenseRepository {
             self.backgroundQueue = backgroundQueue
     }
     
-    func getExpenseEntryByID() -> Expense? {
-        // TODO: Implement
-        return Expense.sampleData[0]
+    func getExpenseEntryByID(
+        expenseID: String,
+        completion: @escaping (Result<Expense, Error>) -> Void
+    ) -> Cancellable? {
+        
+        // TODO: Implement correctly
+        
+        let task = RepositoryTask()
+        let endpoint = APIEndpoints.getExpenseByID(id: expenseID)
+        task.networkTask = self.dataTransferService.request(
+            with: endpoint,
+            on: backgroundQueue
+        ) { result in
+            switch result {
+            case .success(let responseDTO):
+                completion(.success(responseDTO.toDomain()))
+            case .failure(let error):
+                var errorString = "Error: "
+                switch error {
+                    case .resolvedNetworkFailure:
+                        errorString += "\"Resolved Network failure\"."
+                    case .parsing:
+                        errorString += "Parsing error."
+                    case .noResponse:
+                        errorString += "No response."
+                    case .networkFailure:
+                        errorString += "Network failure."
+                }
+                print(errorString)
+                completion(.failure(error))
+            }
+        }
+        return task
     }
     
     func createExpenseEntry() -> Expense {
@@ -43,7 +73,6 @@ final class DefaultExpenseRepository: ExpenseRepository {
     }
     
     public func getAllExpenseEntries(
-        //query: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
         // let requestDTO = ExpenseRequestDTO(query: query)
@@ -58,6 +87,18 @@ final class DefaultExpenseRepository: ExpenseRepository {
                 //self.cache.save(response: responseDTO, for: requestDTO)
                 completion(.success(responseDTO.toDomain()))
             case .failure(let error):
+                var errorString = "Error: "
+                switch error {
+                    case .resolvedNetworkFailure:
+                        errorString += "\"Resolved Network failure\"."
+                    case .parsing:
+                        errorString += "Parsing error."
+                    case .noResponse:
+                        errorString += "No response."
+                    case .networkFailure:
+                        errorString += "Network failure."
+                }
+                print(errorString)
                 completion(.failure(error))
             }
         }

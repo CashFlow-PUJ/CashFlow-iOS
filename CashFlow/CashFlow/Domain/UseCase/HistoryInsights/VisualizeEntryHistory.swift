@@ -33,6 +33,19 @@ final class VisualizeExpenseHistory: VisualizeEntryHistory {
             completion: { result in completion(result) }
         )
     }
+    
+    // TODO: Move the following function execute() to getEntryByID analogous Use Case
+    /*
+    func execute(
+        completion: @escaping (Result<Expense, Error>) -> Void
+    ) -> Cancellable? {
+        return expenseRepository.getExpenseEntryByID(
+            //query: "",
+            expenseID: "2",
+            completion: { result in completion(result) }
+        )
+    }
+    */
 }
 
 final class VisualizeIncomeHistory: VisualizeEntryHistory {

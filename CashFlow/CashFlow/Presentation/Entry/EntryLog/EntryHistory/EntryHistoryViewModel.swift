@@ -25,7 +25,9 @@ extension IncomeHistoryView {
     @MainActor class ExpenseHistoryViewModel: ObservableObject {
         
         private let visualizeExpenseHistory: VisualizeExpenseHistory
-        @Published var expenseHistory: [Expense] = Expense.sampleData
+        
+        //@Published var expenseHistory: [Expense] = Expense.sampleData
+        @Published var expenseHistory: [Expense] = []
         
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
         
@@ -33,16 +35,18 @@ extension IncomeHistoryView {
             visualizeExpenseHistory: VisualizeExpenseHistory
         ) {
             self.visualizeExpenseHistory = visualizeExpenseHistory
-            //self.expenseHistory = self.loadExpenses()
+            self.expenseHistory = self.loadExpenses()
         }
         
         func loadExpenses() -> [Expense] {
             expensesLoadTask = visualizeExpenseHistory.execute() { [weak self] result in
                 switch result {
                 case .success(let expenseHistory):
+                    print(expenseHistory)
                     self?.expenseHistory = expenseHistory
-                case .failure:
+                case .failure(let error):
                     print("Failed loading expenses")
+                    //print(error.localizedDescription)
                 }
             }
             return self.expenseHistory
