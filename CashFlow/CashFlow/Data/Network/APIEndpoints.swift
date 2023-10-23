@@ -9,11 +9,12 @@ import Foundation
 import Alamofire
 
 struct APIEndpoints {
-    static func getAllExpenseEntries(with expenseRequestDTO: ExpenseRequestDTO) -> Endpoint<ExpenseResponseDTO> {
+    static func getAllExpenseEntries() -> Endpoint<ExpenseResponseDTO> {
         return Endpoint(
-            path: "expense/GET",
-            method: .get,
-            queryParametersEncodable: expenseRequestDTO)
+            path: "https://cashflow-400217.uc.r.appspot.com/expense/GET",
+            isFullPath: true,
+            method: .get
+        )
     }
     
     

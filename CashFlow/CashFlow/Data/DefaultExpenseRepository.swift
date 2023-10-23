@@ -43,12 +43,12 @@ final class DefaultExpenseRepository: ExpenseRepository {
     }
     
     public func getAllExpenseEntries(
-        query: String,
+        //query: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
-        let requestDTO = ExpenseRequestDTO(query: query)
+        // let requestDTO = ExpenseRequestDTO(query: query)
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.getAllExpenseEntries(with: requestDTO)
+        let endpoint = APIEndpoints.getAllExpenseEntries()
         task.networkTask = self.dataTransferService.request(
             with: endpoint,
             on: backgroundQueue

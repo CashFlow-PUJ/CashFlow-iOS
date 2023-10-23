@@ -9,4 +9,5 @@ import Foundation
 
 struct ExpenseRequestDTO: Encodable {
     let query: String
+    let expenseID: String
 }

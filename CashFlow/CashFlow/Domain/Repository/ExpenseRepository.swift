@@ -8,8 +8,10 @@
 import Foundation
 
 protocol ExpenseRepository {
-    func getAllExpenseEntries(query: String,
-                              completion: @escaping (Result<[Expense], Error>) -> Void
+    @discardableResult
+    func getAllExpenseEntries(
+        //query: String,
+        completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable?
     func getExpenseEntryByID() -> Expense?
     func createExpenseEntry() -> Expense

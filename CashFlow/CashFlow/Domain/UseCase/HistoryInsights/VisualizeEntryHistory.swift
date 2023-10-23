@@ -11,12 +11,11 @@ protocol VisualizeEntryHistory {
     associatedtype Entry
     
     func execute(
-        type: String,
         completion: @escaping (Result<[Entry], Error>) -> Void
     ) -> Cancellable?
 }
 
-struct VisualizeExpenseHistory: VisualizeEntryHistory {
+final class VisualizeExpenseHistory: VisualizeEntryHistory {
     
     private let expenseRepository: ExpenseRepository
     
@@ -26,24 +25,17 @@ struct VisualizeExpenseHistory: VisualizeEntryHistory {
         self.expenseRepository = expenseRepository
     }
     
-    // TODO: Check if this 'type' parameter is a good practice.
     func execute(
-        type: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
         return expenseRepository.getAllExpenseEntries(
-            query: "",
-            completion: { result in
-                if case .success = result {
-                    // TODO: ¿Qué debe ir en este bloque?
-                }
-                completion(result)
-            }
+            //query: "",
+            completion: { result in completion(result) }
         )
     }
 }
 
-struct VisualizeIncomeHistory: VisualizeEntryHistory {
+final class VisualizeIncomeHistory: VisualizeEntryHistory {
     private let incomeRepository: IncomeRepository
     
     init(
@@ -52,9 +44,7 @@ struct VisualizeIncomeHistory: VisualizeEntryHistory {
         self.incomeRepository = incomeRepository
     }
     
-    // TODO: Check if this 'type' parameter is a good practice.
     func execute(
-        type: String,
         completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable? {
         return incomeRepository.getAllIncomeEntries(

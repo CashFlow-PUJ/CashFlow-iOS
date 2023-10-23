@@ -11,17 +11,22 @@ struct ExpenseHistoryView: View {
     
     @Binding var categoryFilter: ExpenseCategory
     
-    var entryHistory: [Expense] = Expense.sampleData
+    private var entryHistory: [Expense] = Expense.sampleData
     
     var body: some View {
-        if categoryFilter == .total {
+        
+        if (categoryFilter == .total) {
             List(entryHistory) { entry in
                 ExpenseHistoryRow(entry: entry)
-            }.listStyle(.inset)
-        }else {
+            }
+            .listStyle(.inset)
+        }
+        else {
             List(entryHistory.filter({$0.category == categoryFilter})) { entry in
                 ExpenseHistoryRow(entry: entry)
-            }.listStyle(.inset)
+            }
+            .listStyle(.inset)
         }
+        
     }
 }

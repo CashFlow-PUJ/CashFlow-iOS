@@ -49,7 +49,7 @@ extension ExpenseResponseDTO {
         var expenseArray: [Expense] = []
         for expense in expenses {
             // TODO: Revisar con qué formato se devuelve el campo 'date'.
-            var temp = Expense(id: expense.id, total: expense.total, date: expense.date , category: ExpenseCategory(rawValue: expense.category) ?? ExpenseCategory.otros)
+            let temp = Expense(id: expense.id, total: expense.total, date: expense.date , category: ExpenseCategory(rawValue: expense.category) ?? ExpenseCategory.otros)
             expenseArray.append(temp)
         }
         return expenseArray
