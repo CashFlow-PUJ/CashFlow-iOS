@@ -42,7 +42,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 class Coordinator: ObservableObject {
+    
+    var appDIContainer = AppDIContainer()
     @Published var path = [Route]()
+    
+    init(appDIContainer: AppDIContainer = AppDIContainer(), path: [Route] = [Route]()) {
+        self.appDIContainer = appDIContainer
+    }
 }
 
 @main

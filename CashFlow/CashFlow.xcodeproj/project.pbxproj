@@ -56,6 +56,8 @@
 		9A70BD602AC51AC600155BA9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD5F2AC51AC600155BA9 /* ColorExtension.swift */; };
 		9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */; };
 		9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */; };
+		9A83CA5E2AE62FFE00B24196 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA5D2AE62FFE00B24196 /* AppDIContainer.swift */; };
+		9A83CA602AE6A80B00B24196 /* EntryLogDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA5F2AE6A80B00B24196 /* EntryLogDIContainer.swift */; };
 		9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
@@ -138,6 +140,8 @@
 		9A70BD5F2AC51AC600155BA9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistoryRow.swift; sourceTree = "<group>"; };
 		9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistoryView.swift; sourceTree = "<group>"; };
+		9A83CA5D2AE62FFE00B24196 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		9A83CA5F2AE6A80B00B24196 /* EntryLogDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLogDIContainer.swift; sourceTree = "<group>"; };
 		9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryHistoryViewModel.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
@@ -250,7 +254,6 @@
 		9A1612382A6DE6CB0032743E /* CashFlow */ = {
 			isa = PBXGroup;
 			children = (
-				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9AD1A3272AE1FEF40034972E /* Application */,
 				9A70BD212AC3B29A00155BA9 /* Presentation */,
 				9A70BD202AC3B29000155BA9 /* Domain */,
@@ -514,6 +517,15 @@
 			path = Insights;
 			sourceTree = "<group>";
 		};
+		9A83CA5C2AE62FE100B24196 /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				9A83CA5D2AE62FFE00B24196 /* AppDIContainer.swift */,
+				9A83CA5F2AE6A80B00B24196 /* EntryLogDIContainer.swift */,
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
 		9AB523552AB3DE84005EA49C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,7 +582,9 @@
 		9AD1A3272AE1FEF40034972E /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				9A1612392A6DE6CB0032743E /* CashFlowApp.swift */,
 				9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */,
+				9A83CA5C2AE62FE100B24196 /* DIContainer */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -745,6 +759,7 @@
 				9A70BD372AC3C83400155BA9 /* Entry.swift in Sources */,
 				9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */,
 				9A70BD3D2AC5139C00155BA9 /* EnterExpense.swift in Sources */,
+				9A83CA602AE6A80B00B24196 /* EntryLogDIContainer.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
@@ -753,6 +768,7 @@
 				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
 				9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */,
+				9A83CA5E2AE62FFE00B24196 /* AppDIContainer.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
 				7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */,

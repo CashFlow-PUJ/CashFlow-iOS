@@ -11,7 +11,12 @@ struct ExpenseHistoryView: View {
     
     @Binding var categoryFilter: ExpenseCategory
     
-    private var entryHistory: [Expense] = Expense.sampleData
+    var entryHistory: [Expense] = Expense.sampleData
+    
+    // TODO: The ExpenseHistoryViewModel is being instantiated in the coordinator.appDIContainer, how do I access it?
+    //private var viewModel: ExpenseHistoryViewModel
+    
+    //  @StateObject private var viewModel = ExpenseHistoryViewModel(visualizeExpenseHistory: VisualizeExpenseHistory(expenseRepository: DefaultExpenseRepository(dataTransferService: DefaultDataTransferService() as! DataTransferService) as ExpenseRepository))
     
     var body: some View {
         
