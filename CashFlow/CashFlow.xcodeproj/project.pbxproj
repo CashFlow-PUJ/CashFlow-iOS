@@ -58,6 +58,7 @@
 		9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */; };
 		9A83CA5E2AE62FFE00B24196 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA5D2AE62FFE00B24196 /* AppDIContainer.swift */; };
 		9A83CA602AE6A80B00B24196 /* EntryLogDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA5F2AE6A80B00B24196 /* EntryLogDIContainer.swift */; };
+		9A83CA622AE716E300B24196 /* ViewEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA612AE716E300B24196 /* ViewEntry.swift */; };
 		9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
@@ -142,6 +143,7 @@
 		9A70BD632AC527B400155BA9 /* IncomeHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeHistoryView.swift; sourceTree = "<group>"; };
 		9A83CA5D2AE62FFE00B24196 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		9A83CA5F2AE6A80B00B24196 /* EntryLogDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryLogDIContainer.swift; sourceTree = "<group>"; };
+		9A83CA612AE716E300B24196 /* ViewEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEntry.swift; sourceTree = "<group>"; };
 		9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryHistoryViewModel.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 			children = (
 				9A70BD592AC518BF00155BA9 /* VisualizeEntryHistory.swift */,
 				9A70BD5B2AC518E100155BA9 /* VisualizeInsights.swift */,
+				9A83CA612AE716E300B24196 /* ViewEntry.swift */,
 			);
 			path = HistoryInsights;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */,
 				9A70BD162AC0D8AC00155BA9 /* ExpenseHistoryView.swift in Sources */,
 				7F1518C82AC73F030004540A /* TotalCustomView.swift in Sources */,
+				9A83CA622AE716E300B24196 /* ViewEntry.swift in Sources */,
 				9A70BD432AC513D400155BA9 /* EditEntry.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
 				9A70BD4C2AC5157100155BA9 /* EditExpenseItem.swift in Sources */,

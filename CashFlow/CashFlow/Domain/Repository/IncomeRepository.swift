@@ -11,7 +11,10 @@ protocol IncomeRepository {
     func getAllIncomeEntries(query: String,
                              completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable?
-    func getIncomeEntryByID() -> Income?
+    func getIncomeEntryByID(
+        expenseID: String,
+        completion: @escaping (Result<Income, Error>) -> Void
+    ) -> Cancellable?
     func createIncomeEntry() -> Income
     func updateIncomeEntry() -> Bool
     func deleteIncomeEntry()

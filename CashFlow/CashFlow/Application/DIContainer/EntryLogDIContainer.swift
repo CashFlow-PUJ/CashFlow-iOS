@@ -24,13 +24,21 @@ class EntryLogDIContainer {
         VisualizeExpenseHistory(expenseRepository: makeExpenseRepository())
     }
     
+    func makeViewExpense() -> ViewExpense {
+        ViewExpense(expenseRepository: makeExpenseRepository())
+    }
+    
     // MARK: - Repositories
     func makeExpenseRepository() -> ExpenseRepository {
         DefaultExpenseRepository(dataTransferService: dependencies.apiDataTransferService)
     }
     
     // MARK: - Entry History
-    @MainActor func makeExpenseHistoryViewModel() -> ExpenseHistoryViewModel {
-        ExpenseHistoryViewModel(visualizeExpenseHistory: makeVisualizeExpenseHistory())
+    @MainActor func makeExpenseHistoryViewModel() -> ExpenseHistoryView.ExpenseHistoryViewModel {
+        ExpenseHistoryView.ExpenseHistoryViewModel(
+            visualizeExpenseHistory: makeVisualizeExpenseHistory(),
+            viewExpense: makeViewExpense()
+        )
     }
+        
 }

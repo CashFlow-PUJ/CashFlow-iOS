@@ -21,10 +21,11 @@ extension IncomeHistoryView {
     }
 }
 
-//extension ExpenseHistoryView {
+extension ExpenseHistoryView {
     @MainActor class ExpenseHistoryViewModel: ObservableObject {
         
         private let visualizeExpenseHistory: VisualizeExpenseHistory
+        private let viewExpense: ViewExpense
         
         //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
@@ -32,24 +33,37 @@ extension IncomeHistoryView {
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
         
         init(
-            visualizeExpenseHistory: VisualizeExpenseHistory
+            visualizeExpenseHistory: VisualizeExpenseHistory,
+            viewExpense: ViewExpense
         ) {
             self.visualizeExpenseHistory = visualizeExpenseHistory
-            self.expenseHistory = self.loadExpenses()
+            self.viewExpense = viewExpense
+            //self.loadExpenses()
+            self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
         }
         
-        func loadExpenses() -> [Expense] {
+        func loadExpenses(){
             expensesLoadTask = visualizeExpenseHistory.execute() { [weak self] result in
                 switch result {
                 case .success(let expenseHistory):
                     print(expenseHistory)
                     self?.expenseHistory = expenseHistory
-                case .failure(let error):
-                    print("Failed loading expenses")
-                    //print(error.localizedDescription)
+                case .failure:
+                    print("Failed loading expenses.")
                 }
             }
-            return self.expenseHistory
+        }
+        
+        func loadExpenseByID(expenseID: String) {
+            expensesLoadTask = viewExpense.execute(expenseID: expenseID) { [weak self] result in
+                switch result {
+                case .success(let expense):
+                    print("EXPENSE: ", expense)
+                    self?.expenseHistory.append(expense)
+                case .failure:
+                    print("Failed loading entry.")
+                }
+            }
         }
     }
-//}
+}
