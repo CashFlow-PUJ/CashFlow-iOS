@@ -12,18 +12,50 @@ import Foundation
 import SwiftUI
 
 
-// Representa la información individual de un artículo.
 struct Item: Decodable {
     var id: String
     var name: String
     var category: String
     var price: Int
+
+    // Define las claves de codificación que usarás en el proceso de decodificación.
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case category
+        case price
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Nombre no disponible"
+        category = try container.decodeIfPresent(String.self, forKey: .category) ?? "Categoría no disponible"
+        price = try container.decodeIfPresent(Int.self, forKey: .price) ?? 0
+    }
+
 }
 
-// Representa la estructura completa de la respuesta con una lista de detalles.
+struct LineInfo {
+    var text: String
+    var cornerPoints: [CGPoint]
+}
+
 struct ApiResponse: Decodable {
     var details: [Item]
+
+    enum CodingKeys: String, CodingKey {
+        case details
+    }
+
+    // Tu método de inicialización personalizado
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        details = try container.decodeIfPresent([Item].self, forKey: .details) ?? []
+    }
 }
+
+
 
 @objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
@@ -201,6 +233,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
     }
     
     private func tgtgprocess(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
+        let textProcessor = TextProcessor()
         weak var weakSelf = self
         textRecognizer?.process(visionImage) { text, error in
             guard let strongSelf = weakSelf else {
@@ -215,10 +248,32 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                 return
             }
             // ... [código para procesar el texto reconocido] ...
+            var linesInfo: [LineInfo] = []
+
+            for block in text.blocks {
+                for line in block.lines {
+                    // Convertir NSValue a CGPoint
+                    let cornerPoints = line.cornerPoints.map { $0.cgPointValue }
+                    let lineInfo = LineInfo(text: line.text, cornerPoints: cornerPoints)
+                    linesInfo.append(lineInfo)
+                }
+            }
+            
+            linesInfo.sort { $0.cornerPoints[0].y < $1.cornerPoints[0].y }
+
+            var groupedLines = textProcessor.processRecognizedText(linesInfo: linesInfo)
+            let finalTextLines = textProcessor.concatenateLines(from: groupedLines)
+            
+            var expense = textProcessor.createTotalExpense(finalTextLines: finalTextLines)
 
             // Envía la solicitud a tu servidor.
-            let apiURL = "https://us-central1-cashflow-37373.cloudfunctions.net/chatgpt"
-            sendRequest(urlString: apiURL, textData: text.text) { response, error in
+            lazy var apiURL: String = {
+                guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "ChatgptApiURL") as? String else {
+                    fatalError("ChatgptApiURL must not be empty in plist")
+                }
+                return apiURL
+            }()
+            sendRequest(urlString: apiURL, textData: expense.ocrText!, vendor: expense.vendorName!) { response, error in
                 // Vuelve al hilo principal si estás actualizando la UI.
                 DispatchQueue.main.async {
                     if let error = error {
@@ -323,7 +378,7 @@ private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerCon
   return input.rawValue
 }
 
-func sendRequest(urlString: String, textData: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
+func sendRequest(urlString: String, textData: String, vendor: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
     guard let url = URL(string: urlString) else {
         print("Error: cannot create URL")
         completion(nil, nil)
@@ -366,7 +421,7 @@ func sendRequest(urlString: String, textData: String, completion: @escaping (Api
             let response = try decoder.decode(ApiResponse.self, from: data)
             var newExpenses: [Expense] = []
             for item in response.details {
-                let expense = Expense.from(item: item)
+                var expense = Expense.from(item: item, vendor: vendor)
                 newExpenses.append(expense)
             }
 

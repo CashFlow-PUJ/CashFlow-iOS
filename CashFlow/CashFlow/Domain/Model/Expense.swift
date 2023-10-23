@@ -37,7 +37,7 @@ extension Expense {
 }
 
 extension Expense {
-    static func from(item: Item) -> Expense {
+    static func from(item: Item, vendor: String) -> Expense {
         // Aquí, crea un UUID para el id, ya que no viene de la API.
         let expenseId = UUID()
         
@@ -53,7 +53,7 @@ extension Expense {
             total: item.price,
             date: currentDate,
             description: item.name,
-            vendorName: "D1", // o cualquier otro valor adecuado
+            vendorName: vendor, // o cualquier otro valor adecuado
             category: category
         )
     }
