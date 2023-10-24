@@ -60,10 +60,8 @@ struct ApiResponse: Decodable {
 @objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
     
-    /// A string holding current results from detection.
     var resultsText = ""
     
-    /// An overlay view that displays detection annotations.
     private lazy var annotationOverlayView: UIView = {
       precondition(isViewLoaded)
       let annotationOverlayView = UIView(frame: .zero)
@@ -72,12 +70,12 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
       return annotationOverlayView
     }()
     
-    /// An image picker for accessing the photo library or camera.
     var imagePicker = UIImagePickerController()
-    
-    // Image counter.
     var currentImage = 0
-    
+    var activityIndicator: UIActivityIndicatorView!
+    var containerView: UIView!
+
+
     // MARK: - IBOutlets
     
     @IBOutlet fileprivate weak var imageView: UIImageView!
@@ -110,6 +108,57 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         if !isCameraAvailable {
             photoCameraButton.isEnabled = false
         }
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .red
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
+        activityIndicator.center = view.center
+
+        view.addSubview(activityIndicator)
+        
+        // Inicializar la vista de contenedor
+        containerView = UIView()
+        containerView.backgroundColor = UIColor.black.withAlphaComponent(0.6) // para semitransparencia
+        containerView.layer.cornerRadius = 10 // para bordes redondeados
+
+        // Asegúrate de que la vista de contenedor sea del tamaño que desees
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+
+        // Agregar restricciones para la vista de contenedor
+        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalToConstant: 200).isActive = true // ajusta como desees
+        containerView.heightAnchor.constraint(equalToConstant: 100).isActive = true // ajusta como desees
+
+        // Inicializar el activity indicator
+        activityIndicator = UIActivityIndicatorView(style: .large) // el estilo 'large' es más grande
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .white // elige el color que desees
+
+        // Agregar el activity indicator a la vista de contenedor
+        containerView.addSubview(activityIndicator)
+
+        // Agregar restricciones para el activity indicator
+        activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
+
+        // Inicializar la etiqueta
+        let label = UILabel()
+        label.text = "Estamos analizando..."
+        label.textColor = .white // elige el color que desees
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        // Agregar la etiqueta a la vista de contenedor
+        containerView.addSubview(label)
+
+        // Agregar restricciones para la etiqueta
+        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
+
+        // Asegurarte de que la vista de contenedor esté oculta inicialmente
+        containerView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,6 +171,16 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    func showLoadingIndicator() {
+        containerView.isHidden = false
+        activityIndicator.startAnimating()
+    }
+
+    func hideLoadingIndicator() {
+        containerView.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     // MARK: - IBActions
@@ -261,11 +320,11 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
             
             linesInfo.sort { $0.cornerPoints[0].y < $1.cornerPoints[0].y }
 
-            var groupedLines = textProcessor.processRecognizedText(linesInfo: linesInfo)
+            let groupedLines = textProcessor.processRecognizedText(linesInfo: linesInfo)
             let finalTextLines = textProcessor.concatenateLines(from: groupedLines)
             
             var expense = textProcessor.createTotalExpense(finalTextLines: finalTextLines)
-
+            
             // Envía la solicitud a tu servidor.
             lazy var apiURL: String = {
                 guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "ChatgptApiURL") as? String else {
@@ -273,14 +332,18 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                 }
                 return apiURL
             }()
+            self.showLoadingIndicator()
             sendRequest(urlString: apiURL, textData: expense.ocrText!, vendor: expense.vendorName!) { response, error in
                 // Vuelve al hilo principal si estás actualizando la UI.
                 DispatchQueue.main.async {
+                    self.hideLoadingIndicator()
                     if let error = error {
                         // Manejar errores aquí, por ejemplo, mostrar una alerta al usuario.
                         print("Error: \(error.localizedDescription)")
                         // Considera llamar a `showResults` aquí para indicar que hubo un error.
-                        strongSelf.resultsText = "Request failed with error: \(error.localizedDescription)"
+                        expense.category = ExpenseCategory.mercado
+                        Expense.sampleData.append(expense)
+                        strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
                         strongSelf.showResults()
                         return
                     }
@@ -421,7 +484,7 @@ func sendRequest(urlString: String, textData: String, vendor: String, completion
             let response = try decoder.decode(ApiResponse.self, from: data)
             var newExpenses: [Expense] = []
             for item in response.details {
-                var expense = Expense.from(item: item, vendor: vendor)
+                let expense = Expense.from(item: item, vendor: vendor)
                 newExpenses.append(expense)
             }
 
@@ -433,7 +496,7 @@ func sendRequest(urlString: String, textData: String, vendor: String, completion
                 let totalSum = expenses.reduce(0) { $0 + $1.total }
                 
                 // Crea un nuevo gasto que representa el total de la categoría.
-                let summaryExpense = Expense(id: UUID(), total: totalSum, date: Date(), description: "Total para \(category.rawValue)", vendorName: nil, category: category)
+                let summaryExpense = Expense(id: UUID(), total: totalSum, date: Date(), description: "Total para \(category.rawValue)", vendorName: vendor, category: category)
                 summarizedExpenses.append(summaryExpense)
             }
             

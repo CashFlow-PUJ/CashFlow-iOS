@@ -48,14 +48,15 @@ class TextProcessor {
     }
     
     func createTotalExpense(finalTextLines: [String]) -> Expense{
+        let vendor = getBusinessName(finalTextLines: finalTextLines)
         var myExpense = Expense(
             id: UUID(),
-            total: getTotal(vendorName: getBusinessName(finalTextLines: finalTextLines),finalTextLines: finalTextLines),
+            total: getTotal(vendorName:vendor ,finalTextLines: finalTextLines),
             date: Date(),
             description: nil,
-            vendorName: getBusinessName(finalTextLines: finalTextLines),
+            vendorName: vendor,
             category: .total,
-            ocrText: getOCRbyVendor(vendorName: getBusinessName(finalTextLines: finalTextLines), finalTextLines: finalTextLines)
+            ocrText: getOCRbyVendor(vendorName: vendor, finalTextLines: finalTextLines)
         )
         return myExpense
     }
@@ -72,24 +73,23 @@ class TextProcessor {
         }
         
         if let name = extractedName {
-            return name
+            if name.contains("Almacenes"){
+                return name.replacingOccurrences(of: "1", with: "i")
+            } else {
+                return name
+            }
         } else {
             return ""
         }
     }
     
-    func getMaxSubtotal(from textLines: [String]) -> Double {
-        var highestSubtotal: Double = 0.0
+    func getLastSubtotal(from textLines: [String]) -> Double {
+        var lastSubtotal: Double = 0.0
         
-        // Expresión regular para identificar valores numéricos con decimales,
-        // considerando puntos y espacios en los números.
         let numberPattern = "\\d{1,3}(?:[.,]\\d{3})*(?:[.,]\\d{2})?"
         
-        // Iterar sobre todas las líneas del texto.
         for line in textLines {
-            // Verificar si la línea contiene "SUBTOTAL/TOTAL".
             if line.contains("SUBTOTAL/TOTAL") {
-                // Buscar todos los números en la línea.
                 let regex = try? NSRegularExpression(pattern: numberPattern)
                 let nsrange = NSRange(line.startIndex..<line.endIndex, in: line)
                 let matches = regex?.matches(in: line, options: [], range: nsrange) ?? []
@@ -98,7 +98,6 @@ class TextProcessor {
                     let matchRange = Range(match.range, in: line)!
                     let matchString = line[matchRange]
                     
-                    // Limpiar la cadena numérica y prepararla para la conversión.
                     var cleanNumberString = String(matchString)
                         .replacingOccurrences(of: ".", with: "") // Remueve puntos si están usados para separar miles.
                         .replacingOccurrences(of: ",", with: ".") // Considera las comas como indicadores decimales.
@@ -107,49 +106,47 @@ class TextProcessor {
                     let digitCount = cleanNumberString.filter { $0.isNumber }.count
                     if digitCount < 4 {
                         cleanNumberString += "000"
+                        return Double(cleanNumberString) ?? 0
                     }
-                    // Convertir la cadena limpiada a un número flotante y verificar si es mayor que el subtotal más alto actual.
-                    if let number = Double(cleanNumberString), number > highestSubtotal {
-                        highestSubtotal = number
+                    if let number = Double(cleanNumberString) {
+                        lastSubtotal = number
                     }
                 }
             }
         }
         
-        return highestSubtotal
+        return lastSubtotal
     }
+
 
     
     func getTotal(vendorName: String, finalTextLines: [String]) -> Int {
         var total: Int = 0
-        var foundValue: Bool = false // Esta bandera verifica si hemos encontrado algún valor
+        var foundValue: Bool = false
         
-        if vendorName == "Almacenes Exito" {
-            return Int(getMaxSubtotal(from: finalTextLines))
+        if (vendorName.range(of: "Almacenes Ex") != nil){
+            return Int(getLastSubtotal(from: finalTextLines))
         }
         
-        // Primero, intentamos encontrar "Valor Pagado".
         for line in finalTextLines {
             if let valorRange = line.range(of: "Valor Pagado", options: .caseInsensitive) {
                 let numberSubstring = line[valorRange.upperBound...]
                 let cleanNumberString = numberSubstring
-                            .replacingOccurrences(of: ".", with: "") // Elimina puntos
-                            .replacingOccurrences(of: " ", with: "") // Elimina espacios
+                            .replacingOccurrences(of: ".", with: "")
+                            .replacingOccurrences(of: " ", with: "")
                 
                 if let number = Int(cleanNumberString) {
                     total = number
-                    foundValue = true // Marcamos que hemos encontrado un valor
-                    break // Salimos del ciclo porque hemos encontrado lo que necesitábamos
+                    foundValue = true
+                    break
                 }
             }
         }
 
-        // Si no encontramos "Valor Pagado", buscamos "TOTAL".
         if !foundValue {
             for line in finalTextLines {
                 if line.range(of: "TOTAL", options: .caseInsensitive) != nil {
-                    // La línea contiene "TOTAL", por lo que buscamos cualquier número en ella.
-                    // Creamos una expresión regular para identificar los números en la línea.
+                
                     let pattern = "\\d{1,3}(?:[.,]\\d{3})*(?:[.,]\\d{2})?"
                     let regex = try? NSRegularExpression(pattern: pattern)
 
@@ -160,11 +157,10 @@ class TextProcessor {
                         let matchRange = Range(match.range, in: line)!
                         let matchString = line[matchRange]
 
-                        // Limpia y convierte el número encontrado.
                         var cleanNumberString = String(matchString)
-                                    .replacingOccurrences(of: ".", with: "") // Si usas puntos para los decimales, no hagas esto.
-                                    .replacingOccurrences(of: ",", with: "") // Remueve comas si están usadas para separar miles.
-                                    .replacingOccurrences(of: " ", with: "") // Remueve espacios.
+                                    .replacingOccurrences(of: ".", with: "")
+                                    .replacingOccurrences(of: ",", with: "")
+                                    .replacingOccurrences(of: " ", with: "")
                         
                         cleanNumberString += "000"
                         
@@ -199,10 +195,10 @@ class TextProcessor {
             }
 
             let line = finalTextLines[i]
-            if line.contains("SUBTOTAL/TOTAL"){
+            if line.contains("SUBTOTAL/TOTAL") || line.contains("PROX") || line.contains("%"){
                 continue
             }
-            if line.contains("CL SI FA NO") {
+            if line.contains("EXIT") {
                 isRecording = true
             }
 
@@ -210,49 +206,7 @@ class TextProcessor {
                 let transformed = line
                 let currentLine = replaceLetterOWithZero(in: transformed)
                 
-                // División basada en la presencia de múltiples códigos de productos en la misma línea.
-                let productCodes = getProductCodes(currentLine: currentLine)
-
-                if productCodes.count > 1 {
-                    // Si encontramos múltiples códigos de producto, dividimos la línea.
-                    var previousRange: Range<String.Index>? = nil
-                    for code in productCodes {
-                        if let range = currentLine.range(of: code) {
-                            if let prevRange = previousRange {
-                                // Extraemos el texto desde el final del código anterior hasta el comienzo del código actual.
-                                let productInfoRange = prevRange.upperBound..<range.lowerBound
-                                let productInfo = currentLine[productInfoRange].trimmingCharacters(in: .whitespacesAndNewlines)
-                                
-                                // Construimos la línea completa para este producto, incluyendo el código anterior y la información del producto.
-                                let fullProductLine = currentLine[prevRange] + " " + productInfo
-                                
-                                if !fullProductLine.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                                    processedLines.append(String(fullProductLine))
-                                }
-                            }
-                            previousRange = range
-                        }
-                    }
-                    // Tratar el último producto de la línea, si existe, después del último código.
-                    if let lastRange = previousRange {
-                        let lastProductInfo = currentLine[lastRange.upperBound...].trimmingCharacters(in: .whitespacesAndNewlines)
-                        if !lastProductInfo.isEmpty {
-                            // Para el último segmento, incluimos el último código de producto y su descripción correspondiente.
-                            let lastFullProductLine = currentLine[lastRange] + " " + lastProductInfo
-                            processedLines.append(String(lastFullProductLine))
-                        }
-                    }
-                }else {
-                    // Si no hay necesidad de dividir, procesamos normalmente.
-                    if line.range(of: "X \\$[0-9,]+", options: .regularExpression) != nil && i + 1 < finalTextLines.count {
-                        let nextLine = finalTextLines[i + 1]
-                        let combinedLine = "\(line) \(nextLine)"
-                        processedLines.append(combinedLine)
-                        skipNextLine = true
-                    } else {
-                        processedLines.append(currentLine)
-                    }
-                }
+                processedLines.append(currentLine)
                 
                 if line.contains("CAMBI") {
                     break
@@ -281,11 +235,10 @@ class TextProcessor {
             }
 
             let line = finalTextLines[i]
-
+            
             if line.contains("VALOR") {
                 isRecording = true
             }
-
             if isRecording {
                 let transformed = line
                 let currentLine = replaceLetterOWithZero(in: transformed)
@@ -370,19 +323,14 @@ class TextProcessor {
     }
     
     func replaceLetterOWithZero(in text: String) -> String {
-        // Define la expresión regular para encontrar 'O' o 'o' precedida por un dígito.
         let pattern = "(?<=\\b|\\d)[OoÓó]"
 
-        // Intenta crear una expresión regular con el patrón.
         guard let regex = try? NSRegularExpression(pattern: pattern) else {
-            // Si la expresión regular no es válida (lo cual sería raro), devuelve el texto sin cambios.
             return text
         }
 
-        // Define el rango de todo el texto.
         let range = NSRange(text.startIndex..., in: text)
 
-        // Reemplaza las ocurrencias encontradas en el rango con "0".
         let correctedText = regex.stringByReplacingMatches(in: text, options: [], range: range, withTemplate: "0")
 
         return correctedText
@@ -393,13 +341,13 @@ class TextProcessor {
             return getOCRProcess(finalTextLines: finalTextLines)
         }
         if vendorName == "" {
-            return ""
+            return finalTextLines.joined(separator: "\n")
         }
-        if vendorName == "Almacenes Exito"{
+        if (vendorName.range(of: "Almacenes Ex") != nil){
             return getOCRProcessExito(finalTextLines: finalTextLines)
         }
         else {
-            return ""
+            return finalTextLines.joined(separator: "\n")
         }
     }
 
