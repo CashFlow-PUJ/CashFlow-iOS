@@ -9,19 +9,19 @@ import SwiftUI
 
 struct IncomeHistoryView: View {
     
+    @EnvironmentObject var coordinator: Coordinator
     @Binding var categoryFilter: IncomeCategory
-    
-    var entryHistory: [Income] = Income.sampleData
+    @StateObject var viewModel: IncomeHistoryViewModel
     
     var body: some View {
         if (categoryFilter == .total) {
-            List(entryHistory) { entry in
+            List(viewModel.incomeHistory) { entry in
                 IncomeHistoryRow(entry: entry)
             }
             .listStyle(.inset)
         }
         else {
-            List(entryHistory.filter({$0.category == categoryFilter})) { entry in
+            List(viewModel.incomeHistory.filter({$0.category == categoryFilter})) { entry in
                 IncomeHistoryRow(entry: entry)
             }
             .listStyle(.inset)

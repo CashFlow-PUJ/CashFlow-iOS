@@ -29,7 +29,6 @@ final class VisualizeExpenseHistory: VisualizeEntryHistory {
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
         return expenseRepository.getAllExpenseEntries(
-            //query: "",
             completion: { result in completion(result) }
         )
     }
@@ -49,6 +48,7 @@ final class VisualizeExpenseHistory: VisualizeEntryHistory {
 }
 
 final class VisualizeIncomeHistory: VisualizeEntryHistory {
+    
     private let incomeRepository: IncomeRepository
     
     init(
@@ -61,7 +61,6 @@ final class VisualizeIncomeHistory: VisualizeEntryHistory {
         completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable? {
         return incomeRepository.getAllIncomeEntries(
-            query: "",
             completion: { result in
                 if case .success = result {
                     // TODO: ¿Qué debe ir en este bloque?

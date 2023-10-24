@@ -38,8 +38,13 @@ struct EntryLogView: View {
         // MARK: - History
         @State var expenseHistory: [Expense] = Expense.sampleData
         @State var incomeHistory: [Income] = Income.sampleData
-
         
+        // TODO: Pass ViewModels to this View as parameters.
+        /*
+        @StateObject incomeHistoryViewModel = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel()
+        @StateObject expenseHistoryViewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel()
+        */
+
         NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 
@@ -120,13 +125,20 @@ struct EntryLogView: View {
                             }
                         }
                     }
+                    
                     CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"]).padding(15)
                     if secondTabBarIndex == 0 {
                         if firstTabBarIndex == 0 {
-                            IncomeHistoryView(categoryFilter: $selectedIncomeCategory)
+                            IncomeHistoryView(
+                                categoryFilter: $selectedIncomeCategory,
+                                viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel()
+                            )
                         }
                         else {
-                            ExpenseHistoryView(categoryFilter: $selectedExpenseCategory, viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel())
+                            ExpenseHistoryView(
+                                categoryFilter: $selectedExpenseCategory,
+                                viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel()
+                            )
                         }
                     }
                     else {

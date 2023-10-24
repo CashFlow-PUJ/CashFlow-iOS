@@ -10,8 +10,6 @@ import Foundation
 final class AppDIContainer {
     
     lazy var appConfiguration = AppConfiguration()
-    
-    // TODO: Check if doing this is alright?
     lazy var entryLogDIContainer: EntryLogDIContainer = makeEntryLogDIContainer()
     
     // MARK: - Network

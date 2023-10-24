@@ -1,14 +1,14 @@
 //
-//  DefaultExpenseRepository.swift
+//  DefaultIncomeRepository.swift
 //  CashFlow
 //
-//  Created by Cristóbal Castrillón Balcázar on 19/10/23.
+//  Created by Cristóbal Castrillón Balcázar on 23/10/23.
 //
 
 import Foundation
 
-final class DefaultExpenseRepository: ExpenseRepository {
-    
+final class DefaultIncomeRepository: IncomeRepository {
+   
     private let dataTransferService: DataTransferService
     // TODO: Implement a cache (?)
     // private let cache: MoviesResponseStorage
@@ -23,12 +23,12 @@ final class DefaultExpenseRepository: ExpenseRepository {
             self.backgroundQueue = backgroundQueue
     }
     
-    func getExpenseEntryByID(
-        expenseID: String,
-        completion: @escaping (Result<Expense, Error>) -> Void
+    func getIncomeEntryByID(
+        incomeID: String,
+        completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.getExpenseByID(id: expenseID)
+        let endpoint = APIEndpoints.getIncomeByID(id: incomeID)
         task.networkTask = self.dataTransferService.request(
             with: endpoint,
             on: backgroundQueue
@@ -55,26 +55,26 @@ final class DefaultExpenseRepository: ExpenseRepository {
         return task
     }
     
-    func createExpenseEntry() -> Expense {
+    func createIncomeEntry() -> Income {
         // TODO: Implement
-        return Expense.sampleData[0]
+        return Income.sampleData[0]
     }
     
-    func updateExpenseEntry() -> Bool {
+    func updateIncomeEntry() -> Bool {
         // TODO: Implement
         return true
     }
     
-    func deleteExpenseEntry() {
+    func deleteIncomeEntry() {
         // TODO: Implement
     }
     
-    public func getAllExpenseEntries(
-        completion: @escaping (Result<[Expense], Error>) -> Void
+    public func getAllIncomeEntries(
+        completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable? {
-        // let requestDTO = ExpenseRequestDTO(query: query)
+        // let requestDTO = IncomeRequestDTO(query: query)
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.getAllExpenseEntries()
+        let endpoint = APIEndpoints.getAllIncomeEntries()
         task.networkTask = self.dataTransferService.request(
             with: endpoint,
             on: backgroundQueue

@@ -28,9 +28,21 @@ class EntryLogDIContainer {
         ViewExpense(expenseRepository: makeExpenseRepository())
     }
     
+    func makeVisualizeIncomeHistory() -> VisualizeIncomeHistory {
+        VisualizeIncomeHistory(incomeRepository: makeIncomeRepository())
+    }
+    
+    func makeViewIncome() -> ViewIncome {
+        ViewIncome(incomeRepository: makeIncomeRepository())
+    }
+    
     // MARK: - Repositories
     func makeExpenseRepository() -> ExpenseRepository {
         DefaultExpenseRepository(dataTransferService: dependencies.apiDataTransferService)
+    }
+    
+    func makeIncomeRepository() -> IncomeRepository {
+        DefaultIncomeRepository(dataTransferService: dependencies.apiDataTransferService)
     }
     
     // MARK: - Entry History
@@ -38,6 +50,13 @@ class EntryLogDIContainer {
         ExpenseHistoryView.ExpenseHistoryViewModel(
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
             viewExpense: makeViewExpense()
+        )
+    }
+    
+    @MainActor func makeIncomeHistoryViewModel() -> IncomeHistoryView.IncomeHistoryViewModel {
+        IncomeHistoryView.IncomeHistoryViewModel(
+            visualizeIncomeHistory: makeVisualizeIncomeHistory(),
+            viewIncome: makeViewIncome()
         )
     }
         

@@ -8,13 +8,17 @@
 import Foundation
 
 protocol IncomeRepository {
-    func getAllIncomeEntries(query: String,
-                             completion: @escaping (Result<[Income], Error>) -> Void
+    
+    @discardableResult
+    func getAllIncomeEntries(
+        completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable?
+    
     func getIncomeEntryByID(
-        expenseID: String,
+        incomeID: String,
         completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable?
+    
     func createIncomeEntry() -> Income
     func updateIncomeEntry() -> Bool
     func deleteIncomeEntry()

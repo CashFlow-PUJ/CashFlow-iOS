@@ -10,13 +10,52 @@ import Foundation
 extension IncomeHistoryView {
     @MainActor class IncomeHistoryViewModel: ObservableObject {
         private let visualizeIncomeHistory: VisualizeIncomeHistory
+        private let viewIncome: ViewIncome
         
-        @Published var incomeHistory: [Income] = Income.sampleData
+        //@Published var incomeHistory: [Income] = Income.sampleData
+        @Published var incomeHistory: [Income] = []
+        
+        private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
         
         init(
-            visualizeIncomeHistory: VisualizeIncomeHistory
+            visualizeIncomeHistory: VisualizeIncomeHistory,
+            viewIncome: ViewIncome
         ) {
             self.visualizeIncomeHistory = visualizeIncomeHistory
+            self.viewIncome = viewIncome
+            //self.loadIncomeEntries()
+            // TODO: Change the following UUID to an actual UUID present in Income database table.
+            self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
+        }
+        
+        func loadIncomeEntries(){
+            incomeLoadTask = visualizeIncomeHistory.execute() { [weak self] result in
+                switch result {
+                case .success(let incomeHistory):
+                    
+                    // DEBUG PRINT
+                    print("INCOME HISTORY: ", incomeHistory)
+                    
+                    self?.incomeHistory = incomeHistory
+                case .failure:
+                    print("Failed loading income entries.")
+                }
+            }
+        }
+        
+        func loadIncomeByID(incomeID: String) {
+            incomeLoadTask = viewIncome.execute(incomeID: incomeID) { [weak self] result in
+                switch result {
+                case .success(let entry):
+                    
+                    // DEBUG PRINT
+                    print("INCOME: ", entry)
+                    
+                    self?.incomeHistory.append(entry)
+                case .failure:
+                    print("Failed loading entry.")
+                }
+            }
         }
     }
 }

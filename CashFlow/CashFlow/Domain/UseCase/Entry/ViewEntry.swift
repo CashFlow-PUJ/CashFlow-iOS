@@ -51,7 +51,7 @@ final class ViewIncome {
         completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable? {
         return incomeRepository.getIncomeEntryByID(
-            expenseID: incomeID,
+            incomeID: incomeID,
             completion: { result in completion(result) }
         )
     }
