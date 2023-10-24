@@ -9,6 +9,9 @@ import SwiftUI
 
 struct EntryLogView: View {
     
+    // MARK: - Coordinator
+    @EnvironmentObject var coordinator: Coordinator
+    
     // MARK: - ImageInput
     @State private var showSheet: Bool = false
     @State private var showImagePicker: Bool = false
@@ -123,7 +126,7 @@ struct EntryLogView: View {
                             IncomeHistoryView(categoryFilter: $selectedIncomeCategory)
                         }
                         else {
-                            ExpenseHistoryView(categoryFilter: $selectedExpenseCategory)
+                            ExpenseHistoryView(categoryFilter: $selectedExpenseCategory, viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel())
                         }
                     }
                     else {

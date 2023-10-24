@@ -46,7 +46,10 @@ extension ExpenseHistoryView {
             expensesLoadTask = visualizeExpenseHistory.execute() { [weak self] result in
                 switch result {
                 case .success(let expenseHistory):
-                    print(expenseHistory)
+                    
+                    // DEBUG PRINT
+                    print("EXPENSE HISTORY: ", expenseHistory)
+                    
                     self?.expenseHistory = expenseHistory
                 case .failure:
                     print("Failed loading expenses.")
@@ -58,7 +61,10 @@ extension ExpenseHistoryView {
             expensesLoadTask = viewExpense.execute(expenseID: expenseID) { [weak self] result in
                 switch result {
                 case .success(let expense):
+                    
+                    // DEBUG PRINT
                     print("EXPENSE: ", expense)
+                    
                     self?.expenseHistory.append(expense)
                 case .failure:
                     print("Failed loading entry.")
