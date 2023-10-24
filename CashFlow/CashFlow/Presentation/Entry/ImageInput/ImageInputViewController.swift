@@ -12,26 +12,56 @@ import Foundation
 import SwiftUI
 
 
-// Representa la información individual de un artículo.
 struct Item: Decodable {
     var id: String
     var name: String
     var category: String
     var price: Int
+
+    // Define las claves de codificación que usarás en el proceso de decodificación.
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case category
+        case price
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decodeIfPresent(String.self, forKey: .id) ?? ""
+        name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Nombre no disponible"
+        category = try container.decodeIfPresent(String.self, forKey: .category) ?? "Categoría no disponible"
+        price = try container.decodeIfPresent(Int.self, forKey: .price) ?? 0
+    }
+
 }
 
-// Representa la estructura completa de la respuesta con una lista de detalles.
+struct LineInfo {
+    var text: String
+    var cornerPoints: [CGPoint]
+}
+
 struct ApiResponse: Decodable {
     var details: [Item]
+
+    enum CodingKeys: String, CodingKey {
+        case details
+    }
+
+    // Tu método de inicialización personalizado
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        details = try container.decodeIfPresent([Item].self, forKey: .details) ?? []
+    }
 }
+
+
 
 @objc(ImageInputViewController)
 class ImageInputViewController: UIViewController, UINavigationControllerDelegate {
     
-    /// A string holding current results from detection.
     var resultsText = ""
     
-    /// An overlay view that displays detection annotations.
     private lazy var annotationOverlayView: UIView = {
       precondition(isViewLoaded)
       let annotationOverlayView = UIView(frame: .zero)
@@ -40,12 +70,12 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
       return annotationOverlayView
     }()
     
-    /// An image picker for accessing the photo library or camera.
     var imagePicker = UIImagePickerController()
-    
-    // Image counter.
     var currentImage = 0
-    
+    var activityIndicator: UIActivityIndicatorView!
+    var containerView: UIView!
+
+
     // MARK: - IBOutlets
     
     @IBOutlet fileprivate weak var imageView: UIImageView!
@@ -78,6 +108,57 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         if !isCameraAvailable {
             photoCameraButton.isEnabled = false
         }
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .red
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 350, height: 350)
+        activityIndicator.center = view.center
+
+        view.addSubview(activityIndicator)
+        
+        // Inicializar la vista de contenedor
+        containerView = UIView()
+        containerView.backgroundColor = UIColor.black.withAlphaComponent(0.6) // para semitransparencia
+        containerView.layer.cornerRadius = 10 // para bordes redondeados
+
+        // Asegúrate de que la vista de contenedor sea del tamaño que desees
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(containerView)
+
+        // Agregar restricciones para la vista de contenedor
+        containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        containerView.widthAnchor.constraint(equalToConstant: 200).isActive = true // ajusta como desees
+        containerView.heightAnchor.constraint(equalToConstant: 100).isActive = true // ajusta como desees
+
+        // Inicializar el activity indicator
+        activityIndicator = UIActivityIndicatorView(style: .large) // el estilo 'large' es más grande
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .white // elige el color que desees
+
+        // Agregar el activity indicator a la vista de contenedor
+        containerView.addSubview(activityIndicator)
+
+        // Agregar restricciones para el activity indicator
+        activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        activityIndicator.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
+
+        // Inicializar la etiqueta
+        let label = UILabel()
+        label.text = "Estamos analizando..."
+        label.textColor = .white // elige el color que desees
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        // Agregar la etiqueta a la vista de contenedor
+        containerView.addSubview(label)
+
+        // Agregar restricciones para la etiqueta
+        label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
+
+        // Asegurarte de que la vista de contenedor esté oculta inicialmente
+        containerView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +171,16 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         super.viewWillDisappear(animated)
         
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    func showLoadingIndicator() {
+        containerView.isHidden = false
+        activityIndicator.startAnimating()
+    }
+
+    func hideLoadingIndicator() {
+        containerView.isHidden = true
+        activityIndicator.stopAnimating()
     }
     
     // MARK: - IBActions
@@ -201,49 +292,75 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
     }
     
     private func tgtgprocess(_ visionImage: VisionImage, with textRecognizer: TextRecognizer?) {
-        weak var weakSelf = self
-        textRecognizer?.process(visionImage) { text, error in
-            guard let strongSelf = weakSelf else {
-                print("Self is nil!")
-                return
-            }
-            guard error == nil, let text = text else {
-                // Manejar errores aquí si el reconocimiento de texto falla.
-                let errorString = error?.localizedDescription ?? Constants.detectionNoResultsMessage
-                strongSelf.resultsText = "Text recognizer failed with error: \(errorString)"
-                strongSelf.showResults()  // Muestra los resultados aquí si hay un error.
-                return
-            }
-            // ... [código para procesar el texto reconocido] ...
+            let textProcessor = TextProcessor()
+            weak var weakSelf = self
+            textRecognizer?.process(visionImage) { text, error in
+                guard let strongSelf = weakSelf else {
+                    print("Self is nil!")
+                    return
+                }
+                guard error == nil, let text = text else {
+                    // Manejar errores aquí si el reconocimiento de texto falla.
+                    let errorString = error?.localizedDescription ?? Constants.detectionNoResultsMessage
+                    strongSelf.resultsText = "Text recognizer failed with error: \(errorString)"
+                    strongSelf.showResults()  // Muestra los resultados aquí si hay un error.
+                    return
+                }
+                // ... [código para procesar el texto reconocido] ...
+                var linesInfo: [LineInfo] = []
 
-            // TODO: Define request in the appropriate layer (i.e. Data).
-            // Envía la solicitud a tu servidor.
-            let apiURL = "https://us-central1-cashflow-37373.cloudfunctions.net/chatgpt"
-            sendRequest(urlString: apiURL, textData: text.text) { response, error in
-                // Vuelve al hilo principal si estás actualizando la UI.
-                DispatchQueue.main.async {
-                    if let error = error {
-                        // Manejar errores aquí, por ejemplo, mostrar una alerta al usuario.
-                        print("Error: \(error.localizedDescription)")
-                        // Considera llamar a `showResults` aquí para indicar que hubo un error.
-                        strongSelf.resultsText = "Request failed with error: \(error.localizedDescription)"
-                        strongSelf.showResults()
-                        return
+                for block in text.blocks {
+                    for line in block.lines {
+                        // Convertir NSValue a CGPoint
+                        let cornerPoints = line.cornerPoints.map { $0.cgPointValue }
+                        let lineInfo = LineInfo(text: line.text, cornerPoints: cornerPoints)
+                        linesInfo.append(lineInfo)
                     }
+                }
+                
+                linesInfo.sort { $0.cornerPoints[0].y < $1.cornerPoints[0].y }
 
-                    if let response = response {
-                        // Procesa la respuesta aquí.
-                        for item in response.details {
-                            strongSelf.resultsText += ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)\n")
+                let groupedLines = textProcessor.processRecognizedText(linesInfo: linesInfo)
+                let finalTextLines = textProcessor.concatenateLines(from: groupedLines)
+                
+                var expense = textProcessor.createTotalExpense(finalTextLines: finalTextLines)
+                
+                // Envía la solicitud a tu servidor.
+                lazy var apiURL: String = {
+                    guard let apiURL = Bundle.main.object(forInfoDictionaryKey: "ChatgptApiURL") as? String else {
+                        fatalError("ChatgptApiURL must not be empty in plist")
+                    }
+                    return apiURL
+                }()
+                self.showLoadingIndicator()
+                sendRequest(urlString: apiURL, textData: expense.ocrText!, vendor: expense.vendorName!) { response, error in
+                    // Vuelve al hilo principal si estás actualizando la UI.
+                    DispatchQueue.main.async {
+                        self.hideLoadingIndicator()
+                        if let error = error {
+                            // Manejar errores aquí, por ejemplo, mostrar una alerta al usuario.
+                            print("Error: \(error.localizedDescription)")
+                            // Considera llamar a `showResults` aquí para indicar que hubo un error.
+                            expense.category = ExpenseCategory.mercado
+                            Expense.sampleData.append(expense)
+                            strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
+                            strongSelf.showResults()
+                            return
                         }
-                        // Muestra los resultados después de procesar la respuesta.
-                        strongSelf.showResults()
-                        print("Ya debieron mostrarse")
+
+                        if let response = response {
+                            // Procesa la respuesta aquí.
+                            for item in response.details {
+                                strongSelf.resultsText += ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)\n")
+                            }
+                            // Muestra los resultados después de procesar la respuesta.
+                            strongSelf.showResults()
+                            print("Ya debieron mostrarse")
+                        }
                     }
                 }
             }
         }
-    }
     
     private func transformMatrix() -> CGAffineTransform {
         
@@ -324,7 +441,7 @@ private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerCon
   return input.rawValue
 }
 
-func sendRequest(urlString: String, textData: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
+func sendRequest(urlString: String, textData: String, vendor: String, completion: @escaping (ApiResponse?, Error?) -> Void) {
     guard let url = URL(string: urlString) else {
         print("Error: cannot create URL")
         completion(nil, nil)
@@ -367,7 +484,7 @@ func sendRequest(urlString: String, textData: String, completion: @escaping (Api
             let response = try decoder.decode(ApiResponse.self, from: data)
             var newExpenses: [Expense] = []
             for item in response.details {
-                let expense = Expense.from(item: item)
+                let expense = Expense.from(item: item, vendor: vendor)
                 newExpenses.append(expense)
             }
 
@@ -379,7 +496,7 @@ func sendRequest(urlString: String, textData: String, completion: @escaping (Api
                 let totalSum = expenses.reduce(0) { $0 + $1.total }
                 
                 // Crea un nuevo gasto que representa el total de la categoría.
-                let summaryExpense = Expense(id: UUID(), total: totalSum, date: Date(), description: "Total para \(category.rawValue)", vendorName: nil, category: category)
+                let summaryExpense = Expense(id: UUID(), total: totalSum, date: Date(), description: "Total para \(category.rawValue)", vendorName: vendor, category: category)
                 summarizedExpenses.append(summaryExpense)
             }
             
