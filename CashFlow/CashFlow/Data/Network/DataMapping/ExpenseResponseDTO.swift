@@ -8,7 +8,38 @@
 import Foundation
 
 // MARK: - Data Transfer Object
+struct ExpenseDTO: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case total
+        case date
+        case description
+        case vendorName
+        case category
+        case ocrText
+    }
+    
+    let id: String
+    let total: Int
+    let date: Date
+    let description: String?
+    let vendorName: String?
+    let category: ExpenseCategory.RawValue
+    let ocrText: String?
+}
 
+extension ExpenseDTO {
+    func toDomain() -> Expense {
+        return .init(id: UUID(uuidString: id.description) ?? UUID(),
+                     total: total,
+                     date: date,
+                     description: description,
+                     vendorName: vendorName,
+                     category: ExpenseCategory(rawValue: category) ?? ExpenseCategory.otros,
+                     ocrText: ocrText)
+    }
+}
+/*
 struct ExpenseResponseDTO: Decodable {
     /*
     private enum CodingKeys: String, CodingKey {
@@ -71,7 +102,8 @@ extension ExpenseResponseDTO.ExpenseDTO {
                      ocrText: ocrText)
     }
 }
-
+*/
+ 
 // MARK: - Private
 
 private let dateFormatter: DateFormatter = {

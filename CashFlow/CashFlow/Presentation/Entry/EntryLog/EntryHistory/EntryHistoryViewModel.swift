@@ -11,21 +11,26 @@ extension IncomeHistoryView {
     @MainActor class IncomeHistoryViewModel: ObservableObject {
         private let visualizeIncomeHistory: VisualizeIncomeHistory
         private let viewIncome: ViewIncome
+        private let enterIncome: DefaultEnterIncome
         
         //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
         
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
+        private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
         
         init(
             visualizeIncomeHistory: VisualizeIncomeHistory,
-            viewIncome: ViewIncome
+            viewIncome: ViewIncome,
+            enterIncome: DefaultEnterIncome
         ) {
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
-            //self.loadIncomeEntries()
+            self.enterIncome = enterIncome
+            self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
-            self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
+            // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
+            //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba", category: .otros))
         }
         
         func loadIncomeEntries(){
@@ -57,6 +62,17 @@ extension IncomeHistoryView {
                 }
             }
         }
+        
+        func createIncomeEntry(incomeEntry: Income) {
+            incomePostTask = enterIncome.execute(incomeEntry: incomeEntry) { result in
+                switch result {
+                case .success:
+                    print("Success")
+                case .failure:
+                    print("Failed posting entry.")
+                }
+            }
+        }
     }
 }
 
@@ -77,8 +93,8 @@ extension ExpenseHistoryView {
         ) {
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
-            //self.loadExpenses()
-            self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
+            self.loadExpenses()
+            //self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
         }
         
         func loadExpenses(){

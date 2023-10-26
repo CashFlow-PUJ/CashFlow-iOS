@@ -53,7 +53,6 @@ struct EntryLogView: View {
                     HStack {
                         Button(
                             action: {
-                                // TODO: Show Lateral Menu
                                 self.isShowingMenu.toggle()
                             },
                             label: {
