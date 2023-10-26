@@ -19,7 +19,11 @@ protocol IncomeRepository {
         completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable?
     
-    func createIncomeEntry() -> Income
+    func createIncomeEntry(
+        incomeEntry: Income,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?
+    
     func updateIncomeEntry() -> Bool
     func deleteIncomeEntry()
 }

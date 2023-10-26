@@ -61,6 +61,7 @@
 		9A83CA622AE716E300B24196 /* ViewEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA612AE716E300B24196 /* ViewEntry.swift */; };
 		9A83CA642AE7675C00B24196 /* DefaultIncomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA632AE7675C00B24196 /* DefaultIncomeRepository.swift */; };
 		9A83CA662AE7685A00B24196 /* IncomeResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA652AE7685A00B24196 /* IncomeResponseDTO.swift */; };
+		9A83CA682AE9908600B24196 /* IncomeRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */; };
 		9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */; };
 		9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */; };
 		9AB523542AB32803005EA49C /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB523532AB32803005EA49C /* UIUtilities.swift */; };
@@ -148,6 +149,7 @@
 		9A83CA612AE716E300B24196 /* ViewEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEntry.swift; sourceTree = "<group>"; };
 		9A83CA632AE7675C00B24196 /* DefaultIncomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIncomeRepository.swift; sourceTree = "<group>"; };
 		9A83CA652AE7685A00B24196 /* IncomeResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeResponseDTO.swift; sourceTree = "<group>"; };
+		9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeRequestDTO.swift; sourceTree = "<group>"; };
 		9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryHistoryViewModel.swift; sourceTree = "<group>"; };
 		9AB5234F2AB32522005EA49C /* ImageInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInputViewController.swift; sourceTree = "<group>"; };
 		9AB523532AB32803005EA49C /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				9AD1A3142AE1D5D90034972E /* ExpenseRequestDTO.swift */,
 				9AD1A3162AE1D5E20034972E /* ExpenseResponseDTO.swift */,
 				9A83CA652AE7685A00B24196 /* IncomeResponseDTO.swift */,
+				9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 			files = (
 				9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */,
 				7F1518C32AC71DA40004540A /* ChartMonthlyView.swift in Sources */,
+				9A83CA682AE9908600B24196 /* IncomeRequestDTO.swift in Sources */,
 				9A70BD452AC513EA00155BA9 /* DeleteEntry.swift in Sources */,
 				9A70BD5A2AC518BF00155BA9 /* VisualizeEntryHistory.swift in Sources */,
 				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
