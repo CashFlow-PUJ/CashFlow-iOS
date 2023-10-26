@@ -7,56 +7,28 @@
 
 import Foundation
 
-struct IncomeResponseDTO: Decodable {
-    /*
+
+struct IncomeDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
-        // Si lo que se quiere viene con un key distinto, se hace lo siguiente
-        // case movies = "results"
-        // TODO: Ver qué se está devolviendo (JSON)
-        case expenses
+        case id = "record_id"
+        case total = "record_total"
+        case date = "record_date"
+        case description = "record_description"
+        case category = "income_category"
     }
-    */
     
-    let incomeEntries: [IncomeDTO]
-    
-    // La estructura 'ExpenseResponseDTO' *puede* venir como un conjunto de objetos JSON Expense.
-    // Estos últimos se definen en la siguiente estructura.
-    struct IncomeDTO: Decodable {
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case total
-            case date
-            case description
-            case category
-        }
-        
-        let id: UUID
-        let total: Int
-        let date: Date
-        let description: String
-        let category: String
-    }
+    let id: String
+    let total: Int
+    let date: Date
+    let description: String
+    let category: String
 }
 
-// TODO: ¿Cómo se hace el mappeo cuando la respuesta es una lista (JSON) de Expenses?
 
-extension IncomeResponseDTO {
-    func toDomain() -> [Income] {
-        var incomeArray: [Income] = []
-        for entry in incomeEntries {
-            // TODO: Revisar con qué formato se devuelve el campo 'date'.
-            let temp = Income(id: entry.id, total: entry.total, date: entry.date, description: entry.description, category: IncomeCategory(rawValue: entry.category) ?? IncomeCategory.otros)
-            incomeArray.append(temp)
-        }
-        print("Income Array: ", incomeArray)
-        return incomeArray
-    }
-}
-
-extension IncomeResponseDTO.IncomeDTO {
+extension IncomeDTO {
     func toDomain() -> Income {
         return .init(
-            id: id,
+            id: UUID(uuidString: id.description) ?? UUID(),
             total: total,
             date: date,
             description: description,

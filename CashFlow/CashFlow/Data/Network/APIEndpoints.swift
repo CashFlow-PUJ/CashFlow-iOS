@@ -30,16 +30,18 @@ struct APIEndpoints {
     
     // MARK: - Income
     
-    static func getAllIncomeEntries() -> Endpoint<IncomeResponseDTO> {
+    static func getAllIncomeEntries() -> Endpoint<[IncomeDTO]> {
+    //static func getAllIncomeEntries() -> Endpoint<String> {
         return Endpoint(
             // TODO: variable (parameter) for userID
             //path: "user/GET/INCOME/\(userID)",
-            path: "user/GET/INCOME/GWnVlTjzOSNFYVkXlU6SafmwVe42",
+            //path: "user/GET/INCOME/GWnVlTjzOSNFYVkXlU6SafmwVe42",
+            path: "income",
             method: .get
         )
     }
     
-    static func getIncomeByID(id: String) -> Endpoint<IncomeResponseDTO.IncomeDTO> {
+    static func getIncomeByID(id: String) -> Endpoint<IncomeDTO> {
         return Endpoint(
             // TODO: Update path to actual backend endpoint.
             path: "income/GET/\(id)",
