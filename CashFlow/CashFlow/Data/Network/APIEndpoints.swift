@@ -11,16 +11,17 @@ struct APIEndpoints {
     
     // MARK: - Expenses
     
-    static func getAllExpenseEntries() -> Endpoint<ExpenseResponseDTO> {
+    static func getAllExpenseEntries() -> Endpoint<[ExpenseDTO]> {
         return Endpoint(
             // TODO: Update path to actual backend endpoint.
             //path: "user/GET/EXPENSES/\(userID)",
-            path: "user/GET/EXPENSES/GWnVlTjzOSNFYVkXlU6SafmwVe42",
+            //path: "user/GET/EXPENSES/GWnVlTjzOSNFYVkXlU6SafmwVe42",
+            path: "expenses",
             method: .get
         )
     }
     
-    static func getExpenseByID(id: String) -> Endpoint<ExpenseResponseDTO.ExpenseDTO> {
+    static func getExpenseByID(id: String) -> Endpoint<ExpenseDTO> {
         return Endpoint(
             // TODO: Update path to actual backend endpoint.
             path: "expense/GET/\(id)",

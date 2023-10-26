@@ -24,7 +24,6 @@ struct IncomeDTO: Decodable {
     let category: String
 }
 
-
 extension IncomeDTO {
     func toDomain() -> Income {
         return .init(

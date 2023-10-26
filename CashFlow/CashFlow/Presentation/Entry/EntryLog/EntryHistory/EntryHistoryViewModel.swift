@@ -93,7 +93,7 @@ extension ExpenseHistoryView {
         ) {
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
-            //self.loadExpenses()
+            self.loadExpenses()
             //self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
         }
         

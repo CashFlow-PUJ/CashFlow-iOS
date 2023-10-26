@@ -100,11 +100,9 @@ final class DefaultIncomeRepository: IncomeRepository {
             case .success(let responseDTO):
                 //self.cache.save(response: responseDTO, for: requestDTO)
                 var incomeArray: [Income] = []
-                
                 for entry in responseDTO {
                     incomeArray.append(entry.toDomain())
                 }
-                
                 completion(.success(incomeArray))
             case .failure(let error):
                 var errorString = "Error: "
