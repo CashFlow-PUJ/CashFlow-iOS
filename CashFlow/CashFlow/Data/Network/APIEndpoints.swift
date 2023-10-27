@@ -15,8 +15,8 @@ struct APIEndpoints {
         return Endpoint(
             // TODO: Update path to actual backend endpoint.
             //path: "user/GET/EXPENSES/\(userID)",
-            //path: "user/GET/EXPENSES/GWnVlTjzOSNFYVkXlU6SafmwVe42",
-            path: "expenses",
+            path: "user/GET/EXPENSES/4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            //path: "expenses",
             method: .get
         )
     }
@@ -36,8 +36,8 @@ struct APIEndpoints {
         return Endpoint(
             // TODO: variable (parameter) for userID
             //path: "user/GET/INCOME/\(userID)",
-            //path: "user/GET/INCOME/GWnVlTjzOSNFYVkXlU6SafmwVe42",
-            path: "income",
+            path: "user/GET/INCOME/4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            //path: "income",
             method: .get
         )
     }

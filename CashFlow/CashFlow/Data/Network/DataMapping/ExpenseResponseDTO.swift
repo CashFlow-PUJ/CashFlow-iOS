@@ -10,18 +10,18 @@ import Foundation
 // MARK: - Data Transfer Object
 struct ExpenseDTO: Decodable {
     private enum CodingKeys: String, CodingKey {
-        case id
-        case total
-        case date
-        case description
+        case id = "record_id"
+        case total = "record_total"
+        case date = "record_date"
+        case description = "record_description"
         case vendorName
-        case category
-        case ocrText
+        case category = "expense_category"
+        case ocrText = "ocr_txt"
     }
     
     let id: String
     let total: Int
-    let date: Date
+    let date: Double
     let description: String?
     let vendorName: String?
     let category: ExpenseCategory.RawValue
@@ -32,78 +32,14 @@ extension ExpenseDTO {
     func toDomain() -> Expense {
         return .init(id: UUID(uuidString: id.description) ?? UUID(),
                      total: total,
-                     date: date,
+                     date: Date(timeIntervalSince1970: date),
                      description: description,
                      vendorName: vendorName,
                      category: ExpenseCategory(rawValue: category) ?? ExpenseCategory.otros,
                      ocrText: ocrText)
     }
 }
-/*
-struct ExpenseResponseDTO: Decodable {
-    /*
-    private enum CodingKeys: String, CodingKey {
-        // Si lo que se quiere viene con un key distinto, se hace lo siguiente
-        // case movies = "results"
-        // TODO: Ver qué se está devolviendo (JSON)
-        case expenses
-    }
-    */
-    
-    let expenses: [ExpenseDTO]
-    
-    // La estructura 'ExpenseResponseDTO' *puede* venir como un conjunto de objetos JSON Expense.
-    // Estos últimos se definen en la siguiente estructura.
-    struct ExpenseDTO: Decodable {
-        private enum CodingKeys: String, CodingKey {
-            case id
-            case total
-            case date
-            case description
-            case vendorName
-            case category
-            case ocrText
-        }
-        
-        let id: UUID
-        let total: Int
-        let date: Date
-        let description: String?
-        let vendorName: String?
-        let category: ExpenseCategory.RawValue
-        let ocrText: String?
-    }
-}
 
-// TODO: ¿Cómo se hace el mappeo cuando la respuesta es una lista (JSON) de Expenses?
-
-extension ExpenseResponseDTO {
-    func toDomain() -> [Expense] {
-        var expenseArray: [Expense] = []
-        for expense in expenses {
-            // TODO: Revisar con qué formato se devuelve el campo 'date'.
-            print(expense)
-            let temp = Expense(id: expense.id, total: expense.total, date: expense.date , category: ExpenseCategory(rawValue: expense.category) ?? ExpenseCategory.otros)
-            expenseArray.append(temp)
-        }
-        print("Expense Array: ", expenseArray)
-        return expenseArray
-    }
-}
-
-extension ExpenseResponseDTO.ExpenseDTO {
-    func toDomain() -> Expense {
-        return .init(id: id,
-                     total: total,
-                     date: date,
-                     description: description,
-                     vendorName: vendorName,
-                     category: ExpenseCategory(rawValue: category) ?? ExpenseCategory.otros,
-                     ocrText: ocrText)
-    }
-}
-*/
- 
 // MARK: - Private
 
 private let dateFormatter: DateFormatter = {

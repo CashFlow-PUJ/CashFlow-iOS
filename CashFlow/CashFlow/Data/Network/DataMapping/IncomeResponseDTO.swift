@@ -19,7 +19,7 @@ struct IncomeDTO: Decodable {
     
     let id: String
     let total: Int
-    let date: Date
+    let date: Double
     let description: String
     let category: String
 }
@@ -29,7 +29,7 @@ extension IncomeDTO {
         return .init(
             id: UUID(uuidString: id.description) ?? UUID(),
             total: total,
-            date: date,
+            date: Date(timeIntervalSince1970: date),
             description: description,
             category: IncomeCategory(rawValue: category) ?? IncomeCategory.otros)
     }
