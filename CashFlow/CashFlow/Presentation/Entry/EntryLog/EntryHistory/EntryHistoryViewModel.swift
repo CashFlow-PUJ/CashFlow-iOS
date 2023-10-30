@@ -36,17 +36,14 @@ extension IncomeHistoryView {
         }
         
         func loadIncomeEntries(){
-            incomeLoadTask = visualizeIncomeHistory.execute() { [weak self] result in
-                switch result {
-                case .success(let incomeHistory):
-                    
-                    // DEBUG PRINT
-                    //print("INCOME HISTORY: ", incomeHistory)
-                    
-                    self?.sharedData.incomeHistory.append(contentsOf:incomeHistory)
-                    
-                case .failure:
-                    print("Failed loading income entries.")
+            incomeLoadTask = visualizeIncomeHistory.execute() { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let incomeHistory):
+                        self.sharedData.incomeHistory = incomeHistory
+                    case .failure:
+                        print("Failed loading income entries.")
+                    }
                 }
             }
         }
@@ -103,16 +100,14 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenses(){
-            expensesLoadTask = visualizeExpenseHistory.execute() { [weak self] result in
-                switch result {
-                case .success(let expenseHistory):
-                    
-                    // DEBUG PRINT
-                    //print("EXPENSE HISTORY: ", expenseHistory)
-                    
-                    self?.sharedData.expenseHistory = expenseHistory
-                case .failure:
-                    print("Failed loading expenses.")
+            expensesLoadTask = visualizeExpenseHistory.execute() { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let expenseHistory):
+                        self.sharedData.expenseHistory = expenseHistory
+                    case .failure:
+                        print("Failed loading expense entries.")
+                    }
                 }
             }
         }

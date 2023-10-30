@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class SharedData: ObservableObject {
     @Published var incomeHistory: [Income] = []
     @Published var expenseHistory: [Expense] = []

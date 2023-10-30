@@ -15,7 +15,7 @@ struct IncomeHistoryView: View {
     @Binding var categoryFilter: IncomeCategory
     @StateObject var viewModel: IncomeHistoryViewModel
     @EnvironmentObject var sharedData: SharedData
-    
+     
     @State var selectedEntry: Income?
     
     var body: some View {

@@ -49,7 +49,7 @@ class TextProcessor {
     
     func createTotalExpense(finalTextLines: [String]) -> Expense{
         let vendor = getBusinessName(finalTextLines: finalTextLines)
-        var myExpense = Expense(
+        let myExpense = Expense(
             id: UUID(),
             total: getTotal(vendorName:vendor ,finalTextLines: finalTextLines),
             date: Date(),
