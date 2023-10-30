@@ -69,7 +69,7 @@ struct EntryLogView: View {
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     CustomTopTabBar(tabIndex: $firstTabBarIndex, tabTitles: ["Ingresos", "Gastos"])
                                         .padding(20)
-                                    if !isShowingPopup {
+                                    if !isShowingPopup || !showImagePicker {
                                         if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
                                             ScrollView(.horizontal, showsIndicators: true) {
                                                 HStack {
@@ -141,6 +141,7 @@ struct EntryLogView: View {
                                                 categoryFilter: $selectedExpenseCategory,
                                                 viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
                                             )
+                                            .environmentObject(sharedData)
                                         }
                                     }
                                     else {

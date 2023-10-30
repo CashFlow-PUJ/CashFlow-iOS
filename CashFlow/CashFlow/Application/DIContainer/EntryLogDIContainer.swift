@@ -66,5 +66,6 @@ class EntryLogDIContainer {
             enterIncome: makeEnterIncome()
         )
     }
+    
         
 }
