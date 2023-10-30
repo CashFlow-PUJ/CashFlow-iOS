@@ -12,7 +12,7 @@ extension IncomeHistoryView {
         private let visualizeIncomeHistory: VisualizeIncomeHistory
         private let viewIncome: ViewIncome
         private let enterIncome: DefaultEnterIncome
-        
+        private let sharedData: SharedData
         //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
         
@@ -20,10 +20,12 @@ extension IncomeHistoryView {
         private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
         
         init(
+            sharedData: SharedData,
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
             enterIncome: DefaultEnterIncome
         ) {
+            self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
@@ -39,9 +41,10 @@ extension IncomeHistoryView {
                 case .success(let incomeHistory):
                     
                     // DEBUG PRINT
-                    print("INCOME HISTORY: ", incomeHistory)
+                    //print("INCOME HISTORY: ", incomeHistory)
                     
-                    self?.incomeHistory = incomeHistory
+                    self?.sharedData.incomeHistory.append(contentsOf:incomeHistory)
+                    
                 case .failure:
                     print("Failed loading income entries.")
                 }
@@ -54,9 +57,9 @@ extension IncomeHistoryView {
                 case .success(let entry):
                     
                     // DEBUG PRINT
-                    print("INCOME: ", entry)
+                    //print("INCOME: ", entry)
                     
-                    self?.incomeHistory.append(entry)
+                    self?.sharedData.incomeHistory.append(entry)
                 case .failure:
                     print("Failed loading entry.")
                 }
@@ -84,13 +87,15 @@ extension ExpenseHistoryView {
         
         //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
-        
+        private let sharedData: SharedData
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
         
         init(
+            sharedData: SharedData,
             visualizeExpenseHistory: VisualizeExpenseHistory,
             viewExpense: ViewExpense
         ) {
+            self.sharedData = sharedData
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
             self.loadExpenses()
@@ -103,9 +108,9 @@ extension ExpenseHistoryView {
                 case .success(let expenseHistory):
                     
                     // DEBUG PRINT
-                    print("EXPENSE HISTORY: ", expenseHistory)
+                    //print("EXPENSE HISTORY: ", expenseHistory)
                     
-                    self?.expenseHistory = expenseHistory
+                    self?.sharedData.expenseHistory = expenseHistory
                 case .failure:
                     print("Failed loading expenses.")
                 }
@@ -118,9 +123,9 @@ extension ExpenseHistoryView {
                 case .success(let expense):
                     
                     // DEBUG PRINT
-                    print("EXPENSE: ", expense)
+                    //print("EXPENSE: ", expense)
                     
-                    self?.expenseHistory.append(expense)
+                    self?.sharedData.expenseHistory.append(expense)
                 case .failure:
                     print("Failed loading entry.")
                 }

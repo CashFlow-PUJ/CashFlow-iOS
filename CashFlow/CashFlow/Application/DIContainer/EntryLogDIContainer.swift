@@ -50,15 +50,17 @@ class EntryLogDIContainer {
     }
     
     // MARK: - Entry History
-    @MainActor func makeExpenseHistoryViewModel() -> ExpenseHistoryView.ExpenseHistoryViewModel {
+    @MainActor func makeExpenseHistoryViewModel(sharedData: SharedData) -> ExpenseHistoryView.ExpenseHistoryViewModel {
         ExpenseHistoryView.ExpenseHistoryViewModel(
+            sharedData: sharedData,
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
             viewExpense: makeViewExpense()
         )
     }
     
-    @MainActor func makeIncomeHistoryViewModel() -> IncomeHistoryView.IncomeHistoryViewModel {
+    @MainActor func makeIncomeHistoryViewModel(sharedData: SharedData) -> IncomeHistoryView.IncomeHistoryViewModel {
         IncomeHistoryView.IncomeHistoryViewModel(
+            sharedData: sharedData,
             visualizeIncomeHistory: makeVisualizeIncomeHistory(),
             viewIncome: makeViewIncome(),
             enterIncome: makeEnterIncome()

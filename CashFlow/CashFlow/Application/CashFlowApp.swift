@@ -56,7 +56,8 @@ struct CashFlowApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @ObservedObject var coordinator = Coordinator()
-    
+    var userProfile = UserProfile()
+    let sharedData = SharedData()
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
@@ -69,20 +70,28 @@ struct CashFlowApp: App {
                                 EntryLogView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
+                                    .environmentObject(userProfile)
+                                    .environmentObject(sharedData)
                             case .login:
                                 LoginView()
                                     .preferredColorScheme(.light)
                                     .environmentObject(coordinator)
+                                    .environmentObject(userProfile)
+                                    .environmentObject(sharedData)
                             }
                         }
                         .navigationBarBackButtonHidden(true)
                     }
             }
+            .environmentObject(userProfile)
+            .environmentObject(sharedData)
             .onAppear {
                 if Auth.auth().currentUser != nil {
                     coordinator.path.append(.transactionLog)
                 }
             }
+            .environmentObject(userProfile)
+            .environmentObject(sharedData)
             .environmentObject(coordinator)
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)

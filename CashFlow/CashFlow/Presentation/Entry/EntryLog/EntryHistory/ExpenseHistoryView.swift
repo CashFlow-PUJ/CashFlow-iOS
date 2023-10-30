@@ -12,17 +12,19 @@ struct ExpenseHistoryView: View {
     @EnvironmentObject var coordinator: Coordinator
     @Binding var categoryFilter: ExpenseCategory
     @StateObject var viewModel: ExpenseHistoryViewModel
+    @EnvironmentObject var sharedData: SharedData
+    @State var selectedEntry: Expense?
     
     var body: some View {
         if (categoryFilter == .total) {
-            List(viewModel.expenseHistory) { entry in
-                ExpenseHistoryRow(entry: entry)
+            List(sharedData.expenseHistory) { entry in
+                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry)
             }
             .listStyle(.inset)
         }
         else {
-            List(viewModel.expenseHistory.filter({$0.category == categoryFilter})) { entry in
-                ExpenseHistoryRow(entry: entry)
+            List(sharedData.expenseHistory.filter({$0.category == categoryFilter})) { entry in
+                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry)
             }
             .listStyle(.inset)
         }

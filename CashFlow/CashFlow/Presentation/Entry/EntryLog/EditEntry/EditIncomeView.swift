@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct EditEntryView: View {
+struct EditIncomeView: View {
     @Binding var income: Income
     @Binding var isPresented: Bool
     
@@ -32,7 +32,7 @@ struct EditEntryView: View {
             
             Form {
                 TextField("Total", text: $total)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.numberPad) 
                 
                 TextField("Description", text: $description)
                 
@@ -48,7 +48,6 @@ struct EditEntryView: View {
                 }
             }
             .onAppear {
-                // Inicializa los campos con los valores actuales del 'Income'
                 self.total = String(self.income.total)
                 self.description = self.income.description
                 self.category = self.income.category

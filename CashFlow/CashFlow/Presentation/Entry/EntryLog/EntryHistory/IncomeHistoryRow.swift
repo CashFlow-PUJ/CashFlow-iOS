@@ -10,10 +10,11 @@ import SwiftUI
 struct IncomeHistoryRow: View {
     
     var entry: Income
+    @Binding var selectedEntry: Income?
+    @State private var isSheetPresented: Bool = false
     
     var body: some View {
         HStack {
-            // TODO: Render different icon given the 'Category' enumerate value
             Image(systemName: entry.category.symbol)
                 .resizable()
                 .renderingMode(.original)
@@ -36,8 +37,20 @@ struct IncomeHistoryRow: View {
         .padding(.vertical, 10)
         .cornerRadius(10)
         .onTapGesture {
-            // TODO: Navigate / Show Transaction Detail View
-            // TODO: Ripple effect / Feedback de presión al usuario.
+            self.selectedEntry = entry
+            self.isSheetPresented.toggle()
+        }
+        .onChange(of: selectedEntry) { newValue in
+            if newValue != nil {
+                self.isSheetPresented = true
+            }
+        }
+        .sheet(isPresented: $isSheetPresented) {
+            if let selectedEntry = self.selectedEntry {
+                EditIncomeView(income: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category)
+            } else {
+                Text("No entry selected")
+            }
         }
     }
 }

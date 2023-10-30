@@ -12,8 +12,12 @@
 		7F1518C52AC721290004540A /* AnyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C42AC721290004540A /* AnyEntry.swift */; };
 		7F1518C82AC73F030004540A /* TotalCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C72AC73F030004540A /* TotalCustomView.swift */; };
 		7F1518CA2AC73F310004540A /* TotalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C92AC73F310004540A /* TotalButton.swift */; };
+		7F2600A32AEF1BC6004ADD71 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2600A22AEF1BC6004ADD71 /* SharedData.swift */; };
 		7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */; };
 		7F5793D92AC9737500C5877F /* ItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5793D82AC9737500C5877F /* ItemMenu.swift */; };
+		7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */; };
+		7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */; };
+		7F8345DA2AEEEB1000E4D3DA /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */; };
 		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
 		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
 		9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612392A6DE6CB0032743E /* CashFlowApp.swift */; };
@@ -101,8 +105,12 @@
 		7F1518C42AC721290004540A /* AnyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntry.swift; sourceTree = "<group>"; };
 		7F1518C72AC73F030004540A /* TotalCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCustomView.swift; sourceTree = "<group>"; };
 		7F1518C92AC73F310004540A /* TotalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalButton.swift; sourceTree = "<group>"; };
+		7F2600A22AEF1BC6004ADD71 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpIncomeView.swift; sourceTree = "<group>"; };
 		7F5793D82AC9737500C5877F /* ItemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenu.swift; sourceTree = "<group>"; };
+		7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeView.swift; sourceTree = "<group>"; };
+		7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
 		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9A1612362A6DE6CB0032743E /* CashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,10 +240,20 @@
 			path = IncomeEntry;
 			sourceTree = "<group>";
 		};
+		7F8345D62AEB64AF00E4D3DA /* EditEntry */ = {
+			isa = PBXGroup;
+			children = (
+				7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */,
+				7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */,
+			);
+			path = EditEntry;
+			sourceTree = "<group>";
+		};
 		7FCDB3752AC944E500C6FFC5 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
 				7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */,
+				7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -372,6 +390,7 @@
 				9A70BD362AC3C83400155BA9 /* Entry.swift */,
 				7F1518C42AC721290004540A /* AnyEntry.swift */,
 				7FCDB3782AC9533B00C6FFC5 /* User.swift */,
+				7F2600A22AEF1BC6004ADD71 /* SharedData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +493,7 @@
 		9A70BD562AC5179B00155BA9 /* EntryLog */ = {
 			isa = PBXGroup;
 			children = (
+				7F8345D62AEB64AF00E4D3DA /* EditEntry */,
 				9A4B72C52AA748760091E313 /* EntryLogView.swift */,
 				7F3B430B2AC7E93D00DA791C /* IncomeEntry */,
 				9A70BD652AC798E100155BA9 /* Insights */,
@@ -774,13 +794,16 @@
 				9A70BD3D2AC5139C00155BA9 /* EnterExpense.swift in Sources */,
 				9A83CA602AE6A80B00B24196 /* EntryLogDIContainer.swift in Sources */,
 				9A70BD062ABE7BAF00155BA9 /* CustomTopTabBar.swift in Sources */,
+				7F8345DA2AEEEB1000E4D3DA /* EditExpenseView.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
 				9AD1A30B2AE1BA530034972E /* ExpenseRepository.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
 				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
+				7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */,
 				9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */,
+				7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */,
 				9A83CA5E2AE62FFE00B24196 /* AppDIContainer.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
@@ -801,6 +824,7 @@
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
 				9AD1A31C2AE1E0720034972E /* Endpoint.swift in Sources */,
 				9AD1A31E2AE1E0DA0034972E /* DataTransferService.swift in Sources */,
+				7F2600A32AEF1BC6004ADD71 /* SharedData.swift in Sources */,
 				7F1518BD2AC680C70004540A /* MonthlyView.swift in Sources */,
 				9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */,
 				9A70BD392AC5133800155BA9 /* SignUp.swift in Sources */,
@@ -960,7 +984,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = 6HD9C3J3FV;
+				DEVELOPMENT_TEAM = WXFW7D6G6Z;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;

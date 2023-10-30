@@ -92,7 +92,7 @@ extension DefaultDataTransferService: DataTransferService {
     ) -> NetworkCancellable? where E.Response == T {
         
         // DEBUG PRINT
-        print("Request started...")
+        //print("Request started...")
         
         return networkService.request(endpoint: endpoint) { result in
             switch result {
@@ -103,7 +103,7 @@ extension DefaultDataTransferService: DataTransferService {
                 )
                 
                 // DEBUG PRINT
-                print("\nRESULT: ", result, "\n")
+                //print("\nRESULT: ", result, "\n")
                 
                 queue.asyncExecute { completion(result) }
             case .failure(let error):

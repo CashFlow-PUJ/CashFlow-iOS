@@ -9,8 +9,5 @@ import Foundation
 
 struct User: Identifiable {
     var id: UUID
-    var total: Int
-    var date: Date
-    var description: String
-    var category: IncomeCategory
+    var name: String
 }
