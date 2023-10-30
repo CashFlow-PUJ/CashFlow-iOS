@@ -37,9 +37,6 @@ struct EntryLogView: View {
     
     var body: some View {
         
-        // MARK: - History
-        @State var expenseHistory: [Expense] = sharedData.expenseHistory
-        @State var incomeHistory: [Income] = sharedData.incomeHistory
         // TODO: Pass ViewModels to this View as parameters.
         /*
         @StateObject incomeHistoryViewModel = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel()
@@ -72,54 +69,56 @@ struct EntryLogView: View {
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     CustomTopTabBar(tabIndex: $firstTabBarIndex, tabTitles: ["Ingresos", "Gastos"])
                                         .padding(20)
-                                    if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
-                                        ScrollView(.horizontal, showsIndicators: false) {
-                                            HStack {
-                                                ForEach(IncomeCategory.allCases) { category in
-                                                    if (category == .total) {
-                                                        TotalButton(
-                                                            isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
-                                                            title: category.rawValue,
-                                                            value: 100,
-                                                            total: incomeHistory.reduce(0) { $0 + $1.total},
-                                                            color: category.color
-                                                        ){
-                                                            selectedIncomeCategory = category
-                                                        }
-                                                    } else {
-                                                        CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
-                                                                       title: category.rawValue,
-                                                                       value: Int(percentageOfIncomes(for: category, using: incomeHistory)),
-                                                                       color: category.color
-                                                        ) {
-                                                            selectedIncomeCategory = category
+                                    if !isShowingPopup {
+                                        if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
+                                            ScrollView(.horizontal, showsIndicators: true) {
+                                                HStack {
+                                                    ForEach(IncomeCategory.allCases) { category in
+                                                        if (category == .total) {
+                                                            TotalButton(
+                                                                isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                                                title: category.rawValue,
+                                                                value: 100,
+                                                                total: sharedData.incomeHistory.reduce(0) { $0 + $1.total},
+                                                                color: category.color
+                                                            ){
+                                                                selectedIncomeCategory = category
+                                                            }
+                                                        } else {
+                                                            CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                                                           title: category.rawValue,
+                                                                           value: Int(percentageOfIncomes(for: category, using: sharedData.incomeHistory)),
+                                                                           color: category.color
+                                                            ) {
+                                                                selectedIncomeCategory = category
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                    }
-                                    else {
-                                        ScrollView(.horizontal, showsIndicators: false) {
-                                            HStack {
-                                                ForEach(ExpenseCategory.allCases) { category in
-                                                    if (category == .total) {
-                                                        TotalButton(
-                                                            isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
-                                                            title: category.rawValue,
-                                                            value: 100,
-                                                            total: expenseHistory.reduce(0) {$0 + $1.total},
-                                                            color: category.color
-                                                        ){
-                                                            selectedExpenseCategory = category
-                                                        }
-                                                    } else {
-                                                        CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
-                                                                       title: category.rawValue,
-                                                                       value: Int(percentageOfExpenses(for: category, sharedData: sharedData)),
-                                                                       color: category.color
-                                                        ) {
-                                                            selectedExpenseCategory = category
+                                        else {
+                                            ScrollView(.horizontal, showsIndicators: false) {
+                                                HStack {
+                                                    ForEach(ExpenseCategory.allCases) { category in
+                                                        if (category == .total) {
+                                                            TotalButton(
+                                                                isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                                                title: category.rawValue,
+                                                                value: 100,
+                                                                total: sharedData.expenseHistory.reduce(0) {$0 + $1.total},
+                                                                color: category.color
+                                                            ){
+                                                                selectedExpenseCategory = category
+                                                            }
+                                                        } else {
+                                                            CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                                                           title: category.rawValue,
+                                                                           value: Int(percentageOfExpenses(for: category, sharedData: sharedData)),
+                                                                           color: category.color
+                                                            ) {
+                                                                selectedExpenseCategory = category
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -226,6 +225,7 @@ struct EntryLogView: View {
                                         .frame(width: 360, height: 400)
                                         .overlay(
                                             PopUpIncomeView(isPresented: self.$isShowingPopup)
+                                                .environmentObject(sharedData)
                                             .frame(width: 300, height: 380)
                                         )
                                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
@@ -249,10 +249,8 @@ struct EntryLogView: View {
 
 
 @MainActor func percentageOfExpenses(for category: ExpenseCategory, sharedData: SharedData) -> Double {
-    @State var ExpenseHistory: [Expense] = sharedData.expenseHistory
-    
-    let totalExpenses = Double(ExpenseHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
-    let totalAllExpenses = Double(ExpenseHistory.reduce(0) { $0 + $1.total })
+    let totalExpenses = Double(sharedData.expenseHistory.reduce(0) { $0 + ($1.category == category ? $1.total : 0) })
+    let totalAllExpenses = Double(sharedData.expenseHistory.reduce(0) { $0 + $1.total })
     
     if totalAllExpenses > 0 {
         return customRounded((totalExpenses / totalAllExpenses) * 100.0)
@@ -260,6 +258,7 @@ struct EntryLogView: View {
         return 0.0
     }
 }
+
 
 func customRounded(_ value: Double) -> Double {
     let fractionalPart = value - floor(value)
