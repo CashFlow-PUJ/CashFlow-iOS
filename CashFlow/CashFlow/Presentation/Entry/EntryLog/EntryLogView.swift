@@ -69,8 +69,8 @@ struct EntryLogView: View {
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                     CustomTopTabBar(tabIndex: $firstTabBarIndex, tabTitles: ["Ingresos", "Gastos"])
                                         .padding(20)
-                                    if !isShowingPopup || !showImagePicker {
-                                        if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
+                                    if firstTabBarIndex == 0 { // Este es la pestaña Ingresos
+                                        if !isShowingPopup {
                                             ScrollView(.horizontal, showsIndicators: true) {
                                                 HStack {
                                                     ForEach(IncomeCategory.allCases) { category in
@@ -97,7 +97,9 @@ struct EntryLogView: View {
                                                 }
                                             }
                                         }
-                                        else {
+                                    }
+                                    else {
+                                        if !showImagePicker {
                                             ScrollView(.horizontal, showsIndicators: false) {
                                                 HStack {
                                                     ForEach(ExpenseCategory.allCases) { category in
