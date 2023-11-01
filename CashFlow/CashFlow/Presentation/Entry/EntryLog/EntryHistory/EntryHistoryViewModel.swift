@@ -29,10 +29,10 @@ extension IncomeHistoryView {
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
-            self.loadIncomeEntries()
+            //self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
-            //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba", category: .otros))
+            self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
         }
         
         func loadIncomeEntries(){

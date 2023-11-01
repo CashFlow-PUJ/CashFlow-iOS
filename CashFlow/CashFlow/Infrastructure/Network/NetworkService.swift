@@ -104,16 +104,9 @@ extension DefaultNetworkService: NetworkService {
     ) -> NetworkCancellable? {
         do {
             
-            // DEBUG PRINT
-            print("URL Request...")
-            
             let urlRequest = try endpoint.urlRequest(with: config)
             return request(request: urlRequest, completion: completion)
         } catch {
-            
-            // DEBUG PRINT
-            print("Network issue...")
-            
             completion(.failure(.urlGeneration))
             return nil
         }

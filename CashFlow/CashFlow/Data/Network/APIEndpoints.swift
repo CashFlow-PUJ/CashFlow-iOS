@@ -50,10 +50,13 @@ struct APIEndpoints {
         )
     }
     
-    static func postIncomeEntry(userID: String, with incomeRequestDTO: [IncomeRequestDTO]) -> Endpoint<Void> {
+    static func postIncomeEntry(userID: String, with incomes: IncomeRequestDTO) -> Endpoint<Void> {
         return Endpoint(
             path: "user/POST/INCOME/\(userID)",
-            method: .post
+            //path: "income",
+            method: .post,
+            bodyParametersEncodable: incomes
+            //bodyParameters: incomes
         )
     }
 }
