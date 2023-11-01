@@ -61,9 +61,13 @@ final class DefaultIncomeRepository: IncomeRepository {
     ) -> Cancellable? {
         let task = RepositoryTask()
         let endpoint = APIEndpoints.postIncomeEntry(
-            userID: "GWnVlTjzOSNFYVkXlU6SafmwVe42",
-            with: [IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry)]
+            userID: "4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry)
         )
+        
+        // DEBUG PRINT
+        // debugPrint("INCOME ENTRY: ", IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry))
+        
         task.networkTask = self.dataTransferService.request(
             with: endpoint
         ) { resultado in

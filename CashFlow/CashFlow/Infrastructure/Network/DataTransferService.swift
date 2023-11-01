@@ -126,7 +126,7 @@ extension DefaultDataTransferService: DataTransferService {
         on queue: DataTransferDispatchQueue,
         completion: @escaping CompletionHandler<Void>
     ) -> NetworkCancellable? where E : ResponseRequestable, E.Response == Void {
-        networkService.request(endpoint: endpoint) { result in
+        return networkService.request(endpoint: endpoint) { result in
             switch result {
             case .success:
                 queue.asyncExecute { completion(.success(())) }
