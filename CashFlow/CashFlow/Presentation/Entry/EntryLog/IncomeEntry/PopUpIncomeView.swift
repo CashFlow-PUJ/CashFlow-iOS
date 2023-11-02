@@ -10,6 +10,7 @@ import SwiftUI
 struct PopUpIncomeView: View {
     
     @Binding var isPresented: Bool
+    @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
     @State private var selectedPopupCategory: IncomeCategory = IncomeCategory.allCases.dropFirst().first ?? .salario
     @EnvironmentObject var sharedData: SharedData
     @State private var date = Date()
@@ -75,7 +76,7 @@ struct PopUpIncomeView: View {
                         category: selectedPopupCategory
                     )
                     
-                    sharedData.incomeHistory.append(newIncome)
+                    viewModel.createIncomeEntry(incomeEntry: newIncome)
                     isPresented.toggle() // Cierra el cuadro emergente
                 }
 

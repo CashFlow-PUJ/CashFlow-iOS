@@ -29,10 +29,10 @@ extension IncomeHistoryView {
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
-            //self.loadIncomeEntries()
+            self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
-            self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
+            //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
         }
         
         func loadIncomeEntries(){
@@ -40,7 +40,9 @@ extension IncomeHistoryView {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let incomeHistory):
+                        print("INCOME: ", incomeHistory)
                         self.sharedData.incomeHistory = incomeHistory
+                        self.sharedData.dataIncomeLoaded = true
                     case .failure:
                         print("Failed loading income entries.")
                     }
@@ -57,6 +59,7 @@ extension IncomeHistoryView {
                     //print("INCOME: ", entry)
                     
                     self?.sharedData.incomeHistory.append(entry)
+                    self?.sharedData.dataIncomeLoaded = true
                 case .failure:
                     print("Failed loading entry.")
                 }
@@ -104,7 +107,9 @@ extension ExpenseHistoryView {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
+                        print("EXPENSE: ", expenseHistory)
                         self.sharedData.expenseHistory = expenseHistory
+                        self.sharedData.dataExpenseLoaded = true
                     case .failure:
                         print("Failed loading expense entries.")
                     }

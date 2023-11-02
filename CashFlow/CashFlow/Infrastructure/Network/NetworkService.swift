@@ -104,7 +104,13 @@ extension DefaultNetworkService: NetworkService {
     ) -> NetworkCancellable? {
         do {
             
-            let urlRequest = try endpoint.urlRequest(with: config)
+            var urlRequest = try endpoint.urlRequest(with: config)
+            
+            // Añade el encabezado Content-Type si es necesario
+            if let method = urlRequest.httpMethod, method == "POST" {
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+            
             return request(request: urlRequest, completion: completion)
         } catch {
             completion(.failure(.urlGeneration))
@@ -112,6 +118,7 @@ extension DefaultNetworkService: NetworkService {
         }
     }
 }
+
 
 // MARK: - Default Network Session Manager
 // Note: If authorization is needed NetworkSessionManager can be implemented by using,

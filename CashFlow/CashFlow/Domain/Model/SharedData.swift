@@ -11,13 +11,6 @@ import Foundation
 class SharedData: ObservableObject {
     @Published var incomeHistory: [Income] = []
     @Published var expenseHistory: [Expense] = []
-    @Published var dataLoaded = false
-    
-    func changeData () {
-        if self.incomeHistory.isEmpty && self.expenseHistory.isEmpty {
-            print("Esto no ha cambiado")
-        } else {
-            self.dataLoaded = true
-        }
-    }
+    @Published var dataIncomeLoaded = false
+    @Published var dataExpenseLoaded = false
 }

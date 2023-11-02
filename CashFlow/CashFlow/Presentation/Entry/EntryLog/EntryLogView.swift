@@ -44,7 +44,7 @@ struct EntryLogView: View {
         */
         
         Group {
-            if sharedData.incomeHistory.count > 0  && sharedData.expenseHistory.count > 0{
+            if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
                 NavigationView {
                             ZStack(alignment: .bottomTrailing) {
                                 
@@ -132,18 +132,31 @@ struct EntryLogView: View {
                                     CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"]).padding(15)
                                     if secondTabBarIndex == 0 {
                                         if firstTabBarIndex == 0 {
-                                            IncomeHistoryView(
-                                                categoryFilter: $selectedIncomeCategory,
-                                                viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
-                                            )
-                                            .environmentObject(sharedData)
+                                            if !sharedData.incomeHistory.isEmpty {
+                                                if !isShowingPopup {
+                                                    IncomeHistoryView(
+                                                        categoryFilter: $selectedIncomeCategory,
+                                                        viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
+                                                    )
+                                                    .environmentObject(sharedData)
+                                                }
+                                            } else {
+                                                Text("No hay Ingresos para mostrar")
+                                                Spacer()
+                                            }
+                                            
                                         }
                                         else {
-                                            ExpenseHistoryView(
-                                                categoryFilter: $selectedExpenseCategory,
-                                                viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
-                                            )
-                                            .environmentObject(sharedData)
+                                            if !sharedData.expenseHistory.isEmpty {
+                                                ExpenseHistoryView(
+                                                    categoryFilter: $selectedExpenseCategory,
+                                                    viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
+                                                )
+                                                .environmentObject(sharedData)
+                                            } else {
+                                                Text("No hay Gastos para mostrar")
+                                                Spacer()
+                                            }
                                         }
                                     }
                                     else {
@@ -227,9 +240,9 @@ struct EntryLogView: View {
                                         .shadow(radius: 20)
                                         .frame(width: 360, height: 400)
                                         .overlay(
-                                            PopUpIncomeView(isPresented: self.$isShowingPopup)
-                                                .environmentObject(sharedData)
-                                            .frame(width: 300, height: 380)
+                                            PopUpIncomeView(isPresented: self.$isShowingPopup, viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData))
+                                                   .environmentObject(sharedData)
+                                                   .frame(width: 300, height: 380)
                                         )
                                         .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
                                 }
