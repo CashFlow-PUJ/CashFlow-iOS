@@ -14,7 +14,7 @@ struct ExpenseDTO: Decodable {
         case total = "record_total"
         case date = "record_date"
         case description = "record_description"
-        case vendorName
+        case vendorName = "business_name"
         case category = "expense_category"
         case ocrText = "ocr_txt"
     }

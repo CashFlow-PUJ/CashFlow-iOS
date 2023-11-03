@@ -36,7 +36,6 @@ struct EntryLogView: View {
     @EnvironmentObject var sharedData: SharedData
     
     var body: some View {
-        
         Group {
             if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
                 NavigationView {
@@ -170,7 +169,7 @@ struct EntryLogView: View {
                                 }
                                 .padding()
                                 .sheet(isPresented: $showImagePicker){
-                                    ImageInputViewControllerRepresentable()
+                                    ImageInputViewControllerRepresentable(viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData))
                                 }
                                 
                                 if isShowingMenu {
@@ -203,7 +202,7 @@ struct EntryLogView: View {
                                             self.isShowingPopup.toggle()
                                         }
                                         else {
-                                            // Expense entry (OCR / Camera available)
+                                            
                                             self.showImagePicker = true
                                         }
                                     },
@@ -239,15 +238,17 @@ struct EntryLogView: View {
                             }
                         }
                         .sheet(isPresented: $showImagePicker){
-                            ImageInputViewControllerRepresentable()
+                            ImageInputViewControllerRepresentable(viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData))
                         }
             } else {
                 ProgressView()
             }
         }
         .onAppear {
-            coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
-            coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
+            var viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
+            var viewModelI = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
+            viewModelI.loadIncomeEntries()
+            viewModel.loadExpenses()
         }
     }
 }

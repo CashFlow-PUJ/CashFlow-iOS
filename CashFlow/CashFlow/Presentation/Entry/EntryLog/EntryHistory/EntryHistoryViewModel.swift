@@ -36,7 +36,7 @@ extension IncomeHistoryView {
             self.enterIncome = enterIncome
             self.updateIncome = updateIncome
             self.deleteIncome = deleteIncome
-            self.loadIncomeEntries()
+            //self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
             //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
@@ -58,7 +58,6 @@ extension IncomeHistoryView {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let incomeHistory):
-                        print("INCOME: ", incomeHistory)
                         self.sharedData.incomeHistory = incomeHistory
                         self.sharedData.dataIncomeLoaded = true
                     case .failure:
@@ -72,9 +71,6 @@ extension IncomeHistoryView {
             incomeLoadTask = viewIncome.execute(incomeID: incomeID) { [weak self] result in
                 switch result {
                 case .success(let entry):
-                    
-                    // DEBUG PRINT
-                    //print("INCOME: ", entry)
                     
                     self?.sharedData.incomeHistory.append(entry)
                     self?.sharedData.dataIncomeLoaded = true
@@ -115,20 +111,38 @@ extension ExpenseHistoryView {
         
         private let visualizeExpenseHistory: VisualizeExpenseHistory
         private let viewExpense: ViewExpense
-        
+        private let enterExpense: DefaultEnterExpense
         @Published var expenseHistory: [Expense] = []
         private let sharedData: SharedData
+        private let updateExpense: DefaultUpdateExpense
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
+        private var expensePostTask: Cancellable? { willSet { expensePostTask?.cancel() } }
         
         init(
             sharedData: SharedData,
             visualizeExpenseHistory: VisualizeExpenseHistory,
-            viewExpense: ViewExpense
+            viewExpense: ViewExpense,
+            updateExpense: DefaultUpdateExpense,
+            enterExpense: DefaultEnterExpense
         ) {
             self.sharedData = sharedData
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
-            self.loadExpenses()
+            self.updateExpense = updateExpense
+            self.enterExpense = enterExpense
+            //self.loadExpenses()
+        }
+        
+        func updateExpenseEntry(expenseID: String, updatedExpense: Expense) {
+            expensePostTask = updateExpense.execute(expenseID: expenseID, updatedExpense: updatedExpense) { result in
+                switch result {
+                case .success:
+                    print("Expense updated successfully.")
+                    self.loadExpenses()
+                case .failure:
+                    print("Failed updating expense.")
+                }
+            }
         }
         
         func loadExpenses(){
@@ -136,7 +150,6 @@ extension ExpenseHistoryView {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
-                        print("EXPENSE: ", expenseHistory)
                         self.sharedData.expenseHistory = expenseHistory
                         self.sharedData.dataExpenseLoaded = true
                     case .failure:
@@ -162,7 +175,15 @@ extension ExpenseHistoryView {
         }
         
         func createExpenseEntry(expenseEntry: Expense){
-            
+            expensePostTask = enterExpense.execute(expenseEntry: expenseEntry) { result in
+                switch result {
+                case .success:
+                    print("Success")
+                    self.loadExpenses()
+                case .failure:
+                    print("Failed posting entry.")
+                }
+            }
         }
     }
 }

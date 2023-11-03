@@ -18,13 +18,13 @@ struct ExpenseHistoryView: View {
     var body: some View {
         if (categoryFilter == .total) {
             List(sharedData.expenseHistory) { entry in
-                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry)
+                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
             }
             .listStyle(.inset)
         }
         else {
             List(sharedData.expenseHistory.filter({$0.category == categoryFilter})) { entry in
-                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry)
+                ExpenseHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
             }
             .listStyle(.inset)
         }

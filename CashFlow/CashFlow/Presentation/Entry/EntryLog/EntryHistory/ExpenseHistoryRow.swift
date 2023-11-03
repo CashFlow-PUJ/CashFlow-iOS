@@ -13,6 +13,7 @@ struct ExpenseHistoryRow: View {
     
     @Binding var selectedEntry: Expense?
     @State private var isSheetPresented: Bool = false
+    @ObservedObject var viewModel: ExpenseHistoryView.ExpenseHistoryViewModel
     
     var body: some View {
         HStack {
@@ -49,7 +50,7 @@ struct ExpenseHistoryRow: View {
         }
         .sheet(isPresented: $isSheetPresented) {
             if let selectedEntry = self.selectedEntry {
-                EditExpenseView(expense: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category)
+                EditExpenseView(expense: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category, viewModel: viewModel)
             } else {
                 Text("No entry selected")
             }

@@ -82,4 +82,12 @@ struct APIEndpoints {
             bodyParametersEncodable: income
         )
     }
+    
+    static func updateExpenseEntry(expenseID: String, with expense: ExpenseRequestDTO) -> Endpoint<Void> {
+        return Endpoint(
+            path: "expense/UPDATE/\(expenseID)",
+            method: .put,
+            bodyParametersEncodable: expense
+        )
+    }
 }

@@ -4,6 +4,7 @@ struct ExpenseRequestDTO: Encodable {
         case record_date = "record_DATE"
         case record_description = "record_DESCRIPTION"
         case expense_category = "expense_CATEGORY"
+        case business_name = "business_NAME"
         case ocr_text = "ocr_TEXT"
     }
     
@@ -11,6 +12,7 @@ struct ExpenseRequestDTO: Encodable {
     let record_date: Double
     let record_description: String
     let expense_category: String
+    let business_name: String
     let ocr_text: String
 }
 
@@ -19,8 +21,9 @@ extension ExpenseRequestDTO {
         return .init(
             record_total: "\(expenseEntry.total)",
             record_date: expenseEntry.date.timeIntervalSince1970,
-            record_description: expenseEntry.vendorName ?? "",
+            record_description: expenseEntry.description ?? "",
             expense_category: expenseEntry.category.rawValue,
+            business_name: expenseEntry.vendorName ?? "",
             ocr_text: expenseEntry.ocrText ?? ""
         )
     }

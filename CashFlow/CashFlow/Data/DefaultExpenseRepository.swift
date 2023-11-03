@@ -78,9 +78,26 @@ final class DefaultExpenseRepository: ExpenseRepository {
         return task
     }
     
-    func updateExpenseEntry() -> Bool {
-        // TODO: Implement
-        return true
+    func updateExpenseEntry(
+        expenseID: String,
+        expenseEntry: Expense,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?  {
+        let task = RepositoryTask()
+        
+        let endpoint = APIEndpoints.updateExpenseEntry(expenseID: expenseID, with: ExpenseRequestDTO.fromDomain(expenseEntry: expenseEntry))
+        
+        task.networkTask = self.dataTransferService.request(
+            with: endpoint
+        ) { resultado in
+            switch resultado {
+            case .success():
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return task
     }
     
     func deleteExpenseEntry() {

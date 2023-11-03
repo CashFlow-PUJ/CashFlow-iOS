@@ -85,7 +85,8 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
     @IBOutlet weak var detectButton: UIBarButtonItem!
     
     // MARK: - UIViewController
-    
+    var viewModel: ExpenseHistoryView.ExpenseHistoryViewModel?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -242,7 +243,6 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)
-        print(resultsText)
     }
     
     /// Updates the image view with a scaled version of the given image.
@@ -342,7 +342,8 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                             print("Error: \(error.localizedDescription)")
                             // Considera llamar a `showResults` aquí para indicar que hubo un error.
                             expense.category = ExpenseCategory.mercado
-                            Expense.sampleData.append(expense)
+                            //expense.ocrText = "" // Remove comment for testing
+                            self.viewModel?.createExpenseEntry(expenseEntry: expense)
                             strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
                             strongSelf.showResults()
                             return

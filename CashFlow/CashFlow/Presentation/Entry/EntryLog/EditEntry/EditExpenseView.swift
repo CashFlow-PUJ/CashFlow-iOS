@@ -16,11 +16,15 @@ struct EditExpenseView: View {
     @State private var vendorName: String = ""
     @State private var ocrText: String = ""
     @State private var category: ExpenseCategory
+    @State private var showDeletionAlert: Bool = false
+    @ObservedObject var viewModel: ExpenseHistoryView.ExpenseHistoryViewModel
     
-    init(expense: Binding<Expense>, isPresented: Binding<Bool>, category: ExpenseCategory) {
+    
+    init(expense: Binding<Expense>, isPresented: Binding<Bool>, category: ExpenseCategory, viewModel: ExpenseHistoryView.ExpenseHistoryViewModel) {
         self._expense = expense
         self._isPresented = isPresented
         self._category = State(initialValue: category)
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -60,19 +64,49 @@ struct EditExpenseView: View {
                 self.category = self.expense.category
                 self.ocrText = self.expense.ocrText ?? ""
             }
-            
+            HStack {
+                Spacer()
+                Button(action: {
+                    showDeletionAlert = true
+                }) {
+                    Text("Eliminar")
+                        .foregroundColor(.red)
+                }
+                Spacer()
+            }
+            .alert(isPresented: $showDeletionAlert) {
+                Alert(
+                    title: Text("Confirmar eliminación"),
+                    message: Text("¿Estás seguro de que quieres eliminar esta entrada?"),
+                    primaryButton: .destructive(Text("Eliminar")) {
+                        deleteExpense(id: expense.id.uuidString)
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
             Spacer()
         }
     }
     
     func saveExpense() {
-        if let total = Int(self.total) {
-            self.expense.total = total
-            self.expense.description = self.description
-            self.expense.vendorName = self.vendorName
-            self.expense.category = self.category
-            self.expense.ocrText = self.ocrText.isEmpty ? nil : self.ocrText
+        if let totalInt = Int(self.total) {
+            let updatedExpense = Expense(
+                id: expense.id,
+                total: totalInt,
+                date: expense.date, // conserva la fecha original
+                description: self.description.isEmpty ? nil : self.description,
+                vendorName: self.vendorName.isEmpty ? nil : self.vendorName,
+                category: self.category,
+                ocrText: self.ocrText.isEmpty ? nil : self.ocrText
+            )
+            viewModel.updateExpenseEntry(expenseID: expense.id.uuidString, updatedExpense: updatedExpense)
+            self.isPresented = false
         }
+    }
+
+    
+    func deleteExpense(id: String) {
+        //viewModel.deleteExpenseEntry(expenseID: id)
         self.isPresented = false
     }
 }

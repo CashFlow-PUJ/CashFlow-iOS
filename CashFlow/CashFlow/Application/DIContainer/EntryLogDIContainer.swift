@@ -28,6 +28,10 @@ class EntryLogDIContainer {
         DefaultUpdateIncome(incomeRepository: makeIncomeRepository())
     }
     
+    func makeUpdateExpense() -> DefaultUpdateExpense {
+        DefaultUpdateExpense(expenseRepository: makeExpenseRepository())
+    }
+    
     func makeViewExpense() -> ViewExpense {
         ViewExpense(expenseRepository: makeExpenseRepository())
     }
@@ -44,6 +48,9 @@ class EntryLogDIContainer {
         DefaultEnterIncome(incomeRepository: makeIncomeRepository())
     }
     
+    func makeEnterExpense() -> DefaultEnterExpense {
+        DefaultEnterExpense(expenseRepository: makeExpenseRepository())
+    }
     // MARK: - Repositories
     func makeExpenseRepository() -> ExpenseRepository {
         DefaultExpenseRepository(dataTransferService: dependencies.apiDataTransferService)
@@ -61,7 +68,9 @@ class EntryLogDIContainer {
         ExpenseHistoryView.ExpenseHistoryViewModel(
             sharedData: sharedData,
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
-            viewExpense: makeViewExpense()
+            viewExpense: makeViewExpense(),
+            updateExpense: makeUpdateExpense(),
+            enterExpense: makeEnterExpense()
         )
     }
     

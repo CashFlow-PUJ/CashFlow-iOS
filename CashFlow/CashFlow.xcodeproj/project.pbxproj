@@ -20,6 +20,7 @@
 		7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */; };
 		7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */; };
 		7F8345DA2AEEEB1000E4D3DA /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */; };
+		7FBD84BA2AF49EA40035236D /* UpdateExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD84B92AF49EA30035236D /* UpdateExpense.swift */; };
 		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
 		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
 		9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612392A6DE6CB0032743E /* CashFlowApp.swift */; };
@@ -115,6 +116,7 @@
 		7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeView.swift; sourceTree = "<group>"; };
 		7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
+		7FBD84B92AF49EA30035236D /* UpdateExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateExpense.swift; sourceTree = "<group>"; };
 		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9A1612362A6DE6CB0032743E /* CashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -594,6 +596,7 @@
 				9A83CA652AE7685A00B24196 /* IncomeResponseDTO.swift */,
 				9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */,
 				7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */,
+				7FBD84B92AF49EA30035236D /* UpdateExpense.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				9A83CA622AE716E300B24196 /* ViewEntry.swift in Sources */,
 				9A70BD432AC513D400155BA9 /* EditEntry.swift in Sources */,
 				9A656D002ABD0A30003B2F42 /* FacebookAuthentication.swift in Sources */,
+				7FBD84BA2AF49EA40035236D /* UpdateExpense.swift in Sources */,
 				9A70BD4C2AC5157100155BA9 /* EditExpenseItem.swift in Sources */,
 				9A83CA662AE7685A00B24196 /* IncomeResponseDTO.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,

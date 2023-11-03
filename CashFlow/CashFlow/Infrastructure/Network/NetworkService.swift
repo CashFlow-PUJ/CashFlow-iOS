@@ -142,7 +142,7 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     init() { }
 
     func log(request: URLRequest) {
-        print("-------------")
+        //print("-------------")
         print("request: \(request.url!)")
         print("headers: \(request.allHTTPHeaderFields!)")
         print("method: \(request.httpMethod!)")

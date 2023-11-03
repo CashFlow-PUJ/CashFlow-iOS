@@ -129,10 +129,8 @@ struct MenuView: View {
         switch selectedItem {
             case .dashboard:
                 showLogView = true
-                print("Navegando a", selectedItem)
             case .configuracion:
                 showEditProfile = true
-                print("Navegando a", selectedItem)
             case .cerrarSesion:
                 print("Navegando a", selectedItem)
         }
