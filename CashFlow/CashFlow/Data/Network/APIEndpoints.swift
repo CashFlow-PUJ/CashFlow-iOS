@@ -29,6 +29,13 @@ struct APIEndpoints {
         )
     }
     
+    static func deleteExpense(expenseID: String) -> Endpoint<Void> {
+        return Endpoint(
+            path: "expense/DELETE/\(expenseID)",
+            method: .delete
+        )
+    }
+    
     // MARK: - Income
     
     static func getAllIncomeEntries() -> Endpoint<[IncomeDTO]> {

@@ -9,7 +9,7 @@ import Foundation
 
 protocol DeleteEntry {
     func execute(
-        incomeID: String,
+        id: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }
@@ -23,10 +23,25 @@ final class DeleteIncome: DeleteEntry {
     }
     
     func execute(
-        incomeID: String,
+        id: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return incomeRepository.deleteIncomeEntry(incomeID: incomeID, completion: completion)
+        return incomeRepository.deleteIncomeEntry(incomeID: id, completion: completion)
     }
 }
 
+final class DeleteExpense: DeleteEntry {
+    
+    private let expenseRepository: ExpenseRepository
+    
+    init(expenseRepository: ExpenseRepository) {
+        self.expenseRepository = expenseRepository
+    }
+    
+    func execute(
+        id: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable? {
+        return expenseRepository.deleteExpenseEntry(expenseID: id, completion: completion)
+    }
+}

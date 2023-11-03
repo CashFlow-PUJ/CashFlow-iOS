@@ -28,6 +28,10 @@ class EntryLogDIContainer {
         ViewExpense(expenseRepository: makeExpenseRepository())
     }
     
+    func makeDeleteExpense() -> DeleteExpense {
+        DeleteExpense(expenseRepository: makeExpenseRepository())
+    }
+    
     func makeVisualizeIncomeHistory() -> VisualizeIncomeHistory {
         VisualizeIncomeHistory(incomeRepository: makeIncomeRepository())
     }
@@ -62,7 +66,8 @@ class EntryLogDIContainer {
         ExpenseHistoryView.ExpenseHistoryViewModel(
             sharedData: sharedData,
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
-            viewExpense: makeViewExpense()
+            viewExpense: makeViewExpense(),
+            deleteExpense: makeDeleteExpense()
         )
     }
     

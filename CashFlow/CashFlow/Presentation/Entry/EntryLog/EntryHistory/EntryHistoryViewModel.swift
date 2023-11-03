@@ -24,6 +24,7 @@ extension IncomeHistoryView {
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
         private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
         private var incomePutTask: Cancellable? { willSet { incomePutTask?.cancel() } }
+        private var incomeDeleteTask: Cancellable? { willSet { incomeDeleteTask?.cancel() } }
         
         init(
             sharedData: SharedData,
@@ -100,7 +101,7 @@ extension IncomeHistoryView {
         }
         
         func deleteIncomeEntry(incomeID: String) {
-            incomePutTask = deleteIncome.execute(incomeID: incomeID) { result in
+            incomeDeleteTask = deleteIncome.execute(id: incomeID) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted income entry.")
@@ -118,23 +119,30 @@ extension ExpenseHistoryView {
         // MARK: - Use Cases
         private let visualizeExpenseHistory: VisualizeExpenseHistory
         private let viewExpense: ViewExpense
+        private let deleteExpense: DeleteExpense
         
         //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
         private let sharedData: SharedData
         
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
+        private var expenseDeleteTask: Cancellable? { willSet { expenseDeleteTask?.cancel() } }
         
         init(
             sharedData: SharedData,
             visualizeExpenseHistory: VisualizeExpenseHistory,
-            viewExpense: ViewExpense
+            viewExpense: ViewExpense,
+            deleteExpense: DeleteExpense
         ) {
             self.sharedData = sharedData
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
+            self.deleteExpense = deleteExpense
+            
+            // TODO: Add Delete Button to EditExpenseView.
+            // self.deleteExpense(expenseID: "708e99b6-dba1-4082-b6d8-24843a468627")
+            
             self.loadExpenses()
-            //self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
         }
         
         func loadExpenses(){
@@ -163,6 +171,17 @@ extension ExpenseHistoryView {
                     self?.sharedData.expenseHistory.append(expense)
                 case .failure:
                     print("Failed loading entry.")
+                }
+            }
+        }
+        
+        func deleteExpense(expenseID: String) {
+            expenseDeleteTask = deleteExpense.execute(id: expenseID) { result in
+                switch result {
+                case .success:
+                    print("Successfully deleted expense entry.")
+                case .failure:
+                    print("Failed deleting entry.")
                 }
             }
         }
