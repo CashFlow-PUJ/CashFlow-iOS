@@ -15,14 +15,12 @@ struct EditIncomeView: View {
     @State private var description: String = ""
     @State private var category: IncomeCategory
     
-    /*
     init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory, viewModel: IncomeHistoryView.IncomeHistoryViewModel) {
         self._income = income
         self._isPresented = isPresented  // Asegúrate de usar _isPresented aquí
         self._category = State(initialValue: category)
         self.viewModel = viewModel
     }
-    */
     
     var body: some View {
         VStack {
