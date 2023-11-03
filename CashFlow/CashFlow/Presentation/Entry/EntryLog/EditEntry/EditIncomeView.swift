@@ -14,11 +14,13 @@ struct EditIncomeView: View {
     @State private var total: String = ""
     @State private var description: String = ""
     @State private var category: IncomeCategory
-    
-    init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory) {
+    @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
+
+    init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory, viewModel: IncomeHistoryView.IncomeHistoryViewModel) {
         self._income = income
-        self._isPresented = isPresented  // Asegúrate de usar _isPresented aquí
+        self._isPresented = isPresented
         self._category = State(initialValue: category)
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -59,11 +61,14 @@ struct EditIncomeView: View {
     
     func saveIncome() {
         if let total = Int(self.total) {
-            self.income.total = total
-            self.income.description = self.description
-            self.income.category = self.category
+            var updatedIncome = self.income
+            updatedIncome.total = total
+            updatedIncome.description = self.description
+            updatedIncome.category = self.category
+            
+            viewModel.updateIncomeEntry(incomeID: income.id.uuidString, updatedIncome: updatedIncome)
+            self.isPresented = false
         }
-        self.isPresented = false
     }
     
     

@@ -107,7 +107,7 @@ extension DefaultNetworkService: NetworkService {
             var urlRequest = try endpoint.urlRequest(with: config)
             
             // Añade el encabezado Content-Type si es necesario
-            if let method = urlRequest.httpMethod, method == "POST" {
+            if let method = urlRequest.httpMethod, ["POST", "PUT", "PATCH"].contains(method) {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             

@@ -77,6 +77,7 @@ struct PopUpIncomeView: View {
                     )
                     
                     viewModel.createIncomeEntry(incomeEntry: newIncome)
+                    sharedData.incomeHistory.append(newIncome)
                     isPresented.toggle() // Cierra el cuadro emergente
                 }
 

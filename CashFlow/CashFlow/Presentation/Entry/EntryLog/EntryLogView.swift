@@ -37,12 +37,6 @@ struct EntryLogView: View {
     
     var body: some View {
         
-        // TODO: Pass ViewModels to this View as parameters.
-        /*
-        @StateObject incomeHistoryViewModel = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel()
-        @StateObject expenseHistoryViewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel()
-        */
-        
         Group {
             if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
                 NavigationView {
@@ -132,17 +126,19 @@ struct EntryLogView: View {
                                     CustomTopTabBar(tabIndex: $secondTabBarIndex, tabTitles: ["Historial", "Insights"]).padding(15)
                                     if secondTabBarIndex == 0 {
                                         if firstTabBarIndex == 0 {
-                                            if !sharedData.incomeHistory.isEmpty {
-                                                if !isShowingPopup {
-                                                    IncomeHistoryView(
-                                                        categoryFilter: $selectedIncomeCategory,
-                                                        viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
-                                                    )
-                                                    .environmentObject(sharedData)
+                                            if !isShowingPopup {
+                                                if !sharedData.incomeHistory.isEmpty {
+                                                    if !isShowingPopup {
+                                                        IncomeHistoryView(
+                                                            categoryFilter: $selectedIncomeCategory,
+                                                            viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
+                                                        )
+                                                        .environmentObject(sharedData)
+                                                    }
+                                                } else {
+                                                    Text("No hay Ingresos para mostrar")
+                                                    Spacer()
                                                 }
-                                            } else {
-                                                Text("No hay Ingresos para mostrar")
-                                                Spacer()
                                             }
                                             
                                         }
@@ -228,12 +224,6 @@ struct EntryLogView: View {
                                        .edgesIgnoringSafeArea(.all)
                                        .onTapGesture {
                                            isShowingPopup = false
-                                           // TODO: Uncomment before commiting
-                                           /*
-                                           withAnimation(.bouncy(duration: 0.3)){
-                                               isShowingPopup = false
-                                           }
-                                            */
                                        }
                                     Color.white
                                         .cornerRadius(50)

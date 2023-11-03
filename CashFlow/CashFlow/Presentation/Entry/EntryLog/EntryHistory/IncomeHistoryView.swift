@@ -21,13 +21,13 @@ struct IncomeHistoryView: View {
     var body: some View {
         if (categoryFilter == .total) {
             List(sharedData.incomeHistory) { entry in
-                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry)
+                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
             }
             .listStyle(.inset)
         }
         else {
             List(sharedData.incomeHistory.filter({$0.category == categoryFilter})) { entry in
-                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry)
+                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
             }
             .listStyle(.inset)
         }

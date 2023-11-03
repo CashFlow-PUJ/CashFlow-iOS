@@ -19,22 +19,37 @@ extension IncomeHistoryView {
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
         private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
         
+        private let updateIncome: DefaultUpdateIncome
+        
         init(
             sharedData: SharedData,
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
-            enterIncome: DefaultEnterIncome
+            enterIncome: DefaultEnterIncome,
+            updateIncome: DefaultUpdateIncome
         ) {
             self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
+            self.updateIncome = updateIncome
             self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
             //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
         }
         
+        func updateIncomeEntry(incomeID: String, updatedIncome: Income) {
+            incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome) { result in
+                switch result {
+                case .success:
+                    print("Income updated successfully.")
+                    self.loadIncomeEntries() // Recargar los ingresos después de la actualización
+                case .failure:
+                    print("Failed updating income.")
+                }
+            }
+        }
         func loadIncomeEntries(){
             incomeLoadTask = visualizeIncomeHistory.execute() { result in
                 DispatchQueue.main.async {
@@ -71,6 +86,7 @@ extension IncomeHistoryView {
                 switch result {
                 case .success:
                     print("Success")
+                    self.loadIncomeEntries()
                 case .failure:
                     print("Failed posting entry.")
                 }
@@ -85,7 +101,6 @@ extension ExpenseHistoryView {
         private let visualizeExpenseHistory: VisualizeExpenseHistory
         private let viewExpense: ViewExpense
         
-        //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
         private let sharedData: SharedData
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
@@ -99,7 +114,6 @@ extension ExpenseHistoryView {
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
             self.loadExpenses()
-            //self.loadExpenseByID(expenseID: "77fbd880-71ea-11ee-b962-0242ac120002")
         }
         
         func loadExpenses(){
@@ -130,6 +144,10 @@ extension ExpenseHistoryView {
                     print("Failed loading entry.")
                 }
             }
+        }
+        
+        func createExpenseEntry(expenseEntry: Expense){
+            
         }
     }
 }
