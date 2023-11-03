@@ -106,7 +106,7 @@ struct EditExpenseView: View {
 
     
     func deleteExpense(id: String) {
-        //viewModel.deleteExpenseEntry(expenseID: id)
+        viewModel.deleteExpense(expenseID: id)
         self.isPresented = false
     }
 }

@@ -90,4 +90,11 @@ struct APIEndpoints {
             bodyParametersEncodable: expense
         )
     }
+    
+    static func deleteExpense(expenseID: String) -> Endpoint<Void> {
+        return Endpoint(
+            path: "expense/DELETE/\(expenseID)",
+            method: .delete
+        )
+    }
 }

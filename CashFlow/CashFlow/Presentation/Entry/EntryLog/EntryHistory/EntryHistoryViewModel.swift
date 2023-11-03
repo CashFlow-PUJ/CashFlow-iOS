@@ -81,7 +81,7 @@ extension IncomeHistoryView {
         }
         
         func deleteIncomeEntry(incomeID: String) {
-            incomePutTask = deleteIncome.execute(incomeID: incomeID) { result in
+            incomePutTask = deleteIncome.execute(id: incomeID) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted income entry.")
@@ -117,19 +117,23 @@ extension ExpenseHistoryView {
         private let updateExpense: DefaultUpdateExpense
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
         private var expensePostTask: Cancellable? { willSet { expensePostTask?.cancel() } }
+        private var expenseDeleteTask: Cancellable? { willSet { expenseDeleteTask?.cancel() } }
+        private let deleteExpense: DeleteExpense
         
         init(
             sharedData: SharedData,
             visualizeExpenseHistory: VisualizeExpenseHistory,
             viewExpense: ViewExpense,
             updateExpense: DefaultUpdateExpense,
-            enterExpense: DefaultEnterExpense
+            enterExpense: DefaultEnterExpense,
+            deleteExpense: DeleteExpense
         ) {
             self.sharedData = sharedData
             self.visualizeExpenseHistory = visualizeExpenseHistory
             self.viewExpense = viewExpense
             self.updateExpense = updateExpense
             self.enterExpense = enterExpense
+            self.deleteExpense = deleteExpense
             //self.loadExpenses()
         }
         
@@ -182,6 +186,18 @@ extension ExpenseHistoryView {
                     self.loadExpenses()
                 case .failure:
                     print("Failed posting entry.")
+                }
+            }
+        }
+        
+        func deleteExpense(expenseID: String) {
+            expenseDeleteTask = deleteExpense.execute(id: expenseID) { result in
+                switch result {
+                case .success:
+                    print("Successfully deleted expense entry.")
+                    self.loadExpenses()
+                case .failure:
+                    print("Failed deleting entry.")
                 }
             }
         }

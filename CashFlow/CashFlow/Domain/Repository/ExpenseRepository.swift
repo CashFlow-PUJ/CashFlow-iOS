@@ -28,5 +28,8 @@ protocol ExpenseRepository {
         expenseEntry: Expense,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
-    func deleteExpenseEntry()
+    func deleteExpenseEntry(
+        expenseID: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?
 }

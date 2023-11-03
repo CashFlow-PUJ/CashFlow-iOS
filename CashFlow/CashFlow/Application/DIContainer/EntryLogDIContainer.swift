@@ -63,6 +63,10 @@ class EntryLogDIContainer {
     func makeDeleteIncome() -> DeleteIncome {
         DeleteIncome(incomeRepository: makeIncomeRepository())
     }
+    
+    func makeDeleteExpense() -> DeleteExpense {
+        DeleteExpense(expenseRepository: makeExpenseRepository())
+    }
     // MARK: - Entry History
     @MainActor func makeExpenseHistoryViewModel(sharedData: SharedData) -> ExpenseHistoryView.ExpenseHistoryViewModel {
         ExpenseHistoryView.ExpenseHistoryViewModel(
@@ -70,7 +74,8 @@ class EntryLogDIContainer {
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
             viewExpense: makeViewExpense(),
             updateExpense: makeUpdateExpense(),
-            enterExpense: makeEnterExpense()
+            enterExpense: makeEnterExpense(),
+            deleteExpense: makeDeleteExpense()
         )
     }
     
