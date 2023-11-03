@@ -12,23 +12,28 @@ extension IncomeHistoryView {
         private let visualizeIncomeHistory: VisualizeIncomeHistory
         private let viewIncome: ViewIncome
         private let enterIncome: DefaultEnterIncome
+        private let editIncome: EditIncome
         private let sharedData: SharedData
         //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
         
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
         private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
+        private var incomePutTask: Cancellable? { willSet { incomePutTask?.cancel() } }
         
         init(
             sharedData: SharedData,
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
-            enterIncome: DefaultEnterIncome
+            enterIncome: DefaultEnterIncome,
+            editIncome: EditIncome
         ) {
             self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
+            self.editIncome = editIncome
+            
             self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
@@ -68,6 +73,17 @@ extension IncomeHistoryView {
         
         func createIncomeEntry(incomeEntry: Income) {
             incomePostTask = enterIncome.execute(incomeEntry: incomeEntry) { result in
+                switch result {
+                case .success:
+                    print("Success")
+                case .failure:
+                    print("Failed posting entry.")
+                }
+            }
+        }
+        
+        func updateIncomeEntry(incomeEntry: Income) {
+            incomePutTask = editIncome.execute(incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
                     print("Success")

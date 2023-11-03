@@ -139,6 +139,7 @@ struct EntryLogView: View {
                                                         viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
                                                     )
                                                     .environmentObject(sharedData)
+                                                    //.environmentObject(coordinator)
                                                 }
                                             } else {
                                                 Text("No hay Ingresos para mostrar")

@@ -44,7 +44,6 @@ struct APIEndpoints {
     
     static func getIncomeByID(id: String) -> Endpoint<IncomeDTO> {
         return Endpoint(
-            // TODO: Update path to actual backend endpoint.
             path: "income/GET/\(id)",
             method: .get
         )
@@ -53,10 +52,16 @@ struct APIEndpoints {
     static func postIncomeEntry(userID: String, with incomes: IncomeRequestDTO) -> Endpoint<Void> {
         return Endpoint(
             path: "user/POST/INCOME/\(userID)",
-            //path: "income",
             method: .post,
             bodyParametersEncodable: incomes
-            //bodyParameters: incomes
+        )
+    }
+    
+    static func putIncomeEntry(incomeID: String, with incomes: IncomeRequestDTO) -> Endpoint<Void> {
+        return Endpoint(
+            path: "income/UPDATE/\(incomeID)",
+            method: .put,
+            bodyParametersEncodable: incomes
         )
     }
 }
