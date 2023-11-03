@@ -16,7 +16,8 @@ struct IncomeHistoryRow: View {
     
     // MARK: - Coordinator
     @EnvironmentObject var coordinator: Coordinator
-    
+    @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
+
     var body: some View {
         HStack {
             Image(systemName: entry.category.symbol)
@@ -51,7 +52,7 @@ struct IncomeHistoryRow: View {
         }
         .sheet(isPresented: $isSheetPresented) {
             if let selectedEntry = self.selectedEntry {
-                EditIncomeView(income: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category, viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData))
+                EditIncomeView(income: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category, viewModel: viewModel)
             } else {
                 Text("No entry selected")
             }

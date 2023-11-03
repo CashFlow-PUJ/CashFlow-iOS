@@ -19,7 +19,10 @@ protocol ExpenseRepository {
         completion: @escaping (Result<Expense, Error>) -> Void
     ) -> Cancellable?
     
-    func createExpenseEntry() -> Expense
+    func createExpenseEntry(
+        expenseEntry: Expense,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?
     func updateExpenseEntry() -> Bool
     
     func deleteExpenseEntry(

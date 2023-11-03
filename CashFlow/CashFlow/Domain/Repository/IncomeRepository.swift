@@ -25,6 +25,7 @@ protocol IncomeRepository {
     ) -> Cancellable?
     
     func updateIncomeEntry(
+        incomeID: String,
         incomeEntry: Income,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?

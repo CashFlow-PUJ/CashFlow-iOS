@@ -24,6 +24,10 @@ class EntryLogDIContainer {
         VisualizeExpenseHistory(expenseRepository: makeExpenseRepository())
     }
     
+    func makeUpdateIncome() -> DefaultUpdateIncome {
+        DefaultUpdateIncome(incomeRepository: makeIncomeRepository())
+    }
+    
     func makeViewExpense() -> ViewExpense {
         ViewExpense(expenseRepository: makeExpenseRepository())
     }
@@ -77,8 +81,8 @@ class EntryLogDIContainer {
             visualizeIncomeHistory: makeVisualizeIncomeHistory(),
             viewIncome: makeViewIncome(),
             enterIncome: makeEnterIncome(),
-            editIncome: makeEditIncome(),
-            deleteIncome: makeDeleteIncome()
+            deleteIncome: makeDeleteIncome(),
+            updateIncome: makeUpdateIncome() 
         )
     }
     

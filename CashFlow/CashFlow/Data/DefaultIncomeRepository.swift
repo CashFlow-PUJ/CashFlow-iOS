@@ -82,19 +82,17 @@ final class DefaultIncomeRepository: IncomeRepository {
     }
     
     func updateIncomeEntry(
+        incomeID: String,
         incomeEntry: Income,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.putIncomeEntry(
-            incomeID: incomeEntry.id.uuidString,
-            with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry)
-        )
+        let endpoint = APIEndpoints.updateIncomeEntry(incomeID: incomeID, with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry))
+        
         task.networkTask = self.dataTransferService.request(
             with: endpoint
         ) { resultado in
-            switch resultado
-            {
+            switch resultado {
             case .success():
                 completion(.success(()))
             case .failure(let error):
@@ -103,6 +101,7 @@ final class DefaultIncomeRepository: IncomeRepository {
         }
         return task
     }
+
     
     func deleteIncomeEntry(
         incomeID: String,

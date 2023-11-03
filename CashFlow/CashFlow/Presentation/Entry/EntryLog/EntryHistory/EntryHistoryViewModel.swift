@@ -26,27 +26,36 @@ extension IncomeHistoryView {
         private var incomePutTask: Cancellable? { willSet { incomePutTask?.cancel() } }
         private var incomeDeleteTask: Cancellable? { willSet { incomeDeleteTask?.cancel() } }
         
+        private let updateIncome: DefaultUpdateIncome
+        
         init(
             sharedData: SharedData,
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
             enterIncome: DefaultEnterIncome,
-            editIncome: EditIncome,
-            deleteIncome: DeleteIncome
+            deleteIncome: DeleteIncome,
+            updateIncome: DefaultUpdateIncome
         ) {
             self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
-            self.editIncome = editIncome
             self.deleteIncome = deleteIncome
-            
-            // TODO: Add Delete Button to EditIncomeView.
-            // self.deleteIncomeEntry(incomeID: "7d75171f-6f7f-452b-a14b-631543e39ed5")
-            
+            self.updateIncome = updateIncome
             self.loadIncomeEntries()
         }
         
+        func updateIncomeEntry(incomeID: String, updatedIncome: Income) {
+            incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome) { result in
+                switch result {
+                case .success:
+                    print("Income updated successfully.")
+                    self.loadIncomeEntries() // Recargar los ingresos después de la actualización
+                case .failure:
+                    print("Failed updating income.")
+                }
+            }
+        }
         func loadIncomeEntries(){
             incomeLoadTask = visualizeIncomeHistory.execute() { result in
                 DispatchQueue.main.async {
@@ -82,7 +91,8 @@ extension IncomeHistoryView {
             incomePostTask = enterIncome.execute(incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
-                    print("Successfully created income entry.")
+                    print("Success")
+                    self.loadIncomeEntries()
                 case .failure:
                     print("Failed posting entry.")
                 }
@@ -121,7 +131,6 @@ extension ExpenseHistoryView {
         private let viewExpense: ViewExpense
         private let deleteExpense: DeleteExpense
         
-        //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
         private let sharedData: SharedData
         

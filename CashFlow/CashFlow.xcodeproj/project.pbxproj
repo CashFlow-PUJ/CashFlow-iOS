@@ -14,6 +14,8 @@
 		7F1518CA2AC73F310004540A /* TotalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1518C92AC73F310004540A /* TotalButton.swift */; };
 		7F2600A32AEF1BC6004ADD71 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F2600A22AEF1BC6004ADD71 /* SharedData.swift */; };
 		7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */; };
+		7F4BB9FB2AF47636005D9B6A /* EntryExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4BB9FA2AF47636005D9B6A /* EntryExpense.swift */; };
+		7F4BB9FD2AF48308005D9B6A /* UpdateIncome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */; };
 		7F5793D92AC9737500C5877F /* ItemMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5793D82AC9737500C5877F /* ItemMenu.swift */; };
 		7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */; };
 		7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */; };
@@ -107,6 +109,8 @@
 		7F1518C92AC73F310004540A /* TotalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalButton.swift; sourceTree = "<group>"; };
 		7F2600A22AEF1BC6004ADD71 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		7F3B430E2AC7EA0200DA791C /* PopUpIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpIncomeView.swift; sourceTree = "<group>"; };
+		7F4BB9FA2AF47636005D9B6A /* EntryExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryExpense.swift; sourceTree = "<group>"; };
+		7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIncome.swift; sourceTree = "<group>"; };
 		7F5793D82AC9737500C5877F /* ItemMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemMenu.swift; sourceTree = "<group>"; };
 		7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeView.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 				9A70BD3E2AC513B300155BA9 /* EnterIncome.swift */,
 				9A70BD542AC5172F00155BA9 /* EnterExpense */,
 				9A70BD482AC5152100155BA9 /* EditEntry */,
+				7F4BB9FA2AF47636005D9B6A /* EntryExpense.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				9AD1A3162AE1D5E20034972E /* ExpenseResponseDTO.swift */,
 				9A83CA652AE7685A00B24196 /* IncomeResponseDTO.swift */,
 				9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */,
+				7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -800,6 +806,7 @@
 				9AD1A30B2AE1BA530034972E /* ExpenseRepository.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
 				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
+				7F4BB9FD2AF48308005D9B6A /* UpdateIncome.swift in Sources */,
 				9A70BD2F2AC3C65400155BA9 /* ExpenseCategory.swift in Sources */,
 				7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */,
 				9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */,
@@ -834,6 +841,7 @@
 				9A70BD142AC0D6FC00155BA9 /* ExpenseHistoryRow.swift in Sources */,
 				9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */,
 				9A4B72C62AA748760091E313 /* EntryLogView.swift in Sources */,
+				7F4BB9FB2AF47636005D9B6A /* EntryExpense.swift in Sources */,
 				9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9A70BD4E2AC515E200155BA9 /* DeleteExpenseItem.swift in Sources */,
