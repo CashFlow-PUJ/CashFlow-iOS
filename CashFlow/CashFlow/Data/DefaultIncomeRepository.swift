@@ -86,7 +86,7 @@ final class DefaultIncomeRepository: IncomeRepository {
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.putIncomeEntry(            
+        let endpoint = APIEndpoints.putIncomeEntry(
             incomeID: incomeEntry.id.uuidString,
             with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry)
         )
@@ -104,8 +104,26 @@ final class DefaultIncomeRepository: IncomeRepository {
         return task
     }
     
-    func deleteIncomeEntry() {
-        // TODO: Implement
+    func deleteIncomeEntry(
+        incomeID: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?{
+        let task = RepositoryTask()
+        let endpoint = APIEndpoints.deleteIncomeEntry(
+            incomeID: incomeID
+        )
+        task.networkTask = self.dataTransferService.request(
+            with: endpoint
+        ) { resultado in
+            switch resultado
+            {
+            case .success():
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        return task
     }
     
     public func getAllIncomeEntries(

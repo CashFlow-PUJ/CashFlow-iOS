@@ -44,6 +44,10 @@ class EntryLogDIContainer {
         EditIncome(incomeRepository: makeIncomeRepository())
     }
     
+    func makeDeleteIncome() -> DeleteIncome {
+        DeleteIncome(incomeRepository: makeIncomeRepository())
+    }
+    
     // MARK: - Repositories
     func makeExpenseRepository() -> ExpenseRepository {
         DefaultExpenseRepository(dataTransferService: dependencies.apiDataTransferService)
@@ -68,7 +72,8 @@ class EntryLogDIContainer {
             visualizeIncomeHistory: makeVisualizeIncomeHistory(),
             viewIncome: makeViewIncome(),
             enterIncome: makeEnterIncome(),
-            editIncome: makeEditIncome()
+            editIncome: makeEditIncome(),
+            deleteIncome: makeDeleteIncome()
         )
     }
     

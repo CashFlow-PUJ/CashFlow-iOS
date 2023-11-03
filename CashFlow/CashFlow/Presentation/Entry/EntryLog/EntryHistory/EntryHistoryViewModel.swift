@@ -9,10 +9,14 @@ import Foundation
 
 extension IncomeHistoryView {
     @MainActor class IncomeHistoryViewModel: ObservableObject {
+        
+        // MARK: - Use Cases
         private let visualizeIncomeHistory: VisualizeIncomeHistory
         private let viewIncome: ViewIncome
         private let enterIncome: DefaultEnterIncome
         private let editIncome: EditIncome
+        private let deleteIncome: DeleteIncome
+        
         private let sharedData: SharedData
         //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
@@ -26,13 +30,18 @@ extension IncomeHistoryView {
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
             enterIncome: DefaultEnterIncome,
-            editIncome: EditIncome
+            editIncome: EditIncome,
+            deleteIncome: DeleteIncome
         ) {
             self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
             self.editIncome = editIncome
+            self.deleteIncome = deleteIncome
+            
+            
+            self.deleteIncomeEntry(incomeID: "7d75171f-6f7f-452b-a14b-631543e39ed5")
             
             self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
@@ -75,7 +84,7 @@ extension IncomeHistoryView {
             incomePostTask = enterIncome.execute(incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
-                    print("Success")
+                    print("Successfully created income entry.")
                 case .failure:
                     print("Failed posting entry.")
                 }
@@ -86,9 +95,20 @@ extension IncomeHistoryView {
             incomePutTask = editIncome.execute(incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
-                    print("Success")
+                    print("Successfully updated income entry.")
                 case .failure:
-                    print("Failed posting entry.")
+                    print("Failed updating entry.")
+                }
+            }
+        }
+        
+        func deleteIncomeEntry(incomeID: String) {
+            incomePutTask = deleteIncome.execute(incomeID: incomeID) { result in
+                switch result {
+                case .success:
+                    print("Successfully deleted income entry.")
+                case .failure:
+                    print("Failed deleting entry.")
                 }
             }
         }
@@ -98,12 +118,14 @@ extension IncomeHistoryView {
 extension ExpenseHistoryView {
     @MainActor class ExpenseHistoryViewModel: ObservableObject {
         
+        // MARK: - Use Cases
         private let visualizeExpenseHistory: VisualizeExpenseHistory
         private let viewExpense: ViewExpense
         
         //@Published var expenseHistory: [Expense] = Expense.sampleData
         @Published var expenseHistory: [Expense] = []
         private let sharedData: SharedData
+        
         private var expensesLoadTask: Cancellable? { willSet { expensesLoadTask?.cancel() } }
         
         init(
