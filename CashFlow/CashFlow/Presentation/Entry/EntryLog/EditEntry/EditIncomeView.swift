@@ -10,10 +10,11 @@ import SwiftUI
 struct EditIncomeView: View {
     @Binding var income: Income
     @Binding var isPresented: Bool
-    
+    @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
     @State private var total: String = ""
     @State private var description: String = ""
     @State private var category: IncomeCategory
+
     @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
 
     init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory, viewModel: IncomeHistoryView.IncomeHistoryViewModel) {
@@ -33,6 +34,9 @@ struct EditIncomeView: View {
             Spacer()
             
             Form {
+                
+                // TODO: Make all of the Fields editable.
+                
                 TextField("Total", text: $total)
                     .keyboardType(.numberPad) 
                 
@@ -43,6 +47,12 @@ struct EditIncomeView: View {
                         Text(category.rawValue).tag(category)
                     }
                 }
+                .onChange(of: category, perform: { value in
+                    income.category = category
+                    
+                    // DEBUG PRINT
+                    print("INCOME CATEGORY: ", income.category)
+                })
                 .pickerStyle(MenuPickerStyle())
                 
                 Button("Save") {
@@ -59,7 +69,7 @@ struct EditIncomeView: View {
         }
     }
     
-    func saveIncome() {
+     func saveIncome() {
         if let total = Int(self.total) {
             var updatedIncome = self.income
             updatedIncome.total = total
@@ -70,7 +80,5 @@ struct EditIncomeView: View {
             self.isPresented = false
         }
     }
-    
-    
 }
 

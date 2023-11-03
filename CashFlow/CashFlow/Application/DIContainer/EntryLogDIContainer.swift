@@ -32,6 +32,10 @@ class EntryLogDIContainer {
         ViewExpense(expenseRepository: makeExpenseRepository())
     }
     
+    func makeDeleteExpense() -> DeleteExpense {
+        DeleteExpense(expenseRepository: makeExpenseRepository())
+    }
+    
     func makeVisualizeIncomeHistory() -> VisualizeIncomeHistory {
         VisualizeIncomeHistory(incomeRepository: makeIncomeRepository())
     }
@@ -42,6 +46,14 @@ class EntryLogDIContainer {
     
     func makeEnterIncome() -> DefaultEnterIncome {
         DefaultEnterIncome(incomeRepository: makeIncomeRepository())
+    }
+    
+    func makeEditIncome() -> EditIncome {
+        EditIncome(incomeRepository: makeIncomeRepository())
+    }
+    
+    func makeDeleteIncome() -> DeleteIncome {
+        DeleteIncome(incomeRepository: makeIncomeRepository())
     }
     
     // MARK: - Repositories
@@ -58,7 +70,8 @@ class EntryLogDIContainer {
         ExpenseHistoryView.ExpenseHistoryViewModel(
             sharedData: sharedData,
             visualizeExpenseHistory: makeVisualizeExpenseHistory(),
-            viewExpense: makeViewExpense()
+            viewExpense: makeViewExpense(),
+            deleteExpense: makeDeleteExpense()
         )
     }
     
@@ -68,7 +81,8 @@ class EntryLogDIContainer {
             visualizeIncomeHistory: makeVisualizeIncomeHistory(),
             viewIncome: makeViewIncome(),
             enterIncome: makeEnterIncome(),
-            updateIncome: makeUpdateIncome()  // Añade esta línea
+            deleteIncome: makeDeleteIncome(),
+            updateIncome: makeUpdateIncome() 
         )
     }
     

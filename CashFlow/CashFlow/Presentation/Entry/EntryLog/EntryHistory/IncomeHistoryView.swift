@@ -11,7 +11,7 @@ import SwiftUI
 
 struct IncomeHistoryView: View {
     
-    @EnvironmentObject var coordinator: Coordinator
+    //@EnvironmentObject var coordinator: Coordinator
     @Binding var categoryFilter: IncomeCategory
     @StateObject var viewModel: IncomeHistoryViewModel
     @EnvironmentObject var sharedData: SharedData

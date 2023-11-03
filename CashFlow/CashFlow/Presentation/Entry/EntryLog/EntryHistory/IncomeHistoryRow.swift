@@ -12,6 +12,10 @@ struct IncomeHistoryRow: View {
     var entry: Income
     @Binding var selectedEntry: Income?
     @State private var isSheetPresented: Bool = false
+    @EnvironmentObject var sharedData: SharedData
+    
+    // MARK: - Coordinator
+    @EnvironmentObject var coordinator: Coordinator
     @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
 
     var body: some View {

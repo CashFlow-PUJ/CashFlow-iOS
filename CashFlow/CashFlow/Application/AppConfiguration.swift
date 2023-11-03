@@ -15,7 +15,7 @@ final class AppConfiguration {
             fatalError("ApiBaseURL must not be empty in plist")
         }
         
-        
+        // TODO: Delete the following apiBaseURL values for 'production'.
         // Mock API
         // let apiBaseURL = "https://6536b68fbb226bb85dd28959.mockapi.io"
         
