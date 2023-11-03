@@ -12,12 +12,14 @@ struct EditExpenseView: View {
     @Binding var isPresented: Bool
     
     @State private var total: String = ""
-    @State private var vendor: String = ""
+    @State private var description: String = ""
+    @State private var vendorName: String = ""
+    @State private var ocrText: String = ""
     @State private var category: ExpenseCategory
     
     init(expense: Binding<Expense>, isPresented: Binding<Bool>, category: ExpenseCategory) {
         self._expense = expense
-        self._isPresented = isPresented  // Asegúrate de usar _isPresented aquí
+        self._isPresented = isPresented
         self._category = State(initialValue: category)
     }
     
@@ -34,7 +36,11 @@ struct EditExpenseView: View {
                 TextField("Total", text: $total)
                     .keyboardType(.decimalPad)
                 
-                TextField("Vendor Name", text: $vendor)
+                TextField("Description", text: $description)
+                
+                TextField("Vendor Name", text: $vendorName)
+                
+                TextField("OCR Text (if any)", text: $ocrText)
                 
                 Picker("Category", selection: $category) {
                     ForEach(ExpenseCategory.allCases, id: \.self) { category in
@@ -49,8 +55,10 @@ struct EditExpenseView: View {
             }
             .onAppear {
                 self.total = String(self.expense.total)
-                self.vendor = self.expense.vendorName ?? ""
+                self.description = self.expense.description ?? ""
+                self.vendorName = self.expense.vendorName ?? ""
                 self.category = self.expense.category
+                self.ocrText = self.expense.ocrText ?? ""
             }
             
             Spacer()
@@ -60,12 +68,11 @@ struct EditExpenseView: View {
     func saveExpense() {
         if let total = Int(self.total) {
             self.expense.total = total
-            self.expense.vendorName = self.vendor
+            self.expense.description = self.description
+            self.expense.vendorName = self.vendorName
             self.expense.category = self.category
+            self.expense.ocrText = self.ocrText.isEmpty ? nil : self.ocrText
         }
         self.isPresented = false
     }
-    
-    
 }
-

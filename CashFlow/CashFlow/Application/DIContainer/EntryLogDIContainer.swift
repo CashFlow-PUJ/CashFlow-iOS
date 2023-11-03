@@ -53,6 +53,9 @@ class EntryLogDIContainer {
         DefaultIncomeRepository(dataTransferService: dependencies.apiDataTransferService)
     }
     
+    func makeDeleteIncome() -> DeleteIncome {
+        DeleteIncome(incomeRepository: makeIncomeRepository())
+    }
     // MARK: - Entry History
     @MainActor func makeExpenseHistoryViewModel(sharedData: SharedData) -> ExpenseHistoryView.ExpenseHistoryViewModel {
         ExpenseHistoryView.ExpenseHistoryViewModel(
@@ -68,7 +71,8 @@ class EntryLogDIContainer {
             visualizeIncomeHistory: makeVisualizeIncomeHistory(),
             viewIncome: makeViewIncome(),
             enterIncome: makeEnterIncome(),
-            updateIncome: makeUpdateIncome()  // Añade esta línea
+            updateIncome: makeUpdateIncome(),
+            deleteIncome: makeDeleteIncome()// Añade esta línea
         )
     }
     

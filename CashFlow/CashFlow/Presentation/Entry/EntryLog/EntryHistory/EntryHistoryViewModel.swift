@@ -13,12 +13,13 @@ extension IncomeHistoryView {
         private let viewIncome: ViewIncome
         private let enterIncome: DefaultEnterIncome
         private let sharedData: SharedData
+        private let deleteIncome: DeleteIncome
         //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
         
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }
         private var incomePostTask: Cancellable? { willSet { incomePostTask?.cancel() } }
-        
+        private var incomePutTask: Cancellable? { willSet { incomePutTask?.cancel() } }
         private let updateIncome: DefaultUpdateIncome
         
         init(
@@ -26,13 +27,15 @@ extension IncomeHistoryView {
             visualizeIncomeHistory: VisualizeIncomeHistory,
             viewIncome: ViewIncome,
             enterIncome: DefaultEnterIncome,
-            updateIncome: DefaultUpdateIncome
+            updateIncome: DefaultUpdateIncome,
+            deleteIncome: DeleteIncome
         ) {
             self.sharedData = sharedData
             self.visualizeIncomeHistory = visualizeIncomeHistory
             self.viewIncome = viewIncome
             self.enterIncome = enterIncome
             self.updateIncome = updateIncome
+            self.deleteIncome = deleteIncome
             self.loadIncomeEntries()
             // TODO: Change the following UUID to an actual UUID present in Income database table.
             // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
@@ -77,6 +80,18 @@ extension IncomeHistoryView {
                     self?.sharedData.dataIncomeLoaded = true
                 case .failure:
                     print("Failed loading entry.")
+                }
+            }
+        }
+        
+        func deleteIncomeEntry(incomeID: String) {
+            incomePutTask = deleteIncome.execute(incomeID: incomeID) { result in
+                switch result {
+                case .success:
+                    print("Successfully deleted income entry.")
+                    self.loadIncomeEntries()
+                case .failure:
+                    print("Failed deleting entry.")
                 }
             }
         }

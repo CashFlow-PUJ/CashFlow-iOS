@@ -60,6 +60,13 @@ struct APIEndpoints {
         )
     }
     
+    static func deleteIncomeEntry(incomeID: String) -> Endpoint<Void> {
+        return Endpoint(
+            path: "income/DELETE/\(incomeID)",
+            method: .delete
+        )
+    }
+    
     static func postExpenseEntry(userID: String, with expenses: ExpenseRequestDTO) -> Endpoint<Void> {
         return Endpoint(
             path: "user/POST/EXPENSES/\(userID)",

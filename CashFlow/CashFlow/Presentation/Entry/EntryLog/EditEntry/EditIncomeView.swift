@@ -14,6 +14,7 @@ struct EditIncomeView: View {
     @State private var total: String = ""
     @State private var description: String = ""
     @State private var category: IncomeCategory
+    @State private var showDeletionAlert: Bool = false
     @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
 
     init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory, viewModel: IncomeHistoryView.IncomeHistoryViewModel) {
@@ -48,6 +49,29 @@ struct EditIncomeView: View {
                 Button("Save") {
                     saveIncome()
                 }
+                
+                HStack {
+                    Spacer() 
+                    Button(action: {
+                        showDeletionAlert = true
+                    }) {
+                        Text("Eliminar")
+                            .foregroundColor(.red)
+                    }
+                    Spacer()
+                }
+                .alert(isPresented: $showDeletionAlert) {
+                    Alert(
+                        title: Text("Confirmar eliminación"),
+                        message: Text("¿Estás seguro de que quieres eliminar esta entrada?"),
+                        primaryButton: .destructive(Text("Eliminar")) {
+                            deleteIncome(id: income.id.uuidString)
+                        },
+                        secondaryButton: .cancel()
+                    )
+                }
+
+                
             }
             .onAppear {
                 self.total = String(self.income.total)
@@ -69,6 +93,11 @@ struct EditIncomeView: View {
             viewModel.updateIncomeEntry(incomeID: income.id.uuidString, updatedIncome: updatedIncome)
             self.isPresented = false
         }
+    }
+    
+    func deleteIncome(id: String) {
+        viewModel.deleteIncomeEntry(incomeID: id)
+        self.isPresented = false
     }
     
     

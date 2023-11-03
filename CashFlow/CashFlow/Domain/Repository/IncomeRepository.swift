@@ -30,5 +30,8 @@ protocol IncomeRepository {
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 
-    func deleteIncomeEntry()
+    func deleteIncomeEntry(
+        incomeID: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) -> Cancellable?
 }
