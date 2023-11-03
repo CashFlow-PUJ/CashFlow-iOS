@@ -40,13 +40,10 @@ extension IncomeHistoryView {
             self.editIncome = editIncome
             self.deleteIncome = deleteIncome
             
-            
-            self.deleteIncomeEntry(incomeID: "7d75171f-6f7f-452b-a14b-631543e39ed5")
+            // TODO: Add Delete Button to EditIncomeView.
+            // self.deleteIncomeEntry(incomeID: "7d75171f-6f7f-452b-a14b-631543e39ed5")
             
             self.loadIncomeEntries()
-            // TODO: Change the following UUID to an actual UUID present in Income database table.
-            // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
-            //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
         }
         
         func loadIncomeEntries(){
