@@ -46,9 +46,6 @@ class Coordinator: ObservableObject {
     var appDIContainer = AppDIContainer()
     @Published var path = [Route]()
     
-    init(appDIContainer: AppDIContainer = AppDIContainer(), path: [Route] = [Route]()) {
-        self.appDIContainer = appDIContainer
-    }
 }
 
 @main
@@ -61,7 +58,7 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $coordinator.path) {
-                EntryLogView()
+                LoginView()
                     .preferredColorScheme(.light)
                     .navigationDestination(for: Route.self) { route in
                         Group {
@@ -69,13 +66,11 @@ struct CashFlowApp: App {
                             case .transactionLog:
                                 EntryLogView()
                                     .preferredColorScheme(.light)
-                                    .environmentObject(coordinator)
                                     .environmentObject(userProfile)
                                     .environmentObject(sharedData)
                             case .login:
                                 LoginView()
                                     .preferredColorScheme(.light)
-                                    .environmentObject(coordinator)
                                     .environmentObject(userProfile)
                                     .environmentObject(sharedData)
                             }
@@ -85,14 +80,16 @@ struct CashFlowApp: App {
             }
             .environmentObject(userProfile)
             .environmentObject(sharedData)
+            .environmentObject(coordinator)
             .onAppear {
                 if Auth.auth().currentUser != nil {
+                    
+                    // DEBUG PRINT
+                    print("USUARIO AUTENTICADO: ", Auth.auth().currentUser?.email)
+                    
                     coordinator.path.append(.transactionLog)
                 }
             }
-            .environmentObject(userProfile)
-            .environmentObject(sharedData)
-            .environmentObject(coordinator)
             .onOpenURL { url in
                 GIDSignIn.sharedInstance.handle(url)
             }

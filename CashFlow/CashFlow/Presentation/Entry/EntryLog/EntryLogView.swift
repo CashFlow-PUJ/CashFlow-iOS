@@ -190,6 +190,7 @@ struct EntryLogView: View {
                                             .frame(width: (UIScreen.main.bounds.width / 2) + 50, height: UIScreen.main.bounds.height + 10)
                                             .overlay(
                                                 MenuView(selectedItem: $itemMenu)
+                                                    .environmentObject(coordinator)
                                             )
                                             .offset(x: isShowingMenu ? 0 : -(UIScreen.main.bounds.width / 2))
                                         Spacer()
