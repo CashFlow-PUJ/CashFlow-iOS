@@ -43,6 +43,9 @@ struct MenuView: View {
     
     @Binding var selectedItem: ItemMenu
     @EnvironmentObject var userProfile: UserProfile
+    
+    @StateObject private var authVM = AuthViewModel()
+    @EnvironmentObject var coordinator: Coordinator
 
     var body: some View {
         let menuItems: [MenuItem] = ItemMenu.allCases.map { itemMenu in
@@ -132,7 +135,8 @@ struct MenuView: View {
             case .configuracion:
                 showEditProfile = true
             case .cerrarSesion:
-                print("Navegando a", selectedItem)
+                authVM.signOut()
+                coordinator.path.append(.login)
         }
     }
 }
