@@ -26,7 +26,16 @@
 	<string>93e14f2eb700631208f115486314d2dc</string>
 	<key>FacebookDisplayName</key>
 	<string>CashFlow</string>
-	<key>NSAppTransportSecurity</key>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+    <key>FacebookAdvertiserIDCollectionEnabled</key>
+    <true/>
+    <key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>

@@ -120,7 +120,7 @@ struct MenuView: View {
                 .padding(.bottom, 20)
             }
             .sheet(isPresented: $showEditProfile) {
-                EditProfileView()
+                EditProfileView(isPresented: $showEditProfile)
                     .environmentObject(userViewModel)
                     .environmentObject(userProfile)
             }

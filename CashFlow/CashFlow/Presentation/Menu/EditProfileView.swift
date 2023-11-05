@@ -17,7 +17,8 @@ struct EditProfileView: View {
     @State private var selectedGender: Gender = .male
     
     @EnvironmentObject var userViewModel: UserViewModel
-    
+    @Binding var isPresented: Bool
+
     var body: some View {
         VStack(spacing: 20) {
             // Mostrar la imagen de perfil
@@ -63,7 +64,9 @@ struct EditProfileView: View {
                         .datePickerStyle(GraphicalDatePickerStyle())
                 }
                 
+                
             }
+            Spacer()
             
             Button(action: saveProfileChanges) {
                 Text("Guardar Cambios")
@@ -72,6 +75,7 @@ struct EditProfileView: View {
             .background(Color.blue)
             .cornerRadius(10)
             .foregroundColor(.white)
+            
             
             Spacer()
         }
@@ -104,6 +108,7 @@ struct EditProfileView: View {
         
         // Invoca el método updateUser del UserViewModel
         userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser)
+        isPresented = false
     }
 }
 

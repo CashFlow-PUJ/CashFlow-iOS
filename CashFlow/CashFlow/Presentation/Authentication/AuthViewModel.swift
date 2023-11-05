@@ -56,6 +56,7 @@ class AuthViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     completion(.success(true))
                 }
+                
             }
             
         }
@@ -72,7 +73,6 @@ class AuthViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     completion(.success(true))
                 }
-                
                 // TODO: SAVE USER OBJECT IN MEMORY
                 /*
                 self.email = result?.user.email
