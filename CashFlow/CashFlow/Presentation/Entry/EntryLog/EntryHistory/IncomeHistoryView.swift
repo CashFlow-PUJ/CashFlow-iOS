@@ -7,21 +7,29 @@
 
 import SwiftUI
 
+
+
 struct IncomeHistoryView: View {
     
+    @EnvironmentObject var coordinator: Coordinator
     @Binding var categoryFilter: IncomeCategory
-    
-    var entryHistory: [Income] = Income.sampleData
+    @StateObject var viewModel: IncomeHistoryViewModel
+    @EnvironmentObject var sharedData: SharedData
+     
+    @State var selectedEntry: Income?
     
     var body: some View {
-        if (categoryFilter == .total){
-            List(entryHistory) { entry in
-                IncomeHistoryRow(entry: entry)
-            }.listStyle(.inset)
-        }else{
-            List(entryHistory.filter({$0.category == categoryFilter})) { entry in
-                IncomeHistoryRow(entry: entry)
-            }.listStyle(.inset)
+        if (categoryFilter == .total) {
+            List(sharedData.incomeHistory) { entry in
+                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
+            }
+            .listStyle(.inset)
+        }
+        else {
+            List(sharedData.incomeHistory.filter({$0.category == categoryFilter})) { entry in
+                IncomeHistoryRow(entry: entry, selectedEntry: $selectedEntry, viewModel: viewModel)
+            }
+            .listStyle(.inset)
         }
     }
 }

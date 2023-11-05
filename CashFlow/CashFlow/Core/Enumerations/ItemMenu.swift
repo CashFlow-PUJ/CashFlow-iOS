@@ -10,15 +10,17 @@ import Foundation
 enum ItemMenu: String, CaseIterable, Identifiable {
     
     case dashboard = "Dashboard"
-    case rutas = "Rutas"
+    //case rutas = "Rutas"
     case configuracion = "Configuración"
+    case cerrarSesion = "Cerrar Sesión"
     
     
     var symbol: String {
         switch self {
         case .dashboard: return "house"
-        case .rutas: return "map"
+        //case .rutas: return "map"
         case .configuracion: return "gear"
+        case .cerrarSesion: return "power"
         }
     }
     

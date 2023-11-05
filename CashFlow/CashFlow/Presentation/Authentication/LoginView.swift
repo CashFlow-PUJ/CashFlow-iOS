@@ -23,6 +23,7 @@ struct LoginView: View {
     @State private var errorMessage = ""
     
     @StateObject private var vm = AuthViewModel()
+    @EnvironmentObject var sharedData: SharedData
     
     private let facebookAuthentication = FacebookAuthentication()
 
@@ -64,6 +65,14 @@ struct LoginView: View {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
                     case .success(_):
+                        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                            if let error = error {
+                                print("Error getting token: \(error.localizedDescription)")
+                                return
+                            }
+                            print("Token is: \(tokenResult?.token ?? "No token")")
+                        })
+                        sharedData.userId = Auth.auth().currentUser!.uid
                         coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
@@ -113,6 +122,13 @@ struct LoginView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
+                            Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                                if let error = error {
+                                    print("Error getting token: \(error.localizedDescription)")
+                                    return
+                                }
+                                print("Token is: \(tokenResult?.token ?? "No token")")
+                            })
                             coordinator.path.append(.transactionLog)
                         case .failure(let error):
                             showingErrorAlert = true
@@ -176,6 +192,14 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
+                    Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                        if let error = error {
+                            print("Error getting token: \(error.localizedDescription)")
+                            return
+                        }
+                        print("Token is: \(tokenResult?.token ?? "No token")")
+                    })
+                    sharedData.userId = Auth.auth().currentUser!.uid
                     coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)
@@ -189,16 +213,7 @@ struct LoginView: View {
             switch result {
             case .success(let accessToken):
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
-                Auth.auth().signIn(with: credential) { authDataResult, error in
-                    if let error = error {
-                        print("Error creating a new user \(error.localizedDescription)")
-                        completionBlock(.failure(error))
-                        return
-                    }
-                    let email = authDataResult?.user.email ?? "No email"
-                    print("New user created with info \(email)")
-                    completionBlock(.success(true))
-                }
+                //sharedData.userId = Auth.auth().currentUser!.uid
             case .failure(let error):
                 print("Error signIn with Facebook \(error.localizedDescription)")
                 completionBlock(.failure(error))
