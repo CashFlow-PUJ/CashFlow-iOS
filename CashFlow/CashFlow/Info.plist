@@ -26,6 +26,8 @@
 	<string>93e14f2eb700631208f115486314d2dc</string>
 	<key>FacebookDisplayName</key>
 	<string>CashFlow</string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <false/>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>fbapi</string>
