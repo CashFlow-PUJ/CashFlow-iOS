@@ -71,8 +71,9 @@ struct LoginView: View {
                                 return
                             }
                             print("Token is: \(tokenResult?.token ?? "No token")")
+                            sharedData.userId = tokenResult?.token ?? "No token"
                         })
-                        sharedData.userId = Auth.auth().currentUser!.uid
+                        
                         coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
@@ -198,8 +199,8 @@ struct LoginView: View {
                             return
                         }
                         print("Token is: \(tokenResult?.token ?? "No token")")
+                        sharedData.userId = tokenResult?.token ?? "No token"
                     })
-                    sharedData.userId = Auth.auth().currentUser!.uid
                     coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)

@@ -38,7 +38,7 @@ extension IncomeHistoryView {
         }
         
         func updateIncomeEntry(incomeID: String, updatedIncome: Income) {
-            incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome) { result in
+            incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Income updated successfully.")
@@ -63,7 +63,7 @@ extension IncomeHistoryView {
         }
         
         func loadIncomeByID(incomeID: String) {
-            incomeLoadTask = viewIncome.execute(incomeID: incomeID) { [weak self] result in
+            incomeLoadTask = viewIncome.execute(incomeID: incomeID, userID: sharedData.userId) { [weak self] result in
                 switch result {
                 case .success(let entry):
                     
@@ -76,7 +76,7 @@ extension IncomeHistoryView {
         }
         
         func deleteIncomeEntry(incomeID: String) {
-            incomePutTask = deleteIncome.execute(id: incomeID) { result in
+            incomePutTask = deleteIncome.execute(id: incomeID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted income entry.")
@@ -133,7 +133,7 @@ extension ExpenseHistoryView {
         }
         
         func updateExpenseEntry(expenseID: String, updatedExpense: Expense) {
-            expensePostTask = updateExpense.execute(expenseID: expenseID, updatedExpense: updatedExpense) { result in
+            expensePostTask = updateExpense.execute(expenseID: expenseID, updatedExpense: updatedExpense, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Expense updated successfully.")
@@ -159,7 +159,7 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenseByID(expenseID: String) {
-            expensesLoadTask = viewExpense.execute(expenseID: expenseID) { [weak self] result in
+            expensesLoadTask = viewExpense.execute(expenseID: expenseID, userID: sharedData.userId) { [weak self] result in
                 switch result {
                 case .success(let expense):
                     
@@ -186,7 +186,7 @@ extension ExpenseHistoryView {
         }
         
         func deleteExpense(expenseID: String) {
-            expenseDeleteTask = deleteExpense.execute(id: expenseID) { result in
+            expenseDeleteTask = deleteExpense.execute(id: expenseID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted expense entry.")

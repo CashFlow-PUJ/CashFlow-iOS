@@ -57,14 +57,20 @@ struct CashFlowApp: App {
     
     func setup() {
         coordinator.setup()
-        sharedData.userId = Auth.auth().currentUser?.uid ?? ""
+        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+            if let error = error {
+                print("Error getting token: \(error.localizedDescription)")
+                return
+            }
+            sharedData.userId = tokenResult?.token ?? ""
+        })
     }
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 VStack {
-                    if Auth.auth().currentUser != nil {
+                    if Auth.auth().currentUser != nil && !sharedData.userId.isEmpty {
                         EntryLogView(coordinator: coordinator, sharedData: sharedData)
                             .preferredColorScheme(.light)
                             .navigationBarBackButtonHidden(true)

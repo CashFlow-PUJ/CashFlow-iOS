@@ -17,6 +17,7 @@ protocol IncomeRepository {
     
     func getIncomeEntryByID(
         incomeID: String,
+        userID: String,
         completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable?
     
@@ -29,11 +30,13 @@ protocol IncomeRepository {
     func updateIncomeEntry(
         incomeID: String,
         incomeEntry: Income,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 
     func deleteIncomeEntry(
         incomeID: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }

@@ -17,6 +17,7 @@ protocol ExpenseRepository {
     
     func getExpenseEntryByID(
         expenseID: String,
+        userID: String,
         completion: @escaping (Result<Expense, Error>) -> Void
     ) -> Cancellable?
     
@@ -28,10 +29,12 @@ protocol ExpenseRepository {
     func updateExpenseEntry(
         expenseID: String,
         expenseEntry: Expense,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
     func deleteExpenseEntry(
         expenseID: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }

@@ -11,6 +11,7 @@ protocol UpdateIncome {
     func execute(
         incomeID: String,
         updatedIncome: Income,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }
@@ -26,9 +27,10 @@ final class DefaultUpdateIncome: UpdateIncome {
     func execute(
         incomeID: String,
         updatedIncome: Income,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return incomeRepository.updateIncomeEntry(incomeID: incomeID, incomeEntry: updatedIncome, completion: completion)
+        return incomeRepository.updateIncomeEntry(incomeID: incomeID, incomeEntry: updatedIncome, userID: userID, completion: completion)
     }
 }
 

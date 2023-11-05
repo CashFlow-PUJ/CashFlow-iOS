@@ -34,7 +34,7 @@ class Endpoint<R>: ResponseRequestable {
     init(path: String,
          isFullPath: Bool = false,
          method: HTTPMethodType,
-         headerParameters: [String: String] = [:],
+         additionalHeaders: [String: String] = [:],  // Nuevo parámetro
          queryParametersEncodable: Encodable? = nil,
          queryParameters: [String: Any] = [:],
          bodyParametersEncodable: Encodable? = nil,
@@ -44,7 +44,7 @@ class Endpoint<R>: ResponseRequestable {
         self.path = path
         self.isFullPath = isFullPath
         self.method = method
-        self.headerParameters = headerParameters
+        self.headerParameters = additionalHeaders  // Asigna los headers adicionales
         self.queryParametersEncodable = queryParametersEncodable
         self.queryParameters = queryParameters
         self.bodyParametersEncodable = bodyParametersEncodable
