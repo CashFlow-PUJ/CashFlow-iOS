@@ -15,16 +15,14 @@ protocol UserRepository {
         completion: @escaping (Result<User, Error>) -> Void
     ) -> Cancellable?
 
-    /// Update a user's information.
-    /*@discardableResult
+    @discardableResult
     func updateUser(
         uuid: String,
-        user: User,
+        user: UserRequestDTO,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
     
-    /// Delete a user.
-    @discardableResult
+    /*@discardableResult
     func deleteUser(
         uuid: String,
         completion: @escaping (Result<Void, Error>) -> Void

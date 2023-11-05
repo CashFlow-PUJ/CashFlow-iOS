@@ -23,6 +23,7 @@ struct LoginView: View {
     @State private var errorMessage = ""
     
     @StateObject private var vm = AuthViewModel()
+    @EnvironmentObject var sharedData: SharedData
     
     private let facebookAuthentication = FacebookAuthentication()
 
@@ -64,6 +65,7 @@ struct LoginView: View {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
                     case .success(_):
+                        sharedData.userId = Auth.auth().currentUser!.uid
                         coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
@@ -176,6 +178,7 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
+                    sharedData.userId = Auth.auth().currentUser!.uid
                     coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)
@@ -199,6 +202,7 @@ struct LoginView: View {
                     print("New user created with info \(email)")
                     completionBlock(.success(true))
                 }
+                sharedData.userId = Auth.auth().currentUser!.uid
             case .failure(let error):
                 print("Error signIn with Facebook \(error.localizedDescription)")
                 completionBlock(.failure(error))

@@ -14,10 +14,10 @@ struct EditProfileView: View {
     @State private var userName: String = ""
     @State private var userLast: String = ""
     @State private var userBirthday: Date = Date()
-    
     @State private var selectedGender: Gender = .male
     
     @EnvironmentObject var userViewModel: UserViewModel
+    
     var body: some View {
         VStack(spacing: 20) {
             // Mostrar la imagen de perfil
@@ -48,7 +48,7 @@ struct EditProfileView: View {
                 }
                 
                 Section(header: Text("Apellido")) {
-                    TextField("Nombre", text: $userLast)
+                    TextField("Apellido", text: $userLast)
                 }
                 
                 Section(header: Text("Género")) {
@@ -65,23 +65,45 @@ struct EditProfileView: View {
                 
             }
             
+            Button(action: saveProfileChanges) {
+                Text("Guardar Cambios")
+            }
+            .padding()
+            .background(Color.blue)
+            .cornerRadius(10)
+            .foregroundColor(.white)
+            
             Spacer()
         }
         .onAppear {
-           if let user = userViewModel.user {
-               userName = "\(user.firstName)"
-               userLast = "\(user.lastName)"
-               userBirthday = user.birthDate
-               selectedGender = Gender(from: user.gender) ?? .male
-               if userProfile.profileImage == nil {
-                   userProfile.profileImage = loadImageFromDisk(withName: "userProfileImage")
-               }
-           }
-       }
+            if let user = userViewModel.user {
+                userName = "\(user.firstName)"
+                userLast = "\(user.lastName)"
+                userBirthday = user.birthDate
+                selectedGender = Gender(from: user.gender) ?? .male
+                if userProfile.profileImage == nil {
+                    userProfile.profileImage = loadImageFromDisk(withName: "userProfileImage")
+                }
+            }
+        }
         .navigationTitle("Editar Perfil")
         .sheet(isPresented: $isImagePickerPresented, content: {
             ImagePicker(selectedImage: $userProfile.profileImage, sourceType: .photoLibrary)
         })
+    }
+    
+    func saveProfileChanges() {
+        // Construye el objeto User a partir de los valores en la vista
+        let updatedUser = User(
+            uuid: userViewModel.user?.uuid ?? "",
+            birthDate: userBirthday,
+            gender: selectedGender.rawValue,
+            firstName: userName,
+            lastName: userLast
+        )
+        
+        // Invoca el método updateUser del UserViewModel
+        userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser)
     }
 }
 

@@ -26,6 +26,8 @@
 		7F88CC2E2AF6FA4100926617 /* ViewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC2D2AF6FA4100926617 /* ViewUser.swift */; };
 		7F88CC302AF6FC2200926617 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC2F2AF6FC2200926617 /* UserViewModel.swift */; };
 		7F88CC322AF7151900926617 /* UserGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC312AF7151900926617 /* UserGender.swift */; };
+		7F88CC342AF7239D00926617 /* UserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC332AF7239D00926617 /* UserRequestDTO.swift */; };
+		7F88CC362AF7279B00926617 /* UpdateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC352AF7279B00926617 /* UpdateUser.swift */; };
 		7FBD84BA2AF49EA40035236D /* UpdateExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD84B92AF49EA30035236D /* UpdateExpense.swift */; };
 		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
 		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
@@ -128,6 +130,8 @@
 		7F88CC2D2AF6FA4100926617 /* ViewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUser.swift; sourceTree = "<group>"; };
 		7F88CC2F2AF6FC2200926617 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		7F88CC312AF7151900926617 /* UserGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGender.swift; sourceTree = "<group>"; };
+		7F88CC332AF7239D00926617 /* UserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRequestDTO.swift; sourceTree = "<group>"; };
+		7F88CC352AF7279B00926617 /* UpdateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUser.swift; sourceTree = "<group>"; };
 		7FBD84B92AF49EA30035236D /* UpdateExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateExpense.swift; sourceTree = "<group>"; };
 		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -615,6 +619,8 @@
 				7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */,
 				7FBD84B92AF49EA30035236D /* UpdateExpense.swift */,
 				7F88CC272AF6F7DD00926617 /* UserResponseDTO.swift */,
+				7F88CC332AF7239D00926617 /* UserRequestDTO.swift */,
+				7F88CC352AF7279B00926617 /* UpdateUser.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -817,6 +823,7 @@
 				9A70BD5A2AC518BF00155BA9 /* VisualizeEntryHistory.swift in Sources */,
 				9A70BD0C2AC091C400155BA9 /* ChartData.swift in Sources */,
 				9A70BD372AC3C83400155BA9 /* Entry.swift in Sources */,
+				7F88CC362AF7279B00926617 /* UpdateUser.swift in Sources */,
 				9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */,
 				9A70BD3D2AC5139C00155BA9 /* EnterExpense.swift in Sources */,
 				9A83CA602AE6A80B00B24196 /* EntryLogDIContainer.swift in Sources */,
@@ -850,6 +857,7 @@
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
 				7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */,
 				9AD1A30F2AE1D4E40034972E /* DefaultExpenseRepository.swift in Sources */,
+				7F88CC342AF7239D00926617 /* UserRequestDTO.swift in Sources */,
 				9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */,
 				7F88CC302AF6FC2200926617 /* UserViewModel.swift in Sources */,
 				9A70BD412AC513C300155BA9 /* ScanImage.swift in Sources */,

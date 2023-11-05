@@ -104,4 +104,12 @@ struct APIEndpoints {
             method: .get
         )
     }
+    
+    static func updateUser(userID: String, with user: UserRequestDTO) -> Endpoint<Void> {
+        return Endpoint(
+            path: "user/UPDATE/\(userID)",
+            method: .put,
+            bodyParametersEncodable: user
+        )
+    }
 }

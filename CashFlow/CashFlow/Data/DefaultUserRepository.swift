@@ -59,4 +59,25 @@ final class DefaultUserRepository: UserRepository {
         return task
     }
     
+    func updateUser(
+            uuid: String,
+            user: UserRequestDTO,
+            completion: @escaping (Result<Void, Error>) -> Void
+        ) -> Cancellable? {
+            let task = RepositoryTask()
+            let endpoint = APIEndpoints.updateUser(userID: uuid, with: user)
+            task.networkTask = self.dataTransferService.request(
+                with: endpoint,
+                on: backgroundQueue
+            ) { result in
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+            return task
+        }
+    
 }

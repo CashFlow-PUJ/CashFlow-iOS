@@ -42,7 +42,7 @@ struct EntryLogView: View {
     init(coordinator: Coordinator, sharedData: SharedData) {
         self.userRepository = coordinator.appDIContainer.entryLogDIContainer.makeUserRepository()
         self.getUserByUUID = GetUserByUUID(userRepository: userRepository)
-        self.userViewModel = UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUID)
+        self.userViewModel = UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUID, updateUser: coordinator.appDIContainer.entryLogDIContainer.makeUpdateUser())
     }
     
     var body: some View {

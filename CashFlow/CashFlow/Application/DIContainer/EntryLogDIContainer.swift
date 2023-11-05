@@ -76,6 +76,10 @@ class EntryLogDIContainer {
         GetUserByUUID(userRepository: makeUserRepository())
     }
     
+    func makeUpdateUser() -> UpdateUser {
+        return DefaultUpdateUser(userRepository: makeUserRepository())
+    }
+    
     // MARK: - Entry History
     @MainActor func makeExpenseHistoryViewModel(sharedData: SharedData) -> ExpenseHistoryView.ExpenseHistoryViewModel {
         ExpenseHistoryView.ExpenseHistoryViewModel(
@@ -101,8 +105,8 @@ class EntryLogDIContainer {
     
     @MainActor func makeUserViewModel(sharedData: SharedData) -> UserViewModel {
         let getUserByUUIDUseCase = makeGetUserByUUID()
-        return UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUIDUseCase)
+        let updateUserUseCase = makeUpdateUser()
+        return UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUIDUseCase, updateUser: updateUserUseCase)
     }
     
-        
 }

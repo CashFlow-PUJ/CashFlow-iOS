@@ -10,22 +10,22 @@ import Foundation
 @MainActor class UserViewModel: ObservableObject {
     
     private let getUserByUUID: GetUserByUUID
-    // ... [otros casos de uso relacionados con el usuario, como updateUser, deleteUser, etc.]
+    private let updateUser: UpdateUser  // Paso 1: Inyecta el caso de uso UpdateUser
     
     @Published var user: User?
     
     private let sharedData: SharedData
     private var userLoadTask: Cancellable? { willSet { userLoadTask?.cancel() } }
-    // ... [otros tasks relacionados con el usuario, como userUpdateTask, userDeleteTask, etc.]
+    private var userUpdateTask: Cancellable? { willSet { userUpdateTask?.cancel() } }  // Mantén un control del task de actualizar
     
     init(
         sharedData: SharedData,
-        getUserByUUID: GetUserByUUID
-        // ... [otros casos de uso inyectados, como updateUser, deleteUser, etc.]
+        getUserByUUID: GetUserByUUID,
+        updateUser: UpdateUser  // Paso 1: Añade el parámetro para inyectar el caso de uso
     ) {
         self.sharedData = sharedData
         self.getUserByUUID = getUserByUUID
-        // ... [inicializar otros casos de uso]
+        self.updateUser = updateUser  // Paso 1: Inicializa el caso de uso
     }
     
     func loadUser(uuid: String) {
@@ -44,6 +44,24 @@ import Foundation
         )
     }
     
-    // ... [otros métodos relacionados con el usuario, como updateUser, deleteUser, etc.]
+    // Paso 2: Método para actualizar el usuario
+    func updateUser(uuid: String, user: User) {
+        let userDTO = UserRequestDTO.fromDomain(user: user)
+        userUpdateTask = updateUser.execute(
+            uuid: uuid,
+            user: userDTO,
+            completion: { [weak self] result in
+                switch result {
+                case .success:
+                    DispatchQueue.main.async {
+                        self?.user = user  // Actualiza el user en el ViewModel
+                    }
+                case .failure:
+                    print("Failed updating user.")
+                }
+            }
+        )
+    }
 }
+
 
