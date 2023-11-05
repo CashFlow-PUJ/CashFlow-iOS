@@ -11,6 +11,7 @@ protocol ExpenseRepository {
     
     @discardableResult
     func getAllExpenseEntries(
+        userID: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable?
     
@@ -20,6 +21,7 @@ protocol ExpenseRepository {
     ) -> Cancellable?
     
     func createExpenseEntry(
+        userID: String,
         expenseEntry: Expense,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?

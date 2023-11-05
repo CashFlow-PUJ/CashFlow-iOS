@@ -11,11 +11,11 @@ struct APIEndpoints {
     
     // MARK: - Expenses
     
-    static func getAllExpenseEntries() -> Endpoint<[ExpenseDTO]> {
+    static func getAllExpenseEntries(userID: String) -> Endpoint<[ExpenseDTO]> {
         return Endpoint(
             // TODO: Update path to actual backend endpoint.
-            //path: "user/GET/EXPENSES/\(userID)",
-            path: "user/GET/EXPENSES/4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            path: "user/GET/EXPENSES/\(userID)",
+            //path: "user/GET/EXPENSES/4gO09bQ47MaszLrTZCLUT1CQmPL2",
             //path: "expenses",
             method: .get
         )
@@ -31,12 +31,12 @@ struct APIEndpoints {
     
     // MARK: - Income
     
-    static func getAllIncomeEntries() -> Endpoint<[IncomeDTO]> {
+    static func getAllIncomeEntries(userID: String) -> Endpoint<[IncomeDTO]> {
     //static func getAllIncomeEntries() -> Endpoint<String> {
         return Endpoint(
             // TODO: variable (parameter) for userID
-            //path: "user/GET/INCOME/\(userID)",
-            path: "user/GET/INCOME/4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            path: "user/GET/INCOME/\(userID)",
+            //path: "user/GET/INCOME/4gO09bQ47MaszLrTZCLUT1CQmPL2",
             //path: "income",
             method: .get
         )
@@ -95,6 +95,13 @@ struct APIEndpoints {
         return Endpoint(
             path: "expense/DELETE/\(expenseID)",
             method: .delete
+        )
+    }
+    
+    static func getUserByUUID(uuid: String) -> Endpoint<UserDTO> {
+        return Endpoint(
+            path: "user/GET/\(uuid)",
+            method: .get
         )
     }
 }

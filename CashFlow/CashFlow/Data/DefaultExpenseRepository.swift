@@ -56,12 +56,13 @@ final class DefaultExpenseRepository: ExpenseRepository {
     }
     
     func createExpenseEntry(
+        userID: String,
         expenseEntry: Expense,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
         let endpoint = APIEndpoints.postExpenseEntry(
-            userID: "4gO09bQ47MaszLrTZCLUT1CQmPL2",
+            userID: userID,
             with: ExpenseRequestDTO.fromDomain(expenseEntry: expenseEntry)
         )
         task.networkTask = self.dataTransferService.request(
@@ -123,11 +124,12 @@ final class DefaultExpenseRepository: ExpenseRepository {
         }
     
     public func getAllExpenseEntries(
+        userID: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
         // let requestDTO = ExpenseRequestDTO(query: query)
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.getAllExpenseEntries()
+        let endpoint = APIEndpoints.getAllExpenseEntries(userID: userID)
         task.networkTask = self.dataTransferService.request(
             with: endpoint,
             on: backgroundQueue

@@ -20,6 +20,12 @@
 		7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */; };
 		7F8345D82AEB64CE00E4D3DA /* EditIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */; };
 		7F8345DA2AEEEB1000E4D3DA /* EditExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */; };
+		7F88CC282AF6F7DD00926617 /* UserResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC272AF6F7DD00926617 /* UserResponseDTO.swift */; };
+		7F88CC2A2AF6F89B00926617 /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC292AF6F89B00926617 /* DefaultUserRepository.swift */; };
+		7F88CC2C2AF6F91300926617 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC2B2AF6F91300926617 /* UserRepository.swift */; };
+		7F88CC2E2AF6FA4100926617 /* ViewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC2D2AF6FA4100926617 /* ViewUser.swift */; };
+		7F88CC302AF6FC2200926617 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC2F2AF6FC2200926617 /* UserViewModel.swift */; };
+		7F88CC322AF7151900926617 /* UserGender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88CC312AF7151900926617 /* UserGender.swift */; };
 		7FBD84BA2AF49EA40035236D /* UpdateExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD84B92AF49EA30035236D /* UpdateExpense.swift */; };
 		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
 		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
@@ -116,6 +122,12 @@
 		7F8345D42AEB3F9B00E4D3DA /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		7F8345D72AEB64CE00E4D3DA /* EditIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditIncomeView.swift; sourceTree = "<group>"; };
 		7F8345D92AEEEB1000E4D3DA /* EditExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditExpenseView.swift; sourceTree = "<group>"; };
+		7F88CC272AF6F7DD00926617 /* UserResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseDTO.swift; sourceTree = "<group>"; };
+		7F88CC292AF6F89B00926617 /* DefaultUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserRepository.swift; sourceTree = "<group>"; };
+		7F88CC2B2AF6F91300926617 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		7F88CC2D2AF6FA4100926617 /* ViewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUser.swift; sourceTree = "<group>"; };
+		7F88CC2F2AF6FC2200926617 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		7F88CC312AF7151900926617 /* UserGender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGender.swift; sourceTree = "<group>"; };
 		7FBD84B92AF49EA30035236D /* UpdateExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateExpense.swift; sourceTree = "<group>"; };
 		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -344,6 +356,7 @@
 				9AD1A3102AE1D56B0034972E /* Network */,
 				9AD1A30E2AE1D4E40034972E /* DefaultExpenseRepository.swift */,
 				9A83CA632AE7675C00B24196 /* DefaultIncomeRepository.swift */,
+				7F88CC292AF6F89B00926617 /* DefaultUserRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -406,6 +419,7 @@
 			children = (
 				9AD1A30A2AE1BA530034972E /* ExpenseRepository.swift */,
 				9AD1A30C2AE1BA5F0034972E /* IncomeRepository.swift */,
+				7F88CC2B2AF6F91300926617 /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -426,6 +440,7 @@
 				9A70BD2E2AC3C65400155BA9 /* ExpenseCategory.swift */,
 				9A70BD302AC3C69D00155BA9 /* IncomeCategory.swift */,
 				7F5793D82AC9737500C5877F /* ItemMenu.swift */,
+				7F88CC312AF7151900926617 /* UserGender.swift */,
 			);
 			path = Enumerations;
 			sourceTree = "<group>";
@@ -448,6 +463,7 @@
 				9A70BD542AC5172F00155BA9 /* EnterExpense */,
 				9A70BD482AC5152100155BA9 /* EditEntry */,
 				7F4BB9FA2AF47636005D9B6A /* EntryExpense.swift */,
+				7F88CC2D2AF6FA4100926617 /* ViewUser.swift */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -520,6 +536,7 @@
 				9A70BD132AC0D6FC00155BA9 /* ExpenseHistoryRow.swift */,
 				9A70BD612AC524D600155BA9 /* IncomeHistoryRow.swift */,
 				9A88D6DC2AE6016F00CF0B56 /* EntryHistoryViewModel.swift */,
+				7F88CC2F2AF6FC2200926617 /* UserViewModel.swift */,
 			);
 			path = EntryHistory;
 			sourceTree = "<group>";
@@ -597,6 +614,7 @@
 				9A83CA672AE9908600B24196 /* IncomeRequestDTO.swift */,
 				7F4BB9FC2AF48308005D9B6A /* UpdateIncome.swift */,
 				7FBD84B92AF49EA30035236D /* UpdateExpense.swift */,
+				7F88CC272AF6F7DD00926617 /* UserResponseDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -806,7 +824,9 @@
 				7F8345DA2AEEEB1000E4D3DA /* EditExpenseView.swift in Sources */,
 				9A6AD1952A957A9D0047CCD0 /* LoginView.swift in Sources */,
 				9A70BD2C2AC3C5E000155BA9 /* Income.swift in Sources */,
+				7F88CC2A2AF6F89B00926617 /* DefaultUserRepository.swift in Sources */,
 				9AD1A30B2AE1BA530034972E /* ExpenseRepository.swift in Sources */,
+				7F88CC282AF6F7DD00926617 /* UserResponseDTO.swift in Sources */,
 				9A70BD022ABE764200155BA9 /* TabBarButton.swift in Sources */,
 				9A70BD642AC527B400155BA9 /* IncomeHistoryView.swift in Sources */,
 				7F4BB9FD2AF48308005D9B6A /* UpdateIncome.swift in Sources */,
@@ -815,6 +835,7 @@
 				9AD1A3202AE1E0FA0034972E /* NetworkConfig.swift in Sources */,
 				7F8345D52AEB3F9B00E4D3DA /* EditProfileView.swift in Sources */,
 				9A83CA5E2AE62FFE00B24196 /* AppDIContainer.swift in Sources */,
+				7F88CC2E2AF6FA4100926617 /* ViewUser.swift in Sources */,
 				9AB523592AB3E2E9005EA49C /* MLKitExtensions.swift in Sources */,
 				9A70BD312AC3C69D00155BA9 /* IncomeCategory.swift in Sources */,
 				7F3B430F2AC7EA0200DA791C /* PopUpIncomeView.swift in Sources */,
@@ -830,6 +851,7 @@
 				7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */,
 				9AD1A30F2AE1D4E40034972E /* DefaultExpenseRepository.swift in Sources */,
 				9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */,
+				7F88CC302AF6FC2200926617 /* UserViewModel.swift in Sources */,
 				9A70BD412AC513C300155BA9 /* ScanImage.swift in Sources */,
 				9AD1A3172AE1D5E20034972E /* ExpenseResponseDTO.swift in Sources */,
 				9AB523502AB32522005EA49C /* ImageInputViewController.swift in Sources */,
@@ -856,6 +878,7 @@
 				9A70BD1D2AC0E84600155BA9 /* CategoryButton.swift in Sources */,
 				7F1518CA2AC73F310004540A /* TotalButton.swift in Sources */,
 				9AD1A3152AE1D5D90034972E /* ExpenseRequestDTO.swift in Sources */,
+				7F88CC2C2AF6F91300926617 /* UserRepository.swift in Sources */,
 				9A70BD3B2AC5134800155BA9 /* LogIn.swift in Sources */,
 				9A70BD4A2AC5155800155BA9 /* AddExpenseItem.swift in Sources */,
 				7F1518C52AC721290004540A /* AnyEntry.swift in Sources */,
@@ -866,6 +889,7 @@
 				7F5793D92AC9737500C5877F /* ItemMenu.swift in Sources */,
 				9A6AD1972A958F8E0047CCD0 /* SignupView.swift in Sources */,
 				9A70BD602AC51AC600155BA9 /* ColorExtension.swift in Sources */,
+				7F88CC322AF7151900926617 /* UserGender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -996,7 +1020,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = 6HD9C3J3FV;
+				DEVELOPMENT_TEAM = WXFW7D6G6Z;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1014,7 +1038,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

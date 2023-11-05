@@ -64,15 +64,11 @@ struct CashFlowApp: App {
                         Group {
                             switch route {
                             case .transactionLog:
-                                EntryLogView()
+                                EntryLogView(coordinator: coordinator, sharedData: sharedData)
                                     .preferredColorScheme(.light)
-                                    .environmentObject(userProfile)
-                                    .environmentObject(sharedData)
                             case .login:
                                 LoginView()
                                     .preferredColorScheme(.light)
-                                    .environmentObject(userProfile)
-                                    .environmentObject(sharedData)
                             }
                         }
                         .navigationBarBackButtonHidden(true)
@@ -83,10 +79,9 @@ struct CashFlowApp: App {
             .environmentObject(coordinator)
             .onAppear {
                 if Auth.auth().currentUser != nil {
-                    
                     // DEBUG PRINT
-                    print("USUARIO AUTENTICADO: ", Auth.auth().currentUser?.email)
-                    
+                    print("USUARIO AUTENTICADO: ", Auth.auth().currentUser?.uid as Any)
+                    sharedData.userId = Auth.auth().currentUser!.uid
                     coordinator.path.append(.transactionLog)
                 }
             }

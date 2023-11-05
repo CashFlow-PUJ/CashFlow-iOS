@@ -9,6 +9,7 @@ import Foundation
 
 protocol EnterIncome {
     func execute(
+        userID: String,
         incomeEntry: Income,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
@@ -23,9 +24,10 @@ final class DefaultEnterIncome: EnterIncome {
     }
     
     func execute(
+        userID: String,
         incomeEntry: Income,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return incomeRepository.createIncomeEntry(incomeEntry: incomeEntry, completion: completion)
+        return incomeRepository.createIncomeEntry(userID: userID, incomeEntry: incomeEntry, completion: completion)
     }
 }

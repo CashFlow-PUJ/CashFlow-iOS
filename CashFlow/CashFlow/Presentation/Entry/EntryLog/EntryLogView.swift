@@ -35,6 +35,16 @@ struct EntryLogView: View {
     @State private var itemMenu: ItemMenu = (ItemMenu.allCases.first ?? .dashboard)
     @EnvironmentObject var sharedData: SharedData
     
+    var userRepository: UserRepository
+    var getUserByUUID: GetUserByUUID
+    @ObservedObject var userViewModel: UserViewModel
+
+    init(coordinator: Coordinator, sharedData: SharedData) {
+        self.userRepository = coordinator.appDIContainer.entryLogDIContainer.makeUserRepository()
+        self.getUserByUUID = GetUserByUUID(userRepository: userRepository)
+        self.userViewModel = UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUID)
+    }
+    
     var body: some View {
         Group {
             if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
@@ -191,6 +201,8 @@ struct EntryLogView: View {
                                             .overlay(
                                                 MenuView(selectedItem: $itemMenu)
                                                     .environmentObject(coordinator)
+                                                    .environmentObject(userViewModel)
+                                                    .environmentObject(sharedData)
                                             )
                                             .offset(x: isShowingMenu ? 0 : -(UIScreen.main.bounds.width / 2))
                                         Spacer()
@@ -246,8 +258,8 @@ struct EntryLogView: View {
             }
         }
         .onAppear {
-            var viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
-            var viewModelI = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
+            let viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
+            let viewModelI = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
             viewModelI.loadIncomeEntries()
             viewModel.loadExpenses()
         }

@@ -9,6 +9,7 @@ import Foundation
 
 protocol EntryExpense {
     func execute (
+        userID: String,
         expenseEntry: Expense,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
@@ -23,9 +24,10 @@ final class DefaultEnterExpense: EntryExpense {
     }
     
     func execute(
+        userID: String,
         expenseEntry: Expense,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return expenseRepository.createExpenseEntry(expenseEntry: expenseEntry, completion: completion)
+        return expenseRepository.createExpenseEntry(userID: userID, expenseEntry: expenseEntry, completion: completion)
     }
 }

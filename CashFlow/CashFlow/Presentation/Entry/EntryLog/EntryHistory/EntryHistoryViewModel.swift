@@ -36,10 +36,6 @@ extension IncomeHistoryView {
             self.enterIncome = enterIncome
             self.updateIncome = updateIncome
             self.deleteIncome = deleteIncome
-            //self.loadIncomeEntries()
-            // TODO: Change the following UUID to an actual UUID present in Income database table.
-            // self.loadIncomeByID(incomeID: "2572d43a-721f-11ee-b962-0242ac120002")
-            //self.createIncomeEntry(incomeEntry: Income(id: UUID(), total: 2500000, date: (DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 17)).date!, description: "Ingreso de prueba desde el ViewModel", category: .otros))
         }
         
         func updateIncomeEntry(incomeID: String, updatedIncome: Income) {
@@ -54,7 +50,7 @@ extension IncomeHistoryView {
             }
         }
         func loadIncomeEntries(){
-            incomeLoadTask = visualizeIncomeHistory.execute() { result in
+            incomeLoadTask = visualizeIncomeHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let incomeHistory):
@@ -93,7 +89,7 @@ extension IncomeHistoryView {
         }
         
         func createIncomeEntry(incomeEntry: Income) {
-            incomePostTask = enterIncome.execute(incomeEntry: incomeEntry) { result in
+            incomePostTask = enterIncome.execute(userID: sharedData.userId, incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
                     print("Success")
@@ -150,7 +146,7 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenses(){
-            expensesLoadTask = visualizeExpenseHistory.execute() { result in
+            expensesLoadTask = visualizeExpenseHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
@@ -179,7 +175,7 @@ extension ExpenseHistoryView {
         }
         
         func createExpenseEntry(expenseEntry: Expense){
-            expensePostTask = enterExpense.execute(expenseEntry: expenseEntry) { result in
+            expensePostTask = enterExpense.execute(userID: sharedData.userId, expenseEntry: expenseEntry) { result in
                 switch result {
                 case .success:
                     print("Success")

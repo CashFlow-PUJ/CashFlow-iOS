@@ -46,7 +46,10 @@ struct MenuView: View {
     
     @StateObject private var authVM = AuthViewModel()
     @EnvironmentObject var coordinator: Coordinator
-
+    @EnvironmentObject var sharedData: SharedData
+    
+    @EnvironmentObject var userViewModel: UserViewModel
+    
     var body: some View {
         let menuItems: [MenuItem] = ItemMenu.allCases.map { itemMenu in
             return MenuItem(title: itemMenu, systemImageName: itemMenu.symbol) {
@@ -71,7 +74,7 @@ struct MenuView: View {
                         .padding(.top, 80)
                 }
                 
-                Text("El usuario")
+                Text(userViewModel.user?.firstName ?? "Nombre de usuario")
                     .font(.system(size: 20))
                     .bold()
                     .foregroundColor(.gray)
@@ -118,13 +121,17 @@ struct MenuView: View {
             }
             .sheet(isPresented: $showEditProfile) {
                 EditProfileView()
+                    .environmentObject(userViewModel)
                     .environmentObject(userProfile)
             }
             .navigationDestination(isPresented: $showLogView, destination: {
-                EntryLogView()
+                EntryLogView(coordinator: coordinator, sharedData: sharedData)
+                    .preferredColorScheme(.light)
                     .navigationBarBackButtonHidden(true)
             })
-
+            .onAppear {
+                userViewModel.loadUser(uuid: sharedData.userId)
+            }
         }
     }
     
@@ -137,6 +144,7 @@ struct MenuView: View {
             case .cerrarSesion:
                 authVM.signOut()
                 coordinator.path.append(.login)
+                break
         }
     }
 }

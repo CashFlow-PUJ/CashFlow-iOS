@@ -60,6 +60,10 @@ class EntryLogDIContainer {
         DefaultIncomeRepository(dataTransferService: dependencies.apiDataTransferService)
     }
     
+    func makeUserRepository() -> UserRepository {
+        DefaultUserRepository(dataTransferService: dependencies.apiDataTransferService)
+    }
+    
     func makeDeleteIncome() -> DeleteIncome {
         DeleteIncome(incomeRepository: makeIncomeRepository())
     }
@@ -67,6 +71,11 @@ class EntryLogDIContainer {
     func makeDeleteExpense() -> DeleteExpense {
         DeleteExpense(expenseRepository: makeExpenseRepository())
     }
+    
+    func makeGetUserByUUID() -> GetUserByUUID {
+        GetUserByUUID(userRepository: makeUserRepository())
+    }
+    
     // MARK: - Entry History
     @MainActor func makeExpenseHistoryViewModel(sharedData: SharedData) -> ExpenseHistoryView.ExpenseHistoryViewModel {
         ExpenseHistoryView.ExpenseHistoryViewModel(
@@ -88,6 +97,11 @@ class EntryLogDIContainer {
             updateIncome: makeUpdateIncome(),
             deleteIncome: makeDeleteIncome()// Añade esta línea
         )
+    }
+    
+    @MainActor func makeUserViewModel(sharedData: SharedData) -> UserViewModel {
+        let getUserByUUIDUseCase = makeGetUserByUUID()
+        return UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUIDUseCase)
     }
     
         

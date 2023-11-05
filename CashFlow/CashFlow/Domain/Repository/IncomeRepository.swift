@@ -11,6 +11,7 @@ protocol IncomeRepository {
     
     @discardableResult
     func getAllIncomeEntries(
+        userID: String,
         completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable?
     
@@ -20,6 +21,7 @@ protocol IncomeRepository {
     ) -> Cancellable?
     
     func createIncomeEntry(
+        userID: String,
         incomeEntry: Income,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?

@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct User: Identifiable {
-    var id: UUID
-    var name: String
+struct User {
+    let uuid: String
+    let birthDate: Date
+    let gender: String
+    let firstName: String
+    let lastName: String
 }

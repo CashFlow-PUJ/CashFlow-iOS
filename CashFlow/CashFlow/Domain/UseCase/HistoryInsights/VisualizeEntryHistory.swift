@@ -11,6 +11,7 @@ protocol VisualizeEntryHistory {
     associatedtype Entry
     
     func execute(
+        userID: String,
         completion: @escaping (Result<[Entry], Error>) -> Void
     ) -> Cancellable?
 }
@@ -26,9 +27,11 @@ final class VisualizeExpenseHistory: VisualizeEntryHistory {
     }
     
     func execute(
+        userID: String,
         completion: @escaping (Result<[Expense], Error>) -> Void
     ) -> Cancellable? {
         return expenseRepository.getAllExpenseEntries(
+            userID: userID,
             completion: { result in completion(result) }
         )
     }
@@ -58,9 +61,11 @@ final class VisualizeIncomeHistory: VisualizeEntryHistory {
     }
     
     func execute(
+        userID: String,
         completion: @escaping (Result<[Income], Error>) -> Void
     ) -> Cancellable? {
         return incomeRepository.getAllIncomeEntries(
+            userID: userID,
             completion: { result in
                 if case .success = result {
                     // TODO: ¿Qué debe ir en este bloque?
