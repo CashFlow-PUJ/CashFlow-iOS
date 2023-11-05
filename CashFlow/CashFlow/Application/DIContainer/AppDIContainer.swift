@@ -1,10 +1,3 @@
-//
-//  AppDIContainer.swift
-//  CashFlow
-//
-//  Created by Cristóbal Castrillón Balcázar on 22/10/23.
-//
-
 import Foundation
 
 final class AppDIContainer {

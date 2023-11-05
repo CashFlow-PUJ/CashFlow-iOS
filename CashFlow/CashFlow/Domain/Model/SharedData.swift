@@ -1,10 +1,3 @@
-//
-//  SharedData.swift
-//  CashFlow
-//
-//  Created by Angie Tatiana Peña Peña on 29/10/23.
-//
-
 import Foundation
 
 @MainActor

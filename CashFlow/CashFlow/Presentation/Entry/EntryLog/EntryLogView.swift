@@ -1,10 +1,3 @@
-//
-//  EntryLogView.swift
-//  CashFlow
-//
-//  Created by Cristóbal Castrillón Balcázar on 28/08/23.
-//
-
 import SwiftUI
 
 struct EntryLogView: View {

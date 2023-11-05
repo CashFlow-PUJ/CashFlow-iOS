@@ -14,7 +14,6 @@ extension IncomeHistoryView {
         private let enterIncome: DefaultEnterIncome
         private let sharedData: SharedData
         private let deleteIncome: DeleteIncome
-        //@Published var incomeHistory: [Income] = Income.sampleData
         @Published var incomeHistory: [Income] = []
         
         private var incomeLoadTask: Cancellable? { willSet { incomeLoadTask?.cancel() } }

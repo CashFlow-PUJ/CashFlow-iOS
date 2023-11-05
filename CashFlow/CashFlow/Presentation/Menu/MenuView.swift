@@ -21,7 +21,7 @@ struct CircularImageButton: View {
             action()
             isTapped = true
         }) {
-            Image(imageName) // Usa el nombre de la imagen
+            Image(imageName)
                 .resizable()
                 .frame(
                     width:  (UIScreen.main.bounds.width / 2) - 100,
