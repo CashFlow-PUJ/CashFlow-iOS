@@ -9,6 +9,7 @@ target 'CashFlow' do
 
   # Pods for CashFlow
   pod 'GoogleMLKit/TextRecognition', '3.2.0'
+  pod 'KeychainAccess'
   # pod 'Alamofire'
   # pod 'SENetworking'
 
