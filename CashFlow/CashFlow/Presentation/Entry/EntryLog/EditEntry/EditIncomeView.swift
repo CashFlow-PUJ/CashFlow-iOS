@@ -16,7 +16,8 @@ struct EditIncomeView: View {
     @State private var category: IncomeCategory
     @State private var showDeletionAlert: Bool = false
     @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
-
+    @State private var selectedDate = Date()
+    
     init(income: Binding<Income>, isPresented: Binding<Bool>, category: IncomeCategory, viewModel: IncomeHistoryView.IncomeHistoryViewModel) {
         self._income = income
         self._isPresented = isPresented
@@ -34,21 +35,37 @@ struct EditIncomeView: View {
             Spacer()
             
             Form {
-                TextField("Total", text: $total)
-                    .keyboardType(.numberPad) 
                 
-                TextField("Description", text: $description)
+                Section(header: Text("Total")) {
+                    TextField("Total", text: $total)
+                }
                 
-                Picker("Category", selection: $category) {
-                    ForEach(CashFlow.IncomeCategory.allCases, id: \.self) { category in
-                        Text(category.rawValue).tag(category)
+                Section(header: Text("Descripción")) {
+                    TextField("Descripción", text: $description)
+                }
+                
+                Section(header: Text("Categoría")) {
+                    Picker("Category", selection: $category) {
+                        ForEach(CashFlow.IncomeCategory.allCases, id: \.self) { category in
+                            Text(category.rawValue).tag(category)
+                        }
                     }
+                    .pickerStyle(MenuPickerStyle())
                 }
-                .pickerStyle(MenuPickerStyle())
                 
-                Button("Save") {
-                    saveIncome()
+                Section(header: Text("Fecha de ingreso")) {
+                    DatePicker("Selecciona la fecha", selection: $selectedDate, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
                 }
+                
+                HStack {
+                    Spacer()
+                    Button("Guardar") {
+                        saveIncome()
+                    }
+                    Spacer()
+                }
+                
                 
                 HStack {
                     Spacer() 
@@ -77,6 +94,7 @@ struct EditIncomeView: View {
                 self.total = String(self.income.total)
                 self.description = self.income.description
                 self.category = self.income.category
+                self.selectedDate = self.income.date
             }
             
             Spacer()
@@ -89,6 +107,7 @@ struct EditIncomeView: View {
             updatedIncome.total = total
             updatedIncome.description = self.description
             updatedIncome.category = self.category
+            updatedIncome.date = self.selectedDate
             
             viewModel.updateIncomeEntry(incomeID: income.id.uuidString, updatedIncome: updatedIncome)
             self.isPresented = false
