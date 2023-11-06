@@ -5,32 +5,32 @@ import FirebaseAuth
 import GoogleSignIn
 
 enum Route: Hashable {
-  case transactionLog
-  case login
+    case transactionLog
+    case login
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    FBSDKCoreKit.ApplicationDelegate.shared.application(
-      application,
-      didFinishLaunchingWithOptions: launchOptions
-    )
-    return true
-  }
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        FirebaseApp.configure()
+        FBSDKCoreKit.ApplicationDelegate.shared.application(
+            application,
+            didFinishLaunchingWithOptions: launchOptions
+        )
+        return true
+    }
 
-  func application(_ app: UIApplication,
-                   open url: URL,
-                   options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    ApplicationDelegate.shared.application(
-      app,
-      open: url,
-      sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-      annotation: options[UIApplication.OpenURLOptionsKey.annotation]
-    )
-    return true
-  }
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        ApplicationDelegate.shared.application(
+            app,
+            open: url,
+            sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
+            annotation: options[UIApplication.OpenURLOptionsKey.annotation]
+        )
+        return true
+    }
 }
 
 class Coordinator: ObservableObject {
@@ -44,7 +44,7 @@ class Coordinator: ObservableObject {
             self.currentRoute = .transactionLog
         }
     }
-    
+
     func authUser(userID: String) {
         let authUser = AuthUser(userRepository: appDIContainer.entryLogDIContainer.makeUserRepository())
 
@@ -60,34 +60,12 @@ class Coordinator: ObservableObject {
 
 }
 
-
-
 @main
 struct CashFlowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @ObservedObject var coordinator = Coordinator()
     var userProfile = UserProfile()
     let sharedData = SharedData()
-
-    func setup() {
-        coordinator.setup()
-        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
-            if let error = error {
-                print("Error getting token: \(error.localizedDescription)")
-                return
-            }
-
-            if let token = tokenResult?.token {
-                sharedData.userId = token
-                coordinator.authUser(userID: token)
-                DispatchQueue.main.async {
-                    withAnimation {
-                        self.coordinator.currentRoute = .transactionLog
-                    }
-                }
-            }
-        })
-    }
 
     var body: some Scene {
         WindowGroup {
@@ -105,6 +83,7 @@ struct CashFlowApp: App {
 
                                         if let token = tokenResult?.token {
                                             sharedData.userId = token
+                                            coordinator.authUser(userID: token)
                                             DispatchQueue.main.async {
                                                 withAnimation {
                                                     self.coordinator.currentRoute = .transactionLog
@@ -153,5 +132,25 @@ struct CashFlowApp: App {
                 GIDSignIn.sharedInstance.handle(url)
             }
         }
+    }
+
+    func setup() {
+        coordinator.setup()
+        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+            if let error = error {
+                print("Error getting token: \(error.localizedDescription)")
+                return
+            }
+
+            if let token = tokenResult?.token {
+                sharedData.userId = token
+                coordinator.authUser(userID: token)
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.coordinator.currentRoute = .transactionLog
+                    }
+                }
+            }
+        })
     }
 }
