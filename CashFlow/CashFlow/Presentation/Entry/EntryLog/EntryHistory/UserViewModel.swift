@@ -11,21 +11,25 @@ import Foundation
     
     private let getUserByUUID: GetUserByUUID
     private let updateUser: UpdateUser
+    private let auth: AuthUser
     
     @Published var user: User?
     
     private let sharedData: SharedData
     private var userLoadTask: Cancellable? { willSet { userLoadTask?.cancel() } }
     private var userUpdateTask: Cancellable? { willSet { userUpdateTask?.cancel() } }
+    private var authTask: Cancellable? { willSet { userUpdateTask?.cancel() } }
     
     init(
         sharedData: SharedData,
         getUserByUUID: GetUserByUUID,
-        updateUser: UpdateUser
+        updateUser: UpdateUser,
+        auth: AuthUser
     ) {
         self.sharedData = sharedData
         self.getUserByUUID = getUserByUUID
         self.updateUser = updateUser
+        self.auth = auth
     }
     
     func loadUser(uuid: String) {
@@ -56,6 +60,20 @@ import Foundation
                     DispatchQueue.main.async {
                         self?.user = user
                     }
+                case .failure:
+                    print("Failed updating user.")
+                }
+            }
+        )
+    }
+    
+    func authenticateUser(userID: String) {
+        authTask = auth.execute(
+            userID: userID,
+            completion: { [weak self] result in
+                switch result {
+                case .success:
+                    print("User is correct")
                 case .failure:
                     print("Failed updating user.")
                 }

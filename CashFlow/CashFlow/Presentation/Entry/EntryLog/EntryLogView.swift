@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAuth
 
 struct EntryLogView: View {
     
@@ -30,17 +31,19 @@ struct EntryLogView: View {
     
     var userRepository: UserRepository
     var getUserByUUID: GetUserByUUID
+    var auth: AuthUser
     @ObservedObject var userViewModel: UserViewModel
-
+    
     init(coordinator: Coordinator, sharedData: SharedData) {
         self.userRepository = coordinator.appDIContainer.entryLogDIContainer.makeUserRepository()
         self.getUserByUUID = GetUserByUUID(userRepository: userRepository)
-        self.userViewModel = UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUID, updateUser: coordinator.appDIContainer.entryLogDIContainer.makeUpdateUser())
+        self.auth = AuthUser(userRepository: userRepository)
+        self.userViewModel = UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUID, updateUser: coordinator.appDIContainer.entryLogDIContainer.makeUpdateUser(), auth: auth)
     }
     
     var body: some View {
         Group {
-            //if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
+            if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
                 NavigationView {
                             ZStack(alignment: .bottomTrailing) {
                                 
@@ -240,9 +243,9 @@ struct EntryLogView: View {
                         .sheet(isPresented: $showImagePicker){
                             ImageInputViewControllerRepresentable(viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData))
                         }
-            /*} else {
+            } else {
                 ProgressView()
-            }*/
+            }
         }
         .onAppear {
             let viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)

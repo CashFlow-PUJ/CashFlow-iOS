@@ -13,7 +13,6 @@ struct APIEndpoints {
     
     static func getAllExpenseEntries(userID: String) -> Endpoint<[ExpenseDTO]> {
         return Endpoint(
-            // TODO: Update path to actual backend endpoint.
             path: "user/GET/EXPENSES",
             method: .get,
             additionalHeaders: ["Authorization": "Bearer \(userID)"]
@@ -22,7 +21,6 @@ struct APIEndpoints {
     
     static func getExpenseByID(id: String) -> Endpoint<ExpenseDTO> {
         return Endpoint(
-            // TODO: Update path to actual backend endpoint.
             path: "expense/GET/\(id)",
             method: .get
         )
@@ -32,7 +30,6 @@ struct APIEndpoints {
     
     static func getAllIncomeEntries(userID: String) -> Endpoint<[IncomeDTO]> {
         return Endpoint(
-            // TODO: variable (parameter) for userID
             path: "user/GET/INCOME",
             method: .get,
             additionalHeaders: ["Authorization": "Bearer \(userID)"]
@@ -41,7 +38,6 @@ struct APIEndpoints {
     
     static func getIncomeByID(id: String) -> Endpoint<IncomeDTO> {
         return Endpoint(
-            // TODO: Update path to actual backend endpoint.
             path: "income/GET/\(id)",
             method: .get
         )
@@ -113,6 +109,14 @@ struct APIEndpoints {
             method: .put,
             additionalHeaders: ["Authorization": "Bearer \(userID)"],
             bodyParametersEncodable: user
+        )
+    }
+    
+    static func auth(userID: String) -> Endpoint<UserDTO> {
+        return Endpoint(
+            path: "user/auth",
+            method: .post,
+            additionalHeaders: ["Authorization": "Bearer \(userID)"]
         )
     }
 }

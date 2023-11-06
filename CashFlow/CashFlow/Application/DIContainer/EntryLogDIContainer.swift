@@ -96,10 +96,9 @@ class EntryLogDIContainer {
         )
     }
     
-    @MainActor func makeUserViewModel(sharedData: SharedData) -> UserViewModel {
+    @MainActor func makeUserViewModel(sharedData: SharedData, auth: AuthUser) -> UserViewModel {
         let getUserByUUIDUseCase = makeGetUserByUUID()
         let updateUserUseCase = makeUpdateUser()
-        return UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUIDUseCase, updateUser: updateUserUseCase)
+        return UserViewModel(sharedData: sharedData, getUserByUUID: getUserByUUIDUseCase, updateUser: updateUserUseCase, auth: auth)
     }
-    
 }

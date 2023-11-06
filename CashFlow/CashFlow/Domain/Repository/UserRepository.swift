@@ -23,16 +23,10 @@ protocol UserRepository {
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
     
-    /*@discardableResult
-    func deleteUser(
-        uuid: String,
+    @discardableResult
+    func auth(
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
-
-    /// Create a new user.
-    @discardableResult
-    func createUser(
-        user: User,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) -> Cancellable?*/
+    
 }

@@ -145,7 +145,7 @@ struct MenuView: View {
             case .cerrarSesion:
                 authVM.signOut()
                 sharedData.userId = ""
-                coordinator.path.append(.login)
+                coordinator.currentRoute = .login
                 break
         }
     }

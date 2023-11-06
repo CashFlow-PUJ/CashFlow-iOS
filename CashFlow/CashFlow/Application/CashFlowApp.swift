@@ -44,6 +44,20 @@ class Coordinator: ObservableObject {
             self.currentRoute = .transactionLog
         }
     }
+    
+    func authUser(userID: String) {
+        let authUser = AuthUser(userRepository: appDIContainer.entryLogDIContainer.makeUserRepository())
+
+        _ = authUser.execute(userID: userID) { result in
+            switch result {
+            case .success:
+                print("Authentication successful")
+            case .failure(let error):
+                print("Authentication failed with error: \(error)")
+            }
+        }
+    }
+
 }
 
 
@@ -65,6 +79,7 @@ struct CashFlowApp: App {
 
             if let token = tokenResult?.token {
                 sharedData.userId = token
+                coordinator.authUser(userID: token)
                 DispatchQueue.main.async {
                     withAnimation {
                         self.coordinator.currentRoute = .transactionLog
