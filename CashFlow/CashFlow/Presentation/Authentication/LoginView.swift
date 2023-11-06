@@ -65,7 +65,7 @@ struct LoginView: View {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
                     case .success(_):
-                        coordinator.path.append(.transactionLog)
+                        coordinator.currentRoute = .transactionLog
                     case .failure(let error):
                         showingErrorAlert = true
                         errorMessage = error.errorMessage
@@ -114,7 +114,7 @@ struct LoginView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            coordinator.path.append(.transactionLog)
+                            coordinator.currentRoute = .transactionLog
                         case .failure(let error):
                             showingErrorAlert = true
                             errorMessage = error.localizedDescription
@@ -177,7 +177,7 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
-                    coordinator.path.append(.transactionLog)
+                    coordinator.currentRoute = .transactionLog
                 case .failure(let error):
                     print(error.errorMessage)
                 }
