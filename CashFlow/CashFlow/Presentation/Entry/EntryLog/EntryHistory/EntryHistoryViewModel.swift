@@ -42,7 +42,7 @@ extension IncomeHistoryView {
                 switch result {
                 case .success:
                     print("Income updated successfully.")
-                    self.loadIncomeEntries() // Recargar los ingresos después de la actualización
+                    self.loadIncomeEntries()
                 case .failure:
                     print("Failed updating income.")
                 }
@@ -129,7 +129,6 @@ extension ExpenseHistoryView {
             self.updateExpense = updateExpense
             self.enterExpense = enterExpense
             self.deleteExpense = deleteExpense
-            //self.loadExpenses()
         }
         
         func updateExpenseEntry(expenseID: String, updatedExpense: Expense) {
@@ -162,10 +161,6 @@ extension ExpenseHistoryView {
             expensesLoadTask = viewExpense.execute(expenseID: expenseID, userID: sharedData.userId) { [weak self] result in
                 switch result {
                 case .success(let expense):
-                    
-                    // DEBUG PRINT
-                    //print("EXPENSE: ", expense)
-                    
                     self?.sharedData.expenseHistory.append(expense)
                 case .failure:
                     print("Failed loading entry.")

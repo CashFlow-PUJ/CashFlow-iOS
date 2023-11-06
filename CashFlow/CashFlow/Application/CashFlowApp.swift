@@ -80,10 +80,8 @@ struct CashFlowApp: App {
                 VStack {
                     if Auth.auth().currentUser != nil {
                         if sharedData.userId.isEmpty {
-                            // Display a loading indicator while the token is being loaded
                             ProgressView()
                                 .onAppear {
-                                    // Wait until the token is loaded before displaying the EntryLogView
                                     Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
                                         if let error = error {
                                             print("Error getting token: \(error.localizedDescription)")
@@ -101,7 +99,6 @@ struct CashFlowApp: App {
                                     })
                                 }
                         } else {
-                            // Display the EntryLogView when the token is loaded
                             EntryLogView(coordinator: coordinator, sharedData: sharedData)
                                 .preferredColorScheme(.light)
                                 .navigationBarBackButtonHidden(true)
@@ -117,7 +114,6 @@ struct CashFlowApp: App {
                                 }
                         }
                     } else {
-                        // Display the LoginView if the user is not logged in
                         LoginView()
                             .preferredColorScheme(.light)
                             .navigationBarBackButtonHidden(true)

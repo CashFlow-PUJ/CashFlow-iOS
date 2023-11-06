@@ -36,14 +36,14 @@ struct PopUpIncomeView: View {
             }
             HStack {
                 Text("Descripción: ")
-                    .alignmentGuide(.leading) { _ in 0 } // Alinea a la izquierda
+                    .alignmentGuide(.leading) { _ in 0 }
                 TextField("Ingrese el detalle del Ingreso", text: $descripcion)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
             }
             HStack {
                 Text("Valor:             ")
-                    .alignmentGuide(.leading) { _ in 0 }// Alinea a la izquierda
+                    .alignmentGuide(.leading) { _ in 0 }
                 TextField("Ingrese el total", text: $total)
                     .keyboardType(.numberPad)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -78,7 +78,7 @@ struct PopUpIncomeView: View {
                     
                     viewModel.createIncomeEntry(incomeEntry: newIncome)
                     sharedData.incomeHistory.append(newIncome)
-                    isPresented.toggle() // Cierra el cuadro emergente
+                    isPresented.toggle()
                 }
 
             }
@@ -87,11 +87,9 @@ struct PopUpIncomeView: View {
                     
         }
         .onTapGesture {
-            // Cierra el teclado cuando se toca fuera del TextField
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .onChange(of: total) { newValue in
-            // Validar si el valor ingresado es numérico
             isNumeric = isNumericInput(newValue)
         }
     }

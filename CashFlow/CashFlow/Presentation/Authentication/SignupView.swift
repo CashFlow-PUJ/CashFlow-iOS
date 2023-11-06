@@ -207,12 +207,8 @@ struct SignupView: View {
             
             vm.logIn(credential: credential) { result in
                 switch result {
-                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                 case .success(_):
-                    // Dismiss the current view
                     dismiss()
-
-                    // Navigate to the EntryLogView
                     DispatchQueue.main.async {
                         withAnimation {
                             coordinator.currentRoute = .transactionLog

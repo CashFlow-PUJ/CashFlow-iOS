@@ -180,12 +180,6 @@ struct EntryLogView: View {
                                         .edgesIgnoringSafeArea(.all)
                                         .onTapGesture {
                                             isShowingMenu = false
-                                            // TODO: Uncomment before commiting
-                                            /*
-                                            withAnimation(.smooth(duration: 0.8)){
-                                                isShowingMenu = false
-                                            }
-                                            */
                                         }
                                     HStack {
                                         Color.white
