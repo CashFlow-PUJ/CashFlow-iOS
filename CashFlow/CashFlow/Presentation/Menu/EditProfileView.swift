@@ -10,7 +10,7 @@ class UserProfile: ObservableObject {
 struct EditProfileView: View {
     @EnvironmentObject var userProfile: UserProfile
     @State private var isImagePickerPresented: Bool = false
-    
+    @EnvironmentObject var sharedData: SharedData
     @State private var userName: String = ""
     @State private var userLast: String = ""
     @State private var userBirthday: Date = Date()
@@ -21,7 +21,6 @@ struct EditProfileView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            // Mostrar la imagen de perfil
             Spacer()
             if let image = userProfile.profileImage {
                 Image(uiImage: image)
@@ -97,7 +96,6 @@ struct EditProfileView: View {
     }
     
     func saveProfileChanges() {
-        // Construye el objeto User a partir de los valores en la vista
         let updatedUser = User(
             uuid: userViewModel.user?.uuid ?? "",
             birthDate: userBirthday,
@@ -106,8 +104,7 @@ struct EditProfileView: View {
             lastName: userLast
         )
         
-        // Invoca el método updateUser del UserViewModel
-        userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser)
+        userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser, userID: sharedData.userId)
         isPresented = false
     }
 }
@@ -150,7 +147,6 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
-// Funciones de ayuda para guardar y cargar imágenes en el dispositivo
 func saveImageToDisk(image: UIImage, withName name: String) -> Bool {
     guard let data = image.pngData() else { return false }
     let filename = getDocumentsDirectory().appendingPathComponent("\(name).png")

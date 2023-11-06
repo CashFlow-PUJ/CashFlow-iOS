@@ -105,7 +105,9 @@ extension DefaultNetworkService: NetworkService {
         do {
             
             var urlRequest = try endpoint.urlRequest(with: config)
+            //let token = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImQ0OWU0N2ZiZGQ0ZWUyNDE0Nzk2ZDhlMDhjZWY2YjU1ZDA3MDRlNGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vY2FzaGZsb3ctMzczNzMiLCJhdWQiOiJjYXNoZmxvdy0zNzM3MyIsImF1dGhfdGltZSI6MTY5OTIyNTU3NSwidXNlcl9pZCI6IjRnTzA5YlE0N01hc3pMclRaQ0xVVDFDUW1QTDIiLCJzdWIiOiI0Z08wOWJRNDdNYXN6THJUWkNMVVQxQ1FtUEwyIiwiaWF0IjoxNjk5MjI1NTc1LCJleHAiOjE2OTkyMjkxNzUsImVtYWlsIjoicHJ1ZWJhMUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsicHJ1ZWJhMUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.PhSTdBieI8yP3ayzlvzK0Uf_ATdDw61qg-Je_WV4-CMV1QDsSltkgwHjGnMKJ-eHgcCnrlvP0bQE7ttf3jp8v2hdwIPVuXjgNKJy7JqmXsxhb7J2YNQWHpeYiwIRuxjOpFB4zrWL2m0ICIvQGTwkKWBCgKy_jcJ52dVFtifBrZPLPOVK4kqWSLuo77Nbqukdem8--W5Cz9zYqf29fZ4AgTQreupHHEHh8NtEi44ysgvkriW0NW8fyVOk0rzyPXKbMwXgKJHqAl-nTbZLoGIzLNuRgfrdDRBuY3NyD2cIr5-7pKGAs04yrY1fVp-cCj4y447FTmnxPg3HjWKhnPH0dw"
             
+            //urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             // Añade el encabezado Content-Type si es necesario
             if let method = urlRequest.httpMethod, ["POST", "PUT", "PATCH"].contains(method) {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -156,7 +158,7 @@ final class DefaultNetworkErrorLogger: NetworkErrorLogger {
     func log(responseData data: Data?, response: URLResponse?) {
         guard let data = data else { return }
         if let dataDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            printIfDebug("responseData: \(String(describing: dataDict))")
+            print("responseData: \(String(describing: dataDict))")
         }
     }
 

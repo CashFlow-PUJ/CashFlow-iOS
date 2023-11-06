@@ -29,6 +29,7 @@ PODS:
   - GoogleUtilitiesComponents (1.1.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.7.2)
+  - KeychainAccess (4.2.2)
   - MLImage (1.0.0-beta3)
   - MLKitCommon (8.0.0):
     - GoogleDataTransport (~> 9.0)
@@ -63,6 +64,7 @@ PODS:
 
 DEPENDENCIES:
   - GoogleMLKit/TextRecognition (= 3.2.0)
+  - KeychainAccess
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -72,6 +74,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GoogleUtilitiesComponents
     - GTMSessionFetcher
+    - KeychainAccess
     - MLImage
     - MLKitCommon
     - MLKitTextRecognition
@@ -88,6 +91,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: 202e7a9f5128accd11160fb9c19612de1911aa19
   GoogleUtilitiesComponents: 679b2c881db3b615a2777504623df6122dd20afe
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   MLImage: 489dfec109f21da8621b28d476401aaf7a0d4ff4
   MLKitCommon: f6da6c5659618c070b50a80db01248ebe2964175
   MLKitTextRecognition: f6fda8923564f6cebe2bb952a1adb0414e1d731b
@@ -97,6 +101,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   Protobuf: 6a4183ec1d51649eb2be7b86ccc286e5c539219c
 
-PODFILE CHECKSUM: 09f2640548f26e73d9ff50a67e0c617e81209a45
+PODFILE CHECKSUM: 2d0f477d6596c5dc2319455017521dbdca0fe3df
 
 COCOAPODS: 1.13.0

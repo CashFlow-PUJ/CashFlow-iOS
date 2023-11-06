@@ -25,6 +25,7 @@ final class DefaultIncomeRepository: IncomeRepository {
     
     func getIncomeEntryByID(
         incomeID: String,
+        userID: String,
         completion: @escaping (Result<Income, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
@@ -86,10 +87,11 @@ final class DefaultIncomeRepository: IncomeRepository {
     func updateIncomeEntry(
         incomeID: String,
         incomeEntry: Income,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
-        let endpoint = APIEndpoints.updateIncomeEntry(incomeID: incomeID, with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry))
+        let endpoint = APIEndpoints.updateIncomeEntry(incomeID: incomeID, with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry), userID: userID)
         
         task.networkTask = self.dataTransferService.request(
             with: endpoint
@@ -107,11 +109,13 @@ final class DefaultIncomeRepository: IncomeRepository {
     
     func deleteIncomeEntry(
         incomeID: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?{
         let task = RepositoryTask()
         let endpoint = APIEndpoints.deleteIncomeEntry(
-            incomeID: incomeID
+            incomeID: incomeID,
+            userID: userID
         )
         task.networkTask = self.dataTransferService.request(
             with: endpoint

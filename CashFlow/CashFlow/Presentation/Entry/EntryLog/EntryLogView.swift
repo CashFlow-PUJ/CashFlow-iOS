@@ -1,10 +1,3 @@
-//
-//  EntryLogView.swift
-//  CashFlow
-//
-//  Created by Cristóbal Castrillón Balcázar on 28/08/23.
-//
-
 import SwiftUI
 
 struct EntryLogView: View {
@@ -47,7 +40,7 @@ struct EntryLogView: View {
     
     var body: some View {
         Group {
-            if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
+            //if sharedData.dataIncomeLoaded  && sharedData.dataExpenseLoaded {
                 NavigationView {
                             ZStack(alignment: .bottomTrailing) {
                                 
@@ -187,12 +180,6 @@ struct EntryLogView: View {
                                         .edgesIgnoringSafeArea(.all)
                                         .onTapGesture {
                                             isShowingMenu = false
-                                            // TODO: Uncomment before commiting
-                                            /*
-                                            withAnimation(.smooth(duration: 0.8)){
-                                                isShowingMenu = false
-                                            }
-                                            */
                                         }
                                     HStack {
                                         Color.white
@@ -253,9 +240,9 @@ struct EntryLogView: View {
                         .sheet(isPresented: $showImagePicker){
                             ImageInputViewControllerRepresentable(viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData))
                         }
-            } else {
+            /*} else {
                 ProgressView()
-            }
+            }*/
         }
         .onAppear {
             let viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)

@@ -54,30 +54,65 @@ struct CashFlowApp: App {
     @ObservedObject var coordinator = Coordinator()
     var userProfile = UserProfile()
     let sharedData = SharedData()
-    
+
     func setup() {
         coordinator.setup()
-        sharedData.userId = Auth.auth().currentUser?.uid ?? ""
+        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+            if let error = error {
+                print("Error getting token: \(error.localizedDescription)")
+                return
+            }
+
+            if let token = tokenResult?.token {
+                sharedData.userId = token
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.coordinator.currentRoute = .transactionLog
+                    }
+                }
+            }
+        })
     }
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 VStack {
                     if Auth.auth().currentUser != nil {
-                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                            .preferredColorScheme(.light)
-                            .navigationBarBackButtonHidden(true)
-                            .navigationDestination(for: Route.self) { route in
-                                switch route {
-                                case .transactionLog:
-                                    EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                                        .preferredColorScheme(.light)
-                                        .navigationBarBackButtonHidden(true)
-                                case .login:
-                                    EmptyView()
+                        if sharedData.userId.isEmpty {
+                            ProgressView()
+                                .onAppear {
+                                    Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                                        if let error = error {
+                                            print("Error getting token: \(error.localizedDescription)")
+                                            return
+                                        }
+
+                                        if let token = tokenResult?.token {
+                                            sharedData.userId = token
+                                            DispatchQueue.main.async {
+                                                withAnimation {
+                                                    self.coordinator.currentRoute = .transactionLog
+                                                }
+                                            }
+                                        }
+                                    })
                                 }
-                            }
+                        } else {
+                            EntryLogView(coordinator: coordinator, sharedData: sharedData)
+                                .preferredColorScheme(.light)
+                                .navigationBarBackButtonHidden(true)
+                                .navigationDestination(for: Route.self) { route in
+                                    switch route {
+                                    case .transactionLog:
+                                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
+                                            .preferredColorScheme(.light)
+                                            .navigationBarBackButtonHidden(true)
+                                    case .login:
+                                        EmptyView()
+                                    }
+                                }
+                        }
                     } else {
                         LoginView()
                             .preferredColorScheme(.light)

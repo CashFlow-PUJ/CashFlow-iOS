@@ -80,7 +80,15 @@ struct SignupView: View {
                 vm.signUp(email: email, password: password) { result in
                     switch result {
                     case .success(_):
-                        coordinator.path.append(.transactionLog)
+                        // Dismiss the current view
+                        dismiss()
+
+                        // Navigate to the EntryLogView
+                        DispatchQueue.main.async {
+                            withAnimation {
+                                coordinator.currentRoute = .transactionLog
+                            }
+                        }
                     case .failure(let error):
                         showingErrorAlert = true
                         errorMessage = error.errorMessage
@@ -129,7 +137,15 @@ struct SignupView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            coordinator.path.append(.transactionLog)
+                            // Dismiss the current view
+                            dismiss()
+
+                            // Navigate to the EntryLogView
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    coordinator.currentRoute = .transactionLog
+                                }
+                            }
                         case .failure(let error):
                             showingErrorAlert = true
                             errorMessage = error.localizedDescription
@@ -191,9 +207,13 @@ struct SignupView: View {
             
             vm.logIn(credential: credential) { result in
                 switch result {
-                    // TODO: Replace '.imageInput' with '.transactionLog' whenever imageInput OCR on-device functionality has been implemented.
                 case .success(_):
-                    coordinator.path.append(.transactionLog)
+                    dismiss()
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            coordinator.currentRoute = .transactionLog
+                        }
+                    }
                 case .failure(let error):
                     print(error.errorMessage)
                 }

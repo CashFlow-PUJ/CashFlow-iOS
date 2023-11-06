@@ -9,7 +9,6 @@ import Foundation
 import MLKit
 
 class TextProcessor {
-    // Hacer la función 'public' o asegurarse de que tenga el nivel de acceso correcto para ser llamada desde otros archivos.
     public func processRecognizedText(linesInfo: [LineInfo]) -> [[LineInfo]] {
         
         let threshold: CGFloat = 10.0
@@ -28,7 +27,6 @@ class TextProcessor {
             }
         }
         
-        // Asegúrate de agregar el último grupo si no está vacío.
         if !currentGroup.isEmpty {
             groupedLines.append(currentGroup)
         }
@@ -39,7 +37,6 @@ class TextProcessor {
         var concatenatedLines = [String]()
 
         for lineGroup in groupedLines {
-            // Concatenar el texto de todas las líneas en el mismo grupo.
             let groupedText = lineGroup.map { $0.text }.joined(separator: " ")
             concatenatedLines.append(groupedText)
         }
@@ -166,12 +163,11 @@ class TextProcessor {
                         
                         if let number = Int(cleanNumberString) {
                             total = number
-                            foundValue = true // Marcamos que hemos encontrado un valor
-                            break // Salimos del ciclo porque hemos encontrado lo que necesitábamos
+                            foundValue = true
+                            break
                         }
                     }
 
-                    // Si encontramos un total, no necesitamos seguir buscando en las otras líneas.
                     if foundValue {
                         break
                     }
@@ -213,7 +209,7 @@ class TextProcessor {
                 }
             }
         }
-        // Filtramos las líneas procesadas para eliminar aquellas que puedan ser ruido o irrelevantes.
+        
         let meaningfulLines = processedLines.filter { line in
             let words = line.split(whereSeparator: { $0.isWhitespace })
             return words.count >= 2

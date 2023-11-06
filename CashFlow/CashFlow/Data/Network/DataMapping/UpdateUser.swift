@@ -11,6 +11,7 @@ protocol UpdateUser {
     func execute(
         uuid: String,
         user: UserRequestDTO,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }
@@ -26,8 +27,9 @@ final class DefaultUpdateUser: UpdateUser {
     func execute(
         uuid: String,
         user: UserRequestDTO,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return userRepository.updateUser(uuid: uuid, user: user, completion: completion)
+        return userRepository.updateUser(uuid: uuid, user: user, userID: userID, completion: completion)
     }
 }

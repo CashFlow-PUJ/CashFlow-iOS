@@ -10,6 +10,7 @@ import Foundation
 protocol DeleteEntry {
     func execute(
         id: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }
@@ -24,9 +25,10 @@ final class DeleteIncome: DeleteEntry {
 
     func execute(
         id: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return incomeRepository.deleteIncomeEntry(incomeID: id, completion: completion)
+        return incomeRepository.deleteIncomeEntry(incomeID: id, userID: userID, completion: completion)
     }
 }
 
@@ -40,8 +42,9 @@ final class DeleteExpense: DeleteEntry {
 
     func execute(
         id: String,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return expenseRepository.deleteExpenseEntry(expenseID: id, completion: completion)
+        return expenseRepository.deleteExpenseEntry(expenseID: id, userID: userID, completion: completion)
     }
 }

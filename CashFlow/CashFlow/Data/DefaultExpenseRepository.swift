@@ -25,6 +25,7 @@ final class DefaultExpenseRepository: ExpenseRepository {
     
     func getExpenseEntryByID(
         expenseID: String,
+        userID: String,
         completion: @escaping (Result<Expense, Error>) -> Void
     ) -> Cancellable? {
         let task = RepositoryTask()
@@ -82,11 +83,12 @@ final class DefaultExpenseRepository: ExpenseRepository {
     func updateExpenseEntry(
         expenseID: String,
         expenseEntry: Expense,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?  {
         let task = RepositoryTask()
         
-        let endpoint = APIEndpoints.updateExpenseEntry(expenseID: expenseID, with: ExpenseRequestDTO.fromDomain(expenseEntry: expenseEntry))
+        let endpoint = APIEndpoints.updateExpenseEntry(expenseID: expenseID, with: ExpenseRequestDTO.fromDomain(expenseEntry: expenseEntry), userID: userID)
         
         task.networkTask = self.dataTransferService.request(
             with: endpoint
@@ -103,11 +105,13 @@ final class DefaultExpenseRepository: ExpenseRepository {
     
     func deleteExpenseEntry(
             expenseID: String,
+            userID: String,
             completion: @escaping (Result<Void, Error>) -> Void
         ) -> Cancellable? {
             let task = RepositoryTask()
             let endpoint = APIEndpoints.deleteExpense(
-                expenseID: expenseID
+                expenseID: expenseID,
+                userID: userID
             )
             task.networkTask = self.dataTransferService.request(
                 with: endpoint

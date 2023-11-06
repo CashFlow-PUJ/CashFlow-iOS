@@ -11,6 +11,7 @@ protocol UpdateExpense {
     func execute(
         expenseID: String,
         updatedExpense: Expense,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
 }
@@ -25,8 +26,9 @@ final class DefaultUpdateExpense: UpdateExpense {
     func execute(
         expenseID: String,
         updatedExpense: Expense,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable? {
-        return expenseRepository.updateExpenseEntry(expenseID: expenseID, expenseEntry: updatedExpense, completion: completion)
+        return expenseRepository.updateExpenseEntry(expenseID: expenseID, expenseEntry: updatedExpense, userID: userID, completion: completion)
     }
 }
