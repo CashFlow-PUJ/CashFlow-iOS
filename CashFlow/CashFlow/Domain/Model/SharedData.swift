@@ -6,5 +6,6 @@ class SharedData: ObservableObject {
     @Published var expenseHistory: [Expense] = []
     @Published var dataIncomeLoaded = false
     @Published var dataExpenseLoaded = false
+    @Published var isUserIdLoading: Bool = true
     @Published var userId = ""
 }

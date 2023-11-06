@@ -107,7 +107,7 @@ struct APIEndpoints {
         )
     }
     
-    static func updateUser(userID: String, with user: UserRequestDTO) -> Endpoint<Void> {
+    static func updateUser(userID: String, with user: UserRequestDTO, id: String) -> Endpoint<Void> {
         return Endpoint(
             path: "user/UPDATE",
             method: .put,

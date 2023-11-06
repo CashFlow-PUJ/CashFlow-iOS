@@ -10,7 +10,7 @@ class UserProfile: ObservableObject {
 struct EditProfileView: View {
     @EnvironmentObject var userProfile: UserProfile
     @State private var isImagePickerPresented: Bool = false
-    
+    @EnvironmentObject var sharedData: SharedData
     @State private var userName: String = ""
     @State private var userLast: String = ""
     @State private var userBirthday: Date = Date()
@@ -107,7 +107,7 @@ struct EditProfileView: View {
         )
         
         // Invoca el método updateUser del UserViewModel
-        userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser)
+        userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser, userID: sharedData.userId)
         isPresented = false
     }
 }

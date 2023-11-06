@@ -45,11 +45,12 @@ import Foundation
     }
     
     // Paso 2: Método para actualizar el usuario
-    func updateUser(uuid: String, user: User) {
+    func updateUser(uuid: String, user: User, userID: String) {
         let userDTO = UserRequestDTO.fromDomain(user: user)
         userUpdateTask = updateUser.execute(
             uuid: uuid,
             user: userDTO,
+            userID: userID,
             completion: { [weak self] result in
                 switch result {
                 case .success:

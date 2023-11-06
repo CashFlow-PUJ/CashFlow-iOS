@@ -123,6 +123,7 @@ struct MenuView: View {
                 EditProfileView(isPresented: $showEditProfile)
                     .environmentObject(userViewModel)
                     .environmentObject(userProfile)
+                    .environmentObject(sharedData)
             }
             .navigationDestination(isPresented: $showLogView, destination: {
                 EntryLogView(coordinator: coordinator, sharedData: sharedData)
@@ -143,6 +144,7 @@ struct MenuView: View {
                 showEditProfile = true
             case .cerrarSesion:
                 authVM.signOut()
+                sharedData.userId = ""
                 coordinator.path.append(.login)
                 break
         }

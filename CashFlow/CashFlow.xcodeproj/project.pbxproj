@@ -106,11 +106,13 @@
 		9AD1A3262AE1E36E0034972E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3252AE1E36E0034972E /* Cancellable.swift */; };
 		9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */; };
 		9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */; };
-		B11B63CD9C3CA5F04BADDBAE /* Pods_CashFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1A9FD8F38EE961E777D265 /* Pods_CashFlow.framework */; };
+		D5EDFA272C25C93CA38EFB4E /* Pods_CashFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E1A9FD8F38EE961E777D265 /* Pods_CashFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
+		57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		7F1518BC2AC680C70004540A /* MonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyView.swift; sourceTree = "<group>"; };
 		7F1518C22AC71DA40004540A /* ChartMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMonthlyView.swift; sourceTree = "<group>"; };
 		7F1518C42AC721290004540A /* AnyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntry.swift; sourceTree = "<group>"; };
@@ -200,8 +202,6 @@
 		9AD1A3252AE1E36E0034972E /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		BE38DCDF0F19421B33AA677B /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
-		D355B3A2F7BC7D22BBEC71E3 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ACDA9C92AB31FBD00002DE7 /* FirebaseDatabaseSwift in Frameworks */,
-				B11B63CD9C3CA5F04BADDBAE /* Pods_CashFlow.framework in Frameworks */,
 				9A656CF82AB67708003B2F42 /* GoogleSignIn in Frameworks */,
 				9A656CFA2AB67708003B2F42 /* GoogleSignInSwift in Frameworks */,
 				9ACDA9D32AB31FBD00002DE7 /* FirebaseStorageCombine-Community in Frameworks */,
@@ -222,17 +221,26 @@
 				9ACDA9CB2AB31FBD00002DE7 /* FirebaseFirestore in Frameworks */,
 				9ACDA9CD2AB31FBD00002DE7 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				9ACDA9CF2AB31FBD00002DE7 /* FirebaseFirestoreSwift in Frameworks */,
+				D5EDFA272C25C93CA38EFB4E /* Pods_CashFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65B8914DBF010BE41CD6F424 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7578F3A112C24358A72D8FF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D355B3A2F7BC7D22BBEC71E3 /* Pods-CashFlow.debug.xcconfig */,
-				BE38DCDF0F19421B33AA677B /* Pods-CashFlow.release.xcconfig */,
+				5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */,
+				49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -287,7 +295,7 @@
 				9A1612382A6DE6CB0032743E /* CashFlow */,
 				9A1612372A6DE6CB0032743E /* Products */,
 				7578F3A112C24358A72D8FF8 /* Pods */,
-				F45028F4A9B48F76572C9771 /* Frameworks */,
+				65B8914DBF010BE41CD6F424 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -654,14 +662,6 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		F45028F4A9B48F76572C9771 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6E1A9FD8F38EE961E777D265 /* Pods_CashFlow.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -669,12 +669,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A1612442A6DE6CE0032743E /* Build configuration list for PBXNativeTarget "CashFlow" */;
 			buildPhases = (
-				5F7AA1B9305FA413DA2A6651 /* [CP] Check Pods Manifest.lock */,
+				726D8E055C6544578F1AC067 /* [CP] Check Pods Manifest.lock */,
 				9A1612322A6DE6CB0032743E /* Sources */,
 				9A1612332A6DE6CB0032743E /* Frameworks */,
 				9A1612342A6DE6CB0032743E /* Resources */,
-				EEB52A2488C63AD9493BC1F0 /* [CP] Embed Pods Frameworks */,
-				F253C05FBCBC63429071FFB1 /* [CP] Copy Pods Resources */,
+				058364EE652B6448CF60EB4A /* [CP] Embed Pods Frameworks */,
+				F05C9EE9147E532E5B0D4CF5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -753,7 +753,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5F7AA1B9305FA413DA2A6651 /* [CP] Check Pods Manifest.lock */ = {
+		058364EE652B6448CF60EB4A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		726D8E055C6544578F1AC067 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -775,24 +792,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EEB52A2488C63AD9493BC1F0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F253C05FBCBC63429071FFB1 /* [CP] Copy Pods Resources */ = {
+		F05C9EE9147E532E5B0D4CF5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1020,7 +1020,7 @@
 		};
 		9A1612452A6DE6CE0032743E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D355B3A2F7BC7D22BBEC71E3 /* Pods-CashFlow.debug.xcconfig */;
+			baseConfigurationReference = 5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1057,7 +1057,7 @@
 		};
 		9A1612462A6DE6CE0032743E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE38DCDF0F19421B33AA677B /* Pods-CashFlow.release.xcconfig */;
+			baseConfigurationReference = 49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

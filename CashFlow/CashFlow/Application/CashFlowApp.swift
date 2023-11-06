@@ -3,7 +3,6 @@ import FBSDKCoreKit
 import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
-import Keychain
 
 enum Route: Hashable {
   case transactionLog
@@ -55,7 +54,7 @@ struct CashFlowApp: App {
     @ObservedObject var coordinator = Coordinator()
     var userProfile = UserProfile()
     let sharedData = SharedData()
-    
+
     func setup() {
         coordinator.setup()
         Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
@@ -63,29 +62,62 @@ struct CashFlowApp: App {
                 print("Error getting token: \(error.localizedDescription)")
                 return
             }
-            sharedData.userId = tokenResult?.token ?? ""
+
+            if let token = tokenResult?.token {
+                sharedData.userId = token
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.coordinator.currentRoute = .transactionLog
+                    }
+                }
+            }
         })
     }
-    
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 VStack {
-                    if Auth.auth().currentUser != nil && !sharedData.userId.isEmpty {
-                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                            .preferredColorScheme(.light)
-                            .navigationBarBackButtonHidden(true)
-                            .navigationDestination(for: Route.self) { route in
-                                switch route {
-                                case .transactionLog:
-                                    EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                                        .preferredColorScheme(.light)
-                                        .navigationBarBackButtonHidden(true)
-                                case .login:
-                                    EmptyView()
+                    if Auth.auth().currentUser != nil {
+                        if sharedData.userId.isEmpty {
+                            // Display a loading indicator while the token is being loaded
+                            ProgressView()
+                                .onAppear {
+                                    // Wait until the token is loaded before displaying the EntryLogView
+                                    Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                                        if let error = error {
+                                            print("Error getting token: \(error.localizedDescription)")
+                                            return
+                                        }
+
+                                        if let token = tokenResult?.token {
+                                            sharedData.userId = token
+                                            DispatchQueue.main.async {
+                                                withAnimation {
+                                                    self.coordinator.currentRoute = .transactionLog
+                                                }
+                                            }
+                                        }
+                                    })
                                 }
-                            }
+                        } else {
+                            // Display the EntryLogView when the token is loaded
+                            EntryLogView(coordinator: coordinator, sharedData: sharedData)
+                                .preferredColorScheme(.light)
+                                .navigationBarBackButtonHidden(true)
+                                .navigationDestination(for: Route.self) { route in
+                                    switch route {
+                                    case .transactionLog:
+                                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
+                                            .preferredColorScheme(.light)
+                                            .navigationBarBackButtonHidden(true)
+                                    case .login:
+                                        EmptyView()
+                                    }
+                                }
+                        }
                     } else {
+                        // Display the LoginView if the user is not logged in
                         LoginView()
                             .preferredColorScheme(.light)
                             .navigationBarBackButtonHidden(true)

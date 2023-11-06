@@ -19,6 +19,7 @@ protocol UserRepository {
     func updateUser(
         uuid: String,
         user: UserRequestDTO,
+        userID: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) -> Cancellable?
     
