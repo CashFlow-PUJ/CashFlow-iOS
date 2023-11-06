@@ -65,15 +65,6 @@ struct LoginView: View {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
                     case .success(_):
-                        Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
-                            if let error = error {
-                                print("Error getting token: \(error.localizedDescription)")
-                                return
-                            }
-                            print("Token is: \(tokenResult?.token ?? "No token")")
-                            sharedData.userId = tokenResult?.token ?? "No token"
-                        })
-                        
                         coordinator.path.append(.transactionLog)
                     case .failure(let error):
                         showingErrorAlert = true
@@ -123,13 +114,6 @@ struct LoginView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
-                                if let error = error {
-                                    print("Error getting token: \(error.localizedDescription)")
-                                    return
-                                }
-                                print("Token is: \(tokenResult?.token ?? "No token")")
-                            })
                             coordinator.path.append(.transactionLog)
                         case .failure(let error):
                             showingErrorAlert = true
@@ -193,14 +177,6 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
-                    Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
-                        if let error = error {
-                            print("Error getting token: \(error.localizedDescription)")
-                            return
-                        }
-                        print("Token is: \(tokenResult?.token ?? "No token")")
-                        sharedData.userId = tokenResult?.token ?? "No token"
-                    })
                     coordinator.path.append(.transactionLog)
                 case .failure(let error):
                     print(error.errorMessage)
