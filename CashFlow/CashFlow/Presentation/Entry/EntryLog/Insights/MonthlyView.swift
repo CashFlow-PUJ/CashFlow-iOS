@@ -28,3 +28,25 @@ struct MonthlyView: View {
         }
     }
 }
+
+struct MonthlyViewExpenses: View {
+    @State private var showChart = false
+
+    var body: some View {
+        NavigationView{
+            VStack{
+                ChartViewExpensesMini()
+                    .frame(width: 390, height: 230, alignment: .center)
+                    .opacity(showChart ? 0.0 : 1.0)
+                    
+                NavigationLink{
+                    GraphicViewExpenses()
+                    Spacer()
+                }label: {
+                    Text("Ver Informe Mensual")
+                }
+                Spacer()
+            }
+        }
+    }
+}

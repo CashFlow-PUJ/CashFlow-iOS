@@ -168,6 +168,7 @@ struct EntryLogView: View {
                                         }
                                         else {
                                             // Display expense related insights
+                                            MonthlyViewExpenses()
                                             Spacer()
                                         }
                                     }
