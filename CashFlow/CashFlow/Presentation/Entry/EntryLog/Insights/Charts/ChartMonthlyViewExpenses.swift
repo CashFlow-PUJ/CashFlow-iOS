@@ -1,39 +1,34 @@
 //
-//  ChartMonthlyView.swift
+//  ChartMonthlyViewExpenses.swift
 //  CashFlow
 //
-//  Created by Angie Tatiana Peña Peña on 29/09/23.
+//  Created by Cristóbal Castrillón Balcázar on 6/11/23.
 //
 
 import SwiftUI
 import Charts
 
-let month = Calendar.current.component(.month, from: Date())
-let day = Calendar.current.component(.day, from: Date())
-
-let dateRangeArray = dateRange(startDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 1).date!, endDate: DateComponents(calendar: Calendar.current, year: 2023, month: month, day: day).date!)
-
-struct GraphicView: View {
+struct GraphicViewExpenses: View {
     
-    var data: [AnyEntry]
+    var expenseData: [AnyEntry]
     
     var body: some View {
-        ChartView(data: data)
+        ChartViewExpenses(expenseData: expenseData)
             .frame(width: 360, height: 400)
         Spacer()
     }
 }
 
-struct ChartView: View {
+struct ChartViewExpenses: View {
     
-    var data: [AnyEntry]
+    var expenseData: [AnyEntry]
     
     let curGradient = LinearGradient(
         gradient: Gradient (
             colors: [
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.5),
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.2),
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.05),
+                Color(.red).opacity(0.5),
+                Color(.red).opacity(0.2),
+                Color(.red).opacity(0.05),
             ]
         ),
         startPoint: .top,
@@ -42,12 +37,11 @@ struct ChartView: View {
     
     var body: some View {
         VStack {
-            GroupBox ("Ingresos") {
+            GroupBox ("Gastos") {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         GeometryReader { geometry in
-                            Chart(data) { data in
-                                
+                            Chart(expenseData) { data in
                                 LineMark(
                                     x: .value("Day", data.date, unit: .day),
                                     y: .value("Money", data.total)
@@ -56,7 +50,7 @@ struct ChartView: View {
                                     .catmullRom(alpha: 0.75)
                                 )
                                 .foregroundStyle(
-                                    Color(hue: 0.33, saturation: 0.81, brightness: 0.76)
+                                    .red
                                 )
                                 .lineStyle(StrokeStyle(lineWidth: 2))
                                 
@@ -101,16 +95,16 @@ struct ChartView: View {
     }
 }
 
-struct ChartViewMini: View {
+struct ChartViewExpensesMini: View {
     
-    var data: [AnyEntry]
+    var expenseData: [AnyEntry]
     
     let curGradient = LinearGradient(
         gradient: Gradient (
             colors: [
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.5),
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.2),
-                Color(hue: 0.33, saturation: 0.81, brightness: 0.76).opacity(0.05),
+                Color(.red).opacity(0.5),
+                Color(.red).opacity(0.2),
+                Color(.red).opacity(0.05),
             ]
         ),
         startPoint: .top,
@@ -120,7 +114,7 @@ struct ChartViewMini: View {
     var body: some View {
         GroupBox {
             GeometryReader { geometry in
-                Chart(data) { data in
+                Chart(expenseData) { data in
                     LineMark(
                         x: .value("Day", data.date, unit: .day),
                         y: .value("Money", data.total)
@@ -129,7 +123,7 @@ struct ChartViewMini: View {
                         .catmullRom(alpha: 0.75)
                     )
                     .foregroundStyle(
-                        Color(hue: 0.33, saturation: 0.81, brightness: 0.76)
+                        .red
                     )
                     .lineStyle(StrokeStyle(lineWidth: 2))
                     
@@ -142,7 +136,6 @@ struct ChartViewMini: View {
                     )
                     .foregroundStyle(curGradient)
                 }
-                Spacer()
             }
         }
         .frame(width: 333)
@@ -150,14 +143,32 @@ struct ChartViewMini: View {
     }
 }
 
-func dateRange(startDate: Date, endDate: Date) -> [Date] {
-    var currentDate = startDate
-    var dateArray: [Date] = []
+struct ExpenseChartViewMini: View {
     
-    while currentDate <= endDate {
-        dateArray.append(currentDate)
-        currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+    var expenseData: [AnyEntry]
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Chart(expenseData) { data in
+                LineMark(
+                    x: .value("Day", data.date, unit: .day),
+                    y: .value("Money", data.total)
+                )
+            }
+        }
     }
-    
-    return dateArray
+}
+
+struct YellowGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.content
+            .padding(.top, 30)
+            .padding(20)
+            .background(Color(hue: 0.10, saturation: 0.10, brightness: 0.98))
+            .cornerRadius(20)
+            .overlay(
+                configuration.label.padding(15),
+                alignment: .top
+            )
+    }
 }
