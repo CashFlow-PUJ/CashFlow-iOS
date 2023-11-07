@@ -34,6 +34,8 @@ struct EntryLogView: View {
     var auth: AuthUser
     @ObservedObject var userViewModel: UserViewModel
     
+    @State var isEditShowing = false
+    @State var isEditExpShowing = false
     init(coordinator: Coordinator, sharedData: SharedData) {
         self.userRepository = coordinator.appDIContainer.entryLogDIContainer.makeUserRepository()
         self.getUserByUUID = GetUserByUUID(userRepository: userRepository)
@@ -73,23 +75,25 @@ struct EntryLogView: View {
                                             ScrollView(.horizontal, showsIndicators: true) {
                                                 HStack {
                                                     ForEach(IncomeCategory.allCases) { category in
-                                                        if (category == .total) {
-                                                            TotalButton(
-                                                                isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
-                                                                title: category.rawValue,
-                                                                value: 100,
-                                                                total: sharedData.incomeHistory.reduce(0) { $0 + $1.total},
-                                                                color: category.color
-                                                            ){
-                                                                selectedIncomeCategory = category
-                                                            }
-                                                        } else {
-                                                            CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
-                                                                           title: category.rawValue,
-                                                                           value: Int(percentageOfIncomes(for: category, using: sharedData.incomeHistory)),
-                                                                           color: category.color
-                                                            ) {
-                                                                selectedIncomeCategory = category
+                                                        if !isEditShowing {
+                                                            if (category == .total) {
+                                                                TotalButton(
+                                                                    isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                                                    title: category.rawValue,
+                                                                    value: 100,
+                                                                    total: sharedData.incomeHistory.reduce(0) { $0 + $1.total},
+                                                                    color: category.color
+                                                                ){
+                                                                    selectedIncomeCategory = category
+                                                                }
+                                                            } else {
+                                                                CategoryButton(isSelected: selectedIncomeCategory.rawValue == category.rawValue ? true : false,
+                                                                               title: category.rawValue,
+                                                                               value: Int(percentageOfIncomes(for: category, using: sharedData.incomeHistory)),
+                                                                               color: category.color
+                                                                ) {
+                                                                    selectedIncomeCategory = category
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -102,23 +106,25 @@ struct EntryLogView: View {
                                             ScrollView(.horizontal, showsIndicators: false) {
                                                 HStack {
                                                     ForEach(ExpenseCategory.allCases) { category in
-                                                        if (category == .total) {
-                                                            TotalButton(
-                                                                isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
-                                                                title: category.rawValue,
-                                                                value: 100,
-                                                                total: sharedData.expenseHistory.reduce(0) {$0 + $1.total},
-                                                                color: category.color
-                                                            ){
-                                                                selectedExpenseCategory = category
-                                                            }
-                                                        } else {
-                                                            CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
-                                                                           title: category.rawValue,
-                                                                           value: Int(percentageOfExpenses(for: category, sharedData: sharedData)),
-                                                                           color: category.color
-                                                            ) {
-                                                                selectedExpenseCategory = category
+                                                        if !isEditExpShowing {
+                                                            if (category == .total) {
+                                                                TotalButton(
+                                                                    isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                                                    title: category.rawValue,
+                                                                    value: 100,
+                                                                    total: sharedData.expenseHistory.reduce(0) {$0 + $1.total},
+                                                                    color: category.color
+                                                                ){
+                                                                    selectedExpenseCategory = category
+                                                                }
+                                                            } else {
+                                                                CategoryButton(isSelected: selectedExpenseCategory.rawValue == category.rawValue ? true : false,
+                                                                               title: category.rawValue,
+                                                                               value: Int(percentageOfExpenses(for: category, sharedData: sharedData)),
+                                                                               color: category.color
+                                                                ) {
+                                                                    selectedExpenseCategory = category
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -135,6 +141,7 @@ struct EntryLogView: View {
                                                 if !sharedData.incomeHistory.isEmpty {
                                                     if !isShowingPopup {
                                                         IncomeHistoryView(
+                                                            isPresented: self.$isEditShowing,
                                                             categoryFilter: $selectedIncomeCategory,
                                                             viewModel: coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
                                                         )
@@ -150,6 +157,7 @@ struct EntryLogView: View {
                                         else {
                                             if !sharedData.expenseHistory.isEmpty {
                                                 ExpenseHistoryView(
+                                                    isPresented: self.$isEditExpShowing,
                                                     categoryFilter: $selectedExpenseCategory,
                                                     viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
                                                 )
@@ -178,7 +186,6 @@ struct EntryLogView: View {
                                 .sheet(isPresented: $showImagePicker){
                                     ImageInputViewControllerRepresentable(viewModel: coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData))
                                 }
-                                
                                 if isShowingMenu {
                                     Color.black.opacity(0.6)
                                         .edgesIgnoringSafeArea(.all)
@@ -251,8 +258,11 @@ struct EntryLogView: View {
         .onAppear {
             let viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
             let viewModelI = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
-            viewModelI.loadIncomeEntries()
-            viewModel.loadExpenses()
+            
+            viewModelI.loadIncomeEntries {
+                viewModel.loadExpenses {
+                }
+            }
         }
     }
 }

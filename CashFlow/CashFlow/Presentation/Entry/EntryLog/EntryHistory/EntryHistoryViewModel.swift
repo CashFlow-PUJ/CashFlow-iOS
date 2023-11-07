@@ -37,24 +37,26 @@ extension IncomeHistoryView {
             self.deleteIncome = deleteIncome
         }
         
-        func updateIncomeEntry(incomeID: String, updatedIncome: Income) {
+        func updateIncomeEntry(incomeID: String, updatedIncome: Income, completion: @escaping (Bool) -> Void) {
             incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Income updated successfully.")
-                    self.loadIncomeEntries()
+                    completion(true)
                 case .failure:
                     print("Failed updating income.")
+                    completion(false)
                 }
             }
         }
-        func loadIncomeEntries(){
+        func loadIncomeEntries(completion: @escaping () -> Void) {
             incomeLoadTask = visualizeIncomeHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let incomeHistory):
                         self.sharedData.incomeHistory = incomeHistory
                         self.sharedData.dataIncomeLoaded = true
+                        completion() // Llama a la clausura de finalización después de cargar los ingresos
                     case .failure:
                         print("Failed loading income entries.")
                     }
@@ -75,26 +77,30 @@ extension IncomeHistoryView {
             }
         }
         
-        func deleteIncomeEntry(incomeID: String) {
+        func deleteIncomeEntry(incomeID: String, completion: @escaping (Bool) -> Void) {
             incomePutTask = deleteIncome.execute(id: incomeID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted income entry.")
-                    self.loadIncomeEntries()
+                    completion(true)
                 case .failure:
                     print("Failed deleting entry.")
+                    completion(false)
                 }
             }
         }
         
-        func createIncomeEntry(incomeEntry: Income) {
+        func createIncomeEntry(incomeEntry: Income, completion: @escaping (Bool) -> Void) {
             incomePostTask = enterIncome.execute(userID: sharedData.userId, incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
                     print("Success")
-                    self.loadIncomeEntries()
+                    self.loadIncomeEntries {
+                        completion(true)
+                    }
                 case .failure:
                     print("Failed posting entry.")
+                    completion(false)
                 }
             }
         }
@@ -131,25 +137,27 @@ extension ExpenseHistoryView {
             self.deleteExpense = deleteExpense
         }
         
-        func updateExpenseEntry(expenseID: String, updatedExpense: Expense) {
+        func updateExpenseEntry(expenseID: String, updatedExpense: Expense, completion: @escaping (Bool) -> Void) {
             expensePostTask = updateExpense.execute(expenseID: expenseID, updatedExpense: updatedExpense, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Expense updated successfully.")
-                    self.loadExpenses()
+                    completion(true)
                 case .failure:
                     print("Failed updating expense.")
+                    completion(false)
                 }
             }
         }
         
-        func loadExpenses(){
+        func loadExpenses(completion: @escaping () -> Void) {
             expensesLoadTask = visualizeExpenseHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
                         self.sharedData.expenseHistory = expenseHistory
                         self.sharedData.dataExpenseLoaded = true
+                        completion() // Llama a la clausura de finalización después de cargar los gastos
                     case .failure:
                         print("Failed loading expense entries.")
                     }
@@ -168,26 +176,30 @@ extension ExpenseHistoryView {
             }
         }
         
-        func createExpenseEntry(expenseEntry: Expense){
+        func createExpenseEntry(expenseEntry: Expense, completion: @escaping (Bool) -> Void) {
             expensePostTask = enterExpense.execute(userID: sharedData.userId, expenseEntry: expenseEntry) { result in
                 switch result {
                 case .success:
                     print("Success")
-                    self.loadExpenses()
+                    self.loadExpenses {
+                        completion(true)
+                    }
                 case .failure:
                     print("Failed posting entry.")
+                    completion(false)
                 }
             }
         }
         
-        func deleteExpense(expenseID: String) {
+        func deleteExpenseEntry(expenseID: String, completion: @escaping (Bool) -> Void) {
             expenseDeleteTask = deleteExpense.execute(id: expenseID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted expense entry.")
-                    self.loadExpenses()
+                    completion(true)
                 case .failure:
                     print("Failed deleting entry.")
+                    completion(false)
                 }
             }
         }

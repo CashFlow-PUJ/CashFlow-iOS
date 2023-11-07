@@ -343,9 +343,12 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                             // Considera llamar a `showResults` aquí para indicar que hubo un error.
                             expense.category = ExpenseCategory.mercado
                             //expense.ocrText = "" // Remove comment for testing
-                            self.viewModel?.createExpenseEntry(expenseEntry: expense)
-                            strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
-                            strongSelf.showResults()
+                            self.viewModel?.createExpenseEntry(expenseEntry: expense) { success in
+                                if success {
+                                    strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
+                                    strongSelf.showResults()
+                                }
+                            }
                             return
                         }
 

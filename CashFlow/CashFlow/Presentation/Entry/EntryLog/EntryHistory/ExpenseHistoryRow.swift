@@ -12,8 +12,8 @@ struct ExpenseHistoryRow: View {
     var entry: Expense
     
     @Binding var selectedEntry: Expense?
-    @State private var isSheetPresented: Bool = false
     @ObservedObject var viewModel: ExpenseHistoryView.ExpenseHistoryViewModel
+    @Binding var isPresented: Bool
     
     var body: some View {
         HStack {
@@ -41,16 +41,16 @@ struct ExpenseHistoryRow: View {
         .cornerRadius(10)
         .onTapGesture {
             self.selectedEntry = entry
-            self.isSheetPresented.toggle()
+            self.isPresented.toggle()
         }
         .onChange(of: selectedEntry) { newValue in
             if newValue != nil {
-                self.isSheetPresented = true
+                self.isPresented = true
             }
         }
-        .sheet(isPresented: $isSheetPresented) {
+        .sheet(isPresented: $isPresented) {
             if let selectedEntry = self.selectedEntry {
-                EditExpenseView(expense: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category, viewModel: viewModel)
+                EditExpenseView(expense: .constant(self.selectedEntry!), isPresented: self.$isPresented, category: selectedEntry.category, viewModel: viewModel)
             } else {
                 Text("No entry selected")
             }
