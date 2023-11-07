@@ -60,6 +60,7 @@ class Coordinator: ObservableObject {
 
 }
 
+@available(iOS 17.0, *)
 @main
 struct CashFlowApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

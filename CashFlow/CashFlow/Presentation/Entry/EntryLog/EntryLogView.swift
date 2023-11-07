@@ -1,6 +1,7 @@
 import SwiftUI
 import FirebaseAuth
 
+@available(iOS 17.0, *)
 struct EntryLogView: View {
     
     // MARK: - Coordinator

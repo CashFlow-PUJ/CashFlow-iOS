@@ -34,6 +34,7 @@ struct CircularImageButton: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct MenuView: View {
     @State private var isMenuOpen = false
     @State private var isPhotoOpen = false
