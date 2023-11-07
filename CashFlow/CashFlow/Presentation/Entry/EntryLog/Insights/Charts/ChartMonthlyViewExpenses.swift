@@ -14,7 +14,7 @@ struct GraphicViewExpenses: View {
     
     var body: some View {
         ChartViewExpenses(expenseData: expenseData)
-            .frame(width: 333, height: 400)
+            .frame(width: 360, height: 400)
         Spacer()
     }
 }
@@ -37,49 +37,56 @@ struct ChartViewExpenses: View {
     
     var body: some View {
         VStack {
-            GroupBox {
-                GeometryReader { geometry in
-                    Chart(expenseData) { data in
-                        
-                        LineMark(
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .interpolationMethod(.catmullRom)
-                        .foregroundStyle(
-                            .red
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: 2))
-                        
-                        PointMark (
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .symbolSize(1)
-                        .annotation(
-                            position: .overlay,
-                            alignment: .bottom,
-                            spacing: 10
-                        ){
-                            Text("\(String(Double(data.total/1000000)))M")
-                                .font(.system(size: 8))
+            GroupBox ("Gastos") {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        GeometryReader { geometry in
+                            Chart(expenseData) { data in
+                                LineMark(
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .interpolationMethod(
+                                    .catmullRom(alpha: 0.75)
+                                )
+                                .foregroundStyle(
+                                    .red
+                                )
+                                .lineStyle(StrokeStyle(lineWidth: 2))
+                                
+                                PointMark (
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .symbolSize(1)
+                                .annotation(
+                                    position: .overlay,
+                                    alignment: .bottom,
+                                    spacing: 10
+                                ){
+                                    Text("\(String(Double(data.total/1000000)))M")
+                                        .font(.system(size: 8))
+                                }
+                                
+                                AreaMark(
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .interpolationMethod(
+                                    .catmullRom(alpha: 0.75)
+                                )
+                                .foregroundStyle(curGradient)
+                                
+                            }
+                            .navigationTitle("Informe Mensual")
+                            .chartXAxis{
+                                AxisMarks(values: .stride(by: .day)){ day in
+                                    AxisValueLabel(format: .dateTime.day(.defaultDigits))
+                                    AxisGridLine()
+                                }
+                            }
                         }
-                        
-                        AreaMark(
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .interpolationMethod(.catmullRom)
-                        .foregroundStyle(curGradient)
-                        
-                    }
-                    .navigationTitle("Informe Mensual")
-                    //.padding(30)
-                    .chartXAxis{
-                        AxisMarks(values: .stride(by: .day)){ day in
-                            AxisValueLabel(format: .dateTime.day(.defaultDigits))
-                            AxisGridLine()
-                        }
+                        .frame(width: 666)
                     }
                 }
             }
@@ -112,7 +119,9 @@ struct ChartViewExpensesMini: View {
                         x: .value("Day", data.date, unit: .day),
                         y: .value("Money", data.total)
                     )
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(
+                        .catmullRom(alpha: 0.75)
+                    )
                     .foregroundStyle(
                         .red
                     )
@@ -122,7 +131,9 @@ struct ChartViewExpensesMini: View {
                         x: .value("Day", data.date, unit: .day),
                         y: .value("Money", data.total)
                     )
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(
+                        .catmullRom(alpha: 0.75)
+                    )
                     .foregroundStyle(curGradient)
                 }
             }
@@ -151,12 +162,13 @@ struct ExpenseChartViewMini: View {
 struct YellowGroupBoxStyle: GroupBoxStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.content
+            .padding(.top, 30)
             .padding(20)
             .background(Color(hue: 0.10, saturation: 0.10, brightness: 0.98))
             .cornerRadius(20)
             .overlay(
-                configuration.label.padding(10),
-                alignment: .topLeading
+                configuration.label.padding(15),
+                alignment: .top
             )
     }
 }

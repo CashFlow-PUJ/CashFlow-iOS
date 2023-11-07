@@ -19,7 +19,7 @@ struct GraphicView: View {
     
     var body: some View {
         ChartView(data: data)
-            .frame(width: 333, height: 400)
+            .frame(width: 360, height: 400)
         Spacer()
     }
 }
@@ -42,48 +42,57 @@ struct ChartView: View {
     
     var body: some View {
         VStack {
-            GroupBox {
-                GeometryReader { geometry in
-                    Chart(data) { data in
-                        
-                        LineMark(
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .interpolationMethod(.catmullRom)
-                        .foregroundStyle(
-                            Color(hue: 0.33, saturation: 0.81, brightness: 0.76)
-                        )
-                        .lineStyle(StrokeStyle(lineWidth: 2))
-                        
-                        PointMark (
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .symbolSize(1)
-                        .annotation(
-                            position: .overlay,
-                            alignment: .bottom,
-                            spacing: 10
-                        ){
-                            Text("\(String(Double(data.total/1000000)))M")
-                                .font(.system(size: 8))
+            GroupBox ("Ingresos") {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        GeometryReader { geometry in
+                            Chart(data) { data in
+                                
+                                LineMark(
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .interpolationMethod(
+                                    .catmullRom(alpha: 0.75)
+                                )
+                                .foregroundStyle(
+                                    Color(hue: 0.33, saturation: 0.81, brightness: 0.76)
+                                )
+                                .lineStyle(StrokeStyle(lineWidth: 2))
+                                
+                                PointMark (
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .symbolSize(1)
+                                .annotation(
+                                    position: .overlay,
+                                    alignment: .bottom,
+                                    spacing: 10
+                                ){
+                                    Text("\(String(Double(data.total/1000000)))M")
+                                        .font(.system(size: 8))
+                                }
+                                
+                                AreaMark(
+                                    x: .value("Day", data.date, unit: .day),
+                                    y: .value("Money", data.total)
+                                )
+                                .interpolationMethod(
+                                    .catmullRom(alpha: 0.75)
+                                )
+                                .foregroundStyle(curGradient)
+                                
+                            }
+                            .navigationTitle("Informe Mensual")
+                            .chartXAxis{
+                                AxisMarks(values: .stride(by: .day)){ day in
+                                    AxisValueLabel(format: .dateTime.day(.defaultDigits))
+                                    AxisGridLine()
+                                }
+                            }
                         }
-                        
-                        AreaMark(
-                            x: .value("Day", data.date, unit: .day),
-                            y: .value("Money", data.total)
-                        )
-                        .interpolationMethod(.catmullRom)
-                        .foregroundStyle(curGradient)
-                        
-                    }
-                    .navigationTitle("Informe Mensual")
-                    .chartXAxis{
-                        AxisMarks(values: .stride(by: .day)){ day in
-                            AxisValueLabel(format: .dateTime.day(.defaultDigits))
-                            AxisGridLine()
-                        }
+                        .frame(width: 666)
                     }
                 }
             }
@@ -116,7 +125,9 @@ struct ChartViewMini: View {
                         x: .value("Day", data.date, unit: .day),
                         y: .value("Money", data.total)
                     )
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(
+                        .catmullRom(alpha: 0.75)
+                    )
                     .foregroundStyle(
                         Color(hue: 0.33, saturation: 0.81, brightness: 0.76)
                     )
@@ -126,7 +137,9 @@ struct ChartViewMini: View {
                         x: .value("Day", data.date, unit: .day),
                         y: .value("Money", data.total)
                     )
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(
+                        .catmullRom(alpha: 0.75)
+                    )
                     .foregroundStyle(curGradient)
                 }
                 Spacer()

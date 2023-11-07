@@ -17,12 +17,18 @@ struct MonthlyView: View {
                 ChartViewMini(data: self.initData())
                     .frame(width: 390, height: 230, alignment: .center)
                     .opacity(showChart ? 0.0 : 1.0)
-                                
+                               
                 NavigationLink{
                     GraphicView(data: self.initData())
                 }
                 label: {
-                    Text("Ver Informe Mensual")
+                    HStack {
+                        Text("Ver informe mensual")
+                        Image(systemName: "arrow.up.right")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                    }
+                    .foregroundColor(Color(hex: 0xF75E68))
                 }
                 Spacer()
             }
@@ -67,12 +73,18 @@ struct MonthlyViewExpenses: View {
                 ChartViewExpensesMini(expenseData: self.initExpenseData())
                     .frame(width: 390, height: 230, alignment: .center)
                     .opacity(showChart ? 0.0 : 1.0)
-                    
+
                 NavigationLink{
                     GraphicViewExpenses(expenseData: self.initExpenseData())
                 }
                 label: {
-                    Text("Ver Informe Mensual")
+                    HStack {
+                        Text("Ver informe mensual")
+                        Image(systemName: "arrow.up.right")
+                            .resizable()
+                            .frame(width: 10, height: 10)
+                    }
+                    .foregroundColor(Color(hex: 0xF75E68))
                 }
                 Spacer()
             }
