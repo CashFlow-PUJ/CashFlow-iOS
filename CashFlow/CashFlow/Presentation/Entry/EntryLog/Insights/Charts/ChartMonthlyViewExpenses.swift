@@ -13,12 +13,9 @@ struct GraphicViewExpenses: View {
     var expenseData: [AnyEntry]
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ChartViewExpenses(expenseData: expenseData)
-                    .frame(width: 1000, height: 300)
-            }
-        }
+        ChartViewExpenses(expenseData: expenseData)
+            .frame(width: 333, height: 400)
+        Spacer()
     }
 }
 
@@ -26,41 +23,67 @@ struct ChartViewExpenses: View {
     
     var expenseData: [AnyEntry]
     
+    let curGradient = LinearGradient(
+        gradient: Gradient (
+            colors: [
+                Color(.red).opacity(0.5),
+                Color(.red).opacity(0.2),
+                Color(.red).opacity(0.05),
+            ]
+        ),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
     var body: some View {
         VStack {
-            GeometryReader { geometry in
-                Chart(expenseData) { data in
-                    LineMark(
-                        x: .value("Day", data.date, unit: .day),
-                        y: .value("Money", data.total)
-                    )
-                    PointMark (
-                        x: .value("Day", data.date, unit: .day),
-                        y: .value("Money", data.total)
-                    )
-                    .symbolSize(1)
-                    .annotation(
-                        position: .overlay,
-                        alignment: .bottom,
-                        spacing: 10
-                    ){
-                        Text("\(String(Double(data.total/1000000)))M")
-                            .font(.system(size: 8))
+            GroupBox {
+                GeometryReader { geometry in
+                    Chart(expenseData) { data in
+                        
+                        LineMark(
+                            x: .value("Day", data.date, unit: .day),
+                            y: .value("Money", data.total)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .foregroundStyle(
+                            .red
+                        )
+                        .lineStyle(StrokeStyle(lineWidth: 2))
+                        
+                        PointMark (
+                            x: .value("Day", data.date, unit: .day),
+                            y: .value("Money", data.total)
+                        )
+                        .symbolSize(1)
+                        .annotation(
+                            position: .overlay,
+                            alignment: .bottom,
+                            spacing: 10
+                        ){
+                            Text("\(String(Double(data.total/1000000)))M")
+                                .font(.system(size: 8))
+                        }
+                        
+                        AreaMark(
+                            x: .value("Day", data.date, unit: .day),
+                            y: .value("Money", data.total)
+                        )
+                        .interpolationMethod(.catmullRom)
+                        .foregroundStyle(curGradient)
+                        
                     }
-                    
-                }
-                .navigationTitle("Informe Mensual")
-                .padding(30)
-                .chartXAxis{
-                    AxisMarks(values: .stride(by: .day)){ day in
-                        AxisValueLabel(format: .dateTime.day(.defaultDigits))
-                        AxisGridLine()
+                    .navigationTitle("Informe Mensual")
+                    //.padding(30)
+                    .chartXAxis{
+                        AxisMarks(values: .stride(by: .day)){ day in
+                            AxisValueLabel(format: .dateTime.day(.defaultDigits))
+                            AxisGridLine()
+                        }
                     }
                 }
-                
-                
-                Spacer()
             }
+            .groupBoxStyle(YellowGroupBoxStyle())
         }
     }
 }
@@ -69,17 +92,43 @@ struct ChartViewExpensesMini: View {
     
     var expenseData: [AnyEntry]
     
+    let curGradient = LinearGradient(
+        gradient: Gradient (
+            colors: [
+                Color(.red).opacity(0.5),
+                Color(.red).opacity(0.2),
+                Color(.red).opacity(0.05),
+            ]
+        ),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
     var body: some View {
-        GeometryReader { geometry in
-            Chart(expenseData) { data in
-                LineMark(
-                    x: .value("Day", data.date, unit: .day),
-                    y: .value("Money", data.total)
-                )
-                
+        GroupBox {
+            GeometryReader { geometry in
+                Chart(expenseData) { data in
+                    LineMark(
+                        x: .value("Day", data.date, unit: .day),
+                        y: .value("Money", data.total)
+                    )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(
+                        .red
+                    )
+                    .lineStyle(StrokeStyle(lineWidth: 2))
+                    
+                    AreaMark(
+                        x: .value("Day", data.date, unit: .day),
+                        y: .value("Money", data.total)
+                    )
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(curGradient)
+                }
             }
-            Spacer()
         }
+        .frame(width: 333)
+        .groupBoxStyle(YellowGroupBoxStyle())
     }
 }
 
@@ -94,9 +143,20 @@ struct ExpenseChartViewMini: View {
                     x: .value("Day", data.date, unit: .day),
                     y: .value("Money", data.total)
                 )
-                
             }
-            Spacer()
         }
+    }
+}
+
+struct YellowGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.content
+            .padding(20)
+            .background(Color(hue: 0.10, saturation: 0.10, brightness: 0.98))
+            .cornerRadius(20)
+            .overlay(
+                configuration.label.padding(10),
+                alignment: .topLeading
+            )
     }
 }

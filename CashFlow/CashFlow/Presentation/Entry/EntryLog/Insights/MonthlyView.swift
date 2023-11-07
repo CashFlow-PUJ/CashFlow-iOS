@@ -12,16 +12,16 @@ struct MonthlyView: View {
     @EnvironmentObject var sharedData: SharedData
 
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack{
                 ChartViewMini(data: self.initData())
                     .frame(width: 390, height: 230, alignment: .center)
                     .opacity(showChart ? 0.0 : 1.0)
-                    
+                                
                 NavigationLink{
                     GraphicView(data: self.initData())
-                    Spacer()
-                }label: {
+                }
+                label: {
                     Text("Ver Informe Mensual")
                 }
                 Spacer()
@@ -62,7 +62,7 @@ struct MonthlyViewExpenses: View {
     @EnvironmentObject var sharedData: SharedData
 
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack{
                 ChartViewExpensesMini(expenseData: self.initExpenseData())
                     .frame(width: 390, height: 230, alignment: .center)
@@ -70,8 +70,8 @@ struct MonthlyViewExpenses: View {
                     
                 NavigationLink{
                     GraphicViewExpenses(expenseData: self.initExpenseData())
-                    Spacer()
-                }label: {
+                }
+                label: {
                     Text("Ver Informe Mensual")
                 }
                 Spacer()
