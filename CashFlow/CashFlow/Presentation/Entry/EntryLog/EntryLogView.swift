@@ -177,8 +177,7 @@ struct EntryLogView: View {
                                             Spacer()
                                         }
                                         else {
-                                            // Display expense related insights
-                                            MonthlyViewExpenses()
+                                            InsightExpenseView()
                                                 .environmentObject(sharedData)
                                             Spacer()
                                         }

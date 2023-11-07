@@ -71,58 +71,56 @@ struct CashFlowApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                VStack {
-                    if Auth.auth().currentUser != nil {
-                        if sharedData.userId.isEmpty {
-                            ProgressView()
-                                .onAppear {
-                                    Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
-                                        if let error = error {
-                                            print("Error getting token: \(error.localizedDescription)")
-                                            return
-                                        }
+                if Auth.auth().currentUser != nil {
+                    if sharedData.userId.isEmpty {
+                        ProgressView()
+                            .onAppear {
+                                Auth.auth().currentUser?.getIDTokenResult(completion: { (tokenResult, error) in
+                                    if let error = error {
+                                        print("Error getting token: \(error.localizedDescription)")
+                                        return
+                                    }
 
-                                        if let token = tokenResult?.token {
-                                            sharedData.userId = token
-                                            coordinator.authUser(userID: token)
-                                            DispatchQueue.main.async {
-                                                withAnimation {
-                                                    self.coordinator.currentRoute = .transactionLog
-                                                }
+                                    if let token = tokenResult?.token {
+                                        sharedData.userId = token
+                                        coordinator.authUser(userID: token)
+                                        DispatchQueue.main.async {
+                                            withAnimation {
+                                                self.coordinator.currentRoute = .transactionLog
                                             }
                                         }
-                                    })
-                                }
-                        } else {
-                            EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                                .preferredColorScheme(.light)
-                                .navigationBarBackButtonHidden(true)
-                                .navigationDestination(for: Route.self) { route in
-                                    switch route {
-                                    case .transactionLog:
-                                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
-                                            .preferredColorScheme(.light)
-                                            .navigationBarBackButtonHidden(true)
-                                    case .login:
-                                        EmptyView()
                                     }
-                                }
-                        }
+                                })
+                            }
                     } else {
-                        LoginView()
+                        EntryLogView(coordinator: coordinator, sharedData: sharedData)
                             .preferredColorScheme(.light)
                             .navigationBarBackButtonHidden(true)
                             .navigationDestination(for: Route.self) { route in
                                 switch route {
                                 case .transactionLog:
-                                    EmptyView()
-                                case .login:
-                                    LoginView()
+                                    EntryLogView(coordinator: coordinator, sharedData: sharedData)
                                         .preferredColorScheme(.light)
                                         .navigationBarBackButtonHidden(true)
+                                case .login:
+                                    EmptyView()
                                 }
                             }
                     }
+                } else {
+                    LoginView()
+                        .preferredColorScheme(.light)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationDestination(for: Route.self) { route in
+                            switch route {
+                            case .transactionLog:
+                                EmptyView()
+                            case .login:
+                                LoginView()
+                                    .preferredColorScheme(.light)
+                                    .navigationBarBackButtonHidden(true)
+                            }
+                        }
                 }
             }
             .onAppear(perform: setup)
