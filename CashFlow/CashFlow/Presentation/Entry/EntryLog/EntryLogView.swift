@@ -172,11 +172,13 @@ struct EntryLogView: View {
                                         // TODO: Insights View
                                         if firstTabBarIndex == 0 {
                                             MonthlyView()
+                                                .environmentObject(sharedData)
                                             Spacer()
                                         }
                                         else {
                                             // Display expense related insights
                                             MonthlyViewExpenses()
+                                                .environmentObject(sharedData)
                                             Spacer()
                                         }
                                     }

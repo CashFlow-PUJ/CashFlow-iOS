@@ -14,19 +14,23 @@ let day = Calendar.current.component(.day, from: Date())
 let dateRangeArray = dateRange(startDate: DateComponents(calendar: Calendar.current, year: 2023, month: 9, day: 1).date!, endDate: DateComponents(calendar: Calendar.current, year: 2023, month: month, day: day).date!)
 
 struct GraphicView: View {
+    
+    var data: [AnyEntry]
+    
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ChartView()
+                ChartView(data: data)
                     .frame(width: 1000, height: 300)
             }
         }
     }
 }
 
-var data: [AnyEntry] = initData()
-
 struct ChartView: View {
+    
+    var data: [AnyEntry]
+    
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -67,6 +71,9 @@ struct ChartView: View {
 }
 
 struct ChartViewMini: View {
+    
+    var data: [AnyEntry]
+    
     var body: some View {
         GeometryReader { geometry in
             Chart(data) { data in
@@ -80,33 +87,6 @@ struct ChartViewMini: View {
         }
     }
 }
-
-func initData() -> [AnyEntry] {
-    @State var ExpenseHistory: [Expense] = Expense.sampleData
-    @State var IncomeHistory: [Income] = Income.sampleData
-    var previousTotal: Int = 0
-    var info: [AnyEntry] = []
-    for date in dateRangeArray {
-        let matchingExpenses = ExpenseHistory.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-        let matchingIncomes = IncomeHistory.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-        
-        let totalIncome = matchingIncomes.reduce(0, { $0 + $1.total })
-        let totalExpense = matchingExpenses.reduce(0, { $0 + $1.total })
-        
-        let total = previousTotal + totalIncome - totalExpense
-        
-        info.append(AnyEntry(id: UUID(), total: total, date: date))
-        previousTotal = total
-    }
-    
-    info = info.filter { Calendar.current.component(.month, from: $0.date) == month}
-    if info.isEmpty {
-        info.append(AnyEntry(id: UUID(), total: previousTotal, date: Date()))
-    }
-        
-    return info
-}
-
 
 func dateRange(startDate: Date, endDate: Date) -> [Date] {
     var currentDate = startDate

@@ -9,19 +9,23 @@ import SwiftUI
 import Charts
 
 struct GraphicViewExpenses: View {
+    
+    var expenseData: [AnyEntry]
+    
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ChartViewExpenses()
+                ChartViewExpenses(expenseData: expenseData)
                     .frame(width: 1000, height: 300)
             }
         }
     }
 }
 
-var expenseData: [AnyEntry] = initData()
-
 struct ChartViewExpenses: View {
+    
+    var expenseData: [AnyEntry]
+    
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -62,6 +66,9 @@ struct ChartViewExpenses: View {
 }
 
 struct ChartViewExpensesMini: View {
+    
+    var expenseData: [AnyEntry]
+    
     var body: some View {
         GeometryReader { geometry in
             Chart(expenseData) { data in
@@ -77,6 +84,9 @@ struct ChartViewExpensesMini: View {
 }
 
 struct ExpenseChartViewMini: View {
+    
+    var expenseData: [AnyEntry]
+    
     var body: some View {
         GeometryReader { geometry in
             Chart(expenseData) { data in
@@ -89,30 +99,4 @@ struct ExpenseChartViewMini: View {
             Spacer()
         }
     }
-}
-
-func initExpenseData() -> [AnyEntry] {
-    @State var ExpenseHistory: [Expense] = Expense.sampleData
-    //@State var IncomeHistory: [Income] = Income.sampleData
-    var previousTotal: Int = 0
-    var info: [AnyEntry] = []
-    for date in dateRangeArray {
-        let matchingExpenses = ExpenseHistory.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-        //let matchingIncomes = IncomeHistory.filter { Calendar.current.isDate($0.date, inSameDayAs: date) }
-        
-        //let totalIncome = matchingIncomes.reduce(0, { $0 + $1.total })
-        let totalExpense = matchingExpenses.reduce(0, { $0 + $1.total })
-        
-        let total = previousTotal + totalExpense
-        
-        info.append(AnyEntry(id: UUID(), total: total, date: date))
-        previousTotal = total
-    }
-    
-    info = info.filter { Calendar.current.component(.month, from: $0.date) == month}
-    if info.isEmpty {
-        info.append(AnyEntry(id: UUID(), total: previousTotal, date: Date()))
-    }
-        
-    return info
 }
