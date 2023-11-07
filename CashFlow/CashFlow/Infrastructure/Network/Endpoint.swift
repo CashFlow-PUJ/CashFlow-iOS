@@ -135,8 +135,8 @@ extension Requestable {
             urlRequest.httpBody = bodyEncoder.encode(bodyParameters)
             
             // DEBUG PRINT
-            debugPrint("Body params:", bodyParameters)
-            debugPrint("HTTP Body:", urlRequest.httpBody?.prettyPrintedJSONString as Any)
+            //debugPrint("Body params:", bodyParameters)
+            //debugPrint("HTTP Body:", urlRequest.httpBody?.prettyPrintedJSONString as Any)
         }
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = allHeaders

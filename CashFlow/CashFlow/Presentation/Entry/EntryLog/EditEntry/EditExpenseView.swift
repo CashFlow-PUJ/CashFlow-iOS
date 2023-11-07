@@ -122,14 +122,24 @@ struct EditExpenseView: View {
                 category: self.category,
                 ocrText: self.ocrText.isEmpty ? nil : self.ocrText
             )
-            viewModel.updateExpenseEntry(expenseID: expense.id.uuidString, updatedExpense: updatedExpense)
-            self.isPresented = false
+            viewModel.updateExpenseEntry(expenseID: expense.id.uuidString, updatedExpense: updatedExpense) { success in
+                if success {
+                    self.viewModel.loadExpenses {
+                        self.isPresented = false
+                    }
+                }
+            }
         }
     }
 
     
     func deleteExpense(id: String) {
-        viewModel.deleteExpense(expenseID: id)
-        self.isPresented = false
+        viewModel.deleteExpenseEntry(expenseID: id) { success in
+            if success {
+                self.viewModel.loadExpenses {
+                    self.isPresented = false
+                }
+            }
+        }
     }
 }

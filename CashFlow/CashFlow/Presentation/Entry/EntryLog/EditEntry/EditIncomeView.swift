@@ -109,14 +109,25 @@ struct EditIncomeView: View {
             updatedIncome.category = self.category
             updatedIncome.date = self.selectedDate
             
-            viewModel.updateIncomeEntry(incomeID: income.id.uuidString, updatedIncome: updatedIncome)
-            self.isPresented = false
+            viewModel.updateIncomeEntry(incomeID: income.id.uuidString, updatedIncome: updatedIncome) { success in
+                if success {
+                    self.viewModel.loadIncomeEntries {
+                        self.isPresented = false
+                    }
+                }
+            }
         }
     }
+
     
     func deleteIncome(id: String) {
-        viewModel.deleteIncomeEntry(incomeID: id)
-        self.isPresented = false
+        viewModel.deleteIncomeEntry(incomeID: id) { success in
+            if success {
+                self.viewModel.loadIncomeEntries {
+                    self.isPresented = false
+                }
+            }
+        }
     }
     
     
