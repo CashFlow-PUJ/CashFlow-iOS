@@ -32,7 +32,7 @@ struct TotalCustomView: View {
                 }
                 
                 if selectedSlice != -1 {
-                    Text(String(format: "$%.1fM", Double(chartData[selectedSlice].total / 1000000)))
+                    Text(Double(chartData[selectedSlice].total).stringFormat)
                         .font(.system(size: 16))
                         .foregroundColor(chartData.last?.color)
                 }
@@ -54,5 +54,6 @@ struct TotalCustomView: View {
             chartData[i].slicePercent =  (i == 0 ? 0.0 : chartData[i - 1].slicePercent) + percentage
         }
     }
+    
 }
 

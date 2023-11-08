@@ -70,7 +70,7 @@ import Foundation
     func authenticateUser(userID: String) {
         authTask = auth.execute(
             userID: userID,
-            completion: { [weak self] result in
+            completion: { result in
                 switch result {
                 case .success:
                     print("User is correct")

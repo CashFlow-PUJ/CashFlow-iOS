@@ -15,7 +15,6 @@ struct GraphicViewExpenses: View {
     var body: some View {
         ChartViewExpenses(expenseData: expenseData)
             .frame(width: 360, height: 400)
-        Spacer()
     }
 }
 

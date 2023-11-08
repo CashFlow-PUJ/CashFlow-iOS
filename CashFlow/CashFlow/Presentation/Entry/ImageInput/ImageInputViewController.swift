@@ -18,7 +18,6 @@ struct Item: Decodable {
     var category: String
     var price: Int
 
-    // Define las claves de codificación que usarás en el proceso de decodificación.
     enum CodingKeys: String, CodingKey {
         case id
         case name
@@ -48,7 +47,6 @@ struct ApiResponse: Decodable {
         case details
     }
 
-    // Tu método de inicialización personalizado
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         details = try container.decodeIfPresent([Item].self, forKey: .details) ?? []
@@ -123,42 +121,36 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         containerView.backgroundColor = UIColor.black.withAlphaComponent(0.6) // para semitransparencia
         containerView.layer.cornerRadius = 10 // para bordes redondeados
 
-        // Asegúrate de que la vista de contenedor sea del tamaño que desees
+        
         containerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(containerView)
 
-        // Agregar restricciones para la vista de contenedor
+        
         containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         containerView.widthAnchor.constraint(equalToConstant: 200).isActive = true // ajusta como desees
         containerView.heightAnchor.constraint(equalToConstant: 100).isActive = true // ajusta como desees
 
-        // Inicializar el activity indicator
-        activityIndicator = UIActivityIndicatorView(style: .large) // el estilo 'large' es más grande
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.color = .white // elige el color que desees
+        activityIndicator.color = .white
 
-        // Agregar el activity indicator a la vista de contenedor
         containerView.addSubview(activityIndicator)
 
-        // Agregar restricciones para el activity indicator
         activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        activityIndicator.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
-
-        // Inicializar la etiqueta
+        activityIndicator.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20).isActive = true
+        
         let label = UILabel()
         label.text = "Estamos analizando..."
-        label.textColor = .white // elige el color que desees
+        label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        // Agregar la etiqueta a la vista de contenedor
         containerView.addSubview(label)
 
-        // Agregar restricciones para la etiqueta
         label.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true // ajusta el 'constant' como desees
+        label.topAnchor.constraint(equalTo: activityIndicator.bottomAnchor, constant: 20).isActive = true
 
-        // Asegurarte de que la vista de contenedor esté oculta inicialmente
         containerView.isHidden = true
     }
     
@@ -262,7 +254,6 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
       }
       weak var weakSelf = self
       DispatchQueue.global(qos: .userInitiated).async {
-        // Scale image while maintaining aspect ratio so it displays better in the UIImageView.
         var scaledImage = image.scaledImage(
           with: CGSize(width: scaledImageWidth, height: scaledImageHeight)
         )
@@ -273,7 +264,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         }
       }
     }
-    
+
     private func detectTextOnDevice(image: UIImage?) {
         guard let image = image else { return }
         
@@ -283,7 +274,6 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         let onDeviceTextRecognizer = TextRecognizer.textRecognizer(options: options)
         // [END init_text]
         
-        // Initialize a `VisionImage` object with the given `UIImage`.
         let visionImage = VisionImage(image: image)
         visionImage.orientation = image.imageOrientation
         
@@ -338,11 +328,8 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                     DispatchQueue.main.async {
                         self.hideLoadingIndicator()
                         if let error = error {
-                            // Manejar errores aquí, por ejemplo, mostrar una alerta al usuario.
                             print("Error: \(error.localizedDescription)")
-                            // Considera llamar a `showResults` aquí para indicar que hubo un error.
                             expense.category = ExpenseCategory.mercado
-                            //expense.ocrText = "" // Remove comment for testing
                             self.viewModel?.createExpenseEntry(expenseEntry: expense) { success in
                                 if success {
                                     strongSelf.resultsText = "Request: \(expense.ocrText ?? " ")"
@@ -353,13 +340,10 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                         }
 
                         if let response = response {
-                            // Procesa la respuesta aquí.
                             for item in response.details {
                                 strongSelf.resultsText += ("ID: \(item.id), Nombre: \(item.name), Categoría: \(item.category), Precio: \(item.price)\n")
                             }
-                            // Muestra los resultados después de procesar la respuesta.
                             strongSelf.showResults()
-                            print("Ya debieron mostrarse")
                         }
                     }
                 }
@@ -383,8 +367,6 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         (imageViewAspectRatio > imageAspectRatio)
         ? imageViewHeight / imageHeight : imageViewWidth / imageWidth
         
-        // Image view's `contentMode` is `scaleAspectFit`, which scales the image to fit the size of the
-        // image view by maintaining the aspect ratio. Multiple by `scale` to get image's original size.
         let scaledImageWidth = imageWidth * scale
         let scaledImageHeight = imageHeight * scale
         let xValue = (imageViewWidth - scaledImageWidth) / CGFloat(2.0)
@@ -404,7 +386,6 @@ extension ImageInputViewController: UIImagePickerControllerDelegate {
     _ picker: UIImagePickerController,
     didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
   ) {
-    // Local variable inserted by Swift 4.2 migrator.
     let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
 
     clearResults()
@@ -471,7 +452,6 @@ func sendRequest(urlString: String, textData: String, vendor: String, completion
     let task = URLSession.shared.dataTask(with: request) { data, response, error in
         // Manejar errores de la solicitud.
         if let error = error {
-            print("Hay un error")
             completion(nil, error)
             return
         }
@@ -483,7 +463,6 @@ func sendRequest(urlString: String, textData: String, vendor: String, completion
         }
         
         do {
-            print("decodificando los datos")
             let decoder = JSONDecoder()
             let response = try decoder.decode(ApiResponse.self, from: data)
             var newExpenses: [Expense] = []

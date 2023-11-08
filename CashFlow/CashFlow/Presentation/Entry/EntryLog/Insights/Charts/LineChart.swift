@@ -10,7 +10,7 @@ import SwiftUI
 struct LineChartView: View {
     
     @EnvironmentObject var sharedData: SharedData
-    @State private var linearDataType: LinearDataTime = .one
+    @State private var linearDataType: LinearDataTime = .dos
     
     var body: some View {
         
@@ -25,8 +25,6 @@ struct LineChartView: View {
             .labelsHidden()
             
             switch linearDataType {
-            case .one:
-                EmptyView()
             case .dos:
                 MonthlyViewExpenses()
                     .padding(.top, 15)

@@ -56,7 +56,7 @@ extension IncomeHistoryView {
                     case .success(let incomeHistory):
                         self.sharedData.incomeHistory = incomeHistory
                         self.sharedData.dataIncomeLoaded = true
-                        completion() // Llama a la clausura de finalización después de cargar los ingresos
+                        completion()
                     case .failure:
                         print("Failed loading income entries.")
                     }
@@ -157,7 +157,7 @@ extension ExpenseHistoryView {
                     case .success(let expenseHistory):
                         self.sharedData.expenseHistory = expenseHistory
                         self.sharedData.dataExpenseLoaded = true
-                        completion() // Llama a la clausura de finalización después de cargar los gastos
+                        completion() 
                     case .failure:
                         print("Failed loading expense entries.")
                     }
@@ -180,7 +180,7 @@ extension ExpenseHistoryView {
             expensePostTask = enterExpense.execute(userID: sharedData.userId, expenseEntry: expenseEntry) { result in
                 switch result {
                 case .success:
-                    print("Success")
+                    print("Successfully creating entry")
                     self.loadExpenses {
                         completion(true)
                     }

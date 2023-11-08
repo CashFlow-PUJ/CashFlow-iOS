@@ -83,6 +83,7 @@ struct CashFlowApp: App {
 
                                     if let token = tokenResult?.token {
                                         sharedData.userId = token
+                                        sharedData.id = Auth.auth().currentUser?.uid ?? ""
                                         coordinator.authUser(userID: token)
                                         DispatchQueue.main.async {
                                             withAnimation {

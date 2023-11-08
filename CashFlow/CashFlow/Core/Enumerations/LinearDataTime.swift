@@ -9,6 +9,5 @@ import Foundation
 import SwiftUI
 
 enum LinearDataTime: String, CaseIterable {
-    case one = "Un mes"
-    case dos = "Dos meses"
+    case dos = "Un mes"
 }

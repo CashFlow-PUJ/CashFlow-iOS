@@ -86,7 +86,6 @@ struct MonthlyViewExpenses: View {
                     }
                     .foregroundColor(Color(hex: 0xF75E68))
                 }
-                Spacer()
             }
         }
     }

@@ -66,10 +66,6 @@ final class DefaultIncomeRepository: IncomeRepository {
             userID: userID,
             with: IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry)
         )
-        
-        // DEBUG PRINT
-        // debugPrint("INCOME ENTRY: ", IncomeRequestDTO.fromDomain(incomeEntry: incomeEntry))
-        
         task.networkTask = self.dataTransferService.request(
             with: endpoint
         ) { resultado in

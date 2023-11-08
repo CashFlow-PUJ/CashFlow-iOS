@@ -79,6 +79,10 @@ struct MenuView: View {
                     .font(.system(size: 20))
                     .bold()
                     .foregroundColor(.gray)
+                Text(userViewModel.user?.lastName ?? "Apellidos de Usuario")
+                    .font(.system(size: 20))
+                    .bold()
+                    .foregroundColor(.gray)
                     .padding(.bottom, 50)
                 
                 ForEach(menuItems.dropLast()) { menuItem in
@@ -146,6 +150,7 @@ struct MenuView: View {
             case .cerrarSesion:
                 authVM.signOut()
                 sharedData.userId = ""
+                sharedData.resetValues()
                 coordinator.currentRoute = .login
                 break
         }

@@ -38,8 +38,9 @@
 		7FBD84BA2AF49EA40035236D /* UpdateExpense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBD84B92AF49EA30035236D /* UpdateExpense.swift */; };
 		7FCDB3772AC944FD00C6FFC5 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */; };
 		7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCDB3782AC9533B00C6FFC5 /* User.swift */; };
-		7FE3BB552AFA3981004071F0 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE3BB542AFA3981004071F0 /* DailyView.swift */; };
-		7FE3BB572AFA3C24004071F0 /* ChartDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE3BB562AFA3C24004071F0 /* ChartDaily.swift */; };
+		7FE3BB592AFA8D82004071F0 /* ChartDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE3BB582AFA8D82004071F0 /* ChartDailyView.swift */; };
+		7FE3BB5B2AFA91C9004071F0 /* DayChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE3BB5A2AFA91C9004071F0 /* DayChartData.swift */; };
+		7FE3BB5D2AFA985C004071F0 /* DailyChartEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE3BB5C2AFA985C004071F0 /* DailyChartEnum.swift */; };
 		9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1612392A6DE6CB0032743E /* CashFlowApp.swift */; };
 		9A16123E2A6DE6CE0032743E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A16123D2A6DE6CE0032743E /* Assets.xcassets */; };
 		9A1612412A6DE6CE0032743E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A1612402A6DE6CE0032743E /* Preview Assets.xcassets */; };
@@ -116,13 +117,10 @@
 		9AD1A3262AE1E36E0034972E /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3252AE1E36E0034972E /* Cancellable.swift */; };
 		9AD1A3292AE1FF0F0034972E /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */; };
 		9AF2BAB92AA7AA6D00D64FC7 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */; };
-		D5EDFA272C25C93CA38EFB4E /* Pods_CashFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */; };
+		FF91FBCF70340F588BA58F39 /* Pods_CashFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8CC41554F3AF271F3C82F31 /* Pods_CashFlow.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
-		57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
 		7F1518BC2AC680C70004540A /* MonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyView.swift; sourceTree = "<group>"; };
 		7F1518C22AC71DA40004540A /* ChartMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartMonthlyView.swift; sourceTree = "<group>"; };
 		7F1518C42AC721290004540A /* AnyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEntry.swift; sourceTree = "<group>"; };
@@ -154,8 +152,10 @@
 		7FBD84B92AF49EA30035236D /* UpdateExpense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateExpense.swift; sourceTree = "<group>"; };
 		7FCDB3762AC944FD00C6FFC5 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		7FCDB3782AC9533B00C6FFC5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		7FE3BB542AFA3981004071F0 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
-		7FE3BB562AFA3C24004071F0 /* ChartDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDaily.swift; sourceTree = "<group>"; };
+		7FE3BB582AFA8D82004071F0 /* ChartDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDailyView.swift; sourceTree = "<group>"; };
+		7FE3BB5A2AFA91C9004071F0 /* DayChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChartData.swift; sourceTree = "<group>"; };
+		7FE3BB5C2AFA985C004071F0 /* DailyChartEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyChartEnum.swift; sourceTree = "<group>"; };
+		8FF3A651B320F1381912A8FE /* Pods-CashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.release.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.release.xcconfig"; sourceTree = "<group>"; };
 		9A1612362A6DE6CB0032743E /* CashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A1612392A6DE6CB0032743E /* CashFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowApp.swift; sourceTree = "<group>"; };
 		9A16123D2A6DE6CE0032743E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +222,8 @@
 		9AD1A3252AE1E36E0034972E /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		9AD1A3282AE1FF0F0034972E /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		9AF2BAB82AA7AA6D00D64FC7 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		A8CC41554F3AF271F3C82F31 /* Pods_CashFlow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashFlow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8DB5120D6218193F535FE10 /* Pods-CashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashFlow.debug.xcconfig"; path = "Target Support Files/Pods-CashFlow/Pods-CashFlow.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,26 +243,18 @@
 				9ACDA9CB2AB31FBD00002DE7 /* FirebaseFirestore in Frameworks */,
 				9ACDA9CD2AB31FBD00002DE7 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				9ACDA9CF2AB31FBD00002DE7 /* FirebaseFirestoreSwift in Frameworks */,
-				D5EDFA272C25C93CA38EFB4E /* Pods_CashFlow.framework in Frameworks */,
+				FF91FBCF70340F588BA58F39 /* Pods_CashFlow.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		65B8914DBF010BE41CD6F424 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				57C6540AE8C3A22ACF68D9E8 /* Pods_CashFlow.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		7578F3A112C24358A72D8FF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */,
-				49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */,
+				D8DB5120D6218193F535FE10 /* Pods-CashFlow.debug.xcconfig */,
+				8FF3A651B320F1381912A8FE /* Pods-CashFlow.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -272,7 +266,7 @@
 				9AAFE83B2AF9B61000EDD7FD /* ChartMonthlyViewExpenses.swift */,
 				7F5545062AFA029400DDD3FC /* VendorCharts.swift */,
 				7F5545082AFA297A00DDD3FC /* LineChart.swift */,
-				7FE3BB562AFA3C24004071F0 /* ChartDaily.swift */,
+				7FE3BB582AFA8D82004071F0 /* ChartDailyView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -319,7 +313,7 @@
 				9A1612382A6DE6CB0032743E /* CashFlow */,
 				9A1612372A6DE6CB0032743E /* Products */,
 				7578F3A112C24358A72D8FF8 /* Pods */,
-				65B8914DBF010BE41CD6F424 /* Frameworks */,
+				F6F9DAA572C67B2158AB6CC7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -447,6 +441,7 @@
 				7FCDB3782AC9533B00C6FFC5 /* User.swift */,
 				7F2600A22AEF1BC6004ADD71 /* SharedData.swift */,
 				7F5545002AF9FC8000DDD3FC /* VendorChartData.swift */,
+				7FE3BB5A2AFA91C9004071F0 /* DayChartData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -480,6 +475,7 @@
 				7F88CC312AF7151900926617 /* UserGender.swift */,
 				7F5545022AF9FC9F00DDD3FC /* TypeGraph.swift */,
 				7F55450A2AFA2A6F00DDD3FC /* LinearDataTime.swift */,
+				7FE3BB5C2AFA985C004071F0 /* DailyChartEnum.swift */,
 			);
 			path = Enumerations;
 			sourceTree = "<group>";
@@ -608,7 +604,6 @@
 				7F1518BE2AC71D470004540A /* Charts */,
 				7F1518BC2AC680C70004540A /* MonthlyView.swift */,
 				7F5544FE2AF9FC4900DDD3FC /* InsightView.swift */,
-				7FE3BB542AFA3981004071F0 /* DailyView.swift */,
 			);
 			path = Insights;
 			sourceTree = "<group>";
@@ -692,6 +687,14 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		F6F9DAA572C67B2158AB6CC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A8CC41554F3AF271F3C82F31 /* Pods_CashFlow.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -699,12 +702,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9A1612442A6DE6CE0032743E /* Build configuration list for PBXNativeTarget "CashFlow" */;
 			buildPhases = (
-				726D8E055C6544578F1AC067 /* [CP] Check Pods Manifest.lock */,
+				0296FD429ED5B2682CB2EE4F /* [CP] Check Pods Manifest.lock */,
 				9A1612322A6DE6CB0032743E /* Sources */,
 				9A1612332A6DE6CB0032743E /* Frameworks */,
 				9A1612342A6DE6CB0032743E /* Resources */,
-				058364EE652B6448CF60EB4A /* [CP] Embed Pods Frameworks */,
-				F05C9EE9147E532E5B0D4CF5 /* [CP] Copy Pods Resources */,
+				487A0DC5D023E2E48B79171B /* [CP] Embed Pods Frameworks */,
+				40DAB9F620040ECAD29761F6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -737,7 +740,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					9A1612352A6DE6CB0032743E = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -783,24 +786,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		058364EE652B6448CF60EB4A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		726D8E055C6544578F1AC067 /* [CP] Check Pods Manifest.lock */ = {
+		0296FD429ED5B2682CB2EE4F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -822,7 +808,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F05C9EE9147E532E5B0D4CF5 /* [CP] Copy Pods Resources */ = {
+		40DAB9F620040ECAD29761F6 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -839,6 +825,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		487A0DC5D023E2E48B79171B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CashFlow/Pods-CashFlow-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -849,8 +852,8 @@
 				9A70BD102AC093C000155BA9 /* MiniDonut.swift in Sources */,
 				7F1518C32AC71DA40004540A /* ChartMonthlyView.swift in Sources */,
 				9A83CA682AE9908600B24196 /* IncomeRequestDTO.swift in Sources */,
+				7FE3BB592AFA8D82004071F0 /* ChartDailyView.swift in Sources */,
 				7F5545092AFA297A00DDD3FC /* LineChart.swift in Sources */,
-				7FE3BB552AFA3981004071F0 /* DailyView.swift in Sources */,
 				9A70BD452AC513EA00155BA9 /* DeleteEntry.swift in Sources */,
 				7F5545072AFA029400DDD3FC /* VendorCharts.swift in Sources */,
 				9AAFE83C2AF9B61000EDD7FD /* ChartMonthlyViewExpenses.swift in Sources */,
@@ -893,6 +896,7 @@
 				9A83CA662AE7685A00B24196 /* IncomeResponseDTO.swift in Sources */,
 				9A70BD092ABE802600155BA9 /* ImageInputViewControllerRepresentable.swift in Sources */,
 				7FCDB3792AC9533B00C6FFC5 /* User.swift in Sources */,
+				7FE3BB5B2AFA91C9004071F0 /* DayChartData.swift in Sources */,
 				9AD1A30F2AE1D4E40034972E /* DefaultExpenseRepository.swift in Sources */,
 				7F88CC342AF7239D00926617 /* UserRequestDTO.swift in Sources */,
 				9A88D6DD2AE6016F00CF0B56 /* EntryHistoryViewModel.swift in Sources */,
@@ -913,8 +917,8 @@
 				9A70BD622AC524D600155BA9 /* IncomeHistoryRow.swift in Sources */,
 				9A4B72C62AA748760091E313 /* EntryLogView.swift in Sources */,
 				7F4BB9FB2AF47636005D9B6A /* EntryExpense.swift in Sources */,
+				7FE3BB5D2AFA985C004071F0 /* DailyChartEnum.swift in Sources */,
 				9A70BD332AC3C6E200155BA9 /* Expense.swift in Sources */,
-				7FE3BB572AFA3C24004071F0 /* ChartDaily.swift in Sources */,
 				9A16123A2A6DE6CB0032743E /* CashFlowApp.swift in Sources */,
 				9A70BD4E2AC515E200155BA9 /* DeleteExpenseItem.swift in Sources */,
 				9AD1A3242AE1E3250034972E /* RepositoryTask.swift in Sources */,
@@ -980,6 +984,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1040,6 +1045,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1054,13 +1060,13 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
 		9A1612452A6DE6CE0032743E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5856EBB708968961D9B28EA3 /* Pods-CashFlow.debug.xcconfig */;
+			baseConfigurationReference = D8DB5120D6218193F535FE10 /* Pods-CashFlow.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1097,7 +1103,7 @@
 		};
 		9A1612462A6DE6CE0032743E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49616B4CCF1BC04DDBE9703C /* Pods-CashFlow.release.xcconfig */;
+			baseConfigurationReference = 8FF3A651B320F1381912A8FE /* Pods-CashFlow.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1105,7 +1111,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = 6HD9C3J3FV;
+				DEVELOPMENT_TEAM = WXFW7D6G6Z;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1123,7 +1129,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

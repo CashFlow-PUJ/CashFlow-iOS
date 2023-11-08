@@ -53,7 +53,7 @@ struct VendorChartsView: View {
                 
             }
             .padding(.vertical)
-
+            
             Chart {
                 ForEach(vendorData) { value in
                     if graphType == .bar{
@@ -64,6 +64,7 @@ struct VendorChartsView: View {
                         )
                         .cornerRadius(8)
                         .foregroundStyle(by: .value("Vendedor", value.name))
+                        .foregroundStyle(Color.blue.gradient)
                         
                     }else {
                         SectorMark(
@@ -135,7 +136,7 @@ struct VendorChartsView: View {
         }
         .padding(isTitleView ? [.horizontal] : [.all])
         .background(Color(.white).opacity(isTitleView ? 0 : 1), in: .rect(cornerRadius: 8))
-        .frame(maxWidth: .infinity, alignment: isTitleView ? .leading : .center)
+        .frame(maxWidth: .infinity,maxHeight: 250, alignment: isTitleView ? .leading : .center)
     }
     
     func findTotal(_ rangeValue: Double){
