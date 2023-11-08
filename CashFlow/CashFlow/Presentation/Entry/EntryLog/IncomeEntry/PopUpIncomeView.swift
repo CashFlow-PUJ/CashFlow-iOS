@@ -76,11 +76,12 @@ struct PopUpIncomeView: View {
                         category: selectedPopupCategory
                     )
                     
-                    viewModel.createIncomeEntry(incomeEntry: newIncome)
-                    sharedData.incomeHistory.append(newIncome)
-                    isPresented.toggle()
+                    viewModel.createIncomeEntry(incomeEntry: newIncome) { success in
+                        if success {
+                            isPresented.toggle()
+                        }
+                    }
                 }
-
             }
             .padding()
             .disabled(descripcion.isEmpty || total.isEmpty || !isNumeric || Int(total)! <= 0)

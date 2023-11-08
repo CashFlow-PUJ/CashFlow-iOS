@@ -5,6 +5,7 @@ class UserProfile: ObservableObject {
     @Published var profileImage: UIImage?
     @Published var name: String?
     @Published var email: String?
+    var userId: String?
 }
 
 struct EditProfileView: View {
@@ -80,12 +81,13 @@ struct EditProfileView: View {
         }
         .onAppear {
             if let user = userViewModel.user {
+                userProfile.userId = sharedData.id
                 userName = "\(user.firstName)"
                 userLast = "\(user.lastName)"
                 userBirthday = user.birthDate
                 selectedGender = Gender(from: user.gender) ?? .male
                 if userProfile.profileImage == nil {
-                    userProfile.profileImage = loadImageFromDisk(withName: "userProfileImage")
+                    userProfile.profileImage = loadImageFromDisk(withName: "userProfileImage\(userProfile.userId ?? "")")
                 }
             }
         }
@@ -105,8 +107,19 @@ struct EditProfileView: View {
         )
         
         userViewModel.updateUser(uuid: updatedUser.uuid, user: updatedUser, userID: sharedData.userId)
+        
+        // Verifica si hay un ID de usuario asignado en UserProfile
+        if let userId = userProfile.userId, let profileImage = userProfile.profileImage {
+            let imageName = "userProfileImage_\(userId)"
+            let saved = saveImageToDisk(image: profileImage, withName: imageName)
+            if !saved {
+                print("Error al guardar la imagen en el dispositivo.")
+            }
+        }
+        
         isPresented = false
     }
+
 }
 
 

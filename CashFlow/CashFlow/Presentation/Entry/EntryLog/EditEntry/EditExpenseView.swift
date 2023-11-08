@@ -17,6 +17,8 @@ struct EditExpenseView: View {
     @State private var ocrText: String = ""
     @State private var category: ExpenseCategory
     @State private var showDeletionAlert: Bool = false
+    @State private var selectedDate = Date()
+    
     @ObservedObject var viewModel: ExpenseHistoryView.ExpenseHistoryViewModel
     
     
@@ -37,24 +39,63 @@ struct EditExpenseView: View {
             Spacer()
             
             Form {
-                TextField("Total", text: $total)
-                    .keyboardType(.decimalPad)
                 
-                TextField("Description", text: $description)
-                
-                TextField("Vendor Name", text: $vendorName)
-                
-                TextField("OCR Text (if any)", text: $ocrText)
-                
-                Picker("Category", selection: $category) {
-                    ForEach(ExpenseCategory.allCases, id: \.self) { category in
-                        Text(category.rawValue).tag(category)
-                    }
+                Section(header: Text("Total")) {
+                    TextField("Total", text: $total)
                 }
-                .pickerStyle(MenuPickerStyle())
                 
-                Button("Save") {
-                    saveExpense()
+                Section(header: Text("Descripción")) {
+                    TextField("Descripción", text: $description)
+                }
+                
+                Section(header: Text("Vendedor y/o Almacen")) {
+                    TextField("Vendedor", text: $vendorName)
+                }
+                
+                Section(header: Text("Categoría")) {
+                    Picker("Category", selection: $category) {
+                        ForEach(ExpenseCategory.allCases, id: \.self) { category in
+                            Text(category.rawValue).tag(category)
+                        }
+                    }.pickerStyle(MenuPickerStyle())
+                }
+                
+                Section(header: Text("OCR")) {
+                    TextField("OCR Text (if any)", text: $ocrText)
+                }
+                
+                Section(header: Text("Fecha de Gasto")) {
+                    DatePicker("Selecciona la fecha", selection: $selectedDate, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
+                }
+                
+                HStack {
+                    Spacer()
+                    Button("Guardar") {
+                        saveExpense()
+                    }
+                    Spacer()
+                }
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        showDeletionAlert = true
+                    }) {
+                        Text("Eliminar")
+                            .foregroundColor(.red)
+                    }
+                    Spacer()
+                }
+                .alert(isPresented: $showDeletionAlert) {
+                    Alert(
+                        title: Text("Confirmar eliminación"),
+                        message: Text("¿Estás seguro de que quieres eliminar esta entrada?"),
+                        primaryButton: .destructive(Text("Eliminar")) {
+                            deleteExpense(id: expense.id.uuidString)
+                        },
+                        secondaryButton: .cancel()
+                    )
                 }
             }
             .onAppear {
@@ -63,27 +104,9 @@ struct EditExpenseView: View {
                 self.vendorName = self.expense.vendorName ?? ""
                 self.category = self.expense.category
                 self.ocrText = self.expense.ocrText ?? ""
+                self.selectedDate = self.expense.date
             }
-            HStack {
-                Spacer()
-                Button(action: {
-                    showDeletionAlert = true
-                }) {
-                    Text("Eliminar")
-                        .foregroundColor(.red)
-                }
-                Spacer()
-            }
-            .alert(isPresented: $showDeletionAlert) {
-                Alert(
-                    title: Text("Confirmar eliminación"),
-                    message: Text("¿Estás seguro de que quieres eliminar esta entrada?"),
-                    primaryButton: .destructive(Text("Eliminar")) {
-                        deleteExpense(id: expense.id.uuidString)
-                    },
-                    secondaryButton: .cancel()
-                )
-            }
+            
             Spacer()
         }
     }
@@ -93,20 +116,30 @@ struct EditExpenseView: View {
             let updatedExpense = Expense(
                 id: expense.id,
                 total: totalInt,
-                date: expense.date, // conserva la fecha original
+                date: self.selectedDate,
                 description: self.description.isEmpty ? nil : self.description,
                 vendorName: self.vendorName.isEmpty ? nil : self.vendorName,
                 category: self.category,
                 ocrText: self.ocrText.isEmpty ? nil : self.ocrText
             )
-            viewModel.updateExpenseEntry(expenseID: expense.id.uuidString, updatedExpense: updatedExpense)
-            self.isPresented = false
+            viewModel.updateExpenseEntry(expenseID: expense.id.uuidString, updatedExpense: updatedExpense) { success in
+                if success {
+                    self.viewModel.loadExpenses {
+                        self.isPresented = false
+                    }
+                }
+            }
         }
     }
 
     
     func deleteExpense(id: String) {
-        viewModel.deleteExpense(expenseID: id)
-        self.isPresented = false
+        viewModel.deleteExpenseEntry(expenseID: id) { success in
+            if success {
+                self.viewModel.loadExpenses {
+                    self.isPresented = false
+                }
+            }
+        }
     }
 }

@@ -8,4 +8,15 @@ class SharedData: ObservableObject {
     @Published var dataExpenseLoaded = false
     @Published var isUserIdLoading: Bool = true
     @Published var userId = ""
+    @Published var id = ""
+    
+    func resetValues() {
+        incomeHistory = []
+        expenseHistory = []
+        dataIncomeLoaded = false
+        dataExpenseLoaded = false
+        isUserIdLoading = true
+        userId = ""
+        id = ""
+    }
 }

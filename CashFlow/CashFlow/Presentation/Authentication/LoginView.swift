@@ -65,7 +65,7 @@ struct LoginView: View {
                 vm.logIn(email: email, password: password) { result in
                     switch result {
                     case .success(_):
-                        coordinator.path.append(.transactionLog)
+                        coordinator.currentRoute = .transactionLog
                     case .failure(let error):
                         showingErrorAlert = true
                         errorMessage = error.errorMessage
@@ -114,7 +114,7 @@ struct LoginView: View {
                     loginWithFacebook() { result in
                         switch result {
                         case .success(_):
-                            coordinator.path.append(.transactionLog)
+                            coordinator.currentRoute = .transactionLog
                         case .failure(let error):
                             showingErrorAlert = true
                             errorMessage = error.localizedDescription
@@ -177,7 +177,7 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
-                    coordinator.path.append(.transactionLog)
+                    coordinator.currentRoute = .transactionLog
                 case .failure(let error):
                     print(error.errorMessage)
                 }
@@ -190,7 +190,16 @@ struct LoginView: View {
             switch result {
             case .success(let accessToken):
                 let credential = FacebookAuthProvider.credential(withAccessToken: accessToken)
-                //sharedData.userId = Auth.auth().currentUser!.uid
+               Auth.auth().signIn(with: credential) { authDataResult, error in
+                   if let error = error {
+                       print("Error creating a new user \(error.localizedDescription)")
+                       completionBlock(.failure(error))
+                       return
+                   }
+                   let email = authDataResult?.user.email ?? "No email"
+                   print("New user created with info \(email)")
+                   completionBlock(.success(true))
+               }
             case .failure(let error):
                 print("Error signIn with Facebook \(error.localizedDescription)")
                 completionBlock(.failure(error))

@@ -199,7 +199,7 @@ struct SignupView: View {
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
             if let error {
-                // TODO: Handle error
+                print(error.localizedDescription)
             }
             
             guard let user = authentication?.user, let idToken = user.idToken?.tokenString else { return }

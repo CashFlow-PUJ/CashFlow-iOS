@@ -34,6 +34,7 @@ struct CircularImageButton: View {
     }
 }
 
+@available(iOS 17.0, *)
 struct MenuView: View {
     @State private var isMenuOpen = false
     @State private var isPhotoOpen = false
@@ -75,6 +76,10 @@ struct MenuView: View {
                 }
                 
                 Text(userViewModel.user?.firstName ?? "Nombre de usuario")
+                    .font(.system(size: 20))
+                    .bold()
+                    .foregroundColor(.gray)
+                Text(userViewModel.user?.lastName ?? "Apellidos de Usuario")
                     .font(.system(size: 20))
                     .bold()
                     .foregroundColor(.gray)
@@ -145,7 +150,8 @@ struct MenuView: View {
             case .cerrarSesion:
                 authVM.signOut()
                 sharedData.userId = ""
-                coordinator.path.append(.login)
+                sharedData.resetValues()
+                coordinator.currentRoute = .login
                 break
         }
     }

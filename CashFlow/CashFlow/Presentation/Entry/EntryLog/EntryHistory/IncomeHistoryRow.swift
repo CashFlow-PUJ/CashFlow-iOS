@@ -11,9 +11,9 @@ struct IncomeHistoryRow: View {
     
     var entry: Income
     @Binding var selectedEntry: Income?
-    @State private var isSheetPresented: Bool = false
     @ObservedObject var viewModel: IncomeHistoryView.IncomeHistoryViewModel
-
+    @Binding var isPresented: Bool
+    
     var body: some View {
         HStack {
             Image(systemName: entry.category.symbol)
@@ -39,16 +39,16 @@ struct IncomeHistoryRow: View {
         .cornerRadius(10)
         .onTapGesture {
             self.selectedEntry = entry
-            self.isSheetPresented.toggle()
+            self.isPresented.toggle()
         }
         .onChange(of: selectedEntry) { newValue in
             if newValue != nil {
-                self.isSheetPresented = true
+                self.isPresented = true
             }
         }
-        .sheet(isPresented: $isSheetPresented) {
+        .sheet(isPresented: $isPresented) {
             if let selectedEntry = self.selectedEntry {
-                EditIncomeView(income: .constant(self.selectedEntry!), isPresented: self.$isSheetPresented, category: selectedEntry.category, viewModel: viewModel)
+                EditIncomeView(income: .constant(self.selectedEntry!), isPresented: self.$isPresented, category: selectedEntry.category, viewModel: viewModel)
             } else {
                 Text("No entry selected")
             }
