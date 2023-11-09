@@ -258,13 +258,19 @@ struct EntryLogView: View {
             }
         }
         .onAppear {
+            let startTime = Date()
             let viewModel = coordinator.appDIContainer.entryLogDIContainer.makeExpenseHistoryViewModel(sharedData: sharedData)
             let viewModelI = coordinator.appDIContainer.entryLogDIContainer.makeIncomeHistoryViewModel(sharedData: sharedData)
             
             viewModelI.loadIncomeEntries {
                 viewModel.loadExpenses {
+                    let endTime = Date()
+                    let elapsedTime = endTime.timeIntervalSince(startTime)
+                    print("La función tomó \(elapsedTime) segundos en ejecutarse")
+                    print("-----------------------------------------------------")
                 }
             }
+            
         }
     }
 }

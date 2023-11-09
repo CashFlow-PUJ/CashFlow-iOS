@@ -135,11 +135,15 @@ struct LoginView: View {
             }
             
             NavigationLink {
-                // TODO: Forgot password View
+                ForgotPasswordView()
+                    .environmentObject(coordinator)
+                    .preferredColorScheme(.light)
+                    .navigationBarBackButtonHidden(true)
             } label: {
                 Text("¿Olvidaste tu contraseña?")
                     .foregroundColor(Color(hex: 0xF75E68))
             }
+            
             .padding(.top, 25)
             
             NavigationLink {

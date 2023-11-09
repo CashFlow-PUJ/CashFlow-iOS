@@ -151,13 +151,14 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenses(completion: @escaping () -> Void) {
+            print("-----------------------------------------------------")
             expensesLoadTask = visualizeExpenseHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
                         self.sharedData.expenseHistory = expenseHistory
-                        self.sharedData.dataExpenseLoaded = true
-                        completion() 
+                        self.sharedData.dataExpenseLoaded = true                        
+                        completion()
                     case .failure:
                         print("Failed loading expense entries.")
                     }

@@ -94,10 +94,6 @@ struct ChartDailyView: View {
             endPoint: .bottom
         )
         
-        let max = data.max{ item1, item2 in
-            return item2.views > item1.views
-        }?.views ?? 0
-        
         Chart{
             ForEach(data){ item in
                 if isLineGraph{
@@ -111,7 +107,7 @@ struct ChartDailyView: View {
                 }else{
                     switch currentTab {
                     case .all:
-                        BarMark(x: .value("Days", item.hours, unit: .day),
+                        BarMark(x: .value("Days", item.hours, unit: .month),
                                 y: .value("Views",item.animated ? item.views : 0)
                         )
                         .foregroundStyle(.red)
@@ -129,7 +125,7 @@ struct ChartDailyView: View {
                         .foregroundStyle(.red)
                         .interpolationMethod(.catmullRom(alpha: 0.75))
                     case .month:
-                        BarMark(x: .value("Days", item.hours, unit: .day),
+                        BarMark(x: .value("Days", item.hours, unit: .weekOfMonth),
                                 y: .value("Views",item.animated ? item.views : 0)
                         )
                         .foregroundStyle(.red)
@@ -173,7 +169,6 @@ struct ChartDailyView: View {
                 }
             }
         }
-        .chartYScale(domain: 0...(max))
         .chartOverlay(content: { proxy in
             GeometryReader{innerProxy in
                 Rectangle()
@@ -260,10 +255,12 @@ struct ChartDailyView: View {
     }
     
     func animateGraph(fromChange: Bool = false){
-        for (index,_) in data.enumerated(){
-            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * (fromChange ? 0.03 : 0.05)){
-                withAnimation(fromChange ? .easeInOut(duration: 0.8) : .interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)){
-                    data[index].animated = true
+        if !data.isEmpty {
+            for (index,_) in data.enumerated(){
+                DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * (fromChange ? 0.03 : 0.05)){
+                    withAnimation(fromChange ? .easeInOut(duration: 0.8) : .interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.8)){
+                        data[index].animated = true
+                    }
                 }
             }
         }

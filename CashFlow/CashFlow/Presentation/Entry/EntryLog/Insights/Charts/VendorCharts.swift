@@ -132,7 +132,6 @@ struct VendorChartsView: View {
                     .font(.title3)
                     .textScale(.secondary)
             }
-            
         }
         .padding(isTitleView ? [.horizontal] : [.all])
         .background(Color(.white).opacity(isTitleView ? 0 : 1), in: .rect(cornerRadius: 8))
@@ -140,7 +139,6 @@ struct VendorChartsView: View {
     }
     
     func findTotal(_ rangeValue: Double){
-        // Converting download model into Array of Tuples
         var initialValue: Double = 0.0
         let convertedArray = vendorData
             .sorted(by: {$0.value > $1.value})
