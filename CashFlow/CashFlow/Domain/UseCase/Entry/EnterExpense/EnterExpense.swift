@@ -159,7 +159,7 @@ class TextProcessor {
                                     .replacingOccurrences(of: ",", with: "")
                                     .replacingOccurrences(of: " ", with: "")
                         
-                        cleanNumberString += "000"
+                        //cleanNumberString += "000"
                         
                         if let number = Int(cleanNumberString) {
                             total = number

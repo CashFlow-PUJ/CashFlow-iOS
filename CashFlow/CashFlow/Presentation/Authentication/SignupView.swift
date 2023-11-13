@@ -198,6 +198,8 @@ struct SignupView: View {
         
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
+            let startDate = Date()
+            
             if let error {
                 print(error.localizedDescription)
             }
@@ -208,6 +210,11 @@ struct SignupView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'loginWithFacebook' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     dismiss()
                     DispatchQueue.main.async {
                         withAnimation {
@@ -222,6 +229,9 @@ struct SignupView: View {
     }
     
     func loginWithFacebook(completionBlock: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let startDate = Date()
+        
         facebookAuthentication.loginFacebook { result in
             switch result {
             case .success(let accessToken):
@@ -234,6 +244,11 @@ struct SignupView: View {
                     }
                     let email = authDataResult?.user.email ?? "No email"
                     print("New user created with info \(email)")
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'loginWithFacebook' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     completionBlock(.success(true))
                 }
             case .failure(let error):

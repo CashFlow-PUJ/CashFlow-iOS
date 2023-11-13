@@ -63,8 +63,16 @@ struct LoginView: View {
             // Log in Button
             Button(action: {
                 vm.logIn(email: email, password: password) { result in
+                    
+                    let startDate = Date()
+                    
                     switch result {
                     case .success(_):
+                        
+                        // TIMER
+                        let executionTime = Date().timeIntervalSince(startDate)
+                        print("El caso de uso 'logIn' tomó " + executionTime.description + " en ejecutarse.")
+                        
                         coordinator.currentRoute = .transactionLog
                     case .failure(let error):
                         showingErrorAlert = true
@@ -167,6 +175,8 @@ struct LoginView: View {
         
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController) { authentication, error in
             
+            let startDate = Date()
+            
             if let error {
                 print(error.localizedDescription)
             }
@@ -177,6 +187,11 @@ struct LoginView: View {
             vm.logIn(credential: credential) { result in
                 switch result {
                 case .success(_):
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'loginWithFacebook' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     coordinator.currentRoute = .transactionLog
                 case .failure(let error):
                     print(error.errorMessage)
@@ -186,6 +201,9 @@ struct LoginView: View {
     }
     
     func loginWithFacebook(completionBlock: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let startDate = Date()
+        
         facebookAuthentication.loginFacebook { result in
             switch result {
             case .success(let accessToken):
@@ -198,6 +216,11 @@ struct LoginView: View {
                    }
                    let email = authDataResult?.user.email ?? "No email"
                    print("New user created with info \(email)")
+                   
+                   // TIMER
+                   let executionTime = Date().timeIntervalSince(startDate)
+                   print("El caso de uso 'loginWithFacebook' tomó " + executionTime.description + " en ejecutarse.")
+                   
                    completionBlock(.success(true))
                }
             case .failure(let error):

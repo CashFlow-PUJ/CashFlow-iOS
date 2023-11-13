@@ -38,10 +38,18 @@ extension IncomeHistoryView {
         }
         
         func updateIncomeEntry(incomeID: String, updatedIncome: Income, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             incomePostTask = updateIncome.execute(incomeID: incomeID, updatedIncome: updatedIncome, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Income updated successfully.")
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'updateIncomeEntry' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     completion(true)
                 case .failure:
                     print("Failed updating income.")
@@ -49,13 +57,22 @@ extension IncomeHistoryView {
                 }
             }
         }
+        
         func loadIncomeEntries(completion: @escaping () -> Void) {
+            
+            let startDate = Date()
+            
             incomeLoadTask = visualizeIncomeHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let incomeHistory):
                         self.sharedData.incomeHistory = incomeHistory
                         self.sharedData.dataIncomeLoaded = true
+                        
+                        // TIMER
+                        let executionTime = Date().timeIntervalSince(startDate)
+                        print("El caso de uso 'loadIncomeEntries' tomó " + executionTime.description + " en ejecutarse.")
+                        
                         completion()
                     case .failure:
                         print("Failed loading income entries.")
@@ -65,12 +82,20 @@ extension IncomeHistoryView {
         }
         
         func loadIncomeByID(incomeID: String) {
+            
+            let startDate = Date()
+            
             incomeLoadTask = viewIncome.execute(incomeID: incomeID, userID: sharedData.userId) { [weak self] result in
                 switch result {
                 case .success(let entry):
                     
                     self?.sharedData.incomeHistory.append(entry)
                     self?.sharedData.dataIncomeLoaded = true
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'loadIncomeByID' tomó " + executionTime.description + " en ejecutarse.")
+                    
                 case .failure:
                     print("Failed loading entry.")
                 }
@@ -78,10 +103,18 @@ extension IncomeHistoryView {
         }
         
         func deleteIncomeEntry(incomeID: String, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             incomePutTask = deleteIncome.execute(id: incomeID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted income entry.")
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'deleteIncomeEntry' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     completion(true)
                 case .failure:
                     print("Failed deleting entry.")
@@ -91,11 +124,19 @@ extension IncomeHistoryView {
         }
         
         func createIncomeEntry(incomeEntry: Income, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             incomePostTask = enterIncome.execute(userID: sharedData.userId, incomeEntry: incomeEntry) { result in
                 switch result {
                 case .success:
                     print("Success")
                     self.loadIncomeEntries {
+                        
+                        // TIMER
+                        let executionTime = Date().timeIntervalSince(startDate)
+                        print("El caso de uso 'createIncomeEntry' tomó " + executionTime.description + " en ejecutarse.")
+                        
                         completion(true)
                     }
                 case .failure:
@@ -138,10 +179,18 @@ extension ExpenseHistoryView {
         }
         
         func updateExpenseEntry(expenseID: String, updatedExpense: Expense, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             expensePostTask = updateExpense.execute(expenseID: expenseID, updatedExpense: updatedExpense, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Expense updated successfully.")
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'updateExpenseEntry' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     completion(true)
                 case .failure:
                     print("Failed updating expense.")
@@ -151,13 +200,21 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenses(completion: @escaping () -> Void) {
+            
+            let startDate = Date()
+            
             expensesLoadTask = visualizeExpenseHistory.execute(userID: sharedData.userId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let expenseHistory):
                         self.sharedData.expenseHistory = expenseHistory
                         self.sharedData.dataExpenseLoaded = true
-                        completion() 
+                        
+                        // TIMER
+                        let executionTime = Date().timeIntervalSince(startDate)
+                        print("El caso de uso 'loadExpenses' tomó " + executionTime.description + " en ejecutarse.")
+                        
+                        completion()
                     case .failure:
                         print("Failed loading expense entries.")
                     }
@@ -166,9 +223,17 @@ extension ExpenseHistoryView {
         }
         
         func loadExpenseByID(expenseID: String) {
+            
+            let startDate = Date()
+            
             expensesLoadTask = viewExpense.execute(expenseID: expenseID, userID: sharedData.userId) { [weak self] result in
                 switch result {
                 case .success(let expense):
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'loadExpenseByID' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     self?.sharedData.expenseHistory.append(expense)
                 case .failure:
                     print("Failed loading entry.")
@@ -177,11 +242,19 @@ extension ExpenseHistoryView {
         }
         
         func createExpenseEntry(expenseEntry: Expense, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             expensePostTask = enterExpense.execute(userID: sharedData.userId, expenseEntry: expenseEntry) { result in
                 switch result {
                 case .success:
                     print("Successfully creating entry")
                     self.loadExpenses {
+                        
+                        // TIMER
+                        let executionTime = Date().timeIntervalSince(startDate)
+                        print("El caso de uso 'createExpenseEntry' tomó " + executionTime.description + " en ejecutarse.")
+                        
                         completion(true)
                     }
                 case .failure:
@@ -192,10 +265,18 @@ extension ExpenseHistoryView {
         }
         
         func deleteExpenseEntry(expenseID: String, completion: @escaping (Bool) -> Void) {
+            
+            let startDate = Date()
+            
             expenseDeleteTask = deleteExpense.execute(id: expenseID, userID: sharedData.userId) { result in
                 switch result {
                 case .success:
                     print("Successfully deleted expense entry.")
+                    
+                    // TIMER
+                    let executionTime = Date().timeIntervalSince(startDate)
+                    print("El caso de uso 'deleteExpenseEntry' tomó " + executionTime.description + " en ejecutarse.")
+                    
                     completion(true)
                 case .failure:
                     print("Failed deleting entry.")
