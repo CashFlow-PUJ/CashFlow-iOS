@@ -235,6 +235,7 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)
+        print(resultsText)
     }
     
     /// Updates the image view with a scaled version of the given image.
@@ -300,8 +301,33 @@ class ImageInputViewController: UIViewController, UINavigationControllerDelegate
                 var linesInfo: [LineInfo] = []
 
                 for block in text.blocks {
-                    for line in block.lines {
-                        // Convertir NSValue a CGPoint
+                    let transformedRect = block.frame.applying(strongSelf.transformMatrix())
+                    /*UIUtilities.addRectangle(
+                        transformedRect,
+                        to: strongSelf.annotationOverlayView,
+                        color: UIColor.purple
+                    )*/
+                for line in block.lines {
+                    let transformedRect = line.frame.applying(strongSelf.transformMatrix())
+                    /*UIUtilities.addRectangle(
+                        transformedRect,
+                        to: strongSelf.annotationOverlayView,
+                        color: UIColor.orange
+                    )*/
+                    
+                    // Elements.
+                    for element in line.elements {
+                        let transformedRect = element.frame.applying(strongSelf.transformMatrix())
+                        UIUtilities.addRectangle(
+                            transformedRect,
+                            to: strongSelf.annotationOverlayView,
+                            color: UIColor.green
+                        )
+                        let label = UILabel(frame: transformedRect)
+                        //label.text = element.text
+                        label.adjustsFontSizeToFitWidth = true
+                        strongSelf.annotationOverlayView.addSubview(label)
+                    }// Convertir NSValue a CGPoint
                         let cornerPoints = line.cornerPoints.map { $0.cgPointValue }
                         let lineInfo = LineInfo(text: line.text, cornerPoints: cornerPoints)
                         linesInfo.append(lineInfo)

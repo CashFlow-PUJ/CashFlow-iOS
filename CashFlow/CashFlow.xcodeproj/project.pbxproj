@@ -1115,7 +1115,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CashFlow/Preview Content\"";
-				DEVELOPMENT_TEAM = WXFW7D6G6Z;
+				DEVELOPMENT_TEAM = 4UMZXB3W8J;
 				ENABLE_PREVIEWS = YES;
 				FirebaseAppDelegateProxyEnabled = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1133,7 +1133,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cristobalcastrillon.CashFlow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
